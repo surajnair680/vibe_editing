@@ -13,3 +13,10 @@ __pycache__/
 .DS_Store
 # keep tiny final stills if you like:
 !out/stills/*.png
+
+# keep transcripts, cut lists and notes (small text files)
+!work/
+work/*
+!work/*.json
+!work/*.txt
+!work/*.md
