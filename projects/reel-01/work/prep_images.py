@@ -143,3 +143,19 @@ hsv = cv2.cvtColor(lh2.astype(np.uint8), cv2.COLOR_RGB2HSV)
 lamp = np.zeros(lum.shape, np.float32)
 cv2.circle(lamp, (int(0.502 * lh2.shape[1]), int(0.198 * lh2.shape[0])), int(0.03 * lh2.shape[1]), 1.0, -1)
 save(put_colour(l, cv2.GaussianBlur(lamp, (0, 0), 3), RED), "lighthouse.png")
+
+# Seneca bust: cut from its black background, halftone (shadows as ink dots, highlights are paper)
+sb = np.clip(upscale(load("assets/seneca-bust-photo.jpg"), 3.2), 0, 255)       # lanczos can overshoot below 0
+lum = sb @ np.array([0.299, 0.587, 0.114], np.float32)
+obj = (cv2.GaussianBlur(lum, (0, 0), 2) > 28).astype(np.uint8)
+n, lab, st, _ = cv2.connectedComponentsWithStats(obj)
+obj = (lab == 1 + np.argmax(st[1:, cv2.CC_STAT_AREA])).astype(np.uint8)
+ff = 1 - obj; mask = np.zeros((obj.shape[0] + 2, obj.shape[1] + 2), np.uint8)
+cv2.floodFill(ff, mask, (0, 0), 2); obj[ff == 1] = 1                       # fill holes inside the bust
+obj = obj[: int(obj.shape[0] * 0.80)]; sb = sb[: obj.shape[0]]; lum = lum[: obj.shape[0]]   # drop the plinth
+soft = cv2.GaussianBlur(obj.astype(np.float32), (0, 0), 2.5)
+lift = np.clip((np.clip(lum, 0, 255) / 255) ** 0.55 * 1.2, 0, 1) * 255                     # lift midtones so the dark stone doesn't flood
+b = halftone(np.repeat(lift[..., None], 3, axis=2), cell=8, angle=45, gamma=1.15)
+b[..., 3] *= soft
+ys, xs = np.where(obj > 0)
+save(b[ys.min(): ys.max(), xs.min(): xs.max()], "seneca.png")

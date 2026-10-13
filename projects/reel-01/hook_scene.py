@@ -67,8 +67,9 @@ def paper(c, t, variants=PAPERS):
     c.drawImage(variants[int(t * 12) % len(variants)], 0, 0)          # changes 12x a second, like print grain
 
 # ---------------------------------------------------------------- footage: cut-out and full frame, gently graded
-SRC = VideoFrames("work/hook_src.mp4", fps=FPS)
-MAT = VideoFrames("work/matte/hook_src_alpha_clean.mp4", fps=FPS)
+from vframes import StreamFrames
+SRC = StreamFrames("work/hook_src.mp4", fps=FPS)                         # streamed, not held in memory
+MAT = StreamFrames("work/matte/hook_src_alpha_clean.mp4", fps=FPS)
 
 def grade(rgb):
     a = rgb[..., :3].astype(np.float32)

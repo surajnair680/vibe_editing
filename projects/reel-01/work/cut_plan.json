@@ -1,61 +1,61 @@
 {
  "segments": [
   {
-   "src_in": 0.18,
-   "src_out": 4.56,
-   "edit_in": 0
+   "src_in": 0.18333,
+   "src_out": 4.55,
+   "edit_in": 0.0
   },
   {
    "src_in": 4.7,
-   "src_out": 12.32,
-   "edit_in": 4.38
+   "src_out": 12.33333,
+   "edit_in": 4.36667
   },
   {
-   "src_in": 12.36,
-   "src_out": 13.94,
+   "src_in": 12.36667,
+   "src_out": 13.93334,
    "edit_in": 12.0
   },
   {
    "src_in": 14.0,
-   "src_out": 14.84,
-   "edit_in": 13.58
+   "src_out": 14.83333,
+   "edit_in": 13.56667
   },
   {
-   "src_in": 14.92,
-   "src_out": 24.2,
-   "edit_in": 14.42
+   "src_in": 14.91667,
+   "src_out": 24.18334,
+   "edit_in": 14.4
   },
   {
-   "src_in": 24.28,
-   "src_out": 29.24,
-   "edit_in": 23.7
+   "src_in": 24.28333,
+   "src_out": 29.25,
+   "edit_in": 23.66667
   },
   {
-   "src_in": 29.38,
-   "src_out": 35.06,
-   "edit_in": 28.66
+   "src_in": 29.38333,
+   "src_out": 35.05,
+   "edit_in": 28.63333
   },
   {
-   "src_in": 35.14,
-   "src_out": 44.78,
-   "edit_in": 34.34
+   "src_in": 35.13333,
+   "src_out": 44.76666,
+   "edit_in": 34.3
   },
   {
-   "src_in": 44.86,
-   "src_out": 48.48,
-   "edit_in": 43.98
+   "src_in": 44.86667,
+   "src_out": 48.46667,
+   "edit_in": 43.93333
   },
   {
-   "src_in": 48.58,
-   "src_out": 53.04,
-   "edit_in": 47.6
+   "src_in": 48.58333,
+   "src_out": 53.05,
+   "edit_in": 47.53333
   },
   {
-   "src_in": 53.14,
-   "src_out": 57.33,
-   "edit_in": 52.06
+   "src_in": 53.13333,
+   "src_out": 57.33333,
+   "edit_in": 52.0
   }
  ],
- "length": 56.25,
- "rule": "gaps > 0.4s shortened to 0.4s, no cut inside a word"
+ "length": 56.2,
+ "rule": "gaps > 0.4s shortened to 0.4s, no cut inside a word; cut points snapped to frames so picture and sound stay in sync"
 }

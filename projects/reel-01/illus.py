@@ -227,11 +227,56 @@ def red_x(c, cx, cy, size, k, t):
         kk = max(0.0, min(1.0, k * 2 - i))
         if kk <= 0:
             continue
-        pts = [(cx + a[0] * size / 2 + j * (b[0] - a[0]) * size / 8 + noise1(j, i) * 6,
-                cy + a[1] * size / 2 + j * (b[1] - a[1]) * size / 8) for j in range(9)]
+        pts = [(cx + a[0] * size / 2 + j * (b[0] - a[0]) * size / 16 + noise1(j, i) * 6,
+                cy + a[1] * size / 2 + j * (b[1] - a[1]) * size / 16) for j in range(9)]
         path = draw_on(smooth_path(pts, closed=False), kk)
         c.drawPath(path, skia.Paint(Color=RED, AntiAlias=True, Style=skia.Paint.kStroke_Style, StrokeWidth=size * 0.07,
                                     StrokeCap=skia.Paint.kRound_Cap))
+
+
+def family_tree(c, cx, cy, size, t):
+    """Two parents and a child: circles joined by ink lines, one child figure filled."""
+    s = size
+    nodes = [(-0.28, -0.3), (0.28, -0.3), (0.0, 0.32)]
+    c.drawLine(cx - s * 0.28, cy - s * 0.3, cx + s * 0.28, cy - s * 0.3, skia.Paint(Color=INK, StrokeWidth=5, AntiAlias=True))
+    outline(c, [(cx, cy - s * 0.3), (cx, cy + s * 0.32)], 5, t, closed=False, seed=31)
+    for i, (x, y) in enumerate(nodes):
+        figure(c, cx + x * s, cy + y * s + s * 0.2, s * 0.38, t, fit=(i == 2), alpha=0.6 if i < 2 else 1.0)
+
+
+def food_diary(c, cx, cy, size, t):
+    """An open notebook with ruled lines and a fork + knife on the left page."""
+    w, h = size, size * 0.66
+    left = [(cx - w / 2, cy - h / 2 + 10), (cx, cy - h / 2), (cx, cy + h / 2), (cx - w / 2, cy + h / 2 + 10)]
+    right = [(cx, cy - h / 2), (cx + w / 2, cy - h / 2 + 10), (cx + w / 2, cy + h / 2 + 10), (cx, cy + h / 2)]
+    for pg in (left, right):
+        fill(c, poly(pg), CREAM)
+        outline(c, pg, 5, t, seed=33, straight=True)
+    for i in range(6):
+        y = cy - h / 2 + h * (0.22 + i * 0.13)
+        c.drawLine(cx + w * 0.06, y, cx + w * 0.44, y + 4, skia.Paint(Color=INK, StrokeWidth=3, AntiAlias=True, Alphaf=0.6))
+    fx = cx - w * 0.3
+    for dx in (-10, 0, 10):
+        c.drawLine(fx + dx, cy - h * 0.3, fx + dx, cy - h * 0.12, skia.Paint(Color=INK, StrokeWidth=4, AntiAlias=True))
+    c.drawLine(fx, cy - h * 0.12, fx, cy + h * 0.32, skia.Paint(Color=INK, StrokeWidth=8, AntiAlias=True, StrokeCap=skia.Paint.kRound_Cap))
+    kx = cx - w * 0.16
+    kn = [(kx, cy - h * 0.3), (kx + 14, cy - h * 0.2), (kx + 12, cy + h * 0.05), (kx, cy + h * 0.05)]
+    fill(c, poly(kn), INK)
+    c.drawLine(kx + 4, cy + h * 0.05, kx + 4, cy + h * 0.32, skia.Paint(Color=INK, StrokeWidth=8, AntiAlias=True, StrokeCap=skia.Paint.kRound_Cap))
+
+
+def magnifier(c, cx, cy, size, t, under=None):
+    """Magnifying glass. under(c, cx, cy, r) draws what is seen (zoomed) inside the lens."""
+    r = size * 0.32
+    if under is not None:
+        c.save(); clip = skia.Path(); clip.addCircle(cx, cy, r); c.clipPath(clip, doAntiAlias=True)
+        under(c, cx, cy, r); c.restore()
+    lens = skia.Path(); lens.addCircle(cx, cy, r)
+    c.drawPath(lens, skia.Paint(Color=skia.Color(255, 255, 255, 40), AntiAlias=True))
+    outline(c, ellipse_pts(cx, cy, r, r, 40), 12, t, seed=35)
+    a = math.radians(45)
+    x0, y0 = cx + math.cos(a) * r, cy + math.sin(a) * r
+    _stroke(c, [(x0, y0), (x0 + size * 0.36, y0 + size * 0.36)], size * 0.09, INK)
 
 
 if __name__ == "__main__":
