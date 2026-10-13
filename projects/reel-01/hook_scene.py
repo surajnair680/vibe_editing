@@ -104,6 +104,22 @@ def full_frame(t):
     return skia.Image.fromarray(np.dstack([rgb, np.full(rgb.shape[:2], 255, np.uint8)]),
                                 colorType=skia.kRGBA_8888_ColorType)
 
+def make_photo():
+    from PIL import Image
+    im = Image.open("assets/physique-photo.jpg").convert("RGB")
+    im = im.crop((200, 0, 1072, 1350))                                  # drop the phone, keep head to waist
+    a = grade(np.asarray(im)).astype(np.float32)
+    a = np.clip((a - 128) * 1.05 + 128, 0, 255).astype(np.uint8)
+    b = 22                                                              # printed white border
+    framed = np.full((a.shape[0] + 2 * b, a.shape[1] + 2 * b, 3), (238, 233, 222), np.uint8)
+    framed[b:-b, b:-b] = a
+    rgba = np.dstack([framed, np.full(framed.shape[:2], 255, np.uint8)])
+    return skia.Image.fromarray(np.ascontiguousarray(rgba), colorType=skia.kRGBA_8888_ColorType)
+
+PHOTO = make_photo()
+PH_CX, PH_CY, PH_W = 805, 965, 440                                     # where the print sits on the cover
+PH_H = PH_W * PHOTO.height() / PHOTO.width()
+
 # ---------------------------------------------------------------- drawing helpers
 def condensed(c, s, cx, cy, size, font, fill, max_w, squeeze=0.74, stroke=None, alpha=1.0):
     """Tall condensed headline (the poster's masthead): draw at `size`, squeeze horizontally to fit max_w."""
@@ -213,6 +229,58 @@ def word(c, s, x, y, size, start, t, fill, font=SANS, tracking=0.02):
         return text_width(s, size, font, tracking)
     return text(c, s, x, y + (1 - k) * 18, size, font, fill=fill, align="left", alpha=k, tracking=tracking)
 
+def print_photo(c, t):
+    rot = 4 + 0.6 * math.sin(t * 1.3)
+    c.save(); c.translate(PH_CX, PH_CY + 4 * math.sin(t * 1.1)); c.rotate(rot)
+    shadow_p = skia.Paint(Color=col(INK, 0.35), AntiAlias=True, MaskFilter=skia.MaskFilter.MakeBlur(skia.kNormal_BlurStyle, 14))
+    c.drawRect(skia.Rect.MakeXYWH(-PH_W / 2 + 10, -PH_H / 2 + 16, PH_W, PH_H), shadow_p)
+    c.drawImageRect(PHOTO, skia.Rect.MakeXYWH(-PH_W / 2, -PH_H / 2, PH_W, PH_H), skia.SamplingOptions(skia.FilterMode.kLinear))
+    br = skia.Paint(Color=col(INK), AntiAlias=True, Style=skia.Paint.kStroke_Style, StrokeWidth=8)
+    o, L = 22, 60
+    for sxn, syn in ((-1, -1), (1, -1), (-1, 1), (1, 1)):
+        x, y = sxn * (PH_W / 2 + o), syn * (PH_H / 2 + o)
+        path = skia.Path(); path.moveTo(x, y - syn * L); path.lineTo(x, y); path.lineTo(x - sxn * L, y)
+        c.drawPath(path, br)
+    c.save(); c.translate(-20, -PH_H / 2 - 4); c.rotate(-9)                # red tape across the top edge
+    rng = np.random.default_rng(31); tp = skia.Path(); tw, th = 190, 46
+    tp.moveTo(-tw / 2, -th / 2)
+    for x in np.linspace(-tw / 2, tw / 2, 12): tp.lineTo(x, -th / 2 + rng.normal(0, 1.2))
+    for y in np.linspace(-th / 2, th / 2, 6): tp.lineTo(tw / 2 + rng.normal(0, 3), y)
+    for x in np.linspace(tw / 2, -tw / 2, 12): tp.lineTo(x, th / 2 + rng.normal(0, 1.2))
+    for y in np.linspace(th / 2, -th / 2, 6): tp.lineTo(-tw / 2 + rng.normal(0, 3), y)
+    c.drawPath(tp, skia.Paint(Color=col(RED, 0.88), AntiAlias=True))
+    c.restore(); c.restore()
+
+def scribble_ring(c, k, cx, cy, rx, ry, colr, seed=2):
+    if k <= 0:
+        return
+    rng = np.random.default_rng(seed); path = skia.Path(); n = 140; turns = 1.25
+    for i in range(int(n * k) + 1):
+        u = i / n; a = -2.2 + u * turns * 2 * math.pi
+        wob = 1 + 0.035 * math.sin(u * 23 + seed) + 0.02 * (noise1(u * 9, seed) - 0.5)
+        x, y = cx + math.cos(a) * rx * wob * (1 + 0.06 * u), cy + math.sin(a) * ry * wob * (1 + 0.04 * u)
+        path.moveTo(x, y) if i == 0 else path.lineTo(x, y)
+    c.drawPath(path, skia.Paint(Color=colr, AntiAlias=True, Style=skia.Paint.kStroke_Style, StrokeWidth=9,
+                                StrokeCap=skia.Paint.kRound_Cap, StrokeJoin=skia.Paint.kRound_Join))
+
+def arrow(c, k, x0, y0, x1, y1, bend, colr):
+    if k <= 0:
+        return
+    mx, my = (x0 + x1) / 2 + bend, (y0 + y1) / 2
+    pts = [((1 - u) ** 2 * x0 + 2 * (1 - u) * u * mx + u * u * x1, (1 - u) ** 2 * y0 + 2 * (1 - u) * u * my + u * u * y1)
+           for u in np.linspace(0, k, 40)]
+    p = skia.Path(); p.moveTo(*pts[0])
+    for q in pts[1:]: p.lineTo(*q)
+    pa = skia.Paint(Color=colr, AntiAlias=True, Style=skia.Paint.kStroke_Style, StrokeWidth=8, StrokeCap=skia.Paint.kRound_Cap,
+                    StrokeJoin=skia.Paint.kRound_Join)
+    c.drawPath(p, pa)
+    if k >= 0.98:
+        (ax, ay), (bx, by) = pts[-4], pts[-1]
+        ang = math.atan2(by - ay, bx - ax)
+        h = skia.Path(); h.moveTo(bx + math.cos(ang + 2.5) * 34, by + math.sin(ang + 2.5) * 34); h.lineTo(bx, by)
+        h.lineTo(bx + math.cos(ang - 2.5) * 34, by + math.sin(ang - 2.5) * 34)
+        c.drawPath(h, pa)
+
 def barcode(c, x, y, w, h, colr):
     rng = np.random.default_rng(5); cx = x
     while cx < x + w:
@@ -233,50 +301,53 @@ def cover(c, t):
     sx, sy = shake(t, T["addictions"])
     c.save(); c.translate(sx, sy)
     # red sun behind the head
-    red_sun(c, 560, 800, 400, 0.9 + 0.1 * ease_out_back(prog(t, 0.0, 0.35)))
+    red_sun(c, 380, 790, 345, 0.9 + 0.1 * ease_out_back(prog(t, 0.0, 0.35)))
     # masthead: outline from the first frame, slams solid on "addictions"
     hit = prog(t, T["addictions"], 0.22)
     push = 1 + 0.015 * prog(t, 0, 3.5)
-    c.save(); c.translate(540, 610); c.scale(push, push); c.translate(-540, -610)
+    c.save(); c.translate(540, 495); c.scale(push, push); c.translate(-540, -495)
     if hit <= 0:
-        condensed(c, "ADDICTIONS", 540, 610, 330, SERIF, col(INK, 0.9), 1010, stroke=3)
+        condensed(c, "ADDICTIONS", 540, 495, 330, SERIF, col(INK, 0.9), 1010, stroke=3)
     else:
         s = lerp(1.14, 1.0, ease_out_expo(hit))
-        c.save(); c.translate(540, 610); c.scale(s, s); c.translate(-540, -610)
+        c.save(); c.translate(540, 495); c.scale(s, s); c.translate(-540, -495)
         flash = prog(t, T["addictions"], 0.10) < 1
-        condensed(c, "ADDICTIONS", 540, 610, 330, SERIF, col(RED if flash else INK), 1010)
+        condensed(c, "ADDICTIONS", 540, 495, 330, SERIF, col(RED if flash else INK), 1010)
         c.restore()
     c.restore()
     # top line: THREE (on "three") + DISGUSTING on a red brush (on "disgusting")
-    word(c, "THREE", 70, 330, 66, T["three"], t, col(INK), tracking=0.04)
-    bx = 70 + text_width("THREE ", 66, SANS, 0.04) + 26
+    word(c, "THREE", 70, 285, 62, T["three"], t, col(INK), tracking=0.04)
+    bx = 70 + text_width("THREE ", 62, SANS, 0.04) + 26
     k = ease_out_cubic(prog(t, T["disgusting"], 0.22))
-    brush(c, bx - 18, 340, bx + 470, 322, 92, col(RED), 3, head=k)
-    word(c, "DISGUSTING", bx, 330, 66, T["disgusting"] + 0.06, t, col(INK), tracking=0.04)
+    brush(c, bx - 18, 295, bx + 445, 277, 88, col(RED), 3, head=k)
+    word(c, "DISGUSTING", bx, 285, 62, T["disgusting"] + 0.06, t, col(INK), tracking=0.04)
     c.restore()
     # him: the cut-out, slow push-in
-    s = lerp(0.80, 0.84, ease_in_out_cubic(prog(t, 0, 3.5)))
-    c.save(); c.translate(540 + sx * 0.4, 790 + sy * 0.4); c.scale(s, s)
+    s = lerp(0.74, 0.78, ease_in_out_cubic(prog(t, 0, 3.5)))
+    c.save(); c.translate(375 + sx * 0.4, 800 + sy * 0.4); c.scale(s, s)
     c.drawImage(person(t), -540, -960)
     c.restore()
     # torn black band + the rest of the line, word by word
     torn_band(c, col(INK), 4)
-    y1, y2, y3 = 1338, 1404, 1470
+    print_photo(c, t)
+    y1, y2, y3 = 1350, 1412, 1474
     x = 64
-    x += word(c, "STOPPING ", x, y1, 60, T["stopping"], t, col(CREAM))
-    x += word(c, "YOU ", x, y1, 60, T["you"], t, col(CREAM))
-    word(c, "FROM", x, y1, 60, T["frm"], t, col(CREAM))
+    x += word(c, "STOPPING ", x, y1, 56, T["stopping"], t, col(CREAM))
+    x += word(c, "YOU ", x, y1, 56, T["you"], t, col(CREAM))
+    word(c, "FROM", x, y1, 56, T["frm"], t, col(CREAM))
     x = 64
-    x += word(c, "BUILDING ", x, y2, 60, T["building"], t, col(CREAM))
-    word(c, "YOUR", x, y2, 60, T["your"], t, col(CREAM))
+    x += word(c, "BUILDING ", x, y2, 56, T["building"], t, col(CREAM))
+    word(c, "YOUR", x, y2, 56, T["your"], t, col(CREAM))
     x = 64
-    x += word(c, "DREAM ", x, y3, 60, T["dream"], t, col(CREAM))
-    word(c, "PHYSIQUE.", x, y3, 60, T["physique"], t, col(RED))
+    x += word(c, "DREAM ", x, y3, 56, T["dream"], t, col(CREAM))
+    pw = word(c, "PHYSIQUE.", x, y3, 56, T["physique"], t, col(RED))
+    scribble_ring(c, ease_out_cubic(prog(t, T["physique"], 0.35)), PH_CX, PH_CY, PH_W * 0.66, PH_H * 0.6, col(RED))
+    arrow(c, ease_out_cubic(prog(t, T["physique"] + 0.12, 0.25)), x + pw + 14, y3 - 6, PH_CX - 150, PH_CY + PH_H * 0.52, -60, col(RED))
     # ornaments
     tw = 1 + 0.25 * math.sin(t * 5)
-    star(c, 80, 205, 26 * tw, col(INK)); star(c, 1000, 205, 26 * (2 - tw), col(INK))
-    star(c, 1000, 1360, 22, col(CREAM), rot=0.2)
-    barcode(c, 860, 1430, 150, 46, col(CREAM, 0.85))
+    star(c, 1010, 175, 24 * (2 - tw), col(INK))
+    star(c, 1010, 1470, 22, col(CREAM), rot=0.2)
+    barcode(c, 840, 1440, 130, 40, col(CREAM, 0.85))
 
 def card(c, t):
     """Section card: 01 BEING A YES MAN."""
