@@ -13,3 +13,8 @@
 
 ## Delivery
 - Final file: out/reel-01_v1.mp4 (85 MiB, 1 s keyframes). Sent in 4 parts (out/v1_split/), joined parts verified identical frame for frame.
+
+## v2 (user notes on v1)
+- 0:23 payoff: gym clip re-cropped to 900x1200 from x 150 so the full physique (both arms) shows. Background people allowed.
+- 0:47 mirror: generic ink face (illus.generic_face) instead of the physique photo; dark glass kept until the reveal.
+- Changed frames vs v1: 23.33 to 25.13 and 47.13 to 48.03 only (checked). Sent parts 2 and 4 (out/v2_split part1, part3).
