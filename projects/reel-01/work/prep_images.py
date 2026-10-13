@@ -99,3 +99,47 @@ save(b, "beer.png")
 # mirror: keep the woodcut as is (it is already black ink), white -> transparent
 m = ink(load("assets/mirror.png"), gamma=1.0, lift=0.0)
 save(m, "mirror.png")
+
+# pizza: cut the slice off the plate, halftone it, pepperoni in poster red
+pz = load("assets/pizza.jpg")
+hsv = cv2.cvtColor(pz.astype(np.uint8), cv2.COLOR_RGB2HSV)
+H_, S_, V_ = hsv[..., 0].astype(int), hsv[..., 1].astype(int), hsv[..., 2].astype(int)
+plate = ((V_ > 200) & (S_ < 45)).astype(np.uint8)
+n, lab, st, _ = cv2.connectedComponentsWithStats(plate)
+big = 1 + np.argmax(st[1:, cv2.CC_STAT_AREA])
+pts = cv2.findNonZero((lab == big).astype(np.uint8))
+hull = np.zeros_like(plate); cv2.fillConvexPoly(hull, cv2.convexHull(pts), 1)
+slice_ = ((S_ > 70) & (hull == 1)).astype(np.uint8)
+slice_ = cv2.morphologyEx(slice_, cv2.MORPH_CLOSE, np.ones((21, 21), np.uint8))
+slice_ = cv2.morphologyEx(slice_, cv2.MORPH_OPEN, np.ones((9, 9), np.uint8))
+n, lab, st, _ = cv2.connectedComponentsWithStats(slice_)
+slice_ = (lab == 1 + np.argmax(st[1:, cv2.CC_STAT_AREA])).astype(np.float32)
+soft = cv2.GaussianBlur(slice_, (0, 0), 2)
+# two-colour print: red dots where the slice is red (sauce, pepperoni), black dots for shadows on top
+pz2 = pz.copy()
+redness = np.clip((S_ / 255.0) * (((H_ <= 12) | (H_ >= 168)).astype(np.float32) * 1.0 + ((H_ > 12) & (H_ <= 22)) * 0.45), 0, 1)
+redness = cv2.GaussianBlur(redness.astype(np.float32), (0, 0), 1.5)
+red_l = halftone(np.repeat((255 * (1 - redness ** 0.8))[..., None], 3, axis=2), cell=7, angle=15, gamma=1.0)
+red_l[..., :3] = RED
+lum = pz @ np.array([0.299, 0.587, 0.114], np.float32)
+shadow = np.clip((lum - 40) / 170, 0, 1)
+blk = halftone(np.repeat((255 * shadow ** 0.7)[..., None], 3, axis=2), cell=7, angle=45, gamma=1.6)
+p = red_l.copy()
+k = blk[..., 3:4] / 255
+p[..., :3] = p[..., :3] * (1 - k) + INK * k
+p[..., 3] = np.maximum(red_l[..., 3], blk[..., 3])
+edge = ink(pz, gamma=1.6, lift=0.3)
+p[..., 3] = np.maximum(p[..., 3], edge[..., 3] * 0.5) * soft
+ys, xs = np.where(slice_ > 0)
+save(p[ys.min() - 10: ys.max() + 10, xs.min() - 10: xs.max() + 10], "pizza.png")
+
+# lighthouse: colour photo -> ink print, the lamp in poster red
+lh = load("assets/lighthouse.jpg")
+lh2 = upscale(lh, 2)
+lum = lh2 @ np.array([0.299, 0.587, 0.114], np.float32)
+lum = np.clip((lum / 255 - 0.42) * 1.9 + 0.5, 0, 1) * 255                # strong contrast: white tower vs sky
+l = halftone(np.repeat(lum[..., None], 3, axis=2), cell=7, gamma=1.15)
+hsv = cv2.cvtColor(lh2.astype(np.uint8), cv2.COLOR_RGB2HSV)
+lamp = np.zeros(lum.shape, np.float32)
+cv2.circle(lamp, (int(0.502 * lh2.shape[1]), int(0.198 * lh2.shape[0])), int(0.03 * lh2.shape[1]), 1.0, -1)
+save(put_colour(l, cv2.GaussianBlur(lamp, (0, 0), 3), RED), "lighthouse.png")

@@ -41,42 +41,44 @@
   The engraving has a stock watermark and is not used.
 - Keep graphics clear of the face and the handheld mic, and inside the safe zone (250 px top, 420 px bottom).
 
-## 6. Beat sheet (step 10, waiting for approval)
+## 6. Beat sheet v2 (more visuals, waiting for approval)
 Cut: pauses over 0.4 s shortened to 0.4 s (`work/cut_plan.json`), 57.3 s source to 56.3 s, plus a 1.5 s end hold = about 57.8 s.
-Edit time = time in the finished video. Source = time in `raw/take-01.mp4`.
+Edit time = time in the finished video (source times in `work/word_times_edit.txt`).
+Visuals: printed images = `assets/print/*.png` (from the user's images), drawn = `illus.py` (ink drawings in code).
 
-| # | edit time | source | spoken line | on screen | captions | sound |
-|---|---|---|---|---|---|---|
-| 1 | 0.0 to 3.2 | 0.2 to 3.2 | "Three disgusting addictions stopping you from building your dream physique." | HOOK COVER (built): you cut out on cream paper, red sun, ADDICTIONS masthead, physique print, words build, red ring + arrow on "physique" | none, the design carries the words | music in, deep hit on "addictions" |
-| 2 | 3.2 to 4.6 | 3.4 to 4.5 | "Being a yes man." | red brush wipe to card 01 / BEING A / YES / MAN. (built) | none | swoosh, hit on "yes" |
-| 3 | 4.6 to 6.9 | 4.9 to 6.9 | "90% of people around you are out of shape." | black ink wipe to your room. "90%" slams in big red serif beside your head, "ARE OUT OF SHAPE" in small caps under it | none here | paper slap on "90%" |
-| 4 | 7.2 to 11.7 | 7.5 to 11.9 | "Saying yes to their habits is saying yes to that version of you who is okay with having that body." | you, slow push-in | on, "their" shown (not "that") | |
-| 5 | 12.3 to 13.1 | 12.7 to 13.5 | "You, my friend, are different." | push-in to 1.12 on "different" | on, red brush highlight on DIFFERENT | |
-| 6 | 13.9 to 14.5 | 14.3 to 14.5 | "Say no." | red ink stamp "NO." thuds beside your head, slightly rotated | SAY NO. | stamp thud |
-| 7 | 14.7 to 15.8 | 15.2 to 15.8 | "Blaming your luck." | red wipe to card 02 / BLAMING / YOUR LUCK. | none | swoosh, hit |
-| 8 | 16.0 to 18.2 | 16.5 to 18.2 | "You blame your genetics, family, and circumstances." | three typed paper slips stack beside you on each word: GENETICS, FAMILY, CIRCUMSTANCES. A red line strikes through all three at the end | on | paper slap per slip |
-| 9 | 18.9 to 21.3 | 19.4 to 21.3 | "I have had type 1 diabetes since I was a child," | poster tag: TYPE 1 DIABETES / SINCE CHILDHOOD on a red brush, slow push-in | on, "type 1" as a numeral | music dips |
-| 10 | 21.5 to 23.3 | 22.0 to 23.8 | "but that didn't stop me from looking like this." | you, push-in | on | |
-| 11 | 23.3 to 25.3 | 23.8 to 25.9 | "...this." then "Two thousand years ago," | PAYOFF: your gym clip slams in full screen as a framed print, warmed to match, other gym members cropped out | on | hit on "this" |
-| 12 | 25.3 to 30.5 | 25.9 to 31.2 | "Seneca wrote, 'If you don't know which harbor you are sailing for, no wind is favorable.'" | SENECA POSTER 1: halftone bust on cream paper, red sun, red brush across the eyes, quote builds in serif, small label SENECA | none, the quote is the text | low drone swell |
-| 13 | 30.6 to 34.7 | 31.3 to 35.4 | "And then luck has power over our lives because we live by luck." | back to you, captions in serif italic (still quoting) | on, serif italic | |
-| 14 | 34.6 to 37.6 | 35.4 to 37.6 | "Just pick a harbor and stop waiting for the wind." | you, push-in, red underline on PICK A HARBOR | on | |
-| 15 | 37.4 to 38.5 | 38.2 to 38.5 | "Hating yourself." | red wipe to card 03 / HATING / YOURSELF. | none | swoosh, hit |
-| 16 | 38.6 to 44.7 | 39.4 to 45.6 | "Seneca said, 'Why would I be scared of my mistakes when I can just say: I forgive you this time. Don't do it again.'" | SENECA POSTER 2: tighter crop of the bust, different layout from poster 1, quote builds | none | drone swell |
-| 17 | 45.4 to 47.3 | 46.3 to 48.2 | "You can't fix your body if you can't look at it." | you, push-in | on | |
-| 18 | 47.9 to 51.8 | 48.9 to 52.7 | "When you hate yourself, you stop stepping on the scale and stop tracking what you eat." | two paper slips: STEPPING ON THE SCALE, TRACKING WHAT YOU EAT, each struck through in red | on | paper slaps |
-| 19 | 52.4 to 55.3 | 53.4 to 56.3 | "When you forgive yourself, you can look at your flaws," | you, slow push-in, music lifts | on | music builds |
-| 20 | 55.3 to 57.8 | 56.3 to 57.3 | "own it, and fix it." | END CARD: cream paper, OWN IT. / FIX IT. in the masthead serif, the physique print returns, holds 1.5 s | none | final hit, music ends |
+| # | edit time | spoken line | visual | captions | sound |
+|---|---|---|---|---|---|
+| 1 | 0.0 to 3.2 | "Three disgusting addictions... dream physique." | HOOK COVER (built) with the physique print | none | music in, hit on "addictions" |
+| 2 | 3.2 to 4.6 | "Being a yes man." | red wipe, card 01 (built) | none | swoosh, hit |
+| 3 | 4.6 to 6.9 | "90% of people around you are out of shape." | black wipe to you. Torn paper strip low on screen: drawn crowd of 10 figures, 9 out of shape fill in one by one, the fit one gets a red ring on "shape". Red "90%" beside your head | none | paper slap on "90%" |
+| 4 | 7.2 to 11.7 | "Saying yes to their habits is saying yes to that version of you..." | printed pizza and beer pop in on scraps either side of your head on "habits", red ticks on "yes" | on | pops |
+| 5 | 12.3 to 13.1 | "You, my friend, are different." | push-in, a red outline glows around you (cut-out) | on, DIFFERENT highlighted | |
+| 6 | 13.9 to 14.5 | "Say no." | red X slashes across the pizza and the beer, "NO." stamp | SAY NO. | stamp thud |
+| 7 | 14.7 to 15.8 | "Blaming your luck." | red wipe, card 02 | none | swoosh, hit |
+| 8 | 16.0 to 18.2 | "...your genetics, family, and circumstances." | three items on their words: drawn DNA helix, drawn family tree, printed dice. A red line strikes through all three | on | slaps |
+| 9 | 18.9 to 21.3 | "I have had type 1 diabetes since I was a child," | drawn insulin pen and blood drop beside you, tag TYPE 1 DIABETES | on | music dips |
+| 10 | 21.5 to 23.3 | "but that didn't stop me from looking like..." | push-in | on | |
+| 11 | 23.3 to 25.3 | "...this." "Two thousand years ago," | PAYOFF: your gym clip as a full-screen framed print, warmed, others cropped out | on | hit |
+| 12 | 25.3 to 30.5 | "Seneca wrote, 'If you don't know which harbor...'" | SENECA POSTER 1: printed ship in the storm with its red sun, Seneca bust halftone, quote builds | none | waves, drone swell |
+| 13 | 30.6 to 34.7 | "And then luck has power over our lives because we live by luck." | you, printed dice tumble in and land beside you | on, serif italic | dice rattle |
+| 14 | 34.6 to 37.6 | "Just pick a harbor and stop waiting for the wind." | printed lighthouse slides in, its red lamp flashes on "harbor" | on | |
+| 15 | 37.4 to 38.5 | "Hating yourself." | red wipe, card 03 | none | swoosh, hit |
+| 16 | 38.6 to 44.7 | "Seneca said, 'Why would I be scared of my mistakes...'" | SENECA POSTER 2: tight bust crop, a crack runs through it on "mistakes", heals with a red line on "forgive" | none | crack, drone |
+| 17 | 45.4 to 47.3 | "You can't fix your body if you can't look at it." | printed mirror (woodcut), your physique photo inside the glass, dark until "look at it" | on | |
+| 18 | 47.9 to 51.8 | "...stepping on the scale and stop tracking what you eat." | drawn bathroom scale and food diary, each struck through in red | on | slaps |
+| 19 | 52.4 to 55.3 | "When you forgive yourself, you can look at your flaws," | drawn magnifying glass moves over your physique photo | on | music builds |
+| 20 | 55.3 to 57.8 | "own it, and fix it." | END CARD: OWN IT. / FIX IT., physique print back, holds 1.5 s | none | final hit |
 
-Look for all footage beats: warm grade, paper grain, nothing over the face or the mic.
-Captions: 2 to 3 words at a time, Inter Tight 800 caps in cream with a thin black edge, about 1400 px down
-(on the chest, inside the safe zone), key words on a red brush highlight.
+Look for footage beats: warm grade, paper grain, nothing over the face or the mic.
+Captions: 2 to 3 words, Inter Tight 800 caps in cream with a thin black edge, about 1400 px down, key words on a red brush.
 
-Missing or needing a test before the build:
-- Music B ends at 52 s: extend it to about 58 s (repeat a calm passage, test the seam).
-- Gym clip: other members walk behind you. Test a tight crop first, a cut-out if the crop isn't clean.
-- Seneca bust is small (250 x 375): test the halftone at full poster size.
-- Two more ElevenLabs sound effects: a paper slap and an ink-stamp thud.
+To do or test before the build:
+- Music B ends at 52 s: extend it to about 58 s.
+- Gym clip: other members behind you, crop tight or cut out.
+- Seneca bust is small: test the halftone at poster size.
+- Cut-out of you for beat 5 (outline glow).
+- ElevenLabs sound effects still to make: paper slap, ink stamp, dice rattle, stone crack, waves.
+- Image rights: the dice, beer, pizza, ship, mirror and lighthouse images were supplied by the user from online sources.
 
 ## 7. Sign-off checklist
 - [ ] beat table approved
