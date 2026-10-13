@@ -1,0 +1,16 @@
+{
+ "duck": {
+  "threshold": 0.15,
+  "ratio": 2,
+  "attack_ms": 20,
+  "release_ms": 400
+ },
+ "music_prenorm_lufs": -16,
+ "trim_db": {
+  "a": 0,
+  "b": 2.6,
+  "c": -2.8
+ },
+ "target_gap_db": 10.5,
+ "note": "music sits about 10.5 dB under the voice while speaking"
+}
