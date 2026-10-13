@@ -61,7 +61,8 @@ def to_img(rgb):
     return skia.Image.fromarray(a, colorType=skia.kRGBA_8888_ColorType)
 
 def lighten(rgb):
-    return np.clip(rgb.astype(np.float32) * 1.05 + 6, 0, 255).astype(np.uint8)
+    import cv2
+    return cv2.convertScaleAbs(rgb, alpha=1.05, beta=6)                 # x*1.05+6, saturating (fast)
 
 def zoom(t):
     """Slow push-ins on the key lines (scale around the face)."""
@@ -554,4 +555,4 @@ if __name__ == "__main__":
     elif cmd == "draft":
         S.render(draw, "out/reel-01_draft.mp4", draft=True, post=post)
     elif cmd == "render":
-        S.render(draw, "out/reel-01_silent.mp4", post=post)
+        S.render(draw, "out/reel-01_silent.mp4", post=post, crf=14, preset="veryfast")    # master only; delivery is re-encoded

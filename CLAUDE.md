@@ -38,6 +38,9 @@ Revisions: never re-render the whole video for a local note. Render only the aff
 re-encode and compare frames against the previous version so only the intended ranges changed. Before
 rendering, check whether the change also alters frames earlier or later than the note (e.g. an element that
 appears before the noted moment) and keep those frames identical. Long renders: background them with absolute paths.
+Speed: motion_kit grain/vignette use cached noise banks and masks (cv2, ~5 ms); grades are a single 3x4 colour
+matrix via cv2.transform (see hook_scene.grade_matrix); render masters with `crf=14, preset="veryfast"` since the
+delivery file is re-encoded. A full 1080x1920 minute renders in about 5 to 8 minutes on 4 cores.
 
 Habits: one change per note, always a time, approve the plan before the build, rough cut before effects, preview short
 sections before a full render, save a template when an effect works.

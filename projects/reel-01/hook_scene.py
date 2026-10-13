@@ -71,13 +71,21 @@ from vframes import StreamFrames
 SRC = StreamFrames("work/hook_src.mp4", fps=FPS)                         # streamed, not held in memory
 MAT = StreamFrames("work/matte/hook_src_alpha_clean.mp4", fps=FPS)
 
-def grade(rgb):
-    a = rgb[..., :3].astype(np.float32)
-    lum = a @ np.array([0.299, 0.587, 0.114], np.float32)
-    a = lum[..., None] + (a - lum[..., None]) * 0.86                   # a little less saturated
-    a = (a - 128) * 1.07 + 128                                         # a little more contrast
-    a *= np.array([1.03, 1.0, 0.94], np.float32)                       # warm, towards the paper
-    return np.clip(a, 0, 255).astype(np.uint8)
+def grade_matrix(sat=0.86, contrast=1.07, warm=(1.03, 1.0, 0.94), gain=1.0, lift=0.0):
+    """The grade is all linear (desaturate, contrast, warm tint, optional brighten), so it is one 3x4 colour matrix."""
+    L = np.array([0.299, 0.587, 0.114], np.float32)
+    D = sat * np.eye(3, dtype=np.float32) + (1 - sat) * np.tile(L, (3, 1))     # desaturate towards luma
+    Wm = np.diag(np.array(warm, np.float32))
+    M = gain * Wm @ (contrast * D)
+    off = gain * Wm @ np.full(3, 128 * (1 - contrast), np.float32) + lift
+    return np.hstack([M, off[:, None]]).astype(np.float32)
+
+GRADE_M = grade_matrix()
+
+def grade(rgb, m=None):
+    """Warm, slightly muted, a touch more contrast. One saturating cv2.transform per frame."""
+    import cv2
+    return cv2.transform(np.ascontiguousarray(rgb[..., :3]), GRADE_M if m is None else m)
 
 def fill_holes(m):
     """Close holes inside the silhouette (open mouth, gaps in the beard) so nothing shows through."""
