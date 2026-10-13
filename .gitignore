@@ -1,2 +1,11 @@
 __pycache__/
 *.pyc
+
+# Video projects: keep source, briefs and transcripts; skip heavy media
+projects/*/raw/
+projects/*/out/
+projects/*/fonts/
+projects/*/work/**/*.mp4
+projects/*/work/**/*.mov
+projects/*/work/**/*.wav
+projects/*/work/matte/
