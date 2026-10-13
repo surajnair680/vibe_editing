@@ -300,8 +300,13 @@ def beat_mirror(c, t):
     reveal = ease_in_out_cubic(prog(t, wt("look", 46) - 0.05, 0.5))
     def content(c):
         im = PRINT["mirror"]; w = 330; h = w * im.height() / im.width()
-        draw_img(c, im, 0, 0, w)
         gx, gy, rx, ry, tilt = MIRROR_GLASS
+        c.save(); c.translate(-w / 2 + gx * w, -h / 2 + gy * h); c.rotate(tilt)        # dark glass, as in v1
+        glass = skia.Path(); glass.addOval(skia.Rect.MakeXYWH(-rx * w, -ry * h, 2 * rx * w, 2 * ry * h))
+        c.save(); c.clipPath(glass, doAntiAlias=True)
+        c.drawRect(skia.Rect.MakeXYWH(-rx * w, -ry * h, 2 * rx * w, 2 * ry * h), skia.Paint(Color=col(INK)))
+        c.restore(); c.restore()
+        draw_img(c, im, 0, 0, w)
         if reveal > 0:                                                   # the reflection: a generic ink face, not his
             c.save(); c.translate(-w / 2 + gx * w, -h / 2 + gy * h); c.rotate(tilt)
             glass = skia.Path(); glass.addOval(skia.Rect.MakeXYWH(-rx * w, -ry * h, 2 * rx * w, 2 * ry * h))
