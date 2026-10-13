@@ -20,3 +20,4 @@ work/*
 !work/*.json
 !work/*.txt
 !work/*.md
+!work/*.py
