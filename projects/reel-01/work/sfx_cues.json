@@ -1,0 +1,157 @@
+[
+ {
+  "sfx": "brush-swoosh",
+  "peak_at": 3.28,
+  "gain_db": -8.0
+ },
+ {
+  "sfx": "brush-swoosh",
+  "peak_at": 4.38,
+  "gain_db": -6.5
+ },
+ {
+  "sfx": "brush-swoosh",
+  "peak_at": 14.56,
+  "gain_db": -5.0
+ },
+ {
+  "sfx": "brush-swoosh",
+  "peak_at": 15.7,
+  "gain_db": -8.0
+ },
+ {
+  "sfx": "brush-swoosh",
+  "peak_at": 25.08,
+  "gain_db": -6.5
+ },
+ {
+  "sfx": "brush-swoosh",
+  "peak_at": 30.38,
+  "gain_db": -5.0
+ },
+ {
+  "sfx": "brush-swoosh",
+  "peak_at": 37.04,
+  "gain_db": -8.0
+ },
+ {
+  "sfx": "brush-swoosh",
+  "peak_at": 38.26,
+  "gain_db": -6.5
+ },
+ {
+  "sfx": "brush-swoosh",
+  "peak_at": 45.08,
+  "gain_db": -5.0
+ },
+ {
+  "sfx": "brush-swoosh",
+  "peak_at": 54.54,
+  "gain_db": -8.0
+ },
+ {
+  "sfx": "low-hit",
+  "peak_at": 0.877,
+  "gain_db": -3
+ },
+ {
+  "sfx": "low-hit",
+  "peak_at": 3.757,
+  "gain_db": -5
+ },
+ {
+  "sfx": "low-hit",
+  "peak_at": 15.163,
+  "gain_db": -5
+ },
+ {
+  "sfx": "low-hit",
+  "peak_at": 37.707,
+  "gain_db": -5
+ },
+ {
+  "sfx": "low-hit",
+  "peak_at": 23.343,
+  "gain_db": -2
+ },
+ {
+  "sfx": "low-hit",
+  "peak_at": 54.767,
+  "gain_db": -7
+ },
+ {
+  "sfx": "low-hit",
+  "peak_at": 45.707,
+  "gain_db": -2
+ },
+ {
+  "sfx": "paper-slap",
+  "peak_at": 4.747,
+  "gain_db": -12
+ },
+ {
+  "sfx": "paper-slap",
+  "peak_at": 16.563,
+  "gain_db": -12
+ },
+ {
+  "sfx": "paper-slap",
+  "peak_at": 17.183,
+  "gain_db": -12
+ },
+ {
+  "sfx": "paper-slap",
+  "peak_at": 17.783,
+  "gain_db": -12
+ },
+ {
+  "sfx": "paper-slap",
+  "peak_at": 49.47,
+  "gain_db": -12
+ },
+ {
+  "sfx": "paper-slap",
+  "peak_at": 50.85,
+  "gain_db": -12
+ },
+ {
+  "sfx": "pop",
+  "peak_at": 7.947,
+  "gain_db": -13
+ },
+ {
+  "sfx": "pop",
+  "peak_at": 8.107,
+  "gain_db": -13
+ },
+ {
+  "sfx": "pop",
+  "peak_at": 34.907,
+  "gain_db": -13
+ },
+ {
+  "sfx": "pop",
+  "peak_at": 45.42,
+  "gain_db": -13
+ },
+ {
+  "sfx": "pop",
+  "peak_at": 53.817,
+  "gain_db": -13
+ },
+ {
+  "sfx": "ink-stamp",
+  "peak_at": 14.167,
+  "gain_db": -5
+ },
+ {
+  "sfx": "dice-rattle",
+  "peak_at": 31.24,
+  "gain_db": -9
+ },
+ {
+  "sfx": "stone-crack",
+  "peak_at": 40.927,
+  "gain_db": -7
+ }
+]
