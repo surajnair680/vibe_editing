@@ -33,6 +33,12 @@ for talking-head footage). Follow the workflow below for the order of work, and 
     effect timing and no black frames. Deliver it with SendUserFile. Commit and push the editable project (source,
     brief, transcript, asset list, revision notes, render instructions). Report any blocked step honestly.
 
+Revisions: never re-render the whole video for a local note. Render only the affected time range
+(`Stage.render(..., start=a, end=b)` widened to whole seconds), splice it into the previous master, then
+re-encode and compare frames against the previous version so only the intended ranges changed. Before
+rendering, check whether the change also alters frames earlier or later than the note (e.g. an element that
+appears before the noted moment) and keep those frames identical. Long renders: background them with absolute paths.
+
 Habits: one change per note, always a time, approve the plan before the build, rough cut before effects, preview short
 sections before a full render, save a template when an effect works.
 
