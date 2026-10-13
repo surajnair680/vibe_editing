@@ -81,7 +81,7 @@ To do or test before the build:
 - Image rights: the dice, beer, pizza, ship, mirror and lighthouse images were supplied by the user from online sources.
 
 ## 7. Sign-off checklist
-- [ ] beat table approved
-- [ ] styled frame and motion sample approved
+- [x] beat table approved (v2 with visuals)
+- [x] styled frame and motion sample approved (hook sample v2)
 - [ ] v1 preview approved
 - [ ] final export delivered
