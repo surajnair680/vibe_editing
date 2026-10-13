@@ -9,3 +9,4 @@ projects/*/work/**/*.mp4
 projects/*/work/**/*.mov
 projects/*/work/**/*.wav
 projects/*/work/matte/
+projects/*/refs/*.mp4
