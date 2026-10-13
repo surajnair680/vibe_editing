@@ -42,6 +42,11 @@ Speed: motion_kit grain/vignette use cached noise banks and masks (cv2, ~5 ms); 
 matrix via cv2.transform (see hook_scene.grade_matrix); render masters with `crf=14, preset="veryfast"` since the
 delivery file is re-encoded. A full 1080x1920 minute renders in about 5 to 8 minutes on 4 cores.
 
+Stills first (user rule): before ANY full render, v1 or a revision, send the user still frames of the beats
+involved (a contact sheet of the key moments, plus full-size frames of anything new or changed, labelled with
+their time in the finished video) and wait for their approval. Only render the video after they say go.
+Apply their notes on the stills first and resend if anything changed.
+
 Habits: one change per note, always a time, approve the plan before the build, rough cut before effects, preview short
 sections before a full render, save a template when an effect works.
 
