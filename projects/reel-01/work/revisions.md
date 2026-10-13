@@ -10,3 +10,6 @@
   (cropped to 1.5 to 2.85 s of the clip so no other gym member shows), two Seneca posters, end card.
 - Captions: 2 to 3 words, cream with a black edge, key words on a red brush; bold serif while quoting Seneca.
 - 31 sound effects (ElevenLabs), each placed so its peak lands on its frame (work/sfx_cues.json).
+
+## Delivery
+- Final file: out/reel-01_v1.mp4 (85 MiB, 1 s keyframes). Sent in 4 parts (out/v1_split/), joined parts verified identical frame for frame.

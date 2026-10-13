@@ -59,5 +59,9 @@ named `<project>-final.mp4`.
   Heavy extras (rembg for cutouts, kokoro-onnx for AI voice) are installed only when a brief needs them.
 - **Media and git:** this is a cloud session that gets wiped. Never modify original footage. Raw footage and rendered
   video are not committed (see `.gitignore`); GitHub blocks files over 100 MiB. Final videos reach the user through
-  SendUserFile. Everything needed to rebuild the edit is committed and pushed.
+  SendUserFile, which accepts at most 30 MiB per file (uploads from the user are also capped at 30 MB). For bigger
+  finals never lower the quality: encode with a keyframe every second (`-g 30 -keyint_min 30 -sc_threshold 0`),
+  split with `-c copy -f segment -segment_time 15`, check each part is under 30 MiB and that the rejoined parts
+  match the original frame for frame (framemd5), then send the parts. Everything needed to rebuild the edit is
+  committed and pushed.
 - The user wants plain, human language and never uses em dashes. Keep that style in messages and on-screen text.
