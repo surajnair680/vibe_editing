@@ -300,16 +300,19 @@ def beat_mirror(c, t):
     reveal = ease_in_out_cubic(prog(t, wt("look", 46) - 0.05, 0.5))
     def content(c):
         im = PRINT["mirror"]; w = 330; h = w * im.height() / im.width()
-        gx, gy, rx, ry, tilt = MIRROR_GLASS
-        c.save(); c.translate(-w / 2 + gx * w, -h / 2 + gy * h); c.rotate(tilt)
-        glass = skia.Path(); glass.addOval(skia.Rect.MakeXYWH(-rx * w, -ry * h, 2 * rx * w, 2 * ry * h))
-        c.save(); c.clipPath(glass, doAntiAlias=True)
-        c.drawRect(skia.Rect.MakeXYWH(-rx * w, -ry * h, 2 * rx * w, 2 * ry * h), skia.Paint(Color=col(INK)))
-        pw = 2 * rx * w * 1.25; ph = pw * PHYS.height() / PHYS.width()
-        c.drawImageRect(PHYS, skia.Rect.MakeXYWH(-pw / 2, -ry * h * 1.05, pw, ph), skia.SamplingOptions(skia.FilterMode.kLinear),
-                        skia.Paint(Alphaf=reveal))
-        c.restore(); c.restore()
         draw_img(c, im, 0, 0, w)
+        gx, gy, rx, ry, tilt = MIRROR_GLASS
+        if reveal > 0:                                                   # the reflection: a generic ink face, not his
+            c.save(); c.translate(-w / 2 + gx * w, -h / 2 + gy * h); c.rotate(tilt)
+            glass = skia.Path(); glass.addOval(skia.Rect.MakeXYWH(-rx * w, -ry * h, 2 * rx * w, 2 * ry * h))
+            c.clipPath(glass, doAntiAlias=True)
+            c.saveLayer(skia.Rect.MakeXYWH(-rx * w, -ry * h, 2 * rx * w, 2 * ry * h), skia.Paint(Alphaf=reveal))
+            c.drawRect(skia.Rect.MakeXYWH(-rx * w, -ry * h, 2 * rx * w, 2 * ry * h), skia.Paint(Color=col("#D9D2C2")))
+            il.generic_face(c, 0, ry * h * 0.05, 2 * rx * w * 1.35, t)
+            glare = skia.Paint(Color=skia.Color(255, 255, 255, 70), AntiAlias=True, Style=skia.Paint.kStroke_Style,
+                               StrokeWidth=rx * w * 0.35, MaskFilter=skia.MaskFilter.MakeBlur(skia.kNormal_BlurStyle, 6))
+            c.drawLine(-rx * w * 0.6, ry * h, rx * w * 0.2, -ry * h, glare)
+            c.restore(); c.restore()
     scrap(c, 185, 880, 360, 400, -6, 13, p, content)
 
 def beat_scale(c, t):

@@ -279,6 +279,32 @@ def magnifier(c, cx, cy, size, t, under=None):
     _stroke(c, [(x0, y0), (x0 + size * 0.36, y0 + size * 0.36)], size * 0.09, INK)
 
 
+def generic_face(c, cx, cy, size, t):
+    """An anonymous ink head and shoulders (front view), simple features, engraving-style shading."""
+    s = size
+    head = ellipse_pts(cx, cy - s * 0.12, s * 0.2, s * 0.26, 40)
+    neck = [(cx - s * 0.08, cy + s * 0.08), (cx - s * 0.08, cy + s * 0.2), (cx + s * 0.08, cy + s * 0.2), (cx + s * 0.08, cy + s * 0.08)]
+    shoulders = [(cx - s * 0.48, cy + s * 0.62), (cx - s * 0.44, cy + s * 0.34), (cx - s * 0.24, cy + s * 0.22),
+                 (cx - s * 0.08, cy + s * 0.2), (cx + s * 0.08, cy + s * 0.2), (cx + s * 0.24, cy + s * 0.22),
+                 (cx + s * 0.44, cy + s * 0.34), (cx + s * 0.48, cy + s * 0.62)]
+    fill(c, smooth_path(shoulders, closed=True), CREAM); shade(c, smooth_path(shoulders, closed=True), t, spacing=7, alpha=0.45)
+    outline(c, shoulders, 5, t, closed=False, seed=41)
+    fill(c, poly(neck), CREAM); shade(c, poly(neck), t, spacing=5, alpha=0.5)
+    hp = smooth_path(head, closed=True); fill(c, hp, CREAM)
+    c.save(); c.clipPath(hp, doAntiAlias=True)
+    shade(c, poly([(cx + s * 0.05, cy - s * 0.4), (cx + s * 0.3, cy - s * 0.4), (cx + s * 0.3, cy + s * 0.2), (cx + s * 0.05, cy + s * 0.2)]),
+          t, spacing=5, alpha=0.45)                                                       # shadow side
+    hair = ellipse_pts(cx, cy - s * 0.3, s * 0.22, s * 0.13, 30, math.pi, 2 * math.pi) + [(cx + s * 0.2, cy - s * 0.2), (cx - s * 0.2, cy - s * 0.2)]
+    shade(c, poly(hair), t, spacing=3, alpha=0.95)
+    c.restore()
+    outline(c, head, 5, t, seed=42)
+    for ex in (-1, 1):                                                                     # brows, eyes
+        _stroke(c, [(cx + ex * s * 0.13, cy - s * 0.17), (cx + ex * s * 0.08, cy - s * 0.185), (cx + ex * s * 0.03, cy - s * 0.17)], 4, INK)
+        e = skia.Path(); e.addCircle(cx + ex * s * 0.08, cy - s * 0.12, s * 0.014); fill(c, e, INK)
+    _stroke(c, [(cx + s * 0.005, cy - s * 0.1), (cx - s * 0.02, cy - s * 0.01), (cx + s * 0.025, cy + 0.0)], 4, INK)   # nose
+    _stroke(c, [(cx - s * 0.06, cy + s * 0.06), (cx, cy + s * 0.07), (cx + s * 0.06, cy + s * 0.06)], 4, INK)          # mouth
+
+
 if __name__ == "__main__":
     from hook_scene import PAPERS
     from PIL import Image
