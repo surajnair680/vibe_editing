@@ -42,9 +42,11 @@ Speed: motion_kit grain/vignette use cached noise banks and masks (cv2, ~5 ms); 
 matrix via cv2.transform (see hook_scene.grade_matrix); render masters with `crf=14, preset="veryfast"` since the
 delivery file is re-encoded. A full 1080x1920 minute renders in about 5 to 8 minutes on 4 cores.
 
-Stills first (user rule): before ANY full render, v1 or a revision, send the user still frames of the beats
-involved (a contact sheet of the key moments, plus full-size frames of anything new or changed, labelled with
-their time in the finished video) and wait for their approval. Only render the video after they say go.
+Stills first (user rule): before ANY full render, v1 or a revision, send the user still frames and wait for their
+approval. Only render the video after they say go. The stills: one frame every 2.5 seconds of the finished video
+(0, 2.5, 5, 7.5 ... so a 60 s reel = 24 stills), shown as a contact sheet with each frame labelled with its time,
+plus full-size frames of anything new or changed. Stills cannot show motion, so offer a short low-res draft clip
+for beats where timing or movement matters.
 Apply their notes on the stills first and resend if anything changed.
 
 Habits: one change per note, always a time, approve the plan before the build, rough cut before effects, preview short
