@@ -74,9 +74,14 @@ deal with git, branches or naming.
    (`git push origin HEAD:<default branch>`, after `git fetch` and a merge if it moved). The user has given standing
    permission for this push to the default branch, for shared-file changes and finished videos only. Find the default
    branch with `git remote show origin` (HEAD branch).
-5. **Picking up other sessions' changes.** At the start of a session and before starting any new step, run
-   `git fetch origin` and merge the default branch into yours (it only brings shared files and other videos' folders,
-   which never conflict with your folder). If the user says "pull the latest rules", do exactly this and re-read CLAUDE.md.
+5. **Picking up other sessions' changes (automatic, never the user's job).** The hook `.claude/hooks/sync-rules.sh`
+   runs before every user message: it fetches the default branch and merges it into yours (it only brings shared files
+   and other videos' folders, which never conflict with your folder). When it reports changed shared files, re-read
+   CLAUDE.md and any changed skill, hook or tool before doing anything else, tell the user in one line that the latest
+   rules are loaded, and push the merge with your next push. If it reports a failed merge, merge by hand and re-read.
+   Also fetch and merge yourself before starting any new step. Never ask the user to remember, relay or trigger
+   anything between sessions (no "tell your other chat to..."): after changing shared files, notify the user's other
+   open sessions on this repo yourself (claude-code-remote `list_sessions` with `mine: true`, then `send_message`).
 6. **When a video is approved as final,** merge your branch into the default branch and push it (standing permission),
    so the default branch holds every finished video's editable project.
 7. **ElevenLabs is shared by all sessions** (one account: at most 2 requests at a time and one pool of credits). Make
