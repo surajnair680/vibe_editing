@@ -1,6 +1,6 @@
 {
  "fps": 30,
- "length": 41.2,
+ "length": 44.63333,
  "segments": [
   {
    "src": "raw/VID20261007161237.mp4",
@@ -54,43 +54,36 @@
   {
    "src": "raw/1000097826.mp4",
    "src_in": 43.36667,
-   "src_out": 48.43333,
+   "src_out": 48.46667,
    "edit_in": 23.86667,
    "text": "Repeated actions will teach you things your thoughts never can, no matter how intelligent you are. (take 2)"
   },
   {
    "src": "raw/1000097826.mp4",
-   "src_in": 50.93333,
-   "src_out": 55.6,
-   "edit_in": 28.93333,
+   "src_in": 50.5,
+   "src_out": 55.63333,
+   "edit_in": 28.96667,
    "text": "Stop chasing the perfect exercise, perfect diet, and the perfect workout program."
   },
   {
    "src": "raw/1000097826.mp4",
-   "src_in": 57.73333,
-   "src_out": 59.33333,
-   "edit_in": 33.6,
-   "text": "Bring it into existence first,"
+   "src_in": 57.46667,
+   "src_out": 61.06667,
+   "edit_in": 34.1,
+   "text": "Bring it into existence first, then make it perfect,"
   },
   {
    "src": "raw/1000097826.mp4",
-   "src_in": 59.73333,
-   "src_out": 60.96667,
-   "edit_in": 35.2,
-   "text": "then make it perfect,"
-  },
-  {
-   "src": "raw/1000097826.mp4",
-   "src_in": 64.2,
-   "src_out": 65.66667,
-   "edit_in": 36.43333,
+   "src_in": 63.56667,
+   "src_out": 65.73333,
+   "edit_in": 37.7,
    "text": "not the other way around."
   },
   {
    "src": "raw/1000097826.mp4",
-   "src_in": 68.16667,
-   "src_out": 71.46667,
-   "edit_in": 37.9,
+   "src_in": 67.23333,
+   "src_out": 72.0,
+   "edit_in": 39.86667,
    "text": "With whatever knowledge you have right now, just start."
   }
  ]

@@ -16,20 +16,25 @@ lines = [
     (B, 31.02, 34.38, "The perfect photo group just sat around thinking about perfection."),
     (B, 43.46, 48.28, "Repeated actions will teach you things your thoughts never can, no matter how intelligent you are. (take 2)"),
     (B, 51.02, 55.44, "Stop chasing the perfect exercise, perfect diet, and the perfect workout program."),
-    (B, 57.82, 59.26, "Bring it into existence first,"),
-    (B, 59.82, 60.82, "then make it perfect,"),
+    (B, 57.82, 60.82, "Bring it into existence first, then make it perfect,"),
     (B, 64.30, 65.50, "not the other way around."),
     (B, 68.26, 71.02, "With whatever knowledge you have right now, just start."),
 ]
 LEAD, TAIL = 0.10, 0.16
-TIGHT = {9: (LEAD, 0.08), 10: (0.08, TAIL)}   # 0.56 s pause inside "first, then" -> about 0.3 s
+# Revision 1 (user: cuts from "no matter how intelligent you are" to the end felt abrupt). From there on the cut
+# points sit in measured silences instead of fixed pads: each word fully decays and each line keeps its inhale.
+# Absolute source in/out times, from the voice envelope (silence = under 8 dB above the noise floor for 150 ms).
+EXACT = {7: (None, 48.48),      # "are." decays, out in the quiet dip before an exhale at 48.53
+         8: (50.50, 55.62),     # "Stop" starts from its inhale at 50.55
+         9: (57.48, 61.05),     # "Bring" inhale at 57.54; "first, then" left uncut
+         10: (63.56, 65.75),    # "not" inhale at 63.60
+         11: (67.22, 72.00)}    # "With" inhale at 67.26; end keeps the exhale after "start." and fades out
 snap = lambda t: round(t * FPS) / FPS
 segs, t = [], 0.0
 for i, (src, s, e, text) in enumerate(lines):
-    lead, tail = TIGHT.get(i, (LEAD, TAIL))
-    if i == len(lines) - 1:
-        tail = 0.45                              # let the last word ring out
-    a, b = snap(s - lead), snap(e + tail)
+    a, b = snap(s - LEAD), snap(e + TAIL)
+    if i in EXACT:
+        a, b = [snap(v) if v is not None else d for v, d in zip(EXACT[i], (a, b))]
     segs.append({"src": src, "src_in": round(a, 5), "src_out": round(b, 5), "edit_in": round(t, 5), "text": text})
     t = snap(t + b - a)
 json.dump({"fps": FPS, "length": round(t, 5), "segments": segs}, open("work/cut_plan.json", "w"), indent=1)
