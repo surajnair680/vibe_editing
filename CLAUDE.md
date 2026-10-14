@@ -52,6 +52,41 @@ Apply their notes on the stills first and resend if anything changed.
 Habits: one change per note, always a time, approve the plan before the build, rough cut before effects, preview short
 sections before a full render, save a template when an effect works.
 
+## Working in several sessions at once (user rule, 2026-10-14)
+The user edits several videos at the same time, one chat (cloud session) per video. Each session has its own container,
+its own clone of this repo, its own uploads and its own CPU. Handle everything below yourself; never make the user
+deal with git, branches or naming.
+
+1. **One session = one video = one folder.** At the start of a new video, fetch first (`git fetch origin`), then pick the
+   next free name `reel-NN` that exists in no branch (`git ls-tree -d --name-only origin/<branch> projects/` for every
+   remote branch) unless the user names it. Create `projects/<name>/`, commit and push it at once to claim the name.
+   Tell the user in one line: the video name and the branch. If the user refers to an existing video, work in that
+   video's folder and branch; ask only if it is unclear which video they mean.
+2. **Stay in your own folder.** Never edit, move or delete another video's files. To reuse something from another video
+   (a scene, a look), copy it into your own folder; never import across project folders.
+3. **Branches.** Work and push on the branch the session was given. If the user names a branch for a video, use it.
+   Before every push: `git fetch origin` and merge the remote branch you push to (`git pull --no-rebase`), then push.
+   If a push is rejected, fetch, merge and retry (up to 4 times with 2, 4, 8, 16 s waits). Never force-push and never
+   rewrite history.
+4. **Shared files** (`CLAUDE.md`, `tools/`, `.claude/`, `docs/`, the skills' toolkits): change them only when the user
+   asks for a rule or tool change, in a commit separate from video work. Then deliver it to every future session:
+   merge the default branch into yours, and push the same commit to the default branch too
+   (`git push origin HEAD:<default branch>`, after `git fetch` and a merge if it moved). The user has given standing
+   permission for this push to the default branch, for shared-file changes and finished videos only. Find the default
+   branch with `git remote show origin` (HEAD branch).
+5. **Picking up other sessions' changes.** At the start of a session and before starting any new step, run
+   `git fetch origin` and merge the default branch into yours (it only brings shared files and other videos' folders,
+   which never conflict with your folder). If the user says "pull the latest rules", do exactly this and re-read CLAUDE.md.
+6. **When a video is approved as final,** merge your branch into the default branch and push it (standing permission),
+   so the default branch holds every finished video's editable project.
+7. **ElevenLabs is shared by all sessions** (one account: at most 2 requests at a time and one pool of credits). Make
+   requests one at a time per session. On `429` / `concurrent_limit_exceeded`, wait and retry (5, 10, 20, 40 s) instead of
+   failing; tell the user only if it still fails. Don't regenerate paid audio that already exists in the project.
+8. **Uploads and raw footage are per session** and not in git. If the user mentions footage they sent to another chat,
+   ask them to upload it in this chat (in parts under 30 MB if needed). If a session restarts and raw files are gone,
+   say so and ask for them again; everything else rebuilds from the repo (see the project's RENDER.md).
+9. **Renders** never compete across sessions (separate machines), so no waiting on other chats is needed.
+
 ## Folder names
 The workflow guide names folders `input, assets, refs, project, previews, exports`. The skill's tools use a different
 layout, so use the skill's and map them like this: input = `raw/`, assets = `assets/`, refs = `refs/` (create it),
