@@ -28,9 +28,13 @@
   noise floor 17 to 26 dB lower. Cut to the edit by `work/make_voice.py` -> `work/voice_cut.wav`.
 - **Music:** bassy, fast paced and engaging beats, unlike reel-01's dark ambient. Two ElevenLabs options
   (`work/music_prompts.json`, 46 s each): A dark trap at 140 BPM, B gym phonk at 150 BPM.
-  Previews: `work/music_preview.py a|b`, music ducked under the voice. Waiting for the user's pick.
+  Previews: `work/music_preview.py a|b`, music ducked under the voice.
+  **Picked: B (gym phonk).** Voice about 10% louder than in the B preview (+1.4 dB) with the music at exactly the
+  same level as the preview: keep the preview's music chain and master gain fixed, raise only the voice.
 
 ## 5. Look (step 7)
 - Same look as reel-01 (see `../reel-01/brief.md` section 5): cream textured paper, huge black serif, small bold
   sans caps, one red only, halftone prints, brush wipes, captions in cream caps with key words on a red brush.
-- The user's physique photos and videos are used in this reel too (waiting for uploads).
+- The user's physique photos and videos are used in this reel too (waiting for uploads; build starts after them).
+- Not just text: every section gets visual elements like reel-01 (printed cut-out images, drawn ink illustrations,
+  stamps, strikes, push-ins), not only typography.
