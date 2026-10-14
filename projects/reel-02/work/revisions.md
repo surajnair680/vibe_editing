@@ -23,3 +23,7 @@ the end (seen lowering the mic and looking down at the phone).
   landed up to 100 ms off the picture on some lines (picture itself was within a frame of the plan).
 - `work/make_cut.py` now reads audio from `work/audio/<clip>.wav` (decoded from the start); drafts are now exact.
 - The mix uses `work/voice_cut.wav` (isolated voice, `work/make_voice.py`), which is within about 10 ms of the plan.
+
+## Stills v1 -> v2 (2026-10-14)
+Notes: remove the Rx stamp on the diagnosis card; remove the barcode under the physique photo on the hook. Rest fine.
+- Both removed in `reel_scene.py`. Captions stay at reel-01's height (1440 px), as the user said the rest is fine.

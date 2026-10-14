@@ -258,7 +258,6 @@ def cover(c, t):
     tw_ = 1 + 0.25 * math.sin(t * 5)
     star(c, 1010, 175, 24 * (2 - tw_), col(INK))
     star(c, 1010, 1470, 22, col(CREAM), rot=0.2)
-    barcode(c, 840, 1440, 130, 40, col(CREAM, 0.85))
 
 # ---------------------------------------------------------------- 2. diagnosis card (W_DIAG to W_ROOM1)
 def diagnosis(c, t):
@@ -273,7 +272,6 @@ def diagnosis(c, t):
         il.brain(c, 0, 0, 560, t)
         il.tangle(c, -10, -40, 250, 130, ease_in_out_cubic(prog(t, wt("my"), wt("disease") - wt("my"))), t, width=7)
         c.restore()
-    stamp(c, "Rx", 850, 520, prog(t, wt("disease"), 0.12), rot=10, size=110, w=200)
     slam(c, "ANALYSIS", 540, 1120, 300, wt("analysis"), t, col(INK))
     slam(c, "PARALYSIS.", 540, 1370, 300, wt("paralysis"), t, col(RED))
     brush(c, 150, 1490, 930, 1476, 30, col(RED), 72, head=ease_out_cubic(prog(t, wt("paralysis") + 0.3, 0.25)), bristles=16)

@@ -46,7 +46,7 @@
 - Not just text: every section gets visual elements like reel-01 (printed cut-out images, drawn ink illustrations,
   stamps, strikes, push-ins), not only typography.
 
-## 6. Beat sheet v1 (approved 2026-10-14; stills v1 sent, waiting for approval)
+## 6. Beat sheet v1 (approved 2026-10-14; stills v2 sent: Rx stamp and barcode removed)
 Edit time = time in the finished video (`work/word_times_edit.txt`). Cut is 43.4 s plus a 1.5 s end hold = 44.9 s.
 Every drawing is ink in code (no outside images). Wipes snap to the nearest beat of music B where they can.
 
