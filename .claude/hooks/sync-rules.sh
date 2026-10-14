@@ -12,8 +12,7 @@ DEF=$(git symbolic-ref --short refs/remotes/origin/HEAD 2>/dev/null | sed 's|^or
 [ -n "$DEF" ] || exit 0
 timeout 20 git fetch -q origin "$DEF" 2>/dev/null || exit 0
 
-CUR=$(git rev-parse --abbrev-ref HEAD 2>/dev/null)
-[ "$CUR" = "$DEF" ] && exit 0
+CUR=$(git rev-parse --abbrev-ref HEAD 2>/dev/null)                 # on the default branch itself this is a pull
 git merge-base --is-ancestor "origin/$DEF" HEAD 2>/dev/null && exit 0          # nothing new
 
 SHARED=$(git diff --name-only HEAD...origin/"$DEF" 2>/dev/null | grep -E '^(CLAUDE\.md|\.claude/|tools/|docs/|templates/)' | tr '\n' ' ')
