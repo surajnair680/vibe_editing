@@ -27,3 +27,14 @@ the end (seen lowering the mic and looking down at the phone).
 ## Stills v1 -> v2 (2026-10-14)
 Notes: remove the Rx stamp on the diagnosis card; remove the barcode under the physique photo on the hook. Rest fine.
 - Both removed in `reel_scene.py`. Captions stay at reel-01's height (1440 px), as the user said the rest is fine.
+
+## v1 render (2026-10-14)
+- Picture: `python3 reel_scene.py render` -> out/reel-02_silent.mp4 (1346 frames, 44.867 s, crf 14 master).
+- Sound: `python3 work/mix.py` (voice +1.4 dB, music at the B preview's level, one 4-bar phrase repeated at 36.835 s,
+  SFX cues in work/mix_cues.json) -> out/reel-02_v1.mp4. Loudness -12.7 LUFS, true peak -1.2 dB.
+- Checks on the MP4: no black frames, every beat in place, voice in sync within 3 ms all the way through.
+- Size: the per-frame paper grain makes crf 18 about 435 MB. The user chose the 2-part delivery:
+  crf 25 (`-g 30 -keyint_min 30 -sc_threshold 0`), 57 MB, video split at the 24.0 s keyframe with `-c copy`, each part's
+  audio encoded from work/mix.wav for exactly its range (a plain segment split left the audio one AAC frame, 21 ms, off).
+  Parts: 0 to 24.0 s (29.3 MiB) and 24.0 s to the end (25.2 MiB). Rejoined video framemd5 identical to the full file;
+  each part's audio matches the mix at 0.00 ms.

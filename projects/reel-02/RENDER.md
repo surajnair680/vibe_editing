@@ -14,4 +14,4 @@ Run from this folder, in order:
    (needs rembg, mediapipe, libgles2 and work/models/selfie_multiclass.tflite from storage.googleapis.com/mediapipe-models).
 4. Prints: `python3 work/prep_gym.py`, `python3 work/prep_images.py`. Fonts: `python3 vibe/fonts.py "Playfair Display:900" "Inter Tight:800" "Instrument Serif:400" -o fonts/`.
 5. Picture: `python3 reel_scene.py sheet` (stills first), then `python3 reel_scene.py render` -> out/reel-02_silent.mp4.
-6. Sound and final: `python3 work/mix.py` (to be written after the stills are approved).
+6. Sound and final: `python3 work/mix.py` -> out/reel-02_v1.mp4. Delivery and the 2-part split: see work/revisions.md (v1 render).
