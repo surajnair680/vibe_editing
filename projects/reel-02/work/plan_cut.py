@@ -21,14 +21,14 @@ lines = [
     (B, 68.26, 71.02, "With whatever knowledge you have right now, just start."),
 ]
 LEAD, TAIL = 0.10, 0.16
-# Revision 1 (user: cuts from "no matter how intelligent you are" to the end felt abrupt). From there on the cut
-# points sit in measured silences instead of fixed pads: each word fully decays and each line keeps its inhale.
-# Absolute source in/out times, from the voice envelope (silence = under 8 dB above the noise floor for 150 ms).
-EXACT = {7: (None, 48.48),      # "are." decays, out in the quiet dip before an exhale at 48.53
-         8: (50.50, 55.62),     # "Stop" starts from its inhale at 50.55
+# Revisions 1 and 2 (user: cuts from "no matter how intelligent you are" to the end felt abrupt; then: "are" and
+# "program" still clipped, too much time before "not" and "With", and the end showed the mic coming down).
+# Absolute source in/out times, from the voice envelope in 10 ms steps and the picture.
+EXACT = {7: (None, 48.78),      # the trailing "r" of "are" runs to 48.70
+         8: (50.50, 55.85),     # "Stop" from its inhale at 50.55; the "m" of "program" hums to about 55.66
          9: (57.48, 61.05),     # "Bring" inhale at 57.54; "first, then" left uncut
-         10: (63.56, 65.75),    # "not" inhale at 63.60
-         11: (67.22, 72.00)}    # "With" inhale at 67.26; end keeps the exhale after "start." and fades out
+         10: (64.10, 65.75),    # "not" starts at 64.20, no long breath in front
+         11: (68.10, 71.60)}    # mic is up by 68.1 (eyes on the phone before that); exhale ends 71.45, mic drops at 71.8
 snap = lambda t: round(t * FPS) / FPS
 segs, t = [], 0.0
 for i, (src, s, e, text) in enumerate(lines):

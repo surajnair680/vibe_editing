@@ -6,7 +6,7 @@ plan = json.load(open("work/cut_plan.json"))
 ins, parts = [], []
 for i, s in enumerate(plan["segments"]):
     k, d = i, s["src_out"] - s["src_in"]
-    fo = 0.4 if i == len(plan["segments"]) - 1 else 0.008   # last piece fades out gently
+    fo = 0.15 if i == len(plan["segments"]) - 1 else 0.008   # last piece fades out gently
     ins += ["-ss", f"{s['src_in']:.5f}", "-t", f"{d + 0.5:.5f}", "-i", s["src"]]
     parts.append(f"[{k}:v]setpts=PTS-STARTPTS,fps=30,trim=end_frame={round(d * 30)},"
                  f"scale=1080:1920,setsar=1,format=yuv420p[v{i}];"
