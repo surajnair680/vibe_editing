@@ -40,7 +40,8 @@
   `raw/gym-2.mp4` (old captions burned in, not used), `raw/gym-3.mp4` (the clean copy of gym-2: purple tank,
   side chest pose, lat spread). Print clips: `work/prep_gym.py`. Photo prints and the back sketch: `work/prep_images.py`.
 - Poster (beat 8): gym-1 flex, flips to the gym-3 lat spread on the beat at 25.6 s. End card: gym-3 side chest at half speed.
-- Music B ends at 41.6 s: repeat two bars (3.2 s, bar-aligned at 30.435 s) so the beat carries to the end card.
+- Music B ends at 41.6 s: repeat one 4-bar phrase (30.435 to 36.835 s, joined at 36.835 s) so the beat carries
+  through the end card and fades with the video (a 2-bar repeat would jump mid-phrase).
 - Wipes sit on music B's 150 BPM grid (`work/music_beats.json`); the track's drop (3.2 s) lands on the red wipe
   into the diagnosis card.
 - Not just text: every section gets visual elements like reel-01 (printed cut-out images, drawn ink illustrations,
