@@ -38,3 +38,6 @@ Notes: remove the Rx stamp on the diagnosis card; remove the barcode under the p
   audio encoded from work/mix.wav for exactly its range (a plain segment split left the audio one AAC frame, 21 ms, off).
   Parts: 0 to 24.0 s (29.3 MiB) and 24.0 s to the end (25.2 MiB). Rejoined video framemd5 identical to the full file;
   each part's audio matches the mix at 0.00 ms.
+
+## Final (2026-10-14)
+- The user approved v1 as the final video. No further changes. Merged into the default branch.

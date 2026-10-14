@@ -47,7 +47,7 @@
 - Not just text: every section gets visual elements like reel-01 (printed cut-out images, drawn ink illustrations,
   stamps, strikes, push-ins), not only typography.
 
-## 6. Beat sheet v1 (approved 2026-10-14; stills v2 approved; v1 rendered and sent in 2 parts)
+## 6. Beat sheet v1 (approved 2026-10-14; stills v2 approved; v1 approved as final)
 Edit time = time in the finished video (`work/word_times_edit.txt`). Cut is 43.4 s plus a 1.5 s end hold = 44.9 s.
 Every drawing is ink in code (no outside images). Wipes snap to the nearest beat of music B where they can.
 
@@ -77,3 +77,11 @@ To make or test before the build:
 - Ink drawings to add: camera, photo prints, brain, sitting figure with thought bubble, dumbbell, plate, clipboard.
 - Sketch to photo effect for beat 11 (feasibility test first).
 - ElevenLabs sound effects (credits): brush swoosh, low hit, stamp thud, paper slap, camera shutter.
+
+## 7. Sign-off checklist
+- [x] rough cut approved (v3)
+- [x] beat sheet approved (v1)
+- [x] stills approved (v2: Rx stamp and barcode removed)
+- [x] v1 approved as final (2026-10-14)
+- [x] final delivered: `out/reel-02-final.mp4` (crf 25, 57 MB) sent in 2 parts (0 to 24.0 s, 24.0 s to end)
+- [x] merged into the default branch
