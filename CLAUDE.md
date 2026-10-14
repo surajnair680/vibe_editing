@@ -106,13 +106,59 @@ named `<project>-final.mp4`.
   (`/opt/pw-browsers/chromium_headless_shell-1194/chrome-linux/headless_shell`). CLI: `npx hyperframes@0.8.150`.
 - **Web/shader renders (`templates/web/render.mjs`):** never run `npx playwright install`. Chromium is preinstalled
   at `/opt/pw-browsers` and Playwright finds it on its own.
-- **Setup:** `.claude/hooks/session-start.sh` installs the Python packages and system libraries each new session.
-  Heavy extras (rembg for cutouts, kokoro-onnx for AI voice) are installed only when a brief needs them.
+- **Setup:** `.claude/hooks/session-start.sh` installs the Python packages and system libraries each new session
+  (including libGLESv2, which MediaPipe needs). It also starts a background install of the cut-out tools (rembg,
+  onnxruntime, mediapipe, the u2net_human_seg model and MediaPipe's person model at
+  `~/.cache/vibe/selfie_multiclass.tflite`); log in `/tmp/vibe-extras.log`, done when `~/.cache/vibe/extras.ok` exists.
+  Kokoro-onnx (AI voice) is still installed only when a brief needs it.
 - **Media and git:** this is a cloud session that gets wiped. Never modify original footage. Raw footage and rendered
-  video are not committed (see `.gitignore`); GitHub blocks files over 100 MiB. Final videos reach the user through
-  SendUserFile, which accepts at most 30 MiB per file (uploads from the user are also capped at 30 MB). For bigger
-  finals never lower the quality: encode with a keyframe every second (`-g 30 -keyint_min 30 -sc_threshold 0`),
-  split with `-c copy -f segment -segment_time 15`, check each part is under 30 MiB and that the rejoined parts
-  match the original frame for frame (framemd5), then send the parts. Everything needed to rebuild the edit is
-  committed and pushed.
+  video are not committed (see `.gitignore`); GitHub blocks files over 100 MiB. Paid audio (isolated voice, music,
+  SFX as .mp3) is committed so it is never paid for twice. Final videos reach the user through SendUserFile, which
+  accepts at most 30 MiB per file (uploads from the user are also capped at 30 MB). Everything needed to rebuild the
+  edit is committed and pushed. Delivery of a final bigger than 30 MiB:
+  1. Encode with a keyframe every second (`-g 30 -keyint_min 30 -sc_threshold 0`). Per-frame paper grain or noise
+     makes files huge (reel-02: 45 s at crf 18 = 435 MB, about 17 parts). If the file needs more than about 3 parts,
+     show the user the options with real numbers (crf, size, number of parts, a full-size crop comparison) and let
+     them choose; never lower the quality without asking. Instagram re-compresses every Reel, so also remind them to
+     turn on Settings > Data usage and media quality > Upload at highest quality.
+  2. Split the video only: `-map 0:v -c copy -f segment -segment_times <t1,t2..> -reset_timestamps 1` at keyframes.
+     A plain `-c copy -f segment` split of video plus audio leaves each part's audio one AAC frame (21 ms) off.
+  3. Mux each part's audio fresh from the master mix WAV for exactly that part's range (`-ss`/`-t` on the WAV, which
+     is sample accurate), AAC 256k.
+  4. Check: each part under 30 MiB; the parts' video joined with the concat demuxer matches the full file frame for
+     frame (framemd5 of the video stream); each part's audio cross-correlates with the mix at 0 ms. Then send.
 - The user wants plain, human language and never uses em dashes. Keep that style in messages and on-screen text.
+
+## Lessons from past edits (keep adding to this list)
+Learned on reel-02 (2026-10-14). Each one cost a revision or a re-render once; follow them from the start.
+- **Cut audio from WAV, never by seeking into the phone MP4 or an MP3.** `-ss` on a phone MP4's AAC track (and on
+  MP3s) lands up to 100 ms off, so rough cuts drift out of lip sync. Decode each clip's audio to WAV from the start
+  (`work/audio/<clip>.wav`, and the isolated voice .mp3 to .wav too) and cut that. Seeking the picture is fine (it
+  lands within a frame). Verify sync by cross-correlating each cut piece against audio decoded from the start of the
+  source, never against another seeked read (two equally wrong reads agree with each other).
+- **Cut points come from the sound and the picture, not from padded word times.** Scribe's word end times are early
+  on soft endings ("are", "program": the r, m, n, s ring on 0.2 to 0.4 s) and ignore breaths. Fixed pads (0.1 s in,
+  0.16 s out) clipped words and chopped inhales, which the user heard as abrupt cuts. For every in and out point:
+  measure the voice envelope in 10 ms steps, end only after the word has decayed to the noise floor, start a line on
+  its inhale (or in silence just before the onset when the inhale is long), and look at the frames around the cut for
+  movement the user does not want seen (raising or lowering the mic, looking down at the phone to start or stop
+  recording). Keep gaps between lines tight but never cut into sound. Reference: `projects/reel-02/work/plan_cut.py`.
+- **One ffmpeg input per cut piece.** Feeding one long input into many `trim` filters buffers the whole clip and gets
+  the process killed (SIGKILL, out of memory). Give each segment its own `-ss/-t` input. Reference:
+  `projects/reel-02/work/make_cut.py`.
+- **Music: find the beat grid and the phrase length before looping or extending.** Detect the tempo and grid phase
+  (kick onsets in the low band) and the phrase length (bars whose rhythm envelopes match, usually 4 bars). Repeat whole
+  phrases at phrase boundaries; a 2-bar repeat can jump mid-phrase even when the splice is on the beat. Check where the
+  generated track really ends (ElevenLabs tracks can end before their requested length) against the edit length.
+  Snap wipes and slams to the grid and put the drop on a big transition. Reference: `projects/reel-02/work/mix.py`.
+- **"Voice louder, music the same":** key the music's ducking from the voice before the boost and fix the master gain
+  to the approved preview's, instead of normalising the new mix (normalising would turn the music down).
+- **Captions vs a handheld mic.** At reel-01's caption height (about 1440 px) the captions sit on a handheld mic.
+  Ask about caption height when the user holds a mic, at the stills step, not after.
+- **Cut-outs over the floral sofa:** rembg alone keeps the sofa. Refine with MediaPipe:
+  copy `projects/reel-02/work/refine_matte.py` into the project and run it with
+  `--grow 6 --thresh 0.3 --kill-florals --solid-below 0.68 --model "$HOME/.cache/vibe/selfie_multiclass.tflite"`.
+- **Check user-supplied clips for burned-in captions** (a previous edit's text) before planning them in; ask for the
+  clean original.
+- **Explain any decorative element in the stills.** The user asked what "Rx" and the barcode were and had both removed:
+  avoid ornaments that carry no meaning for this audience.
