@@ -1,4 +1,6 @@
-"""Cut both clips by work/cut_plan.json -> work/cut.mp4 (1080x1920, 30 fps, original audio).
+"""Cut both clips by work/cut_plan.json -> work/cut.mp4 (1080x1920, 30 fps, original audio as a guide track).
+Audio comes from work/audio/<clip>.wav (decoded from the start): seeking the phone MP4's own audio landed up to
+100 ms off the picture. The final mix uses the isolated voice from work/make_voice.py instead.
 Each audio piece gets 8 ms fades so the joins never click. Pass --draft for a small preview (out/rough-cut-draft.mp4)."""
 import json, subprocess, sys
 plan = json.load(open("work/cut_plan.json"))
@@ -8,9 +10,11 @@ for i, s in enumerate(plan["segments"]):
     k, d = i, s["src_out"] - s["src_in"]
     fo = 0.15 if i == len(plan["segments"]) - 1 else 0.008   # last piece fades out gently
     ins += ["-ss", f"{s['src_in']:.5f}", "-t", f"{d + 0.5:.5f}", "-i", s["src"]]
+    ins += ["-ss", f"{s['src_in']:.5f}", "-t", f"{d + 0.5:.5f}", "-i", "work/audio/" + s["src"][4:].replace(".mp4", ".wav")]
+    k = 2 * i
     parts.append(f"[{k}:v]setpts=PTS-STARTPTS,fps=30,trim=end_frame={round(d * 30)},"
                  f"scale=1080:1920,setsar=1,format=yuv420p[v{i}];"
-                 f"[{k}:a]asetpts=PTS-STARTPTS,atrim=0:{d:.5f},aformat=sample_rates=48000:channel_layouts=stereo,"
+                 f"[{k + 1}:a]asetpts=PTS-STARTPTS,atrim=0:{d:.5f},aformat=sample_rates=48000:channel_layouts=mono,"
                  f"afade=t=in:d=0.008,afade=t=out:st={d - fo:.3f}:d={fo}[a{i}]")
 n = len(parts)
 fc = ";".join(parts) + ";" + "".join(f"[v{i}][a{i}]" for i in range(n)) + f"concat=n={n}:v=1:a=1[v][a]"

@@ -17,3 +17,9 @@ the end (seen lowering the mic and looking down at the phone).
 - "not" in 63.57 -> 64.10 (dropped the long breath). "With" in 67.23 -> 68.10 (mic up by 68.1).
 - End out 72.00 -> 71.60 (exhale ends 71.45, mic drops at 71.8), fade 0.4 -> 0.15 s.
 - Check: frames 0 to 23.8 s identical to v1 (framemd5). Length 44.6 s -> 43.4 s. v2 plan kept as `work/cut_plan_v2.json`.
+
+## Audio sync fix (2026-10-14)
+- Found while cutting the isolated voice: the rough cut drafts v1 to v3 took audio by seeking the phone MP4, which
+  landed up to 100 ms off the picture on some lines (picture itself was within a frame of the plan).
+- `work/make_cut.py` now reads audio from `work/audio/<clip>.wav` (decoded from the start); drafts are now exact.
+- The mix uses `work/voice_cut.wav` (isolated voice, `work/make_voice.py`), which is within about 10 ms of the plan.

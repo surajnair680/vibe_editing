@@ -15,7 +15,7 @@
   (`raw/parts.txt`, `ffmpeg -f concat -c copy`).
 - Transcripts: `work/short/` (clip A) and `work/main/` (clip B), ElevenLabs Scribe.
 
-## 3. Cuts and pacing (step 5, rough cut v3 sent, waiting for notes)
+## 3. Cuts and pacing (step 5, approved: rough cut v3)
 - Clip A then clip B. Second takes of the two repeated lines ("At the end, the best photos all came..." and
   "Repeated actions will teach you...").
 - Natural pace: up to 0:23.9 gaps between lines are about 0.25 s (approved). From "no matter how intelligent you are"
@@ -23,8 +23,14 @@
   ends before the mic drops (v3).
 - Plan: `work/plan_cut.py` -> `work/cut_plan.json`. Cut: `work/make_cut.py` -> `work/cut.mp4`.
 
-## 4. Music (step 6)
-- New ElevenLabs track. The user is deciding the kind of music first.
+## 4. Audio (step 6)
+- **Voice:** ElevenLabs voice isolation on both full clips (`work/audio/<clip>-isolated.mp3`), in sync within 5 ms,
+  noise floor 17 to 26 dB lower. Cut to the edit by `work/make_voice.py` -> `work/voice_cut.wav`.
+- **Music:** bassy, fast paced and engaging beats, unlike reel-01's dark ambient. Two ElevenLabs options
+  (`work/music_prompts.json`, 46 s each): A dark trap at 140 BPM, B gym phonk at 150 BPM.
+  Previews: `work/music_preview.py a|b`, music ducked under the voice. Waiting for the user's pick.
 
 ## 5. Look (step 7)
-- To be discussed after the trim is approved.
+- Same look as reel-01 (see `../reel-01/brief.md` section 5): cream textured paper, huge black serif, small bold
+  sans caps, one red only, halftone prints, brush wipes, captions in cream caps with key words on a red brush.
+- The user's physique photos and videos are used in this reel too (waiting for uploads).
