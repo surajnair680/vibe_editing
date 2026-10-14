@@ -35,6 +35,40 @@
 ## 5. Look (step 7)
 - Same look as reel-01 (see `../reel-01/brief.md` section 5): cream textured paper, huge black serif, small bold
   sans caps, one red only, halftone prints, brush wipes, captions in cream caps with key words on a red brush.
-- The user's physique photos and videos are used in this reel too (waiting for uploads; build starts after them).
+- The user's physique photos and videos: `assets/physique-front.jpg` (mirror selfie, side chest),
+  `assets/physique-back.jpg` (back pose), `raw/gym-1.mp4` (4.5 s gym mirror flex, white tank, people behind),
+  `raw/gym-2.mp4` (6.4 s, three gym shots, but with old captions burned in over the chest: not usable as is,
+  asked the user for a clean copy).
 - Not just text: every section gets visual elements like reel-01 (printed cut-out images, drawn ink illustrations,
   stamps, strikes, push-ins), not only typography.
+
+## 6. Beat sheet v1 (waiting for approval)
+Edit time = time in the finished video (`work/word_times_edit.txt`). Cut is 43.4 s plus a 1.5 s end hold = 44.9 s.
+Every drawing is ink in code (no outside images). Wipes snap to the nearest beat of music B where they can.
+
+| # | edit time | spoken line | visual | captions | sound |
+|---|---|---|---|---|---|
+| 1 | 0.0 to 3.0 | "Intelligent people like you cannot build their dream physique" | HOOK COVER like reel-01: you cut out over cream paper, red sun behind your head. INTELLIGENT masthead slams on its word, PEOPLE LIKE YOU word by word, torn black band with CANNOT BUILD THEIR DREAM PHYSIQUE., front physique photo taped on as a print, red ring + arrow on "physique" | none | music in hard, low hit on "intelligent" |
+| 2 | 3.0 to 6.5 | "because you, my friend, have a disease called analysis paralysis" | red wipe to DIAGNOSIS card: small DIAGNOSIS: label, drawn brain wrapped in a red tangled scribble, ANALYSIS then PARALYSIS. slam in huge serif on their words, red RX stamp on "disease" | none | swoosh, stamp thud, hit on "paralysis" |
+| 3 | 6.5 to 9.2 | "A photography professor split his class in two." | black wipe to you (clip B). Torn paper strip above your head: drawn camera, PHOTOGRAPHY CLASS, a row of 10 drawn students, a red brush line splits them 5 and 5 on "split" | on | swoosh, paper slap on "split" |
+| 4 | 9.3 to 12.2 | "One group would be graded only on how many photos they took." | paper scrap left of your head: GROUP A / QUANTITY, little printed photos pile up fast on "how many photos", tally counter running | on, MANY highlighted | camera shutter clicks on the pile |
+| 5 | 12.2 to 15.8 | "The other group had only one chance to take one perfect photo." | scrap right of your head: GROUP B / QUALITY, one empty photo frame, big red 1 on "one chance" | on, PERFECT highlighted | one shutter click |
+| 6 | 15.9 to 20.3 | "At the end, the best photos all came from the group taking the most photos." | slow push-in. On "best": red scribble ring and a WINNER stamp on the GROUP A pile, GROUP B fades | on, BEST highlighted | stamp thud |
+| 7 | 20.3 to 23.9 | "The perfect photo group just sat around thinking about perfection." | strip: drawn figure sitting with a thought bubble holding an empty frame, red 0 PHOTOS on "perfection" | on | |
+| 8 | 23.9 to 27.4 | "Repeated actions will teach you things your thoughts never can," | red wipe to POSTER: your gym-1 flex clip as a big framed print over the red sun (people behind cropped out), the quote builds below in serif, NEVER CAN in red | none | swoosh, hit on "repeated" |
+| 9 | 27.4 to 29.3 | "no matter how intelligent you are." | black wipe back to you, push-in | on, INTELLIGENT highlighted | |
+| 10 | 29.8 to 34.8 | "Stop chasing the perfect exercise, perfect diet, and the perfect workout program." | strip: drawn dumbbell, plate, clipboard program pop in on their words, small red PERFECT over each, one red line strikes through all three on "program" | on | paper slaps, brush strike |
+| 11 | 34.9 to 39.9 | "Bring it into existence first, then make it perfect, not the other way around." | red wipe to card: your back photo as a rough ink sketch with 1. EXIST on "existence", the sketch fills in with the real photo on "make it perfect" (2. PERFECT), on "not the other way around" a reversed 2 -> 1 appears and gets a red X | none | swoosh, hit on "perfect" |
+| 12 | 39.9 to 42.2 | "With whatever knowledge you have right now," | black wipe back to you, push-in | on, NOW highlighted | |
+| 13 | 42.2 to 44.9 | "just start." | red wipe to END CARD: JUST START. slams in huge, front physique photo as a print over the red sun, holds 1.5 s | none | final hit, music out |
+
+Captions (reel-01 style): 2 to 3 words, Inter Tight 800 caps in cream with a thin black edge, about 1440 px down,
+key words on a red brush. Graphics stay off your face and the mic, inside the safe zone (250 px top, 420 px bottom).
+Footage: warm muted grade with paper grain, same as reel-01.
+
+To make or test before the build:
+- Cut-out of you for the hook (clip A, rembg matte as in reel-01).
+- gym-1: crop tight so the people behind you are gone.
+- Ink drawings to add: camera, photo prints, brain, sitting figure with thought bubble, dumbbell, plate, clipboard.
+- Sketch to photo effect for beat 11 (feasibility test first).
+- ElevenLabs sound effects (credits): brush swoosh, low hit, stamp thud, paper slap, camera shutter.
