@@ -37,12 +37,16 @@
   sans caps, one red only, halftone prints, brush wipes, captions in cream caps with key words on a red brush.
 - The user's physique photos and videos: `assets/physique-front.jpg` (mirror selfie, side chest),
   `assets/physique-back.jpg` (back pose), `raw/gym-1.mp4` (4.5 s gym mirror flex, white tank, people behind),
-  `raw/gym-2.mp4` (6.4 s, three gym shots, but with old captions burned in over the chest: not usable as is,
-  asked the user for a clean copy).
+  `raw/gym-2.mp4` (old captions burned in, not used), `raw/gym-3.mp4` (the clean copy of gym-2: purple tank,
+  side chest pose, lat spread). Print clips: `work/prep_gym.py`. Photo prints and the back sketch: `work/prep_images.py`.
+- Poster (beat 8): gym-1 flex, flips to the gym-3 lat spread on the beat at 25.6 s. End card: gym-3 side chest at half speed.
+- Music B ends at 41.6 s: repeat two bars (3.2 s, bar-aligned at 30.435 s) so the beat carries to the end card.
+- Wipes sit on music B's 150 BPM grid (`work/music_beats.json`); the track's drop (3.2 s) lands on the red wipe
+  into the diagnosis card.
 - Not just text: every section gets visual elements like reel-01 (printed cut-out images, drawn ink illustrations,
   stamps, strikes, push-ins), not only typography.
 
-## 6. Beat sheet v1 (waiting for approval)
+## 6. Beat sheet v1 (approved 2026-10-14; stills v1 sent, waiting for approval)
 Edit time = time in the finished video (`work/word_times_edit.txt`). Cut is 43.4 s plus a 1.5 s end hold = 44.9 s.
 Every drawing is ink in code (no outside images). Wipes snap to the nearest beat of music B where they can.
 
