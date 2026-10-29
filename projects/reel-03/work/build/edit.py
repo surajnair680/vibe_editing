@@ -300,13 +300,161 @@ def b_okay(tl, i):
     return f
 
 
-# ---------- placeholder for beats not styled yet ----------
-def raw_beat(path, t0, zoom=1.15, cx=0.48, cy=0.45, speed=1.0, still_img=False):
-    def fn(tl, i, _d=[None]):
-        fr = still(path) if still_img else frame_at(path, t0, 4.0, tl, speed)
-        f = grade(cover(fr, zoom, cx, cy), gamma=1.3) * 0.8
-        return finish(f, i)
-    return fn
+# ---------- the other beats ----------
+def src(path, t0, tl, dur=4.0, speed=1.0):
+    return still(path) if path.endswith(".jpg") else frame_at(path, t0, dur, tl, speed)
+
+
+@functools.lru_cache(maxsize=1)
+def side_mask():
+    m = np.ones((H, W), np.float32)
+    m[:, :int(W * 0.10)] = 0.15; m[:, int(W * 0.90):] = 0.15
+    return cv2.GaussianBlur(m, (0, 0), 45)[..., None]
+
+
+def b_want(tl, i):        # 5.00-8.88: slow, purple-blue night, dark soft sides
+    f = cover(src(C02, 0.0, tl), zoom=1.18 + 0.06 * tl / 3.88, cx=0.48, cy=0.42)
+    f = grade(f, sat=0.55, gain=(1.08, 0.78, 0.92), lift=(0.05, 0.025, 0.04), gamma=1.35, contrast=1.05)
+    f = bloom(f, thr=0.55, sigma=40, amt=0.7) * side_mask()
+    if i % 23 == 5:
+        f = glitch(f, i, n=3, amp=20)
+    return finish(f, i, ca=7, vig=0.5)
+
+
+def b_grip(tl, i):        # 8.88-9.24 "you get": hands gripping, hot orange-red
+    f = cover(src(C10, 0.0, tl), zoom=3.0, cx=0.16, cy=0.4)
+    f = tint_bw(f, (0.02, 0.02, 0.10), (0.30, 0.55, 1.0), 1.3)
+    f = bloom(f, thr=0.5, sigma=50, amt=1.2)
+    f = glitch(f, i, n=5, amp=35) if i % 2 == 0 else f
+    return finish(f, i, ca=6)
+
+
+GHOST_T0 = 1.9
+
+
+@functools.lru_cache(maxsize=1)
+def lifter_mattes():
+    """rembg person matte of the deadlift pull, only the lifter (people behind on the left are cut off)."""
+    from rembg import remove, new_session
+    ses = new_session("u2net_human_seg")
+    out = []
+    for fr in clip(C03, GHOST_T0, 0.68):
+        m = np.asarray(remove(np.ascontiguousarray(fr[..., ::-1]), session=ses, only_mask=True)).astype(np.float32) / 255
+        m[:, :int(fr.shape[1] * 0.19)] = 0
+        n, lab, st, _ = cv2.connectedComponentsWithStats((m > 0.5).astype(np.uint8))
+        if n > 1:
+            best = 1 + int(np.argmax(st[1:, 4]))
+            m = m * cv2.dilate((lab == best).astype(np.uint8), np.ones((15, 15), np.uint8))
+        out.append(m)
+    return out
+
+
+def b_ghost(tl, i):       # 9.24-9.92 "a big": the lifter as a glowing blue outline
+    k = min(int(round(tl * FPS)), len(lifter_mattes()) - 1)
+    Z = dict(zoom=1.15, cx=0.4, cy=0.5)
+    bg = cover(src(C03, GHOST_T0, tl, 0.68), **Z)
+    bg = tint_bw(bg, (0.08, 0.03, 0.01), (0.85, 0.45, 0.15), 1.5) * 0.75
+    m = cover((lifter_mattes()[k] * 255).astype(np.uint8)[..., None].repeat(3, 2), **Z)[..., 0]
+    m = cv2.GaussianBlur(m, (0, 0), 2)
+    edge = np.clip(cv2.dilate(m, np.ones((9, 9), np.uint8)) - cv2.erode(m, np.ones((5, 5), np.uint8)), 0, 1)
+    glow = cv2.GaussianBlur(edge, (0, 0), 10) * 1.5 + edge
+    f = bg * (1 - 0.7 * m[..., None]) + glow[..., None] * np.float32([1.0, 0.85, 0.55])
+    return finish(bloom(f, thr=0.6, sigma=40, amt=0.6), i, ca=5)
+
+
+def b_plates(tl, i):      # 9.92-10.28 "piece of": plates close, green
+    f = cover(src(C03, 3.0, tl, 0.4), zoom=3.2, cx=0.665, cy=0.37)
+    f = tint_bw(f, (0.01, 0.03, 0.0), (0.35, 1.0, 0.45), 1.35)
+    f = bloom(f, thr=0.5, sigma=50, amt=1.0)
+    return finish(f, i, g=0.05, ca=6)
+
+
+def b_reach(tl, i):       # 10.28-11.00 "what you want.": arms up, the window blown into light
+    f = cover(src(C08, 0.0, tl, 0.8), zoom=1.45, cx=0.45, cy=0.22)
+    f = grade(f, sat=0.3, gamma=1.5)
+    f = tint_bw(f, (0.12, 0.01, 0.04), (1.0, 0.62, 0.55), 1.2) * 1.15
+    f = bloom(f, thr=0.45, sigma=70, amt=1.8)
+    return finish(f, i, ca=6)
+
+
+def b_mirror(tl, i):      # 11.84-12.40 "can happen and": mirror pose, teal
+    f = cover(src(C09, 0.0, tl, 0.6), zoom=1.5, cx=0.35, cy=0.42)
+    f = tint_bw(f, (0.03, 0.025, 0.0), (0.95, 0.85, 0.35), 1.3)
+    f = bloom(f, thr=0.6, sigma=40, amt=0.6)
+    return finish(f, i, ca=5)
+
+
+@functools.lru_cache(maxsize=1)
+def glow_fig():
+    f = cover(still(C05))
+    hot = np.clip((luma(f) - 0.55) / 0.35, 0, 1)
+    return f, cv2.GaussianBlur(hot, (0, 0), 4)[..., None]
+
+
+def b_reality(tl, i):     # 12.40-13.78 "become a reality.": the glowing figure, breathing light, push in
+    f, hot = glow_fig()
+    f = cover((np.clip(f, 0, 1) * 255).astype(np.uint8), zoom=1.15, cx=0.5, cy=0.28)
+    hot = cover((np.clip(hot, 0, 1) * 255).astype(np.uint8).repeat(3, 2), zoom=1.15, cx=0.5, cy=0.28)[..., :1]
+    breathe = 1 + 0.18 * np.sin(tl * 2 * np.pi / 1.1) + 0.04 * np.random.default_rng(i).normal()
+    f = f * (1 + hot * (breathe - 1) * 1.5)
+    f = grade(f, gain=(1.05, 0.98, 0.9), gamma=1.1)
+    f = bloom(f, thr=0.55, sigma=60, amt=0.9 * breathe)
+    f = push(f, 1 + 0.07 * tl / 1.38, W * 0.48, H * 0.68)
+    return finish(f, i, ca=4)
+
+
+def warm_look(f, hot=False):
+    f = grade(f, sat=0.5, gain=(0.30, 0.58, 1.05), gamma=1.5 if not hot else 1.2, contrast=1.1)
+    return bloom(f, thr=0.5, sigma=50, amt=1.2 if hot else 0.6)
+
+
+def cold_look(f):
+    return grade(f, sat=0.4, gain=(1.05, 0.88, 0.78), gamma=1.45, lift=(0.02, 0.01, 0.0))
+
+
+def leak(f, tl, side=1.0):
+    """Orange light leak drifting in from one side."""
+    x = W * (0.5 + 0.55 * side) + 120 * np.sin(tl * 3)
+    d = np.hypot((XX - x) / 500, (YY - H * 0.4) / 900)
+    return f + np.exp(-d ** 2)[..., None] * np.float32([0.05, 0.25, 0.7]) * 0.8
+
+
+def b_quiet(tl, i):       # 14.46-15.30 "sincerely and": walking away, four warm/dark cuts like the reference
+    t = 14.46 + tl
+    fr = src(C01, 0.5, tl, 0.9)
+    if t < 14.74:
+        f = soft_frame(leak(warm_look(cover(fr, 1.2, 0.48, 0.45)), tl), scale=0.9, feather=120)
+    elif t < 14.90:
+        f = soft_frame(warm_look(cover(fr, 1.3, 0.5, 0.4)) * 0.25, scale=0.9, feather=120)
+    elif t < 15.14:
+        f = soft_frame(leak(warm_look(cover(fr, 1.7, 0.5, 0.35), hot=True), tl, -1), scale=0.88, feather=120)
+    else:
+        f = soft_frame(warm_look(cover(fr, 1.2, 0.5, 0.5)) * 0.5, scale=0.9, feather=120)
+    return finish(film_dirt(f, i, 0.6), i, g=0.05)
+
+
+def b_die(tl, i):         # 15.30-16.02 "i'll die on that": alone, cold, then a warm flash
+    t = 15.30 + tl
+    if t < 15.62:
+        f = soft_frame(cold_look(cover(src(C02, 2.8, tl, 0.8), 1.25, 0.48, 0.42)), scale=0.84, feather=120)
+        if 15.38 <= t < 15.46:
+            f = bloom(f * 1.6, thr=0.4, sigma=60, amt=1.5)
+    elif t < 15.78:
+        f = soft_frame(warm_look(cover((np.clip(gym_layers()[0], 0, 1) * 255).astype(np.uint8), 1.8, 0.2, 0.33), hot=True),
+                       scale=0.88, feather=120)
+    else:
+        f = soft_frame(leak(warm_look(cover(src(C02, 3.2, tl, 0.8), 1.6, 0.5, 0.3)), tl), scale=0.88, feather=120)
+    return finish(film_dirt(f, i, 0.6), i, g=0.05)
+
+
+def b_thought(tl, i):     # 16.02-16.34 "thought.": the empty gym, then you small in the frame
+    t = 16.02 + tl
+    if t < 16.18:
+        f = soft_frame(warm_look(cover((np.clip(gym_layers()[0] * 2.2, 0, 1) * 255).astype(np.uint8), 1.1, 0.5, 0.55), hot=True),
+                       scale=0.86, feather=120)
+    else:
+        f = soft_frame(cold_look(cover(src(C01, 3.6, tl, 0.4), 1.15, 0.5, 0.45)) * 1.2, scale=0.7, feather=90)
+    return finish(film_dirt(f, i, 0.6), i, g=0.05)
 
 
 # ---------- timeline (edit time = reference time) ----------
@@ -314,23 +462,22 @@ TIMELINE = [
     (0.00, 2.64, b_black_open),
     (2.64, 3.92, b_breathe),
     (3.92, 5.00, b_snap),
-    (5.00, 8.88, raw_beat(C02, 0.0)),
-    (8.88, 9.24, raw_beat(C10, 0.0, zoom=2.2, cx=0.22, cy=0.38)),
-    (9.24, 9.92, raw_beat(C03, 0.3)),
-    (9.92, 10.28, raw_beat(C03, 1.7, zoom=1.8, cx=0.6, cy=0.42)),
-    (10.28, 11.00, raw_beat(C08, 0.0)),
+    (5.00, 8.88, b_want),
+    (8.88, 9.24, b_grip),
+    (9.24, 9.92, b_ghost),
+    (9.92, 10.28, b_plates),
+    (10.28, 11.00, b_reach),
     (11.00, 11.84, b_flurry),
-    (11.84, 12.40, raw_beat(C09, 0.0)),
-    (12.40, 13.78, raw_beat(C05, 0, still_img=True)),
+    (11.84, 12.40, b_mirror),
+    (12.40, 13.78, b_reality),
     (13.78, 13.94, lambda tl, i: finish(sil_frame(1.0, i, white=True), i)),
     (13.94, 14.46, b_pixel),
-    (14.46, 15.30, raw_beat(C01, 0.5)),
-    (15.30, 16.02, raw_beat(C02, 2.8)),
-    (16.02, 16.34, raw_beat(C06, 0, still_img=True)),
+    (14.46, 15.30, b_quiet),
+    (15.30, 16.02, b_die),
+    (16.02, 16.34, b_thought),
     (16.34, 18.00, b_okay),
     (18.00, END, b_black),
 ]
-
 
 def render_frame(n):
     t = n / FPS
