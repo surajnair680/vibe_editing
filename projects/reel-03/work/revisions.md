@@ -8,3 +8,4 @@
 - v3 (2026-10-29): back photo holds 3.92-4.60 (was 0.16 s), brighter, "breathe." clears by 4.16; light snaps on at
   4.60 ("you want"), one flicker, cools to blue. Cut-out v3 keeps the hair/forearm above the hand. Rendered 3-5 and
   13-14 only, spliced into v2; diff vs v2: only 4.04-5.0 changed (white flash at 13.8 changed slightly), elsewhere SSIM >= 0.993.
+- Final (2026-10-29): the user approved v3 as the final video. Delivered as one file (crf 22) and near-lossless 3 parts (crf 14, split at 8 s and 14 s). Merged into the default branch.
