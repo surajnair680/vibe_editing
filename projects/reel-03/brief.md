@@ -63,7 +63,7 @@ c10 shoulder press. Watermarks (Flow sparkle) hidden by a punch-in. Sheet: `out/
 | 10 | 11.84-12.40 | can happen and | c09 0.0-0.6 (mirror pose) | teal | tiny |
 | 11 | 12.40-13.78 | become a reality. | c05, push in, glow breathing | cold blue | tiny |
 | 12 | 13.78-13.94 | | c07 silhouette filled white | white glow flash | tiny |
-| 13 | 13.94-14.46 | I believe that | c04 0.0-0.5 (head turning) | b/w, half face pixelated | tiny |
+| 13 | 13.94-14.46 | I believe that | c04 0.0-0.5 (head turning) | b/w, starts pixelated and resolves to the clear face as he turns (user choice) | tiny |
 | 14 | 14.46-15.30 | sincerely and | c01 0.5-1.3 | warm lamp, framed with soft edges | tiny |
 | 15 | 15.30-16.02 | I'll die on that | c02 2.8-3.5 | cold night, framed | tiny |
 | 16 | 16.02-16.34 | thought, | c06 | warm, framed | tiny |
