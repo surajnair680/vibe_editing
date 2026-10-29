@@ -10,7 +10,8 @@ i = np.asarray(remove(rgb, session=new_session("isnet-general-use"), only_mask=T
 seg = vision.ImageSegmenter.create_from_options(vision.ImageSegmenterOptions(
     base_options=mpt.BaseOptions(model_asset_path=os.path.expanduser("~/.cache/vibe/selfie_multiclass.tflite")),
     output_confidence_masks=True))
-p = 1 - seg.segment(mp.Image(image_format=mp.ImageFormat.SRGB, data=np.ascontiguousarray(rgb))).confidence_masks[0].numpy_view()
+cms = seg.segment(mp.Image(image_format=mp.ImageFormat.SRGB, data=np.ascontiguousarray(rgb))).confidence_masks
+p, hair = 1 - cms[0].numpy_view().squeeze(), cms[1].numpy_view().squeeze()
 pm = cv2.dilate((p > 0.3).astype(np.uint8), cv2.getStructuringElement(cv2.MORPH_ELLIPSE, (31, 31))).astype(np.float32)
 a = np.maximum(u, i * pm)                                                   # u2net body, isnet adds the hand
 cv2.fillPoly(a, [np.array([[283, 478], [427, 474], [433, 748], [289, 752]], np.int32)], 1.0)   # the phone
@@ -18,6 +19,14 @@ for y in range(1450, a.shape[0]):                                           # wa
     xs = np.flatnonzero(a[y] > 0.5)
     if xs.size: a[y, xs[0]:xs[-1] + 1] = 1
 b = cv2.morphologyEx((a > 0.5).astype(np.uint8), cv2.MORPH_CLOSE, cv2.getStructuringElement(cv2.MORPH_ELLIPSE, (7, 7)))
+n, lab, st, _ = cv2.connectedComponentsWithStats(b); b = (lab == 1 + int(np.argmax(st[1:, 4]))).astype(np.float32)
+al = np.clip((cv2.GaussianBlur(b, (0, 0), 2.2) - 0.5) * 2.5 + 0.5, 0, 1)
+# v3: the head above the hand (hair, forearm) from MediaPipe person + hair classes, top of the photo only
+top = np.zeros_like(al); top[:420] = 1; top = cv2.GaussianBlur(top, (0, 0), 20)
+add = np.maximum((p > 0.5).astype(np.float32), (hair > 0.3).astype(np.float32))
+add = np.maximum(add, (i > 0.5).astype(np.float32) * (p > 0.2))
+b = cv2.morphologyEx((np.maximum(al, add * top) > 0.5).astype(np.uint8), cv2.MORPH_CLOSE, cv2.getStructuringElement(cv2.MORPH_ELLIPSE, (15, 15)))
+b = cv2.morphologyEx(b, cv2.MORPH_OPEN, cv2.getStructuringElement(cv2.MORPH_ELLIPSE, (9, 9)))
 n, lab, st, _ = cv2.connectedComponentsWithStats(b); b = (lab == 1 + int(np.argmax(st[1:, 4]))).astype(np.float32)
 al = np.clip((cv2.GaussianBlur(b, (0, 0), 2.2) - 0.5) * 2.5 + 0.5, 0, 1)
 cv2.imwrite("work/matte/c07_alpha.png", (al * 255).astype(np.uint8))

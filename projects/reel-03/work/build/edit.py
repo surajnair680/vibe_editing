@@ -117,7 +117,7 @@ def back_layers():
     IMG = np.zeros((H, W, 3), np.float32); AL = np.zeros((H, W), np.float32)
     IMG[H - ph:] = img[:, 50:50 + W]; AL[H - ph:] = al[:, 50:50 + W]
     fade = np.clip((np.arange(H) - (H - ph)) / 260.0, 0, 1)[:, None, None]
-    norm = grade(IMG, gain=(0.80, 0.85, 0.92), gamma=1.25) * 0.85 * fade
+    norm = grade(IMG, gain=(0.82, 0.88, 0.95), gamma=1.12, contrast=1.08) * 0.95 * fade
     cx, cy = 600, 1010
     d = np.hypot(XX - cx, (YY - cy) / 1.25)
     core = np.exp(-(d / 520) ** 2)
@@ -131,8 +131,8 @@ def back_layers():
     return norm, light, AL[..., None], edge, inner
 
 
-SNAP = 0.16          # local time the light switches on
-LIGHT_SEQ = [1, 1, 1, 0.25, 1, 1, 1, 1, 0.5, 1, 1, 1, 1, 1, 0.3, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1]
+SNAP = 0.68          # local time the light switches on (4.60, on "you want"): the back holds for 0.68 s
+LIGHT_SEQ = [1, 1, 1, 1, 1, 0.4, 1, 1, 1, 1, 1]
 
 
 def sil_frame(tl, i, cool=0.0, white=False):
@@ -156,12 +156,12 @@ def b_snap(tl, i):
     if tl < SNAP:
         f = norm.copy()
     else:
-        f = sil_frame(tl, i, cool=ease((tl - 0.85) / 0.2))
+        f = sil_frame(tl, i, cool=ease((tl - 0.90) / 0.15))
         if tl - SNAP < 1 / FPS:
             f = 0.5 * f + 0.5 * np.clip(norm * 3, 0, 1)
-    f = push(f, 1 + 0.035 * tl / 1.08, W / 2, H * 0.55)
+    f = push(f, 1 + 0.06 * tl / 1.08, W / 2, H * 0.62)
     f = finish(f, i)
-    if tl < 0.40:                                    # "breathe." carries over, breaking into teal
+    if tl < 0.24:                                    # "breathe." carries over, breaking into teal, clears off the back
         m = text_mask("breathe.", size_for_width("breathe.", 750), cy=H * 0.47)[..., None]
         rng = np.random.default_rng(i)
         band = np.zeros((H, 1, 1), np.float32)
