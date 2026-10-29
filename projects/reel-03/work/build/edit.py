@@ -334,19 +334,20 @@ GHOST_T0 = 1.9
 
 @functools.lru_cache(maxsize=1)
 def lifter_mattes():
-    """rembg person matte of the deadlift pull, only the lifter (people behind on the left are cut off)."""
+    """rembg person matte of the deadlift pull (the people behind him on the left fade out in b_ghost)."""
     from rembg import remove, new_session
     ses = new_session("u2net_human_seg")
-    out = []
-    for fr in clip(C03, GHOST_T0, 0.68):
-        m = np.asarray(remove(np.ascontiguousarray(fr[..., ::-1]), session=ses, only_mask=True)).astype(np.float32) / 255
-        m[:, :int(fr.shape[1] * 0.19)] = 0
-        n, lab, st, _ = cv2.connectedComponentsWithStats((m > 0.5).astype(np.uint8))
-        if n > 1:
-            best = 1 + int(np.argmax(st[1:, 4]))
-            m = m * cv2.dilate((lab == best).astype(np.uint8), np.ones((15, 15), np.uint8))
-        out.append(m)
-    return out
+    return [np.asarray(remove(np.ascontiguousarray(fr[..., ::-1]), session=ses, only_mask=True)).astype(np.float32) / 255
+            for fr in clip(C03, GHOST_T0, 0.68)]
+
+
+@functools.lru_cache(maxsize=1)
+def ghost_fade():
+    """0 on the left where people stand behind the lifter, 1 from his hips rightwards: his outline fades into shadow."""
+    w, h = probe(C03)
+    x = np.linspace(0, 1, w, dtype=np.float32)
+    r = np.clip((x - 0.10) / 0.14, 0, 1); r = r * r * (3 - 2 * r)
+    return np.repeat(r[None], h, 0)
 
 
 def b_ghost(tl, i):       # 9.24-9.92 "a big": the lifter as a glowing blue outline
@@ -355,9 +356,11 @@ def b_ghost(tl, i):       # 9.24-9.92 "a big": the lifter as a glowing blue outl
     bg = cover(src(C03, GHOST_T0, tl, 0.68), **Z)
     bg = tint_bw(bg, (0.08, 0.03, 0.01), (0.85, 0.45, 0.15), 1.5) * 0.75
     m = cover((lifter_mattes()[k] * 255).astype(np.uint8)[..., None].repeat(3, 2), **Z)[..., 0]
+    fade = cover((ghost_fade() * 255).astype(np.uint8)[..., None].repeat(3, 2), **Z)[..., 0]
     m = cv2.GaussianBlur(m, (0, 0), 2)
     edge = np.clip(cv2.dilate(m, np.ones((9, 9), np.uint8)) - cv2.erode(m, np.ones((5, 5), np.uint8)), 0, 1)
-    glow = cv2.GaussianBlur(edge, (0, 0), 10) * 1.5 + edge
+    glow = (cv2.GaussianBlur(edge, (0, 0), 10) * 1.5 + edge) * fade
+    m = m * fade
     f = bg * (1 - 0.7 * m[..., None]) + glow[..., None] * np.float32([1.0, 0.85, 0.55])
     return finish(bloom(f, thr=0.6, sigma=40, amt=0.6), i, ca=5)
 
