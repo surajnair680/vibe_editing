@@ -15,7 +15,7 @@ c07_back_photo.jpg, c08_vid_185334.mp4 (lat pulldown), c09_vid_201511.mp4 (mirro
 
 ## Delivery
     ffmpeg -i out/master.mp4 -i raw/reference.mp4 -map 0:v -map 1:a -c:v libx264 -crf 22 -preset slow \
-      -g 25 -keyint_min 25 -sc_threshold 0 -pix_fmt yuv420p -movflags +faststart -c:a copy -shortest out/reel-03-v2-onefile.mp4
+      -g 25 -keyint_min 25 -sc_threshold 0 -pix_fmt yuv420p -movflags +faststart -c:a copy -shortest out/reel-03-v3-onefile.mp4
 crf 20 (33 MB) is sent as two parts split at 11 s (video copied, audio from work/audio/reference.wav per part).
 
 Timings live in work/build/edit.py (CAPS = captions, TIMELINE = shots), effects in work/build/fx.py.
