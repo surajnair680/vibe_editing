@@ -108,24 +108,12 @@ def b_breathe(tl, i):
 # ---------- beat 3: back photo, light snaps on, body goes black ----------
 @functools.lru_cache(maxsize=1)
 def back_layers():
-    import mediapipe as mp
-    from mediapipe.tasks import python as mpt
-    from mediapipe.tasks.python import vision
     src = still(C07); h0, w0 = src.shape[:2]
-    seg = vision.ImageSegmenter.create_from_options(vision.ImageSegmenterOptions(
-        base_options=mpt.BaseOptions(model_asset_path=os.path.expanduser("~/.cache/vibe/selfie_multiclass.tflite")),
-        output_confidence_masks=True))
-    r = seg.segment(mp.Image(image_format=mp.ImageFormat.SRGB, data=np.ascontiguousarray(cv2.cvtColor(src, cv2.COLOR_BGR2RGB))))
-    m = ((1 - r.confidence_masks[0].numpy_view()) > 0.5).astype(np.float32)
-    cv2.rectangle(m, (262, 455), (450, 760), 0, -1)          # the phone
-    cv2.ellipse(m, (322, 760), (92, 46), -8, 0, 360, 1, -1)   # a fist in its place
-    for y in range(1450, h0):
-        xs = np.flatnonzero(m[y] > 0.5)
-        if xs.size: m[y, xs[0]:xs[-1] + 1] = 1
-    m = cv2.morphologyEx(m, cv2.MORPH_OPEN, cv2.getStructuringElement(cv2.MORPH_ELLIPSE, (9, 9)))
+    # v2 cut-out (work/matte/c07_alpha.png): rembg u2net body + isnet hand, phone kept, from work/matte/make_c07_alpha.py
+    m = cv2.imread("work/matte/c07_alpha.png", cv2.IMREAD_GRAYSCALE).astype(np.float32) / 255
     S = 1180 / w0; ph = int(h0 * S)
     img = cv2.resize(src, (1180, ph), interpolation=cv2.INTER_AREA).astype(np.float32) / 255
-    al = cv2.resize(cv2.GaussianBlur(m, (0, 0), 2.0), (1180, ph))
+    al = cv2.resize(m, (1180, ph), interpolation=cv2.INTER_AREA)
     IMG = np.zeros((H, W, 3), np.float32); AL = np.zeros((H, W), np.float32)
     IMG[H - ph:] = img[:, 50:50 + W]; AL[H - ph:] = al[:, 50:50 + W]
     fade = np.clip((np.arange(H) - (H - ph)) / 260.0, 0, 1)[:, None, None]
@@ -312,9 +300,64 @@ def side_mask():
     return cv2.GaussianBlur(m, (0, 0), 45)[..., None]
 
 
-def b_want(tl, i):        # 5.00-8.88: slow, purple-blue night, dark soft sides
-    f = cover(src(C02, 0.0, tl), zoom=1.18 + 0.06 * tl / 3.88, cx=0.48, cy=0.42)
+RIM_T, FILL_T = 7.50, 8.08     # "to give it" -> rim light creeps in; "that much," -> body fills with glowing grain
+
+
+def want_matte(k):
+    """rembg person matte of c02 frame k (edit fps), cached on disk in work/matte/c02/."""
+    p = f"work/matte/c02/{k:03d}.png"
+    if not os.path.exists(p):
+        from rembg import remove, new_session
+        global _REMBG
+        if "_REMBG" not in globals():
+            _REMBG = new_session("u2net_human_seg")
+        os.makedirs("work/matte/c02", exist_ok=True)
+        fr = clip(C02, 0.0, 3.88)[k]
+        cv2.imwrite(p, np.asarray(remove(np.ascontiguousarray(fr[..., ::-1]), session=_REMBG, only_mask=True)))
+    return cv2.imread(p, cv2.IMREAD_GRAYSCALE)
+
+
+@functools.lru_cache(maxsize=1)
+def fill_bank():
+    rng = np.random.default_rng(21)
+    out = []
+    for _ in range(10):
+        n = cv2.GaussianBlur(rng.normal(0, 1, (H // 6, W // 6)).astype(np.float32), (0, 0), 1.2)
+        n = cv2.resize(n, (W, H), interpolation=cv2.INTER_CUBIC)
+        out.append(np.clip(0.55 + 0.35 * n, 0, 1.2))
+    return out
+
+
+FILL_DARK = {4, 9, 13}       # fill frames where the light drops out, like the reference's flicker
+
+
+def b_want(tl, i):        # 5.00-8.88: slow, purple-blue night, dark soft sides; glow builds at the end
+    t = 5.0 + tl
+    Z = dict(zoom=1.18 + 0.06 * tl / 3.88, cx=0.48, cy=0.42)
+    f = cover(src(C02, 0.0, tl), **Z)
     f = grade(f, sat=0.55, gain=(1.08, 0.78, 0.92), lift=(0.05, 0.025, 0.04), gamma=1.35, contrast=1.05)
+    if t >= RIM_T:
+        k = min(int(round(tl * FPS)), len(clip(C02, 0.0, 3.88)) - 1)
+        m = cover(want_matte(k)[..., None].repeat(3, 2), **Z)[..., 0]
+        m = cv2.GaussianBlur(m, (0, 0), 1.5)
+        rim_k = ease((t - RIM_T) / (FILL_T - RIM_T))
+        edge = np.clip(cv2.dilate(m, np.ones((11, 11), np.uint8)) - cv2.erode(m, np.ones((7, 7), np.uint8)), 0, 1)
+        rim = (cv2.GaussianBlur(edge, (0, 0), 9) * 1.4 + edge * 0.8) * rim_k
+        f = f + rim[..., None] * np.float32([0.75, 0.9, 1.0]) * flicker(i, 0.08)
+        if t >= FILL_T:
+            n = int(round((t - FILL_T) * FPS))
+            tex = fill_bank()[i % 10]
+            spark = (np.random.default_rng(i).random((H, W)) > 0.9985).astype(np.float32)
+            spark = cv2.GaussianBlur(spark, (0, 0), 1.5) * 6
+            body = tex[..., None] * np.float32([0.50, 0.84, 0.80]) + spark[..., None]
+            if n in FILL_DARK:
+                body = tex[..., None] * np.float32([0.10, 0.06, 0.05])
+            rng = np.random.default_rng(i * 3)
+            for _ in range(2):                                   # a couple of bright scan bands across the body
+                y = int(rng.integers(300, 1700)); body[y:y + int(rng.integers(4, 18))] *= 1.6
+            a = m[..., None] * min(1.0, (n + 1) / 2)
+            f = f * (1 - a) + body * a
+            f = bloom(f, thr=0.6, sigma=40, amt=0.8)
     f = bloom(f, thr=0.55, sigma=40, amt=0.7) * side_mask()
     if i % 23 == 5:
         f = glitch(f, i, n=3, amp=20)
