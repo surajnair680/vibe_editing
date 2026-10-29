@@ -10,7 +10,8 @@ for talking-head footage). Follow the workflow below for the order of work, and 
 
 ## The workflow (every video)
 1. **Workspace:** one project folder per video under `projects/<name>/` (`new_project.py`). Check tools and do a short test render.
-2. **Reference:** the two guides above are already loaded. Note any gap between them and this environment before editing.
+2. **Reference:** the two guides above are already loaded. Also read `docs/lessons-learned.md` in full (everything
+   learned on past videos: the user's taste, recipes, mistakes). Note any gap between them and this environment before editing.
 3. **Inputs:** confirm every file opens. Report duration, frame size and audio. Transcribe with word timings, inspect frames,
    get the language and correct spellings of names and brands, what must stay and what to leave out. Summarise before cutting.
 4. **Finished video:** purpose, audience, platform and aspect ratio, length, hook / main points / CTA, voice and caption language.
@@ -134,7 +135,25 @@ named `<project>-final.mp4`.
      frame (framemd5 of the video stream); each part's audio cross-correlates with the mix at 0 ms. Then send.
 - The user wants plain, human language and never uses em dashes. Keep that style in messages and on-screen text.
 
-## Lessons from past edits (keep adding to this list)
+## Learning loop (user rule, 2026-10-29): get better with every video
+The user wants every lesson, skill and piece of knowledge from every session carried into all future sessions, with
+nothing missed. Memory does not survive between sessions; only this repo does. So:
+1. **Start of every video:** read `docs/lessons-learned.md` in full, and apply it from the first message (footage list,
+   beat sheet, stills checks, delivery).
+2. **During the video, as it happens:** whenever the user gives a note, corrects something, states a preference, or a
+   technique, tool, model or number proves itself (or fails), add it to `docs/lessons-learned.md` in the right section,
+   tagged with the video name. Don't wait for the end; a session can be cut off.
+3. **The most important ones** (things that cost a revision, or that apply to every video) also go as a short bullet in
+   the lessons list below, since CLAUDE.md is always loaded.
+4. **Before calling a video done** (final approved, or the user moves on): review the whole session for anything not yet
+   written down (user taste, effects that worked with their code location, mattes, timings, sizes, mistakes), add it,
+   and tell the user in one line what was added.
+5. These are shared-file changes: commit them separately from video work and push them to the default branch at once
+   (rule 4 of "Working in several sessions at once"), so the next session starts with them. No need to ask first.
+6. Reusable code (effects, matte recipes) stays in its project folder; the lessons file points to it by path and the
+   next project copies it in.
+
+## Lessons from past edits (keep adding to this list; full detail in docs/lessons-learned.md)
 Learned on reel-02 (2026-10-14). Each one cost a revision or a re-render once; follow them from the start.
 - **Cut audio from WAV, never by seeking into the phone MP4 or an MP3.** `-ss` on a phone MP4's AAC track (and on
   MP3s) lands up to 100 ms off, so rough cuts drift out of lip sync. Decode each clip's audio to WAV from the start
@@ -167,3 +186,21 @@ Learned on reel-02 (2026-10-14). Each one cost a revision or a re-render once; f
   clean original.
 - **Explain any decorative element in the stills.** The user asked what "Rx" and the barcode were and had both removed:
   avoid ornaments that carry no meaning for this audience.
+
+Learned on reel-03 (2026-10-29), a shot-for-shot remake of a reference edit with the user's footage:
+- **His physique is the product.** Never let an effect eat the physique shot: give it at least 0.6 to 0.7 s of clear view
+  before a silhouette, glow or flash takes over, even when the reference cuts faster. A 4 s static hold needs something
+  to happen in its second half.
+- **Silhouettes and outlines of his body must be anatomically right** (head, hair above a raised hand, hands). Combine
+  mattes (u2net body + isnet hands + MediaPipe hair/person for the head); check at full size. Recipe:
+  `projects/reel-03/work/matte/make_c07_alpha.py`. Never remove background people with a straight cutting line: fade
+  the effect out on that side instead.
+- **Remaking a reference:** use its frame rate, measure every cut frame by frame, time captions from the reference's
+  picture (caption-band strip sheet), copy its audio bit-exact. Method and effects: `docs/lessons-learned.md` sections
+  2 and 5, code in `projects/reel-03/work/build/`.
+- **Footage requests:** describe the kind of footage each moment needs (feel + examples), not exact shots; track a short
+  "still needed" list as clips arrive. Google Flow's sparkle watermark (bottom right) hides with a punch-in of 1.15+.
+- **Check every still yourself before sending:** logos and bystanders in crops, text on the face or beard, captions over
+  the brightest glow.
+- **Quality talk:** grain drives file size (22 s: crf 14 = 65 MB, crf 20 = 33 MB, crf 22 = 25 MB, visually the same on a
+  phone; Instagram re-encodes to 3 to 5 Mbps). Offer the one-file version plus near-lossless parts under 30 MiB each.
