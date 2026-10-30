@@ -7,7 +7,7 @@ you have a B-roll library for months.
 ## When to use this
 - **Footage requests:** when a video needs gym or physique B-roll the user hasn't filmed yet, pick shots from this list
   by name and step number (e.g. "Step 03 shot 3: hands picking up the bar, close up"). Still describe the feel of each
-  moment (lessons-learned section 3 and the reel-03 rule), but this list gives the user a shared vocabulary.
+  moment (`docs/playbook/lessons-learned.md` section 3 and the reel-03 rule), but this list gives the user a shared vocabulary.
 - **Planning a gym session shoot:** if the user asks what to film, hand them this list in order, with the cinematic tips.
 - **Sorting a footage dump:** tag each clip the user sends with its step, shot and type (LS / MS / CU), so the beat
   sheet can say which shot covers which line.
@@ -93,4 +93,4 @@ No weight. 2x5.
 - "Gassed" and "180 walk" shots are natural breathers between hard sections and good for a voice line or caption.
 - Flex step: "veins" (CU) and "body only" (MS) are physique shots. The reel-03 rule applies: at least 0.6 to 0.7 s of
   clear view before any effect takes over.
-- Gyms are busy: check foreground layers and backgrounds for logos and bystanders (lessons-learned section 3).
+- Gyms are busy: check foreground layers and backgrounds for logos and bystanders (`docs/playbook/lessons-learned.md` section 3).

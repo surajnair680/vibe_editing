@@ -1,10 +1,13 @@
 # Vibe editing project
 
-Video editing with the Vibe Editing System by Ideabro Studio. Two guides are the source of truth, both in `docs/`:
-- `docs/vibe-editing-system-reference.md` (Part 1): the technical reference. Tools, eyes and ears, filming, effects.
-- `docs/vibe-editing-workflow.md` (Part 2): the step-by-step workflow for every edit, with copyable prompts and the
+Video editing with the Vibe Editing System by Ideabro Studio. **Docs map: `docs/README.md`** lists every doc and when
+to read it, in three folders: `docs/system/` (the bought Ideabro guides, never edit), `docs/playbook/` (the user's own
+knowledge, grows every video) and `docs/library/` (outside references the user shared). New doc: put it in the right
+folder and add one line to `docs/README.md`. The two guides are the source of truth:
+- `docs/system/vibe-editing-system-reference.md` (Part 1): the technical reference. Tools, eyes and ears, filming, effects.
+- `docs/system/vibe-editing-workflow.md` (Part 2): the step-by-step workflow for every edit, with copyable prompts and the
   reusable editing brief. Read it before starting any new video.
-- `docs/cinematic-gym-shotlist.md`: a 9-step, 35-shot gym session shot list (LS / MS / CU) with cinematic tips. Use it
+- `docs/library/cinematic-gym-shotlist.md`: a 9-step, 35-shot gym session shot list (LS / MS / CU) with cinematic tips. Use it
   to name shots in footage requests, plan a gym shoot, tag the user's gym clips and order gym B-roll.
 
 The skills in `.claude/skills/` are the playbooks per video type (`vibe-editing-system` picks the type; `vibe-talking-head`
@@ -12,7 +15,7 @@ for talking-head footage). Follow the workflow below for the order of work, and 
 
 ## The workflow (every video)
 1. **Workspace:** one project folder per video under `projects/<name>/` (`new_project.py`). Check tools and do a short test render.
-2. **Reference:** the two guides above are already loaded. Also read `docs/lessons-learned.md` in full (everything
+2. **Reference:** the two guides above are already loaded. Also read `docs/playbook/lessons-learned.md` in full (everything
    learned on past videos: the user's taste, recipes, mistakes). Note any gap between them and this environment before editing.
 3. **Inputs:** confirm every file opens. Report duration, frame size and audio. Transcribe with word timings, inspect frames,
    get the language and correct spellings of names and brands, what must stay and what to leave out. Summarise before cutting.
@@ -140,10 +143,10 @@ named `<project>-final.mp4`.
 ## Learning loop (user rule, 2026-10-29): get better with every video
 The user wants every lesson, skill and piece of knowledge from every session carried into all future sessions, with
 nothing missed. Memory does not survive between sessions; only this repo does. So:
-1. **Start of every video:** read `docs/lessons-learned.md` in full, and apply it from the first message (footage list,
+1. **Start of every video:** read `docs/playbook/lessons-learned.md` in full, and apply it from the first message (footage list,
    beat sheet, stills checks, delivery).
 2. **During the video, as it happens:** whenever the user gives a note, corrects something, states a preference, or a
-   technique, tool, model or number proves itself (or fails), add it to `docs/lessons-learned.md` in the right section,
+   technique, tool, model or number proves itself (or fails), add it to `docs/playbook/lessons-learned.md` in the right section,
    tagged with the video name. Don't wait for the end; a session can be cut off.
 3. **The most important ones** (things that cost a revision, or that apply to every video) also go as a short bullet in
    the lessons list below, since CLAUDE.md is always loaded.
@@ -155,7 +158,7 @@ nothing missed. Memory does not survive between sessions; only this repo does. S
 6. Reusable code (effects, matte recipes) stays in its project folder; the lessons file points to it by path and the
    next project copies it in.
 
-## Lessons from past edits (keep adding to this list; full detail in docs/lessons-learned.md)
+## Lessons from past edits (keep adding to this list; full detail in docs/playbook/lessons-learned.md)
 Learned on reel-02 (2026-10-14). Each one cost a revision or a re-render once; follow them from the start.
 - **Cut audio from WAV, never by seeking into the phone MP4 or an MP3.** `-ss` on a phone MP4's AAC track (and on
   MP3s) lands up to 100 ms off, so rough cuts drift out of lip sync. Decode each clip's audio to WAV from the start
@@ -198,7 +201,7 @@ Learned on reel-03 (2026-10-29), a shot-for-shot remake of a reference edit with
   `projects/reel-03/work/matte/make_c07_alpha.py`. Never remove background people with a straight cutting line: fade
   the effect out on that side instead.
 - **Remaking a reference:** use its frame rate, measure every cut frame by frame, time captions from the reference's
-  picture (caption-band strip sheet), copy its audio bit-exact. Method and effects: `docs/lessons-learned.md` sections
+  picture (caption-band strip sheet), copy its audio bit-exact. Method and effects: `docs/playbook/lessons-learned.md` sections
   2 and 5, code in `projects/reel-03/work/build/`.
 - **Footage requests:** describe the kind of footage each moment needs (feel + examples), not exact shots; track a short
   "still needed" list as clips arrive. Google Flow's sparkle watermark (bottom right) hides with a punch-in of 1.15+.

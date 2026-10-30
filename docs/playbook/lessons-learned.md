@@ -5,6 +5,7 @@ edit and cost a revision, a re-render or a question once. Newest videos at the b
 each lesson came from: [r01] reel-01, [r02] reel-02, [r03] reel-03.
 
 How this file grows: see "Learning loop" in CLAUDE.md. Add to it during every video, not only at the end.
+Other docs and when to read them: `docs/README.md`.
 
 ---
 
@@ -66,7 +67,7 @@ How this file grows: see "Learning loop" in CLAUDE.md. Add to it during every vi
 - Check user clips for burned-in captions before planning them in; ask for the clean original. [r02]
 - The user's phone clips often have no audio and are 1080x1920 at 30 fps; Flow clips are 1080x1920 at 24 fps, 4 s. [r03]
 - **Gym footage vocabulary**: the user shared a cinematic gym shot list (Matt Nikishin), saved in
-  `docs/cinematic-gym-shotlist.md`. Use its step and shot names when asking for gym B-roll or tagging clips; keep
+  `docs/library/cinematic-gym-shotlist.md`. Use its step and shot names when asking for gym B-roll or tagging clips; keep
   handheld shake, use foreground layers and low-angle flare as hero shots. [2026-10-30]
 
 ## 4. Cut-outs (mattes)
