@@ -4,6 +4,8 @@ Video editing with the Vibe Editing System by Ideabro Studio. Two guides are the
 - `docs/vibe-editing-system-reference.md` (Part 1): the technical reference. Tools, eyes and ears, filming, effects.
 - `docs/vibe-editing-workflow.md` (Part 2): the step-by-step workflow for every edit, with copyable prompts and the
   reusable editing brief. Read it before starting any new video.
+- `docs/cinematic-gym-shotlist.md`: a 9-step, 35-shot gym session shot list (LS / MS / CU) with cinematic tips. Use it
+  to name shots in footage requests, plan a gym shoot, tag the user's gym clips and order gym B-roll.
 
 The skills in `.claude/skills/` are the playbooks per video type (`vibe-editing-system` picks the type; `vibe-talking-head`
 for talking-head footage). Follow the workflow below for the order of work, and the matching skill for the techniques.

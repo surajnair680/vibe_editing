@@ -65,6 +65,9 @@ How this file grows: see "Learning loop" in CLAUDE.md. Add to it during every vi
   people behind the subject. [r01][r03]
 - Check user clips for burned-in captions before planning them in; ask for the clean original. [r02]
 - The user's phone clips often have no audio and are 1080x1920 at 30 fps; Flow clips are 1080x1920 at 24 fps, 4 s. [r03]
+- **Gym footage vocabulary**: the user shared a cinematic gym shot list (Matt Nikishin), saved in
+  `docs/cinematic-gym-shotlist.md`. Use its step and shot names when asking for gym B-roll or tagging clips; keep
+  handheld shake, use foreground layers and low-angle flare as hero shots. [2026-10-30]
 
 ## 4. Cut-outs (mattes)
 - **No single model does it all.** Compare on the actual image before committing: [r03]
