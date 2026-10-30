@@ -11,7 +11,8 @@ folder and add one line to `docs/README.md`. The two guides are the source of tr
   to name shots in footage requests, plan a gym shoot, tag the user's gym clips and order gym B-roll.
 
 The skills in `.claude/skills/` are the playbooks per video type (`vibe-editing-system` picks the type; `vibe-talking-head`
-for talking-head footage). Follow the workflow below for the order of work, and the matching skill for the techniques.
+for talking-head footage; `vibe-mini-vlog` for mini vlogs / day in my life with the camcorder overlay pack, vertical by
+default). Follow the workflow below for the order of work, and the matching skill for the techniques.
 
 ## The workflow (every video)
 1. **Workspace:** one project folder per video under `projects/<name>/` (`new_project.py`). Check tools and do a short test render.
@@ -191,6 +192,11 @@ Learned on reel-02 (2026-10-14). Each one cost a revision or a re-render once; f
   clean original.
 - **Explain any decorative element in the stills.** The user asked what "Rx" and the barcode were and had both removed:
   avoid ornaments that carry no meaning for this audience.
+
+Learned on the mini vlog style study (2026-10-30):
+- **Mini vlog series is coming, mostly vertical.** For any vlog or day in my life video load `vibe-mini-vlog`: it has
+  the reference reel breakdown, the overlay pack (horizontal + vertical versions), Screen / key compositing and the
+  episode template. Image overlay 2 carries the pack creator's credit and a typo: crop or rebuild it, ask first.
 
 Learned on reel-03 (2026-10-29), a shot-for-shot remake of a reference edit with the user's footage:
 - **His physique is the product.** Never let an effect eat the physique shot: give it at least 0.6 to 0.7 s of clear view

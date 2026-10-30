@@ -18,6 +18,7 @@ If the user hasn't said, show this menu and ask what they want to make (and whet
 | # | type | examples | playbook |
 |---|---|---|---|
 | 1 | **Talking-head & creator** | reels from a take, podcast clips, YouTube edits, testimonials, course lessons | `vibe-talking-head` |
+| 1b | **Mini vlog (user's own)** | day in my life, vlog series episodes, camcorder REC / vlog title overlays, vertical by default | `vibe-mini-vlog` (+ `vibe-talking-head` for cuts and captions) |
 | 2 | **Launch videos & ads** | promo reels, product launches, social ads + variants, app demos, product videos | `vibe-launch-ads` |
 | 3 | **Motion graphics** | showreels, explainers, kinetic type, logo reveals, infographics, lower-third packs | `vibe-motion-graphics` |
 | 4 | **Stylised animation** | claymation, crayon, paper-cut, doodle, cartoon mascots, kids' stories | `vibe-stylised-animation` |

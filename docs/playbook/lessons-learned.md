@@ -2,7 +2,7 @@
 
 Read this whole file before starting any new video, and again before the stills step. Every entry came from a real
 edit and cost a revision, a re-render or a question once. Newest videos at the bottom of each section. Tags say where
-each lesson came from: [r01] reel-01, [r02] reel-02, [r03] reel-03.
+each lesson came from: [r01] reel-01, [r02] reel-02, [r03] reel-03, [vlog] the mini vlog style study (2026-10-30).
 
 How this file grows: see "Learning loop" in CLAUDE.md. Add to it during every video, not only at the end.
 Other docs and when to read them: `docs/README.md`.
@@ -36,6 +36,9 @@ Other docs and when to read them: `docs/README.md`.
   original audio. No CTA unless asked. [r03]
 - Quality matters to him: he asked why the one-file version "is not high quality" and then wanted the near-lossless parts.
   Lead with the best file when it fits; explain numbers plainly. [r03]
+- Planning an Instagram **mini vlog series, mostly vertical 9:16**, in the camcorder overlay style of a reference reel he
+  shared. Everything for it is in the skill `.claude/skills/vibe-mini-vlog/` (reel breakdown, overlay pack in horizontal
+  and vertical, compositing helpers, episode template). Load it for any vlog / day in my life video. [vlog]
 - Plain human language, no em dashes, short messages. [all]
 
 ## 2. Remaking a reference edit shot for shot [r03]
@@ -100,6 +103,13 @@ All in `projects/reel-03/work/build/fx.py` (helpers) and `edit.py` (beats). Dete
 - Fluorescent tube flicker in a still: isolate the bright tube by luma, off frames = image x 0.22 without the tube. [r03]
 - Two-colour ramps (`tint_bw`) give the green, teal, blue, orange flashes of a flurry fast and consistently. [r03]
 - Ink illustrations, printed-paper look, Seneca posters, brush wipes: reel-01 / reel-02 `illus.py`, `reel_scene.py`. [r01][r02]
+- Vlog overlay pack (REC, vlog titles, VLOG on blue, REC iris): `.claude/skills/vibe-mini-vlog/scripts/vlog_overlays.py`.
+  White-on-black designs use Screen blend (1-(1-a)(1-b)); the blue VLOG (7) and the lavender REC circle (12) need a
+  colour key with mode "normal" so their dark parts stay dark. Hold the last frame to stretch a design. [vlog]
+- Making 16:9 overlays vertical: find the text blocks from the max of all frames, dilate (70x46 px; wider when spaced
+  words must stay one row: 170 for the clocks, 300 for "a day in"), keep left/right/centre anchors, spread rows over
+  y 230 to 1400, push colliding blocks down. A full-frame circle stretched to 1080x1920 becomes a nice tall oval iris,
+  but paint over the stretched copy of its text before pasting the sharp one. [vlog]
 
 ## 6. Text and captions
 - Captions sit on a handheld mic at about 1440 px; ask about caption height at the stills step when he holds a mic. [r01][r02]
