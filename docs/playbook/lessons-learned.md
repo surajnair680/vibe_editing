@@ -39,6 +39,12 @@ Other docs and when to read them: `docs/README.md`.
 - Planning an Instagram **mini vlog series, mostly vertical 9:16**, in the camcorder overlay style of a reference reel he
   shared. Everything for it is in the skill `.claude/skills/vibe-mini-vlog/` (reel breakdown, overlay pack in horizontal
   and vertical, compositing helpers, episode template). Load it for any vlog / day in my life video. [vlog]
+- **"Learn this permanently" means build it into the repo, not just remember it.** When he shares a reference reel
+  plus assets for a future series, he wants a skill: the assets committed, a tool to use them, a written breakdown of
+  the reference and reference stills. Do that, then tell him what was saved. He confirmed "same page" means future
+  sessions must be able to edit in that style without being taught again. [vlog]
+- He sometimes just says "watch this reel": give a short breakdown (what is said, the look, what works, what is weak)
+  and ask what he wants to do with it. Don't start a project until he says. [vlog]
 - Plain human language, no em dashes, short messages. [all]
 
 ## 2. Remaking a reference edit shot for shot [r03]
@@ -72,6 +78,13 @@ Other docs and when to read them: `docs/README.md`.
 - **Gym footage vocabulary**: the user shared a cinematic gym shot list (Matt Nikishin), saved in
   `docs/library/cinematic-gym-shotlist.md`. Use its step and shot names when asking for gym B-roll or tagging clips; keep
   handheld shake, use foreground layers and low-angle flare as hero shots. [2026-10-30]
+- **Google Drive links shared by someone else:** the Drive connector can open the folder's metadata but lists no files
+  in a folder that is shared by link only, and this environment blocks drive.google.com, so it cannot be downloaded.
+  Ask right away for a zip uploaded in the chat (Drive's "Download" gives one; under 30 MB) or a copy in his own
+  Drive. A zip upload of the overlay pack (5.4 MB) worked first time. [vlog]
+- Overlay / asset packs: probe every file (size, fps, audio), make a "max of all frames" composite per video to see
+  everything it ever shows on one tile, and measure when it stops moving and whether it has sound. That one sheet
+  answered every question about the pack. [vlog]
 
 ## 4. Cut-outs (mattes)
 - **No single model does it all.** Compare on the actual image before committing: [r03]
@@ -129,6 +142,9 @@ All in `projects/reel-03/work/build/fx.py` (helpers) and `edit.py` (beats). Dete
   final about -14 LUFS, peak about -1.4 dB. [r01]
 - Reused reference audio stays untouched: no isolation, no new music, no loudness change. [r03]
 
+- Downloaded overlay packs carry their own SFX, often mastered loud (the vlog pack peaks at -0.8 to -5 dB). Mix
+  them as separate tracks under the voice, never at their original level. [vlog]
+
 ## 8. Workflow and process
 - Stills first, every time (contact sheet every 2.5 s + full-size changed frames), plus a short low-res draft clip when
   timing matters. For reel-03 the user approved from stills + a 2.6 s draft of the changed range. [all]
@@ -144,6 +160,13 @@ All in `projects/reel-03/work/build/fx.py` (helpers) and `edit.py` (beats). Dete
   master, re-encode, then SSIM per frame against the previous version: list the changed ranges and the minimum SSIM
   outside them (reel-03: >= 0.984 is just re-encode noise). [r01][r03]
 - Keep a revision log `work/revisions.md` and `RENDER.md` with rebuild steps in every project. [all]
+- Style studies (no video yet) go in a skill, not a project folder: `.claude/skills/<name>/` with `SKILL.md`,
+  `assets/`, `scripts/`, `reference/`; add it to the router table in `vibe-editing-system/SKILL.md`, CLAUDE.md and
+  `docs/README.md`. Committed as a shared-file change. [vlog]
+- Analysing a reference reel: 1 fps contact sheet with time labels, a few full-size key frames, a close-up of any
+  custom type, and a Scribe transcript (costs a few credits; say so). [vlog]
+- Environment: `xxd` is not installed (use Python for pixel values); the sandcastles plugin failed to connect
+  (proxy 403) on 2026-10-30. [vlog]
 
 ## 9. Delivery and quality
 - File sizes with per-frame grain (1080x1920): reel-03, 22.2 s: crf 14 = 65 MB, crf 20 = 33 MB, crf 22 = 25 MB.
@@ -165,3 +188,6 @@ All in `projects/reel-03/work/build/fx.py` (helpers) and `edit.py` (beats). Dete
 - Missed a gym logo in a flurry frame; "okay?" sat on his beard; caption over the glow. Caught at stills. [r03]
 - Fixed word-time pads clipped words; seeking MP4 audio drifted lip sync. [r02]
 - Decorative ornaments with no meaning ("Rx", barcode) were removed on request. [r02]
+- First automatic vertical layout of the overlays scattered the 4 clocks (V6), reordered "a day in" (V9) and lost the
+  REC circle's shape (V12); then the stretched copy of REC showed under the sharp one. Caught by checking the vertical
+  contact sheet and a full-size crop before calling it done: always look at every converted asset. [vlog]
