@@ -153,7 +153,8 @@ nothing missed. Memory does not survive between sessions; only this repo does. S
    the lessons list below, since CLAUDE.md is always loaded.
 4. **Before calling a video done** (final approved, or the user moves on): review the whole session for anything not yet
    written down (user taste, effects that worked with their code location, mattes, timings, sizes, mistakes), add it,
-   and tell the user in one line what was added.
+   and tell the user in one line what was added. The user can also call **`/vibe-wrap-up`** (`.claude/skills/vibe-wrap-up/`)
+   at the end of a session: it does this full review, explains every lesson in detail and pushes it to the default branch.
 5. These are shared-file changes: commit them separately from video work and push them to the default branch at once
    (rule 4 of "Working in several sessions at once"), so the next session starts with them. No need to ask first.
 6. Reusable code (effects, matte recipes) stays in its project folder; the lessons file points to it by path and the
