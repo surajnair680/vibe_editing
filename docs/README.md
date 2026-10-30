@@ -23,4 +23,6 @@ one line below. Don't nest deeper than these three folders.
 - `CLAUDE.md` (repo root): the rules. Always loaded.
 - `.claude/skills/<type>/`: one playbook per video type, with its own `reference/` files (they ship with the skill pack).
 - `.claude/skills/vibe-mini-vlog/`: the user's own skill for mini vlogs (camcorder overlay pack, reference reel breakdown).
+- `.claude/skills/vibe-wrap-up/`: run at the end of every session (`/vibe-wrap-up`): reviews the session, explains what was
+  learned and writes it into `playbook/lessons-learned.md` and `CLAUDE.md` for all future sessions.
 - `projects/<reel>/`: each video's brief, RENDER.md and code. The lessons file points to reusable recipes there.
