@@ -198,6 +198,10 @@ Learned on the mini vlog style study (2026-10-30):
 - **Mini vlog series is coming, mostly vertical.** For any vlog or day in my life video load `vibe-mini-vlog`: it has
   the reference reel breakdown, the overlay pack (horizontal + vertical versions), Screen / key compositing and the
   episode template. Image overlay 2 carries the pack creator's credit and a typo: crop or rebuild it, ask first.
+- **"Learn this for future sessions" = save it in the repo as a skill** (assets, tool, breakdown, reference stills),
+  pushed to the default branch; memory alone is lost.
+- **Drive links someone else shared by link can't be read here** (connector lists no files, drive.google.com is
+  blocked): ask at once for a zip uploaded in the chat.
 
 Learned on reel-03 (2026-10-29), a shot-for-shot remake of a reference edit with the user's footage:
 - **His physique is the product.** Never let an effect eat the physique shot: give it at least 0.6 to 0.7 s of clear view
