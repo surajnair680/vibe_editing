@@ -1,67 +1,53 @@
-"""timeline: the single source of truth for reel-04.
+"""reel-04 timeline: the single source of truth for cut timing.
 
-Picture (scene.py) and sound (audio cues) both read from here, so a change of timing
-moves the cut, the animation and the sound effect together. Never hard-code a time
-anywhere else.
+Music: assets/music/m3_moody.mp3, 92.3 BPM, beat = 0.6502 s.
+Beat grid phase: beats at 0.61 + n*0.6502; bar downbeats at 2.56, 5.16, 7.76, 10.36, 12.96,
+15.56, 18.16, 20.76, 23.36, 25.97, 28.57 (kick builds from ~10.4, full drop by 12.96,
+final swell peaks 27.9 to 29.2, the main content ends at 28.57, low tail fades by 32.5).
+
+Each shot: (clip, source_in, edit_end, speed, note). Edit start = previous edit_end.
+Edit times are rounded to whole frames (30 fps) when built.
 """
-
-import os
-
-W, H = 1080, 1920          # 9:16
-# render other formats without editing: VIBE_SIZE=1080x1080 python3 scene.py render
-# (Windows PowerShell: $env:VIBE_SIZE="1080x1080"; py scene.py render)
-if os.environ.get("VIBE_SIZE"):
-    W, H = (int(v) for v in os.environ["VIBE_SIZE"].lower().split("x"))
 FPS = 30
-DURATION = 30       # seconds
-BPM = 120                     # music tempo; cuts land on beats
-BEAT = 60.0 / BPM
-BAR = 4 * BEAT
-MOOD = "upbeat"               # audio_kit moods: upbeat, hype, chill, corporate, cinematic, playful, tech
+BEAT = 0.6502
+MUSIC = "assets/music/m3_moody.mp3"
+MUSIC_OFFSET = 0.0  # music time = edit time + offset
 
-
-def beat(n):
-    """time of beat n (0-based)."""
-    return n * BEAT
-
-
-# (start, end, scene name). Keep scenes on bar lines when there is music.
-SCENES = [
-    (0.0, beat(4), "hook"),
-    (beat(4), beat(8), "message"),
-    (beat(8), DURATION, "endcard"),
-]
-
-# on-screen copy lives here too, so Claude edits words in one place
-COPY = {
-    "hook": ["DIRECT", "THE", "VIBE"],
-    "chips": ["CUTS", "CAPTIONS", "MOTION", "MUSIC"],
-    "end_title": "VIBE EDITING",
-    "cta": "ENROLL NOW",
-}
-
-# sound effects: (time, kind, gain_db). Kinds: python3 vibe/audio_kit.py sfx --list
-SFX = [
-    (0.0, "impact", -4),
-    (beat(4) - 0.35, "whoosh", -8),
-] + [(beat(4) + 0.25 + i * BEAT / 2, "pop", -9) for i in range(4)] + [
-    (beat(8) - 0.35, "whoosh", -8),
-    (beat(8) + 0.1, "sparkle", -10),
+SHOTS = [
+    # 1. The empty world
+    ("wide", 2.40, 3.86, 1.0, "empty room, you walk in from the left, cut mid-sit"),
+    ("x1a", 3.00, 6.46, 1.0, "door frame: you sit and settle"),
+    ("x5a", 5.40, 10.36, 1.0, "behind the chair, settled in; riser peaks"),
+    # 2. Into the flow (bar 10.36 to 18.16, 12 beats)
+    ("x4", 1.00, 11.66, 1.0, "hands hit the keys; SUB HIT at 10.36"),
+    ("x3", 0.10, 12.31, 1.0, "dashboard graphs; tick"),
+    ("x5b", 1.00, 12.96, 1.0, "over the shoulder typing; swish"),
+    ("x4", 5.00, 13.61, 1.0, "hands, tighter crop; tick"),
+    ("x3", 1.60, 14.26, 1.0, "tooltip pops; click"),
+    ("x1a", 11.80, 15.56, 1.0, "drink, door frame"),
+    ("x2", 4.70, 16.86, 1.0, "bottle set down"),
+    ("x2", 7.80, 18.16, 1.0, "cap twisted on"),
+    # 3. The breath (music low-passed)
+    ("wide", 9.60, 20.76, 1.0, "wide, deep in work; reverse swell, music muffles"),
+    ("x4", 8.00, 23.36, 1.0, "last keystrokes, hands lift off"),
+    # 4. The exit
+    ("x5b", 7.30, 26.62, 1.0, "stand, lean, walk off; swish"),
+    ("x1b", 6.60, 28.57, 1.0, "walk toward the lens, body wipes the frame; riser"),
+    ("wide", 20.60, 31.97, 0.5, "empty chair, half speed; low hit, fade to black"),
 ]
 
 
-def scene_at(t):
-    for s, e, name in SCENES:
-        if s <= t < e:
-            return name, t - s, e - s
-    s, e, name = SCENES[-1]
-    return name, t - s, e - s
+def shots():
+    """Yield dicts with frame-accurate edit in/out and source in/duration."""
+    start_f = 0
+    for clip, src_in, end, speed, note in SHOTS:
+        end_f = round(end * FPS)
+        n = end_f - start_f
+        yield dict(clip=clip, src_in=src_in, speed=speed, note=note,
+                   start_f=start_f, frames=n, start=start_f / FPS, end=end_f / FPS,
+                   src_dur=n / FPS * speed)
+        start_f = end_f
 
 
-def cues(voice=None, music="work/music.wav"):
-    """cues.json payload for: python3 vibe/audio_kit.py mix work/cues.json"""
-    c = {"duration": DURATION, "music": {"file": music, "gain_db": -9, "duck_db": -10, "fade_out": 1.2},
-         "sfx": [{"t": round(t, 3), "kind": k, "gain_db": g} for t, k, g in SFX]}
-    if voice:
-        c["voice"] = {"file": voice, "gain_db": 0}
-    return c
+def length():
+    return round(SHOTS[-1][2] * FPS) / FPS
