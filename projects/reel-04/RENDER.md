@@ -1,5 +1,6 @@
 # reel-04 rebuild steps
 
+Overlays: copy video-overlay-4.mp4 and -12.mp4 from .claude/skills/vibe-mini-vlog/assets/overlays/vertical/ into assets/overlays/ (mp4 is not committed).
 Raw clips (not in git) go in raw/ with these names: wide.mp4 (VID20261101122253), x1a/x1b (x1 part 1/2),
 x2, x3, x4, x5a/x5b (x5 part 1/2). Music and SFX (paid, ElevenLabs) are committed in assets/.
 

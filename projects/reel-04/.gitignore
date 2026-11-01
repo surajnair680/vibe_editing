@@ -12,3 +12,5 @@ work/matte/
 __pycache__/
 .DS_Store
 !out/stills/*.png
+work/*.mbtree
+work/*.log
