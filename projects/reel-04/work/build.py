@@ -8,6 +8,8 @@ import argparse, os, subprocess, sys
 import numpy as np, cv2
 sys.path.insert(0, os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
 import timeline as T
+sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
+import overlays as OV
 
 SW, SH = 1080, 1920
 
@@ -141,6 +143,7 @@ def main():
     ap.add_argument("--end", type=float, default=None); ap.add_argument("--out", default="work/picture.mp4")
     ap.add_argument("--crf", type=int, default=20)
     ap.add_argument("--raw", action="store_true", help="no grade (cut + moves only)")
+    ap.add_argument("--no-ov", dest="no_ov", action="store_true", help="no overlays (v1/v2 picture)")
     ap.add_argument("--stills", default=None, help="comma list of edit times: save PNGs to out/stills/")
     a = ap.parse_args()
     end = a.end or T.length(); W = a.w; H = W * 16 // 9
@@ -168,6 +171,7 @@ def main():
             u = f / max(1, n - 1); t = f / T.FPS
             out = frame_out(img, mv, u, t, 1 / max(1, n - 1)) if mv else img
             if not a.raw: out = look(out, s["clip"], s["start_f"] + f)
+            if not a.no_ov: out = OV.apply(out, (s["start_f"] + f) / T.FPS)
             if W != SW: out = cv2.resize(out, (W, H), interpolation=cv2.INTER_AREA)
             enc.stdin.write(out.tobytes())
         dec.kill()
@@ -189,6 +193,7 @@ def stills(times, a):
         mv = MOVES.get(i); n = s["frames"]
         out = frame_out(img, mv, f / max(1, n - 1), f / T.FPS, 1 / max(1, n - 1)) if mv else img
         if not a.raw: out = look(out, s["clip"], fi)
+        if not a.no_ov: out = OV.apply(out, fi / T.FPS)
         cv2.imwrite(f"out/stills/t{tm:05.2f}.png", out)
         print("still", tm, s["clip"], flush=True)
 
