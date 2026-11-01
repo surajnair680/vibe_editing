@@ -245,3 +245,5 @@ Learned on reel-04 (2026-11-01), a cinematic edit of an everyday work session:
 - **Soften generated risers and swells** (low-pass about 2.2 to 3.2 kHz, 2 to 3 dB down); he found them ear piercing.
 - **Overlays: few, small, at structural moments, words naming the feeling;** never over the fast montage.
   `projects/reel-04/work/overlays.py`.
+- **Fix the project `.gitignore` at the start:** the scaffold ignores `work/` and `*.mp3`, which kept scripts and paid
+  audio out of git. Never pipe a running build into `head` (it kills the render).

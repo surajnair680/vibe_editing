@@ -114,6 +114,8 @@ Other docs and when to read them: `docs/README.md`.
   several angles, foreground layers for depth, golden hour light, focus lock on a stand-in object at about f/2.8, floor
   tape for frame edges when filming solo, shoot 4K for digital moves in a 1080 timeline. Map his clips to the five
   shots when planning; his phone clips are 1080 wide, so digital zooms stay under about 1.15 except on fast moves. [r04]
+- His phone clips (reel-04): HEVC 1920x1080 with rotation -90, so they play as 1080x1920; ffmpeg auto-rotates on
+  decode. Room audio is quiet (about -30 dB mean); a close typing shot peaked at 0 dB from key clicks. [r04]
 
 ## 4. Cut-outs (mattes)
 - **No single model does it all.** Compare on the actual image before committing: [r03]
@@ -152,6 +154,13 @@ All in `projects/reel-03/work/build/fx.py` (helpers) and `edit.py` (beats). Dete
   words must stay one row: 170 for the clocks, 300 for "a day in"), keep left/right/centre anchors, spread rows over
   y 230 to 1400, push colliding blocks down. A full-frame circle stretched to 1080x1920 becomes a nice tall oval iris,
   but paint over the stretched copy of its text before pasting the sharp one. [vlog]
+- **Moody warm grade, approved from stills first time** (reel-04 `work/build.py`, `look()`): per-clip levels from a
+  mid frame applied at half strength, curve with gamma 1.12, gentle S, highlight roll-off above 0.82, lifted blacks
+  (0.035), split tone (teal shadows, warm highlights) as a per-channel LUT, saturation 0.82, halation from highlights
+  above 205 at quarter res (the first try at 190 smeared orange on frame edges), vignette 0.42, grain 0.035 from a
+  16-field bank. About 0.5 s per 1080x1920 frame including moves. [r04]
+- Revision splice tool: `projects/reel-04/work/splice.py` swaps re-rendered ranges into the previous master frame by
+  frame and prints which frames changed, so you can prove only the noted seconds moved. [r04]
 
 ## 6. Text and captions
 - Captions sit on a handheld mic at about 1440 px; ask about caption height at the stills step when he holds a mic. [r01][r02]
@@ -180,6 +189,9 @@ All in `projects/reel-03/work/build/fx.py` (helpers) and `edit.py` (beats). Dete
 - **Risers and swells from ElevenLabs come out bright and piercing** (riser_exit: 79% of its energy above 3 kHz;
   reverse swell 86%). He called them "harsh and ear piercing". Low-pass risers around 2.2 to 3.2 kHz (keep about 15%
   dry for air) and sit them 2 to 3 dB lower before he hears them. Code: `projects/reel-04/work/mix.py` (SOFTEN). [r04]
+- Room sound under a no-voice edit: about 0.3 of the clip level, keys 0.55, bottle and cap 0.8, halved on the ending.
+  Audio-only revisions: copy the picture stream (`-c:v copy`) from the previous preview, mux the new mix, check sync
+  by cross-correlation (0 ms). [r04]
 
 ## 8. Workflow and process
 - Stills first, every time (contact sheet every 2.5 s + full-size changed frames), plus a short low-res draft clip when
@@ -224,6 +236,17 @@ All in `projects/reel-03/work/build/fx.py` (helpers) and `edit.py` (beats). Dete
   to the clips, cut list with source times, 3 music options, map the chosen track, refit the cut list to its bars,
   low-res rough cut, motion test of the opening, look stills + before/after, sound design + full v1, then overlays as
   stills + a joined draft of only the overlay moments, rendered as spliced ranges. [r04]
+- **The project scaffold's `.gitignore` ignores `work/` and `*.mp3`,** so scripts and paid ElevenLabs audio were not
+  committed at first in reel-04. At project start, rewrite it: keep raw/, out/, video, wav and heavy work files out,
+  keep scripts and mp3 in; also ignore `work/*.log` and `*.mbtree` (x264 two-pass leftovers, 17 MB slipped in once). [r04]
+- Never pipe a long build script into `head`: the broken pipe kills the script mid-render (reel-04 rough v2). Write the
+  log to a file and `tail` it. [r04]
+- Clear `out/stills/` (or use a fresh folder) before each stills round: old PNGs mixed into a new contact sheet and
+  looked like a bug in the iris. [r04]
+- Environment: librosa is not preinstalled (`pip install librosa` works). The Google Drive connector is connected
+  (lists and reads his files) but uploads pass the whole file inside one call, so it can't carry videos (even a 27 MB
+  preview); deliver big files in parts through SendUserFile. Full 32 s 1080x1920 picture render with the reel-04 look:
+  about 8 minutes on 4 cores; four 2 to 4 s ranges rendered in parallel took about 3 minutes. [r04]
 
 ## 9. Delivery and quality
 - File sizes with per-frame grain (1080x1920): reel-03, 22.2 s: crf 14 = 65 MB, crf 20 = 33 MB, crf 22 = 25 MB.
@@ -237,6 +260,8 @@ All in `projects/reel-03/work/build/fx.py` (helpers) and `edit.py` (beats). Dete
 - Split procedure (keyframe every second, video-only segment copy, fresh audio per part from WAV, framemd5 + 0 ms checks)
   is in CLAUDE.md. [r02][r03]
 - When he asks how to get the video: resend the file card last in the chat and give phone save steps. [r03]
+- reel-04 file sizes (32 s, 1080x1920, per-frame grain): crf 14 master 372 MB, crf 22 112 MB, crf 24 72 MB; two-pass
+  6.6 Mbps = 27.4 MB, under the 30 MiB send limit, good enough for a phone preview. [r04]
 
 ## 10. Mistakes made (so they never repeat)
 - Copied the reference's 0.16 s photo beat literally; the physique deserved 0.7 s. [r03]
@@ -252,3 +277,5 @@ All in `projects/reel-03/work/build/fx.py` (helpers) and `edit.py` (beats). Dete
   Match the success text exactly ("Logged in using"). [codex]
 - Set up Codex without writing a CLAUDE.md rule, so the next session told him it needed an API key. Write the rule the
   same day as any new tool. [codex]
+- reel-04: scaffold `.gitignore` kept scripts and paid audio out of git until noticed; piped a build into `head`
+  and killed it; reused a stills folder so old frames confused a check; let x264 pass logs into git. [r04]
