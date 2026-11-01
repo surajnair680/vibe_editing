@@ -232,3 +232,8 @@ Learned on reel-03 (2026-10-29), a shot-for-shot remake of a reference edit with
   the brightest glow.
 - **Quality talk:** grain drives file size (22 s: crf 14 = 65 MB, crf 20 = 33 MB, crf 22 = 25 MB, visually the same on a
   phone; Instagram re-encodes to 3 to 5 Mbps). Offer the one-file version plus near-lossless parts under 30 MiB each.
+
+Learned on the Codex CLI setup (2026-11-01):
+- **Any tool the user sets up gets a CLAUDE.md rule the same day.** Without one, the next session told him Codex
+  needed an API key. When another session gets something wrong, fix the shared rule and message that session yourself.
+- **Wait loops: match the success text exactly** (`"Logged in using"`; a plain "logged in" also matches "Not logged in").

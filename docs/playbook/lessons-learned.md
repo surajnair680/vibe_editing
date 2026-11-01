@@ -2,7 +2,8 @@
 
 Read this whole file before starting any new video, and again before the stills step. Every entry came from a real
 edit and cost a revision, a re-render or a question once. Newest videos at the bottom of each section. Tags say where
-each lesson came from: [r01] reel-01, [r02] reel-02, [r03] reel-03, [vlog] the mini vlog style study (2026-10-30).
+each lesson came from: [r01] reel-01, [r02] reel-02, [r03] reel-03, [vlog] the mini vlog style study (2026-10-30),
+[codex] the Codex CLI setup session (2026-11-01).
 
 How this file grows: see "Learning loop" in CLAUDE.md. Add to it during every video, not only at the end.
 Other docs and when to read them: `docs/README.md`.
@@ -46,6 +47,12 @@ Other docs and when to read them: `docs/README.md`.
 - He sometimes just says "watch this reel": give a short breakdown (what is said, the look, what works, what is weak)
   and ask what he wants to do with it. Don't start a project until he says. [vlog]
 - Plain human language, no em dashes, short messages. [all]
+- **Setup jobs: he wants it automatic and fixed at the root.** He gives exact steps ("check the domains, stop if one is
+  blocked, install, device sign-in, add it to the hook") and wants short replies: what was done, what he does next.
+  When another session gets something wrong, he shows it here: fix the shared rule so no session repeats it, and tell
+  that session yourself. He asked for Codex sign-in to be requested at the start of every session, not when needed. [codex]
+- Before suggesting a workaround to a repeated chore (like saving the Codex login), he wants it looked up and the
+  honest trade-off given; he accepted "sign in each session" once he saw why the shortcut breaks. [codex]
 
 ## 2. Remaking a reference edit shot for shot [r03]
 - **Measure the reference frame by frame.** `select='gt(scene,0.12)'` gives a first cut list; busy parts need sheets of
@@ -172,6 +179,11 @@ All in `projects/reel-03/work/build/fx.py` (helpers) and `edit.py` (beats). Dete
   `codex exec` generates images with no API billing (test: `codex-images/manga-laptop.png`, a clean manga panel with
   legible thought-cloud text on the first try). A new session once wrongly said Codex needed an API key because no rule
   existed yet: any tool the user sets up needs a CLAUDE.md rule the same day. [codex]
+- Environment checks: curl on auth.openai.com / chatgpt.com returns 403 with `cf-mitigated: challenge` (Cloudflare,
+  fine); a real proxy block fails the CONNECT instead (see `curl -sS "$HTTPS_PROXY/__agentproxy/status"`, recent relay
+  failures). developers.openai.com is not on the allowed list, so OpenAI docs come only through web search. Codex login
+  lives in `~/.codex/auth.json`; copying it between sessions breaks because the token rotates (about every 8 days, and
+  whenever any copy refreshes). [codex]
 
 ## 9. Delivery and quality
 - File sizes with per-frame grain (1080x1920): reel-03, 22.2 s: crf 14 = 65 MB, crf 20 = 33 MB, crf 22 = 25 MB.
@@ -196,3 +208,7 @@ All in `projects/reel-03/work/build/fx.py` (helpers) and `edit.py` (beats). Dete
 - First automatic vertical layout of the overlays scattered the 4 clocks (V6), reordered "a day in" (V9) and lost the
   REC circle's shape (V12); then the stretched copy of REC showed under the sharp one. Caught by checking the vertical
   contact sheet and a full-size crop before calling it done: always look at every converted asset. [vlog]
+- My first wait-for-sign-in loop used `grep -i "logged in"`, which also matches "Not logged in", so it ended at once.
+  Match the success text exactly ("Logged in using"). [codex]
+- Set up Codex without writing a CLAUDE.md rule, so the next session told him it needed an API key. Write the rule the
+  same day as any new tool. [codex]
