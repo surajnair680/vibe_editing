@@ -117,10 +117,13 @@ named `<project>-final.mp4`.
 - **OpenAI Codex CLI:** the start-up hook installs it (`codex`, log `/tmp/codex-install.log`). It signs in with the
   user's **ChatGPT Go account, never an API key** (no API billing; there is no OPENAI_API_KEY and none is needed).
   auth.openai.com, chatgpt.com and api.openai.com are allowed in the network settings (curl on their home pages shows
-  Cloudflare 403 challenges; that is normal, not a block). Sign-in is lost with each container, so when Codex is
-  needed: check `codex login status`; if not logged in, run `codex login --device-auth` in the background, give the
-  user the link (https://auth.openai.com/codex/device) and the one-time code, and wait until the status says
-  "Logged in using ChatGPT". Don't save auth.json as a secret (the token rotates and parallel sessions break it).
+  Cloudflare 403 challenges; that is normal, not a block). Sign-in is lost with each container. **User rule
+  (2026-11-01): every new session asks for the Codex sign-in at the start**, in the reply to the user's first message,
+  whatever it says: wait for the install (`until command -v codex; do sleep 2; done`), check `codex login status`; if
+  not logged in, run `codex login --device-auth` in the background (output to a log file), give the user the link
+  (https://auth.openai.com/codex/device) and the one-time code, then carry on with their request and confirm once the
+  status says "Logged in using ChatGPT" (watch it with a background until-loop; "Not logged in" also contains
+  "logged in", so match "Logged in using"). Codes expire after 15 minutes: if it lapses, start a new one. Don't save auth.json as a secret (the token rotates and parallel sessions break it).
   Images: `codex exec --skip-git-repo-check --sandbox workspace-write "Generate an image: ... Save it here as x.png"`
   uses Codex's built-in image generation (files land in `~/.codex/generated_images/`). Example: `codex-images/`.
 - **Rendering with HyperFrames:** `HYPERFRAMES_BROWSER_PATH` is set by the session start hook
