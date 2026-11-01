@@ -158,6 +158,9 @@ All in `projects/reel-03/work/build/fx.py` (helpers) and `edit.py` (beats). Dete
   ended about 33 s). Generate, then map the real track (librosa beat_track for tempo/grid, per-beat sub/mid/hi energy
   for drops and fills, downbeats from where fills land) and fit the cuts to it. reel-04 moody track: 92.3 BPM,
   downbeats every 2.60 s from 2.56. Script: `projects/reel-04/work/el_gen.py` (music/SFX with 429 back-off). [r04]
+- **Risers and swells from ElevenLabs come out bright and piercing** (riser_exit: 79% of its energy above 3 kHz;
+  reverse swell 86%). He called them "harsh and ear piercing". Low-pass risers around 2.2 to 3.2 kHz (keep about 15%
+  dry for air) and sit them 2 to 3 dB lower before he hears them. Code: `projects/reel-04/work/mix.py` (SOFTEN). [r04]
 
 ## 8. Workflow and process
 - Stills first, every time (contact sheet every 2.5 s + full-size changed frames), plus a short low-res draft clip when
