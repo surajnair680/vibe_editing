@@ -114,6 +114,15 @@ named `<project>-final.mp4`.
   `music_length_ms`), `POST /v1/sound-generation` (`text`, `duration_seconds`), `POST /v1/text-to-speech/<voice_id>`.
   Voice clean-up: `POST /v1/audio-isolation` (multipart field `audio`) returns a 320 kbps mono mp3, in sync with the
   source; prefer it over `audio_kit.py voice --denoise`. Prefer these over audio_kit beds and Kokoro TTS. They cost the user's credits, so generate options deliberately. The plan allows at most 2 requests at a time.
+- **OpenAI Codex CLI:** the start-up hook installs it (`codex`, log `/tmp/codex-install.log`). It signs in with the
+  user's **ChatGPT Go account, never an API key** (no API billing; there is no OPENAI_API_KEY and none is needed).
+  auth.openai.com, chatgpt.com and api.openai.com are allowed in the network settings (curl on their home pages shows
+  Cloudflare 403 challenges; that is normal, not a block). Sign-in is lost with each container, so when Codex is
+  needed: check `codex login status`; if not logged in, run `codex login --device-auth` in the background, give the
+  user the link (https://auth.openai.com/codex/device) and the one-time code, and wait until the status says
+  "Logged in using ChatGPT". Don't save auth.json as a secret (the token rotates and parallel sessions break it).
+  Images: `codex exec --skip-git-repo-check --sandbox workspace-write "Generate an image: ... Save it here as x.png"`
+  uses Codex's built-in image generation (files land in `~/.codex/generated_images/`). Example: `codex-images/`.
 - **Rendering with HyperFrames:** `HYPERFRAMES_BROWSER_PATH` is set by the session start hook
   (`/opt/pw-browsers/chromium_headless_shell-1194/chrome-linux/headless_shell`). CLI: `npx hyperframes@0.8.150`.
 - **Web/shader renders (`templates/web/render.mjs`):** never run `npx playwright install`. Chromium is preinstalled
