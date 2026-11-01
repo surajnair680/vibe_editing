@@ -63,6 +63,12 @@ Other docs and when to read them: `docs/README.md`.
   doesn't fit masked out (V4: kept WORKING + REC only), nothing over the fast montage, and the V12 REC iris closing
   to black as the ending (rebuild its mask: eroded lavender area, no blue fringe; clip the last line inside it).
   Code: `projects/reel-04/work/overlays.py`. [r04]
+- **He wants motion from the very first frame.** "When the video starts I want some sort of motion, zooming, so it
+  looks dynamic." Approved first try: a snap pull-out 1.30 -> 1.08 in 1 s (ease-out, zoom blur) then a slow drift,
+  a lateral slide past a foreground frame, and a push-in that accelerates into the drop; then a slow push or drift on
+  every shot. Plan an opening move in every cinematic edit. Code: `projects/reel-04/work/build.py` (MOVES). [r04]
+- He gives free rein on taste calls ("make your own judgment") for sound design: propose a palette with a reason per
+  sound, keep it subtle with one or two bold hits, and let him react to the result. [r04]
 
 ## 2. Remaking a reference edit shot for shot [r03]
 - **Measure the reference frame by frame.** `select='gt(scene,0.12)'` gives a first cut list; busy parts need sheets of
@@ -102,6 +108,12 @@ Other docs and when to read them: `docs/README.md`.
 - Overlay / asset packs: probe every file (size, fps, audio), make a "max of all frames" composite per video to see
   everything it ever shows on one tile, and measure when it stops moving and whether it has sound. That one sheet
   answered every question about the pack. [vlog]
+- **His filming knowledge (shared on reel-04):** a five-shot system for every scene: establishing wide, action shot
+  with a foreground element, medium shot with the hands busy (repeat 1 to 2 actions from the wide for clean cuts),
+  close-up detail, over-the-shoulder POV (focus on the background, shoulder soft). Also: record the same action from
+  several angles, foreground layers for depth, golden hour light, focus lock on a stand-in object at about f/2.8, floor
+  tape for frame edges when filming solo, shoot 4K for digital moves in a 1080 timeline. Map his clips to the five
+  shots when planning; his phone clips are 1080 wide, so digital zooms stay under about 1.15 except on fast moves. [r04]
 
 ## 4. Cut-outs (mattes)
 - **No single model does it all.** Compare on the actual image before committing: [r03]
@@ -208,6 +220,10 @@ All in `projects/reel-03/work/build/fx.py` (helpers) and `edit.py` (beats). Dete
   zero a 5 px band on panel borders or a thin outline appears. Fabric bend must be tiny (about 1.5 px; 30 px looked like
   water). He confirmed the two-step plan before generating, which he asked for. Code and result:
   `codex-images/tee-mockup/` (`print_on_tee.py`). [codex]
+- Order that worked on reel-04 (no revisions to the cut beyond one note): clip-by-clip report, his guidelines mapped
+  to the clips, cut list with source times, 3 music options, map the chosen track, refit the cut list to its bars,
+  low-res rough cut, motion test of the opening, look stills + before/after, sound design + full v1, then overlays as
+  stills + a joined draft of only the overlay moments, rendered as spliced ranges. [r04]
 
 ## 9. Delivery and quality
 - File sizes with per-frame grain (1080x1920): reel-03, 22.2 s: crf 14 = 65 MB, crf 20 = 33 MB, crf 22 = 25 MB.

@@ -237,3 +237,11 @@ Learned on the Codex CLI setup (2026-11-01):
 - **Any tool the user sets up gets a CLAUDE.md rule the same day.** Without one, the next session told him Codex
   needed an API key. When another session gets something wrong, fix the shared rule and message that session yourself.
 - **Wait loops: match the success text exactly** (`"Logged in using"`; a plain "logged in" also matches "Not logged in").
+
+Learned on reel-04 (2026-11-01), a cinematic edit of an everyday work session:
+- **Open in the middle of the action, with motion from the first frame** (he cut the walk-in, then asked for a
+  dynamic zoom at the start). Snap pull-out + slow drifts: `projects/reel-04/work/build.py`.
+- **Fit the cut to the real generated track** (ElevenLabs ignores section timings): beat grid, downbeats, drop.
+- **Soften generated risers and swells** (low-pass about 2.2 to 3.2 kHz, 2 to 3 dB down); he found them ear piercing.
+- **Overlays: few, small, at structural moments, words naming the feeling;** never over the fast montage.
+  `projects/reel-04/work/overlays.py`.
