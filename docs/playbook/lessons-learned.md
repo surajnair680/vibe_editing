@@ -3,7 +3,7 @@
 Read this whole file before starting any new video, and again before the stills step. Every entry came from a real
 edit and cost a revision, a re-render or a question once. Newest videos at the bottom of each section. Tags say where
 each lesson came from: [r01] reel-01, [r02] reel-02, [r03] reel-03, [vlog] the mini vlog style study (2026-10-30),
-[codex] the Codex CLI setup session (2026-11-01).
+[codex] the Codex CLI setup session (2026-11-01), [r04] reel-04 (cinematic work-session edit, 2026-11-01).
 
 How this file grows: see "Learning loop" in CLAUDE.md. Add to it during every video, not only at the end.
 Other docs and when to read them: `docs/README.md`.
@@ -53,6 +53,9 @@ Other docs and when to read them: `docs/README.md`.
   that session yourself. He asked for Codex sign-in to be requested at the start of every session, not when needed. [codex]
 - Before suggesting a workaround to a repeated chore (like saving the Codex login), he wants it looked up and the
   honest trade-off given; he accepted "sign in each session" once he saw why the shortcut breaks. [codex]
+- **Cinematic edits of everyday footage open in the middle of the action.** In reel-04 (him working at his desk) he
+  cut the walk-in and sit-down: "begin with me already sitting and working". Start on the activity already going;
+  walk-outs at the end are fine. Learning pieces stay private, so no blurring of client names on screens. [r04]
 
 ## 2. Remaking a reference edit shot for shot [r03]
 - **Measure the reference frame by frame.** `select='gt(scene,0.12)'` gives a first cut list; busy parts need sheets of
@@ -151,6 +154,10 @@ All in `projects/reel-03/work/build/fx.py` (helpers) and `edit.py` (beats). Dete
 
 - Downloaded overlay packs carry their own SFX, often mastered loud (the vlog pack peaks at -0.8 to -5 dB). Mix
   them as separate tracks under the voice, never at their original level. [vlog]
+- ElevenLabs music ignores section timings in the prompt (asked for a dip at 18 s, got none; all three 36 s requests
+  ended about 33 s). Generate, then map the real track (librosa beat_track for tempo/grid, per-beat sub/mid/hi energy
+  for drops and fills, downbeats from where fills land) and fit the cuts to it. reel-04 moody track: 92.3 BPM,
+  downbeats every 2.60 s from 2.56. Script: `projects/reel-04/work/el_gen.py` (music/SFX with 429 back-off). [r04]
 
 ## 8. Workflow and process
 - Stills first, every time (contact sheet every 2.5 s + full-size changed frames), plus a short low-res draft clip when
