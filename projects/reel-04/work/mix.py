@@ -11,6 +11,7 @@ sys.path.insert(0, os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
 import timeline as T
 
 SR = 48000
+OUT = sys.argv[1] if len(sys.argv) > 1 else "work/mix_v2.wav"
 L = int(round(T.length() * SR)) + SR  # one second of tail room, trimmed at mux
 def sec(t): return int(round(t * SR))
 
@@ -68,9 +69,15 @@ CUES = [
     ("riser_exit",   28.57, 1.94, 0.40),   # builds into the empty room
     ("end_boom",     28.57, 0.06, 1.6),    # low hit on the empty chair
 ]
+# v2 note "risers too harsh, ear piercing": warm them up (low-pass the piercing 3 to 10 kHz) and a touch quieter.
+SOFTEN = {"riser_build": (2200, 0.75), "riser_exit": (2600, 0.7), "reverse_swell": (3200, 0.8)}
+def soften(y, cutoff, g):
+    lo = sosfiltfilt(butter(4, cutoff, "low", fs=SR, output="sos"), y, axis=0)
+    return (0.85 * lo + 0.15 * y) * g      # keep a hint of air so it doesn't sound underwater
 sfx = np.zeros((L, 2)); log = []
 for name, t, anchor, gain in CUES:
     y = tick if name == "TICK" else load(f"work/audio/sfx/{name}.wav")
+    if name in SOFTEN: y = soften(y, *SOFTEN[name])
     st = sec(t - anchor)
     if st < 0: y = y[-st:]; st = 0
     n = min(len(y), L - st); sfx[st:st + n] += y[:n] * gain
@@ -87,10 +94,12 @@ sf.write("work/mix_pre.wav", mix.astype(np.float32), SR, subtype="FLOAT")
 r = subprocess.run(["ffmpeg", "-nostats", "-i", "work/mix_pre.wav", "-af", "ebur128", "-f", "null", "-"],
                    capture_output=True, text=True).stderr
 I = float([l for l in r.splitlines() if l.strip().startswith("I:")][-1].split()[1])
-gain = 10 ** ((-14 - I) / 20); mix = mix * gain
+gain = 10 ** ((-14 - I) / 20)
+gain = 10 ** (0.7 / 20)   # v2+: master gain fixed to the approved v1 (+0.7 dB), never re-normalised
+mix = mix * gain
 pk = np.abs(mix).max(); lim = 10 ** (-1.5 / 20)
 if pk > lim:  # soft knee on the few loud peaks only
     a = np.abs(mix); k = lim * 0.8
     mix = np.sign(mix) * np.where(a > k, k + (lim - k) * np.tanh((a - k) / (lim - k)), a)
-sf.write("work/mix_v1.wav", mix.astype(np.float32), SR, subtype="FLOAT")
+sf.write(OUT, mix.astype(np.float32), SR, subtype="FLOAT")
 print(f"integrated {I:.1f} LUFS -> gain {20*np.log10(gain):+.1f} dB, peak before limit {20*np.log10(pk):.1f} dB")

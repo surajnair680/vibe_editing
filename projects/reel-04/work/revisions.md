@@ -15,3 +15,9 @@ Note: "when the video starts I want some sort of motion, zooming, so it looks dy
 - Look approved from stills (contact_v1). Sound design: 9 ElevenLabs SFX (assets/sfx), cue list work/sfx_cues.json;
   music low-passed at 520 Hz during the breath (18.17 to 23.37); room sound kept low, keys and bottle closer.
 - Preview: out/reel-04-v1-preview.mp4 (6.6 Mbps two-pass, 27.5 MB).
+
+## v1 -> v2 (2026-11-01)
+Note: "the risers are too harsh and ear piercing, make them more pleasant".
+- riser_build (8.0-10.4), riser_exit (26.6-28.6) and the reverse swell (16.0-18.2) low-passed (2.2 / 2.6 / 3.2 kHz,
+  15% dry kept for air) and 2 to 3 dB quieter. Master gain fixed at v1's +0.7 dB (not re-normalised).
+- Checked: only 8.0-10.5, 16.5-18.2 and 26.75-28.6 differ from v1; picture stream copied from v1; audio sync 0 ms.
