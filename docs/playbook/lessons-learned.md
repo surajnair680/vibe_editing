@@ -167,6 +167,11 @@ All in `projects/reel-03/work/build/fx.py` (helpers) and `edit.py` (beats). Dete
   custom type, and a Scribe transcript (costs a few credits; say so). [vlog]
 - Environment: `xxd` is not installed (use Python for pixel values); the sandcastles plugin failed to connect
   (proxy 403) on 2026-10-30. [vlog]
+- Codex CLI (2026-11-01): installed by the start-up hook, signed in with the user's ChatGPT Go account via
+  `codex login --device-auth` (never an API key), asked for at the start of every session; full rule in CLAUDE.md.
+  `codex exec` generates images with no API billing (test: `codex-images/manga-laptop.png`, a clean manga panel with
+  legible thought-cloud text on the first try). A new session once wrongly said Codex needed an API key because no rule
+  existed yet: any tool the user sets up needs a CLAUDE.md rule the same day. [codex]
 
 ## 9. Delivery and quality
 - File sizes with per-frame grain (1080x1920): reel-03, 22.2 s: crf 14 = 65 MB, crf 20 = 33 MB, crf 22 = 25 MB.
