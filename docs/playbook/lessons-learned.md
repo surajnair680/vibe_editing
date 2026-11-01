@@ -184,6 +184,13 @@ All in `projects/reel-03/work/build/fx.py` (helpers) and `edit.py` (beats). Dete
   failures). developers.openai.com is not on the allowed list, so OpenAI docs come only through web search. Codex login
   lives in `~/.codex/auth.json`; copying it between sessions breaks because the token rotates (about every 8 days, and
   whenever any copy refreshes). [codex]
+- Codex image test, artwork on a product (2026-11-01, Berserk poster on a black tee): let Codex make only the blank
+  product (shirt came out straight and clean in one try, 1024x1536) and put the user's artwork on in code, because
+  Codex redraws art and mangles lettering. "Blend into a black shirt" = no box: inside dark panels light becomes ink,
+  in the light margin flip it (black text prints white), keep white-filled lettering (katakana) as its own mask, and
+  zero a 5 px band on panel borders or a thin outline appears. Fabric bend must be tiny (about 1.5 px; 30 px looked like
+  water). He confirmed the two-step plan before generating, which he asked for. Code and result:
+  `codex-images/tee-mockup/` (`print_on_tee.py`). [codex]
 
 ## 9. Delivery and quality
 - File sizes with per-frame grain (1080x1920): reel-03, 22.2 s: crf 14 = 65 MB, crf 20 = 33 MB, crf 22 = 25 MB.
