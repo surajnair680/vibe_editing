@@ -56,6 +56,13 @@ Other docs and when to read them: `docs/README.md`.
 - **Cinematic edits of everyday footage open in the middle of the action.** In reel-04 (him working at his desk) he
   cut the walk-in and sit-down: "begin with me already sitting and working". Start on the activity already going;
   walk-outs at the end are fine. Learning pieces stay private, so no blurring of client names on screens. [r04]
+- **Overlays on a cinematic edit: engaging but never distracting.** His brief for reel-04: overlays should keep it
+  engaging "but not so overwhelming that the viewer feels distracted by the editing instead of connected to the
+  subject's world". What he approved first time: only 4 moments (open, drop, breath, ending), small lowercase lines
+  naming the feeling ("the quiet hours", "locked in.", "the world goes quiet", "same time tomorrow."), pack text that
+  doesn't fit masked out (V4: kept WORKING + REC only), nothing over the fast montage, and the V12 REC iris closing
+  to black as the ending (rebuild its mask: eroded lavender area, no blue fringe; clip the last line inside it).
+  Code: `projects/reel-04/work/overlays.py`. [r04]
 
 ## 2. Remaking a reference edit shot for shot [r03]
 - **Measure the reference frame by frame.** `select='gt(scene,0.12)'` gives a first cut list; busy parts need sheets of
