@@ -1,6 +1,6 @@
 """Rough cut (no grade, no effects): picture from timeline.py, music + quiet room sound.
 
-python3 work/make_rough.py [--w 540]   ->  out/rough_v1.mp4
+python3 work/make_rough.py [--w 540]   ->  out/rough_v2.mp4
 One ffmpeg input per piece (never long trim chains). Audio is cut from WAV decoded from
 the start of each clip (never by seeking the phone MP4's AAC).
 """
@@ -61,5 +61,5 @@ sf.write("work/rough_mix.wav", mix, SR)
 subprocess.run(["ffmpeg", "-v", "error", "-y", "-i", "work/rough_video.mp4", "-i", "work/rough_mix.wav",
                 "-vf", f"fade=t=in:st=0:d=0.8,fade=t=out:st={T.length()-1.5:.2f}:d=1.5",
                 "-c:v", "libx264", "-preset", "veryfast", "-crf", "23", "-c:a", "aac", "-b:a", "192k",
-                "-shortest", "out/rough_v1.mp4"], check=True)
-print("out/rough_v1.mp4", T.length(), "s")
+                "-shortest", "out/rough_v2.mp4"], check=True)
+print("out/rough_v2.mp4", T.length(), "s")

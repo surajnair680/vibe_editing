@@ -14,10 +14,10 @@ MUSIC = "assets/music/m3_moody.mp3"
 MUSIC_OFFSET = 0.0  # music time = edit time + offset
 
 SHOTS = [
-    # 1. The empty world
-    ("wide", 2.40, 3.86, 1.0, "empty room, you walk in from the left, cut mid-sit"),
-    ("x1a", 3.00, 6.46, 1.0, "door frame: you sit and settle"),
-    ("x5a", 5.40, 10.36, 1.0, "behind the chair, settled in; riser peaks"),
+    # 1. Already at work (v2 note: open with him sitting and working)
+    ("wide", 13.00, 3.86, 1.0, "wide, already sitting and working (v2: no walk-in)"),
+    ("x1a", 5.00, 6.46, 1.0, "door frame: working (before the bottle reach)"),
+    ("x5a", 7.00, 10.36, 1.0, "behind the chair, working; riser peaks"),
     # 2. Into the flow (bar 10.36 to 18.16, 12 beats)
     ("x4", 1.00, 11.66, 1.0, "hands hit the keys; SUB HIT at 10.36"),
     ("x3", 0.10, 12.31, 1.0, "dashboard graphs; tick"),
