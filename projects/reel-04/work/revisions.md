@@ -21,3 +21,11 @@ Note: "the risers are too harsh and ear piercing, make them more pleasant".
 - riser_build (8.0-10.4), riser_exit (26.6-28.6) and the reverse swell (16.0-18.2) low-passed (2.2 / 2.6 / 3.2 kHz,
   15% dry kept for air) and 2 to 3 dB quieter. Master gain fixed at v1's +0.7 dB (not re-normalised).
 - Checked: only 8.0-10.5, 16.5-18.2 and 26.75-28.6 differ from v1; picture stream copied from v1; audio sync 0 ms.
+
+## v2 -> v3 (2026-11-01)
+Note: add mini vlog overlays, subtle, text describing the vibe (approved plan + stills + overlay draft).
+- work/overlays.py: V4 corners (WORKING, REC) + "the quiet hours" 0-3.87; "locked in." 10.37-11.67;
+  "the world goes quiet" type-on 18.4-20.7; V12 REC iris + "same time tomorrow." 28.57-end, closing from 30.0
+  (replaces the delivery fade to black).
+- Rendered only 0-4, 10-12, 18-21, 28-32 (crf 14) and spliced into picture_v1 (work/splice.py). Changed frames
+  are only inside those windows. Audio = mix_v2. Preview out/reel-04-v3-preview.mp4 (27.4 MB).
