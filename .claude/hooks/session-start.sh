@@ -34,6 +34,11 @@ if [ ! -f "$VIBE_CACHE/extras.ok" ]; then
   ' "$VIBE_CACHE" > /tmp/vibe-extras.log 2>&1 &
 fi
 
+# OpenAI Codex CLI in the background (sign-in is per session: codex login --device-auth). Log in /tmp/codex-install.log.
+if ! command -v codex >/dev/null 2>&1; then
+  nohup npm install -g @openai/codex > /tmp/codex-install.log 2>&1 &
+fi
+
 # Renderer path for HyperFrames
 if [ -n "${CLAUDE_ENV_FILE:-}" ]; then
   echo 'export HYPERFRAMES_BROWSER_PATH=/opt/pw-browsers/chromium_headless_shell-1194/chrome-linux/headless_shell' >> "$CLAUDE_ENV_FILE"
