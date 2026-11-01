@@ -1,0 +1,68 @@
+[
+ {
+  "sfx": "open_whoosh",
+  "edit_time": 0.0,
+  "anchor": 0.22,
+  "gain": 0.55
+ },
+ {
+  "sfx": "riser_build",
+  "edit_time": 10.37,
+  "anchor": 2.36,
+  "gain": 0.45
+ },
+ {
+  "sfx": "sub_hit",
+  "edit_time": 10.37,
+  "anchor": 0.12,
+  "gain": 0.95
+ },
+ {
+  "sfx": "TICK",
+  "edit_time": 11.67,
+  "anchor": 0.01,
+  "gain": 0.75
+ },
+ {
+  "sfx": "swish_a",
+  "edit_time": 12.3,
+  "anchor": 0.2,
+  "gain": 0.4
+ },
+ {
+  "sfx": "TICK",
+  "edit_time": 12.97,
+  "anchor": 0.01,
+  "gain": 0.6
+ },
+ {
+  "sfx": "TICK",
+  "edit_time": 13.6,
+  "anchor": 0.01,
+  "gain": 0.75
+ },
+ {
+  "sfx": "reverse_swell",
+  "edit_time": 18.17,
+  "anchor": 2.18,
+  "gain": 0.55
+ },
+ {
+  "sfx": "swish_b",
+  "edit_time": 26.45,
+  "anchor": 0.38,
+  "gain": 0.55
+ },
+ {
+  "sfx": "riser_exit",
+  "edit_time": 28.57,
+  "anchor": 1.94,
+  "gain": 0.4
+ },
+ {
+  "sfx": "end_boom",
+  "edit_time": 28.57,
+  "anchor": 0.06,
+  "gain": 1.6
+ }
+]
