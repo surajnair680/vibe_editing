@@ -3,7 +3,7 @@
 Read this whole file before starting any new video, and again before the stills step. Every entry came from a real
 edit and cost a revision, a re-render or a question once. Newest videos at the bottom of each section. Tags say where
 each lesson came from: [r01] reel-01, [r02] reel-02, [r03] reel-03, [vlog] the mini vlog style study (2026-10-30),
-[codex] the Codex CLI setup session (2026-11-01), [r04] reel-04 (cinematic work-session edit, 2026-11-01).
+[codex] the Codex CLI setup session (2026-11-01), [r04] reel-04 (cinematic work-session edit, 2026-11-01), [r05] reel-05 (Automance logo intro, 2026-11-04).
 
 How this file grows: see "Learning loop" in CLAUDE.md. Add to it during every video, not only at the end.
 Other docs and when to read them: `docs/README.md`.
@@ -69,6 +69,10 @@ Other docs and when to read them: `docs/README.md`.
   every shot. Plan an opening move in every cinematic edit. Code: `projects/reel-04/work/build.py` (MOVES). [r04]
 - He gives free rein on taste calls ("make your own judgment") for sound design: propose a palette with a reason per
   sound, keep it subtle with one or two bold hits, and let him react to the result. [r04]
+
+- **He may answer a first draft with a storyboard** (numbered AI frames, reel-05): treat it as the plan for order,
+  look and staging, rebuild it in code (never just crossfade his frames), drop the number badges, and keep the end
+  frame exactly his logo. Ask for sound in the same pass he asked for it. [r05]
 
 ## 2. Remaking a reference edit shot for shot [r03]
 - **Measure the reference frame by frame.** `select='gt(scene,0.12)'` gives a first cut list; busy parts need sheets of
@@ -161,6 +165,13 @@ All in `projects/reel-03/work/build/fx.py` (helpers) and `edit.py` (beats). Dete
   16-field bank. About 0.5 s per 1080x1920 frame including moves. [r04]
 - Revision splice tool: `projects/reel-04/work/splice.py` swaps re-rendered ranges into the previous master frame by
   frame and prints which frames changed, so you can prove only the noted seconds moved. [r04]
+
+- **Animating a flat logo image (reel-05):** split it into layers with connected components on the ink (threshold
+  min(RGB) < 170, then grow labels 4 px for anti-aliased edges) plus a few hand rules (a seam line between merged
+  shapes), and "colour to alpha" over white so the layers composite back to the exact logo. Solid white bodies: a
+  hand-traced outline polygon beat every closing/hole-fill trick on open line art. Upsample layer crops 2x with a
+  sharpened alpha so zoomed-in shots stay crisp. End by blending into the exact reference so the last frame matches
+  pixel for pixel. Code: `projects/reel-05/work/layers.py`, `fills.py`, `scene2.py`. [r05]
 
 ## 6. Text and captions
 - Captions sit on a handheld mic at about 1440 px; ask about caption height at the stills step when he holds a mic. [r01][r02]
