@@ -27,3 +27,11 @@
 
 ## Status
 - v1 stills + low-res draft sent for approval (2026-11-04). Sound not generated yet (ElevenLabs, after approval).
+
+## v2 (2026-11-04): rebuilt after the user's 9-frame storyboard (refs/storyboard/)
+- 3.0 s, 60 fps. Night landscape (dark hill, skyline, snowy mountains, road with light edges), pink glow, red sun
+  rises, bike in from the left (0.78 s), car in from the right (0.98 s), both slow, then cross (car in front) and lock
+  into the logo at 1.95 s while the camera pulls back and the world turns white. AUTOMANCE rises in from 2.00 s, red A
+  drops last (2.42 s), orange light streak under the word (2.10-2.50), tagline opens from it (2.40-2.72), exact logo
+  from 2.84 s. Code: `work/scene2.py`, fills `work/fills.py`, sound `work/mix.py` (assets/sfx/*.mp3, ElevenLabs).
+- The bike has no rider: the logo's bike has none, and a rider vanishing at the lock would look wrong.
