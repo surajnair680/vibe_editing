@@ -79,6 +79,11 @@ Other docs and when to read them: `docs/README.md`.
   sound: when sound is approved for one version, add it to every version you send. Reuse paid SFX by retiming
   (`projects/reel-05/work/mix_v1.py` imports `mix.py`). Intros: about -13 LUFS, peak -3 dB, engines panned with the
   vehicles. [r05]
+- **He also makes brand intros** (reel-05: "Automance", a cars / bikes / road trips channel): 16:9, very short
+  (2.5 s asked, 3 s for the storyboard version), used as a channel intro, the logo image he supplied is the last
+  frame. He states the idea in a few lines (dark sky start, car right to left, bike left to right, dynamic text) and
+  asks "first confirm if you understand": restate, propose how to get from dark to the white logo, ask format,
+  length, sound and use in one message. [r05]
 
 ## 2. Remaking a reference edit shot for shot [r03]
 - **Measure the reference frame by frame.** `select='gt(scene,0.12)'` gives a first cut list; busy parts need sheets of
@@ -178,6 +183,22 @@ All in `projects/reel-03/work/build/fx.py` (helpers) and `edit.py` (beats). Dete
   hand-traced outline polygon beat every closing/hole-fill trick on open line art. Upsample layer crops 2x with a
   sharpened alpha so zoomed-in shots stay crisp. End by blending into the exact reference so the last frame matches
   pixel for pixel. Code: `projects/reel-05/work/layers.py`, `fills.py`, `scene2.py`. [r05]
+- **Logo reveal kit (reel-05), copy from `projects/reel-05/work/`:**
+  - Night line art: neutral ink recoloured white with a soft additive glow on the dark sky, red parts keep their red;
+    a soft white bloom from the joint at the lock hides the switch to black ink on white (`scene.py`, `place`, `bloom`).
+  - Speed: horizontal box blur sized from the per-frame displacement (about 0.5 x px per frame) on the layer.
+  - Smooth motion: PCHIP keyframes for positions (continuous speed, add a duplicate end key so it lands at rest)
+    and smootherstep for cameras (`scene2.py`, `BIKE_L`, `CAR_L`, `CAM_S`).
+  - Parallax: two cameras, scenery zoomed 1.6 to 1.8 and vehicles 1.12 low on screen, both easing to identity on the
+    lock, so the end frame is the logo exactly (`scene2.py`, `M_scenery`, `M_vehicle`).
+  - Speed streaks smeared out of a vehicle's back at quarter resolution also hide a flat cut edge (the logo's bike
+    is cut along the seam where it meets the car) (`scene2.py`, `streak`). Draw all streaks before all vehicles, or a
+    streak paints over the other vehicle.
+  - Sun rising behind mountains: clip the disc per column at the logo sun's own bottom edge, so it lands exactly as
+    drawn. Red flash ring around a letter looked like a stray circle over the tagline; a short red glow behind the
+    letter worked. A wide soft "sheen" on black letters reads as a smudge; a 14 px glint works.
+  - Wordmark: letters slam or rise in 0.035 to 0.05 s apart, the red A lands last with a small hit; an orange light
+    streak under the word that opens into the tagline (his storyboard idea). [r05]
 
 ## 6. Text and captions
 - Captions sit on a handheld mic at about 1440 px; ask about caption height at the stills step when he holds a mic. [r01][r02]
@@ -209,6 +230,11 @@ All in `projects/reel-03/work/build/fx.py` (helpers) and `edit.py` (beats). Dete
 - Room sound under a no-voice edit: about 0.3 of the clip level, keys 0.55, bottle and cap 0.8, halved on the ending.
   Audio-only revisions: copy the picture stream (`-c:v copy`) from the previous preview, mux the new mix, check sync
   by cross-correlation (0 ms). [r04]
+- ElevenLabs sound-generation for an intro (reel-05): 5 prompts, 2.5 s engine pass-bys (bike loudest 0.6 to 1.0 s
+  into the clip, car 0.9 to 1.6 s), 1.5 s impact (peak at 0 s), 1.5 s swell (peak 0.88 s), 1.2 s shimmer (peak 0.3 s).
+  Measure each clip's envelope in 0.1 s bins, then place the loud part on the motion. Pan engines from the vehicle's
+  screen x (equal-power, 0.85 max). One request at a time went through with no 429. `work/gen_sfx.sh`, `work/mix.py`.
+  [r05]
 
 ## 8. Workflow and process
 - Stills first, every time (contact sheet every 2.5 s + full-size changed frames), plus a short low-res draft clip when
@@ -264,6 +290,13 @@ All in `projects/reel-03/work/build/fx.py` (helpers) and `edit.py` (beats). Dete
   (lists and reads his files) but uploads pass the whole file inside one call, so it can't carry videos (even a 27 MB
   preview); deliver big files in parts through SendUserFile. Full 32 s 1080x1920 picture render with the reel-04 look:
   about 8 minutes on 4 cores; four 2 to 4 s ranges rendered in parallel took about 3 minutes. [r04]
+- **Very short videos: the 2.5 s stills grid gives one frame.** For intros, send stills every 0.1 s (25 to 31 tiles)
+  labelled with time, plus a half-size draft clip, because motion is the whole point. Labels: ffmpeg drawtext with
+  image metadata did not render; `projects/reel-05/work/sheet.py` (cv2) does. [r05]
+- Render speed (reel-05, numpy/cv2 layer compositing, 4 cores): 1920x1080 at about 1.2 s per frame (v1, 75 frames in
+  about 1.5 min); stills about 0.8 s each. [r05]
+- Before writing the beat sheet, test the riskiest step on the real asset first (here: can the logo be split into
+  car, bike, letters?). The split worked in three passes and decided the whole plan. [r05]
 
 ## 9. Delivery and quality
 - File sizes with per-frame grain (1080x1920): reel-03, 22.2 s: crf 14 = 65 MB, crf 20 = 33 MB, crf 22 = 25 MB.
@@ -279,6 +312,7 @@ All in `projects/reel-03/work/build/fx.py` (helpers) and `edit.py` (beats). Dete
 - When he asks how to get the video: resend the file card last in the chat and give phone save steps. [r03]
 - reel-04 file sizes (32 s, 1080x1920, per-frame grain): crf 14 master 372 MB, crf 22 112 MB, crf 24 72 MB; two-pass
   6.6 Mbps = 27.4 MB, under the 30 MiB send limit, good enough for a phone preview. [r04]
+- A 2.5 s 1920x1080 intro at crf 16, keyframe every second, AAC 256k = 1.1 MB: one send, no parts. [r05]
 
 ## 10. Mistakes made (so they never repeat)
 - Copied the reference's 0.16 s photo beat literally; the physique deserved 0.7 s. [r03]
@@ -296,3 +330,10 @@ All in `projects/reel-03/work/build/fx.py` (helpers) and `edit.py` (beats). Dete
   same day as any new tool. [codex]
 - reel-04: scaffold `.gitignore` kept scripts and paid audio out of git until noticed; piped a build into `head`
   and killed it; reused a stills folder so old frames confused a check; let x264 pass logs into git. [r04]
+- reel-05: a scripted find-and-replace that cut from one marker to the next also deleted a whole function (`streak`)
+  and broke a render. After any block replace, grep that the neighbouring functions still exist and render one still.
+  Also: two parallel Bash calls run in different working directories (one edit failed with "no such file"); use
+  absolute paths. `ffmpeg -ss <last time>` past the final frame gives no frame: use `-sseof -0.04`. First tries at
+  filling open line art (closing + hole fill, "outside through wide channels") left stripes open or made bumps; a
+  hand-traced polygon fixed it in one go. [r05]
+

@@ -252,4 +252,5 @@ Learned on reel-05 (2026-11-04), an animated logo intro:
 - **Logo images animate well in code:** split into layers (connected components + colour to alpha), end on the exact
   logo. Recipe: `projects/reel-05/work/layers.py`, `scene.py`.
 - **Offer versions side by side and add sound to every version you send;** he picked the earlier v1 over the newer one.
+- **Short intros: stills every 0.1 s plus a half-size draft,** since the 2.5 s grid gives a single frame.
 
