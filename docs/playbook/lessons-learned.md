@@ -73,6 +73,12 @@ Other docs and when to read them: `docs/README.md`.
 - **He may answer a first draft with a storyboard** (numbered AI frames, reel-05): treat it as the plan for order,
   look and staging, rebuild it in code (never just crossfade his frames), drop the number badges, and keep the end
   frame exactly his logo. Ask for sound in the same pass he asked for it. [r05]
+- **reel-05 outcome:** shown both, he chose the first code-built logo reveal (v1, 2.5 s: night sky, white line-art
+  car and bike lock together, flash to white, letters slam in, red A last) over the version rebuilt from his own
+  storyboard (v2). Keep earlier versions alive and offer the choice; don't assume the newest wins. He noticed v1 had no
+  sound: when sound is approved for one version, add it to every version you send. Reuse paid SFX by retiming
+  (`projects/reel-05/work/mix_v1.py` imports `mix.py`). Intros: about -13 LUFS, peak -3 dB, engines panned with the
+  vehicles. [r05]
 
 ## 2. Remaking a reference edit shot for shot [r03]
 - **Measure the reference frame by frame.** `select='gt(scene,0.12)'` gives a first cut list; busy parts need sheets of

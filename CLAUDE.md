@@ -247,3 +247,9 @@ Learned on reel-04 (2026-11-01), a cinematic edit of an everyday work session:
   `projects/reel-04/work/overlays.py`.
 - **Fix the project `.gitignore` at the start:** the scaffold ignores `work/` and `*.mp3`, which kept scripts and paid
   audio out of git. Never pipe a running build into `head` (it kills the render).
+
+Learned on reel-05 (2026-11-04), an animated logo intro:
+- **Logo images animate well in code:** split into layers (connected components + colour to alpha), end on the exact
+  logo. Recipe: `projects/reel-05/work/layers.py`, `scene.py`.
+- **Offer versions side by side and add sound to every version you send;** he picked the earlier v1 over the newer one.
+
