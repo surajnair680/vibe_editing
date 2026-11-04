@@ -26,7 +26,7 @@
 | 2.22-2.50 | settles into the exact logo and holds | tail of the hit |
 
 ## Status
-- v1 stills + low-res draft sent for approval (2026-11-04). Sound not generated yet (ElevenLabs, after approval).
+- v1 chosen by the user over v2 (2026-11-04); final delivered with sound (mix_v1.py).
 
 ## v2 (2026-11-04): rebuilt after the user's 9-frame storyboard (refs/storyboard/)
 - 3.0 s, 60 fps. Night landscape (dark hill, skyline, snowy mountains, road with light edges), pink glow, red sun
