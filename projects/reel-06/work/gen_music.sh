@@ -1,0 +1,9 @@
+#!/bin/bash
+# Paid ElevenLabs music for reel-06. One request at a time. Skips files that already exist.
+cd "$(dirname "$0")/.."
+G="python3 work/el_gen.py music"
+$G "Playful, cheeky, high-energy Indian-Russian folk cabaret party song, 126 BPM. Opens with a dramatic slow held brass and accordion note with a teasing build for 3 seconds, a short pause, then explodes into a fast stomping groove: oom-pah bass, tight claps on every beat, accordion and brass melody, dhol and tambourine, festive Bollywood wedding dance energy that keeps lifting. Fun, sassy, celebratory." 26000 assets/music/song_a.mp3
+$G "Fast, sassy retro Bollywood cabaret dance number, 126 BPM, brass section stabs, accordion riff, punchy dhol and claps, swinging oom-pah bassline, playful clarinet runs. Starts with a long dramatic held note and swell, then drops into the full stomping groove with crowd claps and 'hey!' shouts. Bold, cheeky and celebratory, builds energy throughout." 26000 assets/music/song_b.mp3 vocals
+$G "Energetic Eastern European gypsy brass party tune fused with Indian dhol, 126 BPM, accelerating playful folk dance, accordion lead, brass hits, hand claps and foot stomps, cheeky and mischievous mood. A slow teasing held intro note for a few seconds, then a sudden fast groove that keeps building. Instrumental." 26000 assets/music/song_c.mp3
+$G "Subtle minimal background beat for a serious, slightly sarcastic talking video. Dark, modern, understated: soft deep kick, warm sub bass, gentle muted hi-hats, a low airy pad, no lead melody, lots of space for a voice. Steady 90 BPM, calm tension, documentary feel, consistent throughout." 48000 assets/music/bed_a.mp3
+$G "Low-key lo-fi hip hop instrumental bed, 85 BPM, dusty soft drums, deep rounded bass, faint dark piano chords, very sparse and quiet, steady loop with no big changes, designed to sit under narration. Moody, confident, minimal." 48000 assets/music/bed_b.mp3
