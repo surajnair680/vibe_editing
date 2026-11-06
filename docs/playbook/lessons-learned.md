@@ -3,7 +3,7 @@
 Read this whole file before starting any new video, and again before the stills step. Every entry came from a real
 edit and cost a revision, a re-render or a question once. Newest videos at the bottom of each section. Tags say where
 each lesson came from: [r01] reel-01, [r02] reel-02, [r03] reel-03, [vlog] the mini vlog style study (2026-10-30),
-[codex] the Codex CLI setup session (2026-11-01), [r04] reel-04 (cinematic work-session edit, 2026-11-01), [r05] reel-05 (Automance logo intro, 2026-11-04).
+[codex] the Codex CLI setup session (2026-11-01), [r04] reel-04 (cinematic work-session edit, 2026-11-01), [r05] reel-05 (Automance logo intro, 2026-11-04), [openverse] the Openverse sound library setup (2026-11-06).
 
 How this file grows: see "Learning loop" in CLAUDE.md. Add to it during every video, not only at the end.
 Other docs and when to read them: `docs/README.md`.
@@ -27,6 +27,12 @@ Other docs and when to read them: `docs/README.md`.
 - He likes to understand why an effect exists ("what is the point of pixelating half the face?"). Explain meaning
   briefly when proposing effects. Explain any decorative element (he had the "Rx" stamp and a barcode removed). [r02][r03]
 - He asks "first tell me if you understand" before revisions: restate his note, propose the fix, wait. [r03]
+- **When he asks "do you get what I want?", answer that first, in two or three plain lines, before anything else.** On
+  the Openverse request I replied with a plan, a network blocker and a domain list; he came back with "At least tell me
+  if you understood what I want." Restate the goal in his terms, then (separately, or after he confirms) the blockers
+  and plan. [openverse]
+- He shares other creators' reels (pasted transcripts) about AI tools and means "add this to my system". Build it as a
+  shared tool + CLAUDE.md rule + skill line, so every session has it. [openverse]
 - Footage requests: give a list of **the kind of footage that fits each moment** (feel + examples), not exact shots
   to film; he may not be able to film exactly what is asked. Then a short "still needed" list, updated per upload. [r03]
 - He sends clips one at a time and says "done" at the end. Report each clip in a few lines (length, shape, where it fits,
@@ -254,6 +260,11 @@ All in `projects/reel-03/work/build/fx.py` (helpers) and `edit.py` (beats). Dete
   sample, then style the rest. [r03]
 - **Look at every still yourself before sending** and fix what you see (logo in frame, text on the beard, caption over
   glow, hard edges). Then list the remaining doubts for the user with times. [r03]
+- **New outside service: test reachability first with one small request,** then give him the exact hosts to allow
+  (the API host plus every host the files are served from: for Openverse that was api.openverse.org, cdn.freesound.org,
+  freesound.org, upload.wikimedia.org, ccmixter.org, Jamendo). He adds them himself in the environment settings and it
+  works at once. Then check each file host honestly: a 403 or 429 from the site itself (tunnel established) is the site
+  blocking the cloud IP, not the network policy, and must not be worked round by faking a browser. [openverse]
 - Test a complex effect on the user's actual asset early (the light-snap test on his back photo) and send it. [r03]
 - One ffmpeg input per cut piece; long `trim` chains get killed for memory. [r02]
 - ffmpeg `fps=2` contact sheets can show frames about 0.25 s off their labels. For exact checks pull frames by number
@@ -347,4 +358,9 @@ All in `projects/reel-03/work/build/fx.py` (helpers) and `edit.py` (beats). Dete
   absolute paths. `ffmpeg -ss <last time>` past the final frame gives no frame: use `-sseof -0.04`. First tries at
   filling open line art (closing + hole fill, "outside through wide channels") left stripes open or made bumps; a
   hand-traced polygon fixed it in one go. [r05]
+- Mixed units in `openverse_sfx.py`: the hit / swell thresholds compared 10 ms frames against millisecond numbers, so a
+  1.6 s riser came out as "swoosh". Caught by testing the measurement on generated sounds of known shape (ffmpeg
+  `anoisesrc` + `afade`: a sharp hit, a 0.2 s swoosh, a 1.6 s riser). Always test analysis code on synthetic inputs
+  with a known answer before trusting it on real files. The BPM estimate can come out double (hip hop read as 154,
+  really about 77): read it as "or half". [openverse]
 

@@ -267,3 +267,8 @@ Learned on reel-05 (2026-11-04), an animated logo intro:
 - **Offer versions side by side and add sound to every version you send;** he picked the earlier v1 over the newer one.
 - **Short intros: stills every 0.1 s plus a half-size draft,** since the 2.5 s grid gives a single frame.
 
+Learned on the Openverse setup (2026-11-06):
+- **"Do you get what I want?" gets a direct yes and his goal restated, first.** Blockers and plans come after.
+- **Sound design on every edit, real sounds first:** `tools/openverse_sfx.py` (rule above). Freesound and Wikimedia
+  block this cloud IP: send him the sound links to download, never fake a browser.
+
