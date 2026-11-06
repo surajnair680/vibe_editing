@@ -1,0 +1,7 @@
+raw/
+out/
+*.mp4
+*.mov
+*.wav
+work/*.log
+*.mbtree
