@@ -35,6 +35,8 @@ Paths below are relative to **this skill's folder**: `scripts/`, `reference/`, `
 python3 vibe/audio_kit.py bed --mood upbeat --seconds 30 -o work/music.wav      # moods: upbeat hype tech corporate chill cinematic playful
 python3 vibe/audio_kit.py bed --mood chill --bpm 84 --key A --seed 4 -o work/music_b.wav   # variation
 python3 vibe/audio_kit.py sfx --list                                              # whoosh pop click typing impact riser ...
+python3 tools/openverse_sfx.py pick "whoosh" --kind sfx --max-sec 2 --n 4 --project projects/<name> --name whoosh  # REAL sounds (Openverse, free, commercial use); run from the repo root
+python3 tools/openverse_sfx.py pick "cinematic" --kind music --n 3 --project projects/<name>          # free CC music (Jamendo), measured for BPM
 python3 vibe/audio_kit.py voice raw/take.mp4 -o work/voice.wav --denoise          # clean a recorded voice
 python3 vibe/tts.py --script work/script.txt -o work/vo.wav --voice af_heart       # AI voiceover (+ vo.json timings)
 python3 vibe/tts.py --list                                                        # all voices (en-US/UK, Hindi, ES, FR, IT, PT, JA, ZH)
@@ -42,6 +44,10 @@ python3 vibe/transcribe.py work/vo.wav -o work/words.json                       
 python3 vibe/audio_kit.py mix work/cues.json -o work/mix.wav --video in.mp4 --out-video out/final.mp4
 ```
 Mixing rules and levels: `reference/sound-design.md`.
+
+Sound design order (user rule, 2026-11-06): real recorded sounds from Openverse first (`tools/openverse_sfx.py`, see the
+CLAUDE.md rule for licences, credits and the Freesound/Wikimedia blocks), ElevenLabs sound generation for anything
+Openverse lacks, `audio_kit.py sfx` synth sounds last. Every cut and key moment gets a sound; no repeated whoosh.
 
 ## Step 1: Brief
 

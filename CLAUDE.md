@@ -114,6 +114,19 @@ named `<project>-final.mp4`.
   `music_length_ms`), `POST /v1/sound-generation` (`text`, `duration_seconds`), `POST /v1/text-to-speech/<voice_id>`.
   Voice clean-up: `POST /v1/audio-isolation` (multipart field `audio`) returns a 320 kbps mono mp3, in sync with the
   source; prefer it over `audio_kit.py voice --denoise`. Prefer these over audio_kit beds and Kokoro TTS. They cost the user's credits, so generate options deliberately. The plan allows at most 2 requests at a time.
+- **Sound design from Openverse (user rule, 2026-11-06):** every edit gets real sound design: a real recorded sound on
+  every cut and key moment (whoosh, swish, hit, riser, click, ambience), plus music when it fits. First choice is the free
+  Openverse library (millions of real sounds, no API key):
+  `python3 tools/openverse_sfx.py pick "whoosh" --kind sfx --max-sec 2 --n 4 --project projects/<name> --name whoosh`.
+  It only takes licences that allow commercial use (cc0, pdm, by; by-sa only with `--allow-sa`, never NC or ND), trims
+  the sound, saves it to `assets/sfx/openverse/`, writes `CREDITS.md` (put the "credit needed" lines in the caption)
+  and measures it, since Claude can't listen: shape (hit / swoosh / swell), attack, peak time, tail, tone, hits, and BPM
+  for music. Choose by those numbers and place each sound so its peak lands on its frame. Use one-word searches (every word
+  must match). From this cloud container, Freesound (where most short SFX live) answers 403 and Wikimedia often answers 429.
+  Never fake a browser to get past that: list the sounds you want with their page links, ask the user to download and
+  upload them, then run `measure <file> --id <openverse-id>`. Use ElevenLabs sound generation only for what Openverse
+  can't supply. Anonymous limit: 20 searches a minute, 200 a day (searches are cached). Commit `assets/sfx/openverse/`
+  (check the project `.gitignore` does not drop `*.mp3`).
 - **OpenAI Codex CLI:** the start-up hook installs it (`codex`, log `/tmp/codex-install.log`). It signs in with the
   user's **ChatGPT Go account, never an API key** (no API billing; there is no OPENAI_API_KEY and none is needed).
   auth.openai.com, chatgpt.com and api.openai.com are allowed in the network settings (curl on their home pages shows
