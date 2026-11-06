@@ -217,6 +217,17 @@ All in `projects/reel-03/work/build/fx.py` (helpers) and `edit.py` (beats). Dete
 - SFX: place each so its peak lands on its frame (`work/sfx_cues.json`). Music ducked about 10.5 dB under voice;
   final about -14 LUFS, peak about -1.4 dB. [r01]
 - Reused reference audio stays untouched: no isolation, no new music, no loudness change. [r03]
+- **Openverse is the sound library (user rule, 2026-11-06).** He wants real sound design on every cut and asked for the
+  free Openverse library (openverse.org, no key) so he never buys a sound pack. Tool: `tools/openverse_sfx.py`
+  (search / pick / get / measure / credits). Facts found while building it: the API needs `format=json` (it serves
+  HTML otherwise); multi-word searches match every word, so "cinematic hip hop" found nothing while "hip hop" found 17
+  Jamendo tracks; `license_type=commercial` still includes by-sa, so the tool passes `license=cc0,pdm,by` itself;
+  `category=sound_effect` returns nothing for Freesound sounds (their category is empty), so SFX are found with
+  `length=shortest` plus a duration cap; Wikimedia's hits for "whoosh" are mostly people saying the word (Lingua Libre
+  `LL-Q...`, category `pronunciation`), filtered out. From the cloud container: Jamendo downloads fine, Freesound
+  answers 403 to everything (cloud IP block; the bulk of the SFX), Wikimedia comes and goes with 429. Do not spoof a
+  browser to get round it (auto mode blocks it, rightly): give him the sound page links to download and upload, then
+  run `measure`. Measured shapes: up to 50 ms attack = hit, 50 to 400 ms = swoosh, longer = swell. [openverse]
 
 - Downloaded overlay packs carry their own SFX, often mastered loud (the vlog pack peaks at -0.8 to -5 dB). Mix
   them as separate tracks under the voice, never at their original level. [vlog]
