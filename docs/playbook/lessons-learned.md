@@ -3,7 +3,7 @@
 Read this whole file before starting any new video, and again before the stills step. Every entry came from a real
 edit and cost a revision, a re-render or a question once. Newest videos at the bottom of each section. Tags say where
 each lesson came from: [r01] reel-01, [r02] reel-02, [r03] reel-03, [vlog] the mini vlog style study (2026-10-30),
-[codex] the Codex CLI setup session (2026-11-01), [r04] reel-04 (cinematic work-session edit, 2026-11-01), [r05] reel-05 (Automance logo intro, 2026-11-04), [openverse] the Openverse sound library setup (2026-11-06).
+[codex] the Codex CLI setup session (2026-11-01), [r04] reel-04 (cinematic work-session edit, 2026-11-01), [r05] reel-05 (Automance logo intro, 2026-11-04), [openverse] the Openverse sound library setup (2026-11-06), [r06] reel-06 (YouTube Shorts music swap of a finished reel, 2026-11-06).
 
 How this file grows: see "Learning loop" in CLAUDE.md. Add to it during every video, not only at the end.
 Other docs and when to read them: `docs/README.md`.
@@ -90,6 +90,10 @@ Other docs and when to read them: `docs/README.md`.
   frame. He states the idea in a few lines (dark sky start, car right to left, bike left to right, dynamic text) and
   asks "first confirm if you understand": restate, propose how to get from dark to the white logo, ask format,
   length, sound and use in one message. [r05]
+- **Reposting an Instagram reel on YouTube Shorts:** Bollywood songs get the Short blocked by Content ID. He wants the
+  song swapped for an ElevenLabs track with the same energy, and the quiet beat under his talking replaced too, while
+  the picture and his voice stay exactly as they were. Suggest a Private YouTube upload first: YouTube Studio's "Checks"
+  step lists every matched range. [r06]
 
 ## 2. Remaking a reference edit shot for shot [r03]
 - **Measure the reference frame by frame.** `select='gt(scene,0.12)'` gives a first cut list; busy parts need sheets of
@@ -252,6 +256,20 @@ All in `projects/reel-03/work/build/fx.py` (helpers) and `edit.py` (beats). Dete
   Measure each clip's envelope in 0.1 s bins, then place the loud part on the motion. Pan engines from the vehicle's
   screen x (equal-power, 0.85 max). One request at a time went through with no 429. `work/gen_sfx.sh`, `work/mix.py`.
   [r05]
+- **Swapping music in a finished, mixed video (reel-06):** ElevenLabs audio isolation gives his voice back, but it
+  also keeps *sung* vocals (the song's singer) and drops every sound effect. So: use the isolated voice only where he
+  speaks, put the new music in where the song was, and keep the original mix in gaps that hold only an effect (whoosh,
+  explosion), where the old bed sits about 25 dB under it. Map the song's structure first (held intro, break on the
+  cut, drop, stop) and pick the generated option whose shape matches; the one that matched (126.6 vs 126 BPM, drop
+  at 7.76 s) needed only a 0.17 s offset. Measure the original bed in silent gaps: here a sub-heavy hum about 25 dB
+  under the voice; the new bed sits 26 dB under. The original was mastered very loud (-7 LUFS, peaks 0 dB): match the
+  talk level with make-up gain on voice + bed and a look-ahead limiter, not by scaling the whole mix.
+  Code: `projects/reel-06/work/mix.py`. [r06]
+- **Aligning an isolated voice: use the envelope, not the waveform.** Waveform cross-correlation on one 10 s window put
+  the isolated voice 10.5 ms early, and the isolated file also drifts (about -0.12 ms per second). Band-passed RMS
+  envelopes (300 to 3000 Hz) in 4 s windows, a linear fit of lag over time, then resampling brought every window
+  within 0.25 ms. Code: `projects/reel-06/work/align_voice.py`. [r06]
+- Original reel audio with a commercial song in it stays out of git (`full_src.mp3` ignored). [r06]
 
 ## 8. Workflow and process
 - Stills first, every time (contact sheet every 2.5 s + full-size changed frames), plus a short low-res draft clip when
