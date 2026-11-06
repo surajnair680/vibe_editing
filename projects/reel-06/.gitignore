@@ -7,3 +7,4 @@ work/*.log
 *.mbtree
 work/pip_*.log
 work/audio/full_src.mp3
+work/x265.log*

@@ -10,3 +10,8 @@ the finished Instagram reel in 3 parts, 1080x1920 60 fps HEVC, AAC 44.1k stereo.
 3. Music (paid, committed): `work/gen_music.sh` -> `assets/music/song_{a,b,c}.mp3`, `bed_{a,b}.mp3`.
 4. Mix: `python3 work/mix.py <song a|b> <bed a|b> work/audio/mix_XY.wav`.
 5. Preview: picture copied from `raw/full.mov`, audio = the mix.
+6. Final (approved: song B + beat B):
+   - Master, picture bit-exact: `ffmpeg -f concat -safe 0 -i raw/parts.txt -i work/audio/mix_bb.wav -map 0:v -map 1:a
+     -c:v copy -tag:v hvc1 -c:a aac -b:a 320k out/reel-06-master.mp4` (no `-shortest`: it dropped the last 2 frames).
+   - One file under 30 MiB: `work/encode_final.sh` -> `out/reel-06-final.mp4`.
+   - Original-quality parts: each `raw/partN.mp4` video copied + its range of `mix_bb.wav` (0-32, 32-44, 44-64.283 s).
