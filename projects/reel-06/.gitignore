@@ -5,3 +5,4 @@ out/
 *.wav
 work/*.log
 *.mbtree
+work/pip_*.log
