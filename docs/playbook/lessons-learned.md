@@ -269,6 +269,11 @@ All in `projects/reel-03/work/build/fx.py` (helpers) and `edit.py` (beats). Dete
   the isolated voice 10.5 ms early, and the isolated file also drifts (about -0.12 ms per second). Band-passed RMS
   envelopes (300 to 3000 Hz) in 4 s windows, a linear fit of lag over time, then resampling brought every window
   within 0.25 ms. Code: `projects/reel-06/work/align_voice.py`. [r06]
+- **Joining the user's split uploads:** the parts' seams carry odd timestamps (frame gaps of 26 and 35 ms). Copying
+  them into a master works, but re-encoding that master dropped frames at the seams and the last 0.5 s (the payoff
+  shot), and `-shortest` dropped the last 2 frames. Encode from the parts with `setpts=N/(60*TB)` and `-fps_mode
+  passthrough`, no `-shortest`, then count packets against the source (3857 here) before sending. HEVC 2-pass
+  3.5 Mbps for 64 s of 1080x1920 at 60 fps = 28.5 MiB, SSIM about 0.986 to the source. [r06]
 - Original reel audio with a commercial song in it stays out of git (`full_src.mp3` ignored). [r06]
 
 ## 8. Workflow and process
