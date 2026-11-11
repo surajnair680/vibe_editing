@@ -272,3 +272,9 @@ Learned on the Openverse setup (2026-11-06):
 - **Sound design on every edit, real sounds first:** `tools/openverse_sfx.py` (rule above). Freesound and Wikimedia
   block this cloud IP: send him the sound links to download, never fake a browser.
 
+Learned on reel-07 (2026-11-11), a meme template caption swap:
+- **Post captions: explain, don't preach.** Approved after two rejected tries ("sounds AI", then "not rant"): two short
+  plain paragraphs, what the clip shows, then the fitness point. No emoji, hashtags, CTA or rhetorical lists.
+- **Meme templates:** keep the clip and sound bit-exact, swap only the caption, drop the other brand's logo (nothing
+  in its place), proper brand spelling, hide channel marks with a small zoom. Code: `projects/reel-07/work/`.
+

@@ -101,6 +101,15 @@ Other docs and when to read them: `docs/README.md`.
   hidden with a small zoom (4.6%: crop 24 px off the left of the 720 wide band). Measure the template's bands (caption
   lines, video band, logo) with row maxima, re-render the caption crisp at 1080x1920 in Inter SemiBold sized to the
   original line width, copy the audio bit-exact. 12 s render takes seconds. Code: `projects/reel-07/work/`. [r07]
+- **He may upload a reel with no message at all** (reel-07). Give a short breakdown (what it is, format, audio) plus 2 or 3
+  options and wait; he answered with just the new caption line. Mention footage rights once at most: he uses meme
+  templates as they are (the clip, the sound), so don't push "use your own footage" again. [r07]
+- **He asks for an Instagram post caption after the video** ("make a caption that explains the joke"). He turned down
+  two versions before approving: the first read as AI (stacked short lines, "It can't X, it can't Y", a moral line,
+  "tag the friend" CTA), the second as a rant (story details, lowercase slang, emoji). Approved: two short plain
+  paragraphs, proper capitals, no emoji, no hashtags, no CTA. Line 1 names what the clip shows ("He has the saw, the
+  wood and someone to copy, but he's not cutting anything."), line 2 maps it to the fitness problem in one or two
+  sentences (no form checks, no progress tracking, no adjusting when you stall, so nothing changes). [r07]
 
 ## 2. Remaking a reference edit shot for shot [r03]
 - **Measure the reference frame by frame.** `select='gt(scene,0.12)'` gives a first cut list; busy parts need sheets of
@@ -222,6 +231,9 @@ All in `projects/reel-03/work/build/fx.py` (helpers) and `edit.py` (beats). Dete
 - Keep text off his face and beard: move the picture (crop) rather than the text when a centred word lands on the face. [r03]
 - A caption over the brightest glow is hard to read: move the picture so the glow sits below the caption line, and give
   captions over footage a soft dark halo. [r03]
+
+- **Post captions (Instagram text under the reel):** explain, don't preach. Say what the clip shows, then the point in
+  plain sentences. No rhetorical triplets, no "tag a friend", no emoji or hashtags unless he asks. See section 1. [r07]
 
 ## 7. Audio
 - Cut audio from WAV decoded from the start, never by seeking an MP4/MP3 (up to 100 ms off). Verify sync by
@@ -393,4 +405,9 @@ All in `projects/reel-03/work/build/fx.py` (helpers) and `edit.py` (beats). Dete
   `anoisesrc` + `afade`: a sharp hit, a 0.2 s swoosh, a 1.6 s riser). Always test analysis code on synthetic inputs
   with a known answer before trusting it on real files. The BPM estimate can come out double (hip hop read as 154,
   really about 77): read it as "or half". [openverse]
-
+- reel-07: `cd dir; rm -f out/stills/*` was blocked by the safety check (relative glob after a cd can't be resolved):
+  use a fresh folder or absolute paths, never a glob removal after cd. Scene detection on a meme reel found no cuts
+  because the static black bands dominate the frame: crop to the video band first. A `git log --grep` with the
+  wrong capitalisation returned nothing, so `cherry-pick` got no commit: take the hash from `git log --oneline`.
+  Scribe on a music-only clip returns 0 words (costs a few credits): check for speech by ear-level loudness and
+  frames first when the clip is a meme. [r07]
