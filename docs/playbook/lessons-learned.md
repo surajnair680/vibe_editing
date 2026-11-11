@@ -3,7 +3,7 @@
 Read this whole file before starting any new video, and again before the stills step. Every entry came from a real
 edit and cost a revision, a re-render or a question once. Newest videos at the bottom of each section. Tags say where
 each lesson came from: [r01] reel-01, [r02] reel-02, [r03] reel-03, [vlog] the mini vlog style study (2026-10-30),
-[codex] the Codex CLI setup session (2026-11-01), [r04] reel-04 (cinematic work-session edit, 2026-11-01), [r05] reel-05 (Automance logo intro, 2026-11-04), [openverse] the Openverse sound library setup (2026-11-06), [r06] reel-06 (YouTube Shorts music swap of a finished reel, 2026-11-06).
+[codex] the Codex CLI setup session (2026-11-01), [r04] reel-04 (cinematic work-session edit, 2026-11-01), [r05] reel-05 (Automance logo intro, 2026-11-04), [openverse] the Openverse sound library setup (2026-11-06), [r06] reel-06 (YouTube Shorts music swap of a finished reel, 2026-11-06), [r07] reel-07 (meme template caption swap, 2026-11-11).
 
 How this file grows: see "Learning loop" in CLAUDE.md. Add to it during every video, not only at the end.
 Other docs and when to read them: `docs/README.md`.
@@ -94,6 +94,13 @@ Other docs and when to read them: `docs/README.md`.
   song swapped for an ElevenLabs track with the same energy, and the quiet beat under his talking replaced too, while
   the picture and his voice stay exactly as they were. Suggest a Private YouTube upload first: YouTube Studio's "Checks"
   step lists every matched range. [r06]
+
+- **Meme template swaps (reel-07):** he sends a meme reel (caption on black above a funny clip, a brand logo below) and
+  a new caption line. He wants the same clip and sound, only his caption; the other brand's logo removed and nothing in
+  its place (he said no to a handle); proper brand spelling ("ChatGPT", not "chatgpt"); the footage's TV channel mark
+  hidden with a small zoom (4.6%: crop 24 px off the left of the 720 wide band). Measure the template's bands (caption
+  lines, video band, logo) with row maxima, re-render the caption crisp at 1080x1920 in Inter SemiBold sized to the
+  original line width, copy the audio bit-exact. 12 s render takes seconds. Code: `projects/reel-07/work/`. [r07]
 
 ## 2. Remaking a reference edit shot for shot [r03]
 - **Measure the reference frame by frame.** `select='gt(scene,0.12)'` gives a first cut list; busy parts need sheets of
