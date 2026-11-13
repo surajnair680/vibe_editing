@@ -32,7 +32,11 @@ Other docs and when to read them: `docs/README.md`.
   if you understood what I want." Restate the goal in his terms, then (separately, or after he confirms) the blockers
   and plan. [openverse]
 - He shares other creators' reels (pasted transcripts) about AI tools and means "add this to my system". Build it as a
-  shared tool + CLAUDE.md rule + skill line, so every session has it. [openverse]
+  shared tool + CLAUDE.md rule + skill line, so every session has it. [openverse] Confirmed again on Lemo-Opuscar: he
+  pasted only a transcript and caption, I looked the tool up and offered four options, and he picked "add it to our
+  setup". Next time: look it up, then put "add it to the setup" first as the recommended option. [lemo]
+- **He does not monetise his content** (2026-11-13). Non-commercial licences (CC BY-NC docs, prompts, styles) are fine
+  to copy and use: mention a licence only when it would block him (ND, or a paid tool), not as a caveat. [lemo]
 - Footage requests: give a list of **the kind of footage that fits each moment** (feel + examples), not exact shots
   to film; he may not be able to film exactly what is asked. Then a short "still needed" list, updated per upload. [r03]
 - He sends clips one at a time and says "done" at the end. Report each clip in a few lines (length, shape, where it fits,
@@ -336,8 +340,13 @@ All in `projects/reel-03/work/build/fx.py` (helpers) and `edit.py` (beats). Dete
   so its browser install is a no-op; WebGL is SwiftShader (software), so 3D and shader styles render slowly. Tested: a
   sparse clone is 33 MB, core packages install in about 5 s, watercolor demo stills render in about 0.1 s each, a 3 s
   1080x1920 film in 3.5 s. Pages outside the library import `/core/lib.js` fine. Codex is detected as the image
-  generator for the ✦ styles. Also noticed: `HYPERFRAMES_BROWSER_PATH` in the start-up hook points at
-  `chromium_headless_shell-1194`, but the container now has `-1243`. [lemo]
+  generator for the ✦ styles. `HYPERFRAMES_BROWSER_PATH` in the start-up hook pointed at `chromium_headless_shell-1194`,
+  gone from the image (now `-1243`, with a different inner folder name): the hook now globs for the newest. A demo's
+  first still failed (`paper.jpg` 404, "source image cannot be decoded") until its `build.sh` step 0 ran (fonts, paper
+  texture): demos are reference code, not ready to render. [lemo]
+- **New shared tool: test the start-up hook from a wiped state before pushing** (delete the install, run
+  `CLAUDE_CODE_REMOTE=true bash .claude/hooks/session-start.sh`, wait for the done marker, then render through the
+  wrapper). That is what a new session gets; a tool that only works in the session that set it up is not set up. [lemo]
 - Environment checks: curl on auth.openai.com / chatgpt.com returns 403 with `cf-mitigated: challenge` (Cloudflare,
   fine); a real proxy block fails the CONNECT instead (see `curl -sS "$HTTPS_PROXY/__agentproxy/status"`, recent relay
   failures). developers.openai.com is not on the allowed list, so OpenAI docs come only through web search. Codex login
