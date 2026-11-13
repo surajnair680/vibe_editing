@@ -16,3 +16,5 @@ __pycache__/
 .DS_Store
 # paid audio (mp3) IS committed so it is never paid for twice
 !out/stills/*.png
+work/*.log
+*.mbtree

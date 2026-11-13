@@ -1,0 +1,58 @@
+{
+ "selfie": {
+  "w": 611,
+  "h": 1489,
+  "footX": 403,
+  "footY": 1484,
+  "top": 4,
+  "bodyX": 244
+ },
+ "tired": {
+  "w": 644,
+  "h": 1199,
+  "footX": 366,
+  "footY": 1194,
+  "top": 4,
+  "bodyX": 305
+ },
+ "wave": {
+  "w": 487,
+  "h": 1500,
+  "footX": 285,
+  "footY": 1495,
+  "top": 4,
+  "bodyX": 262
+ },
+ "walk0": {
+  "w": 432,
+  "h": 791,
+  "footX": 228,
+  "footY": 786,
+  "top": 4,
+  "bodyX": 202
+ },
+ "walk1": {
+  "w": 308,
+  "h": 795,
+  "footX": 177,
+  "footY": 790,
+  "top": 4,
+  "bodyX": 138
+ },
+ "walk2": {
+  "w": 431,
+  "h": 792,
+  "footX": 234,
+  "footY": 787,
+  "top": 4,
+  "bodyX": 207
+ },
+ "walk3": {
+  "w": 308,
+  "h": 794,
+  "footX": 102,
+  "footY": 789,
+  "top": 4,
+  "bodyX": 130
+ }
+}

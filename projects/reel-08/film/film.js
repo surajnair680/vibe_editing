@@ -218,7 +218,7 @@ const toothPat = ctx.createPattern(tooth, 'repeat');
 // ---------------- camera ----------------
 // keys: [t, cx, cy, z]; eased (in-out cubic) between keys, so the camera always moves
 const KEYS = [
-  [0, 800, 1010, 1.22], [0.95, 800, 1000, .965], [3.3, 790, 1060, .93],
+  [0, 800, 1010, 1.15], [0.95, 800, 1000, .965], [3.3, 790, 1060, .93],
   [4.0, 640, 2500, 1.3], [5.15, 660, 2490, 1.36], [5.6, 1020, 2960, 1.3], [6.35, 1000, 2975, 1.36], [6.8, 610, 3540, 1.3], [7.3, 615, 3560, 1.34], [7.9, 900, 3990, .98], [8.5, 870, 4060, .95], [10.0, 560, 4230, 1.22], [11.05, 590, 4250, 1.26],
   [11.5, 760, 5420, .98], [15.9, 700, 5380, 1.14], [16.12, 640, 5020, 1.42], [17.0, 650, 5030, 1.38],
 ];
@@ -247,38 +247,37 @@ function camera(t) {
   return { cx: cx + sx, cy: cy + sy, z: z * K, rot };
 }
 
-// ---------------- her ----------------
+// ---------------- her (Codex pen-and-wash drawings, cut out by work/cutout.py) ----------------
 const boil = t => Math.floor(t * 12);
-function herA(t) {   // mirror selfie, facing the camera
-  const breathe = .006 * Math.sin(t * 2.2);
-  const p = stand({ headYaw: .12, nod: -.05 });
-  p.hipY = .52 + breathe * .3; p.handR = V(.13, .82, .2); p.elbR = V(1, -.6, .2); p.handL = V(-.13, .5, .02); p.elbL = V(-1, 0, -.4); p.side = .04;
-  return { pose: p, place: { x: A.gx, y: A.gy, S: A.S, yaw: Math.PI } };
+const HM = await (await fetch('her/her.json')).json();
+const IMG = {};
+await Promise.all(Object.keys(HM).flatMap(n => ['', '_ink', '_mask'].map(sfx => new Promise((res, rej) => { const im = new Image(); im.onload = res; im.onerror = rej; im.src = `her/${n}${sfx}.png`; IMG[n + sfx] = im; }))));
+// Draw pose n with her feet on (x, y), h world units tall. ink 0..1 = the pen drawing her (top to bottom), col 0..1 = colour bloom.
+// o.sx / o.sy breathing scale, o.alpha fade, o.arm = { poly, pivot, ang } rotates a cut-out region (the waving forearm).
+function her(n, x, y, h, ink, col, o = {}) {
+  const m = HM[n], s = h / (m.footY - m.top), ax = m.bodyX, W = m.w, H = m.h, A0 = o.alpha ?? 1;
+  ctx.save(); ctx.translate(x, y); ctx.scale(s * (o.sx ?? 1), s * (o.sy ?? 1)); ctx.translate(-ax, -m.footY);
+  const inkClip = c => { c.beginPath(); c.moveTo(-60, -60); const yy = -60 + (H + 220) * ink; for (let i = 0; i <= 24; i++) { const xx = -60 + (W + 120) * i / 24; c.lineTo(xx, yy + (fbm(xx * .01, 3, 7, 2) - .5) * 200); } c.lineTo(W + 60, -60); c.closePath(); };
+  const paint = () => {
+    if (ink <= 0) return;
+    ctx.save(); if (ink < 1) { inkClip(ctx); ctx.clip(); }
+    ctx.globalAlpha = A0; ctx.drawImage(IMG[n + '_mask'], 0, 0);
+    if (col > 0) { ctx.save(); if (col < 1) { noisyCircle(W * .5, H * .42, Math.hypot(W, H) * .62 * col + 1, 11)(ctx); ctx.clip(); } ctx.globalCompositeOperation = 'multiply'; ctx.globalAlpha = A0; ctx.drawImage(IMG[n], 0, 0); ctx.restore(); }
+    ctx.globalAlpha = A0 * (1 - .8 * col); ctx.drawImage(IMG[n + '_ink'], 0, 0);
+    ctx.restore();
+  };
+  const path = poly => { poly.forEach(([px, py], i) => i ? ctx.lineTo(px, py) : ctx.moveTo(px, py)); ctx.closePath(); };
+  if (o.arm) {
+    const { poly, pivot, ang } = o.arm;
+    ctx.save(); ctx.beginPath(); ctx.rect(-80, -80, W + 160, H + 160); path(poly); ctx.clip('evenodd'); paint(); ctx.restore();
+    ctx.save(); ctx.translate(pivot[0], pivot[1]); ctx.rotate(ang); ctx.translate(-pivot[0], -pivot[1]); ctx.beginPath(); path(poly); ctx.clip(); paint(); ctx.restore();
+  } else paint();
+  ctx.restore();
+  return { s, at: (px, py) => [x + (px - ax) * s * (o.sx ?? 1), y + (py - m.footY) * s * (o.sy ?? 1)] };
 }
-function herC(t) {   // bent over, hands on knees, breathing hard (side view, facing left)
-  const br = Math.sin((t - 11) * TAU * 1.45), heavy = 1 - .5 * seg(t, 16.1, 17);
-  return { pose: { hipY: .45 + .004 * br * heavy, hipZ: 0, lean: .78 + .05 * br * heavy, nod: -.55 - .06 * br, side: 0,
-    footL: V(-.06, .03, .06), footR: V(.07, .03, -.1), handL: V(-.06, .3, .2), handR: V(.06, .3, .2), elbL: V(-1, 0, -.2), elbR: V(1, 0, -.2) },
-    place: { x: Cn.gx, y: Cn.gy, S: Cn.S, yaw: -Math.PI / 2 } };
-}
-function herD(t) {   // walking along the seawall (facing right), then stops, turns to camera and waves
-  const x = herX(t), ph = (Math.max(t, WALK0) - WALK0) * Math.PI * 1.4;
-  const k = ss(seg(t, WALK0, WALK0 + .35)) * (1 - ss(seg(t, WALK1 - .3, WALK1 + .1)));
-  let pose = mixPose(stand(), walk(ph), k), yaw = Math.PI / 2;
-  const turn = ss(seg(t, WALK1, WALK1 + .7)); yaw = lerp(Math.PI / 2, Math.PI, turn);
-  if (t > WALK1 + .5) { const w = ss(seg(t, WALK1 + .5, WALK1 + 1.0)) * (1 - ss(seg(t, 31.2, 31.8))); const a = Math.sin((t - WALK1) * 7) * .07, wv = { ...stand({ headYaw: 0, headSide: .04 }), handR: V(.24 + a, .93, .1), elbR: V(1, -.6, .2) }; pose = mixPose(stand({ headYaw: 0 }), wv, w); }
-  if (t > 31.7) pose = mixPose(pose, stand({ nod: .12 * Math.sin(seg(t, 31.9, 32.5) * Math.PI), headSide: -.06 }), ss(seg(t, 31.7, 32.0)));
-  return { pose, place: { x, y: Dn.gy, S: Dn.S, yaw } };
-}
-function inkProgress(prims, t, t0, t1) {
-  const inks = prims.filter(p => p.k === 'ink'), n = inks.length, u = clamp((t - t0) / (t1 - t0)), m = new Map();
-  inks.forEach((p, i) => m.set(p, clamp(u * n - i * .75))); return p => m.get(p) ?? 1;
-}
-function shadow(x, y, S, a) { ctx.save(); ctx.globalCompositeOperation = 'multiply'; ctx.fillStyle = rgba(hex('#8a8070'), a); ctx.beginPath(); ctx.ellipse(x + S * .04, y + S * .004, S * .2, S * .03, 0, 0, TAU); ctx.fill(); ctx.restore(); }
-function phone(prims, S, a = 1) {
-  const h = prims.hand.R, w = S * .05, hh = S * .095, x = h[0] - w * .55, y = h[1] - hh * .8;
-  drawPrims(ctx, [{ k: 'knock', poly: rect(x, y, w, hh) }, { k: 'wash', poly: rect(x, y, w, hh), col: hex('#4a4d57'), a: .7 * a, seed: 3 }, { k: 'ink', st: penStroke(closed(rect(x, y, w, hh)), { w: 2.4, wob: .6, seed: 4, smooth: false }) }], {});
-}
+const ARM = { poly: [[0, 120], [150, 120], [150, 230], [110, 300], [98, 385], [82, 440], [20, 444], [4, 300], [0, 250]], pivot: [52, 446] };
+function shadow(x, y, S, a) { ctx.save(); ctx.globalCompositeOperation = 'multiply'; ctx.fillStyle = rgba(hex('#8a8070'), a); ctx.beginPath(); ctx.ellipse(x + S * .02, y + S * .004, S * .19, S * .028, 0, 0, TAU); ctx.fill(); ctx.restore(); }
+
 
 // ---------------- dynamic bits ----------------
 function weekTracker(t) {
@@ -319,8 +318,8 @@ function dumbbell(t) {   // coral wash on the dumbbell, fading as its ink erases
   for (const d of DUMB) { ctx.save(); ctx.globalAlpha = f * app; wash(ctx, d.poly, C.coral, { a: .7, j: 2.5, layers: 2, edge: .35, seed: 400, dx: 3, dy: 2 }); ctx.restore(); }
   if (t > 8.5) { const R = rng(500 + boil(t)); ctx.save(); ctx.fillStyle = rgba(C.coral, .5 * f); for (let k = 0; k < 14; k++) { const x = 420 + (R() - .5) * 260, y = 4300 - seg(t, 8.5, 9.9) * 140 * R() - 70 * R(); ctx.beginPath(); ctx.arc(x, y, 3 + R() * 4, 0, TAU); ctx.fill(); } ctx.restore(); }
 }
-function breath(t, prims) {   // breath drawn as ink curls from her mouth, 13.6 to 16.6
-  if (t < 13.55 || t > 16.9) return; const h = prims.head, mouth = [h.c[0] - h.r * 1.1, h.c[1] + h.r * .35];
+function breath(t, mouth, h) {   // breath drawn as ink curls from her mouth, 13.6 to 16.6
+  if (t < 13.55 || t > 16.9) return;
   for (let k = 0; k < 6; k++) {
     const tk = 13.6 + k * .5, age = t - tk; if (age < 0 || age > 1.0 || tk > 16.0) continue;
     const pts = []; for (let i = 0; i <= 20; i++) { const u = i / 20; pts.push([mouth[0] - u * 170, mouth[1] + Math.sin(u * 7 + k) * 16 - u * 30]); }
@@ -329,8 +328,8 @@ function breath(t, prims) {   // breath drawn as ink curls from her mouth, 13.6 
   }
   if (t > 14.4 && t < 15.6) { const u = seg(t, 14.4, 15.6); for (let k = 0; k < 3; k++) { ctx.save(); ctx.globalCompositeOperation = 'multiply'; dab(ctx, h.c[0] + 30 + k * 40 + u * 60, h.c[1] - h.r - 20 - u * 80 + u * u * 160 + k * 10, 9, 1.2, C.bottle, .8 * (1 - u), 800 + k); ctx.restore(); } }
 }
-function thought(t, prims) {   // "nothing.": an empty thought bubble pops up
-  const p = eo(seg(t, 16.12, 16.5)); if (p <= 0 || t > 17.4) return; const h = prims.head, cx = h.c[0] + 60, cy = h.c[1] - h.r * 3.3;
+function thought(t, h) {   // "nothing.": an empty thought bubble pops up
+  const p = eo(seg(t, 16.12, 16.5)); if (p <= 0 || t > 17.4) return; const cx = h.c[0] + 60, cy = h.c[1] - h.r * 3.3;
   const bub = ellipse(cx + 80, cy - 70, 150, 100, 24);
   drawPrims(ctx, [{ k: 'knock', poly: bub, a: .95 * p }], {});
   drawPen(ctx, penStroke(closed(bub), { w: 3, wob: 1.2, seed: 901, over: 4 }), p);
@@ -439,24 +438,30 @@ function renderPage(t) {
   notesMargin(t); rain(t); plane(t);
   // her, in the scene the camera is on
   if (cam.cy < 2400) {
-    const h = herA(t), prims = figure(LOOK_HER, h.pose, h.place, { seed: 50, boil: boil(t), lw: .0042 });
     const col = eo(seg(t, .45, 1.25));
-    shadow(h.place.x, h.place.y, h.place.S, .35 * col);
-    drawPrims(ctx, prims, { color: col, ink: inkProgress(prims, t, -.4, .55), clip: col < 1 ? noisyCircle(A.gx, A.gy - A.S * .55, A.S * .9 * col + 1, 5) : null });
-    phone(prims, A.S, col); weekTracker(t); title(t);
+    shadow(A.gx, A.gy, A.S, .3 * col);
+    her('selfie', A.gx, A.gy, A.S, eo(seg(t, -.35, .6)), col, { sy: 1 + .004 * Math.sin(t * 2.2) });
+    weekTracker(t); title(t);
   }
   if (cam.cy > 4700 && cam.cy < 6300 && t > 11.0) {
-    const h = herC(t), prims = figure(LOOK_HER, h.pose, h.place, { seed: 60, boil: boil(t), lw: .0042 });
-    const col = eo(seg(t, 12.3, 13.2));
-    shadow(h.place.x - h.place.S * .1, h.place.y, h.place.S, .35 * col);
-    drawPrims(ctx, prims, { color: col, ink: inkProgress(prims, t, 11.3, 12.3), clip: col < 1 ? noisyCircle(Cn.gx - 150, Cn.gy - Cn.S * .55, Cn.S * .9 * col + 1, 6) : null });
-    breath(t, prims); thought(t, prims);
+    const col = eo(seg(t, 12.3, 13.2)), br = Math.sin((t - 11) * TAU * 1.45) * (1 - .6 * seg(t, 16.1, 17));
+    shadow(Cn.gx + 60, Cn.gy, 1100, .3 * col);
+    const f = her('tired', Cn.gx, Cn.gy, 880, eo(seg(t, 11.3, 12.3)), col, { sy: 1 + .012 * br, sx: 1 - .004 * br });
+    const head = { c: f.at(115, 150), r: 70 * f.s };
+    breath(t, f.at(37, 193), head); thought(t, head);
   }
   if (t > 17.0) {
     gulls(t); checklist(t);
-    const h = herD(t), prims = figure(LOOK_HER, h.pose, h.place, { seed: 70, boil: boil(t), lw: .0042 });
-    shadow(h.place.x, h.place.y, h.place.S, .35);
-    drawPrims(ctx, prims, { color: eo(seg(t, 17.5, 18.2)), ink: inkProgress(prims, t, 17.25, 17.85) });
+    const x = herX(t), H = 770;
+    shadow(x, Dn.gy, H, .3);
+    if (t < WALK1 + .3) {
+      const k = t < WALK0 ? 0 : Math.floor((t - WALK0) / (STEP / 2)) % 4;
+      her('walk' + k, x, Dn.gy, H, eo(seg(t, 17.2, 17.8)), eo(seg(t, 17.5, 18.2)), { alpha: 1 - seg(t, WALK1 + .05, WALK1 + .3) });
+    }
+    if (t >= WALK1) {
+      const w = clamp((t - WALK1 - .6) / .4) * (1 - seg(t, 31.2, 31.7));
+      her('wave', x, Dn.gy, H * 1.02, eo(seg(t, WALK1 - .05, WALK1 + .22)), eo(seg(t, WALK1 + .05, WALK1 + .4)), { sy: 1 + .004 * Math.sin(t * 2.4), arm: { ...ARM, ang: -.13 * Math.sin((t - WALK1) * TAU * 1.5) * w } });
+    }
   }
   // paper tooth over everything
   ctx.save(); ctx.globalCompositeOperation = 'multiply'; ctx.fillStyle = toothPat; ctx.setTransform(tf[0] * .8, tf[1] * .8, tf[2] * .8, tf[3] * .8, tf[4], tf[5]);
