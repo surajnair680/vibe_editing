@@ -286,6 +286,11 @@ Learned on the Lemo-Opuscar setup (2026-11-13):
 - **Container ffmpeg is 6.1; tools wanting 7+ use imageio-ffmpeg's ffmpeg 9** (`~/.local/lemo-bin`, set by
   `tools/lemo.sh`). Browser folder names in `/opt/pw-browsers` change with the image: glob for the newest, never hard-code.
 
+Learned on reel-08 (2026-11-13), a Lemo Urban Sketch test intro:
+- **Main characters in Lemo films are drawn by Codex, not the style engine's code figure** (he found the tube figure
+  "weird"). Character sheet first, then poses with `--ref`; cut-out and draw-on recipe: `projects/reel-08/work/cutout.py`,
+  `her()` in `projects/reel-08/film/film.js`.
+
 Learned on reel-07 (2026-11-11), a meme template caption swap:
 - **Post captions: explain, don't preach.** Approved after two rejected tries ("sounds AI", then "not rant"): two short
   plain paragraphs, what the clip shows, then the fitness point. No emoji, hashtags, CTA or rhetorical lists.
