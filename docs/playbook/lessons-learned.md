@@ -115,6 +115,14 @@ Other docs and when to read them: `docs/README.md`.
   wood and someone to copy, but he's not cutting anything."), line 2 maps it to the fitness problem in one or two
   sentences (no form checks, no progress tracking, no adjusting when you stall, so nothing changes). [r07]
 
+- **People in Lemo animations: never use the urban-sketch engine's tube figure for a main character.** On reel-08 the
+  user said "the human itself looks weird" (pipe arms, baggy hips, blank oval face). Fixed in one round with Codex:
+  a 4-view character sheet first, then each pose with `--ref <sheet>` (mirror selfie, bent over out of breath, a
+  4-frame walk cycle on one sheet, waving); all came out consistent on the first try, about 30 s each. Cut out with
+  `projects/reel-08/work/cutout.py` (colour-to-alpha silhouette for a paper knock, black-hat ink lines so the pen can
+  still draw her before the colour blooms, walk sheet split at column gaps, torso-centre anchor). Drawn by `her()`
+  in `projects/reel-08/film/film.js`; a waving hand = the forearm region rotated a few degrees around the elbow. [r08]
+
 ## 2. Remaking a reference edit shot for shot [r03]
 - **Measure the reference frame by frame.** `select='gt(scene,0.12)'` gives a first cut list; busy parts need sheets of
   every frame (`-ss a -t b`, `drawtext=%{pts}`), because shots can be 1 to 2 frames long (reel-03's reference: about
