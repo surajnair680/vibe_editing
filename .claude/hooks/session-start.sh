@@ -34,6 +34,23 @@ if [ ! -f "$VIBE_CACHE/extras.ok" ]; then
   ' "$VIBE_CACHE" > /tmp/vibe-extras.log 2>&1 &
 fi
 
+# Lemo-Opuscar film style library (skill lemo-opuscar) in the background: clone to ~/lemo-opuscar, core packages.
+# Done when ~/.cache/vibe/lemo.ok exists; log in /tmp/lemo-setup.log.
+if [ ! -f "$VIBE_CACHE/lemo.ok" ]; then
+  LEMO_SETUP="$(cd "$(dirname "$0")/.." && pwd)/skills/lemo-opuscar/scripts/setup.sh"
+  nohup bash -c '
+    set -e
+    BIN=$HOME/.local/lemo-bin; mkdir -p "$BIN"
+    ln -sf "$(python3 -c "import imageio_ffmpeg as i; print(i.get_ffmpeg_exe())")" "$BIN/ffmpeg"
+    ln -sf "$(command -v ffprobe)" "$BIN/ffprobe"
+    export PATH="$BIN:$PATH"
+    cd "$HOME"
+    sh "$0"
+    sh "$0" deps
+    touch "$1/lemo.ok"
+  ' "$LEMO_SETUP" "$VIBE_CACHE" > /tmp/lemo-setup.log 2>&1 &
+fi
+
 # OpenAI Codex CLI in the background (sign-in is per session: codex login --device-auth). Log in /tmp/codex-install.log.
 if ! command -v codex >/dev/null 2>&1; then
   nohup npm install -g @openai/codex > /tmp/codex-install.log 2>&1 &
@@ -42,5 +59,8 @@ echo "Reminder (user rule): in your reply to the user's first message, start the
 
 # Renderer path for HyperFrames
 if [ -n "${CLAUDE_ENV_FILE:-}" ]; then
-  echo 'export HYPERFRAMES_BROWSER_PATH=/opt/pw-browsers/chromium_headless_shell-1194/chrome-linux/headless_shell' >> "$CLAUDE_ENV_FILE"
+  # newest preinstalled headless shell (the folder name changes with the image: -1194/chrome-linux/headless_shell, later
+  # -1243/chrome-headless-shell-linux64/chrome-headless-shell)
+  HF=$(ls -d /opt/pw-browsers/chromium_headless_shell-*/chrome-*/*headless*shell 2>/dev/null | grep -v '\.' | sort -V | tail -1)
+  if [ -n "$HF" ]; then echo "export HYPERFRAMES_BROWSER_PATH=$HF" >> "$CLAUDE_ENV_FILE"; fi
 fi

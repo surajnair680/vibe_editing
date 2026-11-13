@@ -12,7 +12,7 @@ folder and add one line to `docs/README.md`. The two guides are the source of tr
 
 The skills in `.claude/skills/` are the playbooks per video type (`vibe-editing-system` picks the type; `vibe-talking-head`
 for talking-head footage; `vibe-mini-vlog` for mini vlogs / day in my life with the camcorder overlay pack, vertical by
-default). Follow the workflow below for the order of work, and the matching skill for the techniques.
+default; `lemo-opuscar` for animated explainers and short films in one of 99 code-made film styles or the user's own). Follow the workflow below for the order of work, and the matching skill for the techniques.
 
 ## The workflow (every video)
 1. **Workspace:** one project folder per video under `projects/<name>/` (`new_project.py`). Check tools and do a short test render.
@@ -139,8 +139,18 @@ named `<project>-final.mp4`.
   "logged in", so match "Logged in using"). Codes expire after 15 minutes: if it lapses, start a new one. Don't save auth.json as a secret (the token rotates and parallel sessions break it).
   Images: `codex exec --skip-git-repo-check --sandbox workspace-write "Generate an image: ... Save it here as x.png"`
   uses Codex's built-in image generation (files land in `~/.codex/generated_images/`). Example: `codex-images/`.
+- **Lemo-Opuscar film styles (user rule, 2026-11-13):** for an animated explainer or a short film in a named style
+  (watercolor, chalkboard, newsreel, whiteboard, blueprint, pixel RPG... 99 styles, gallery
+  https://lemomo-ai.github.io/lemo-opuscar/), or a style built from the user's colours and logo, load the
+  `lemo-opuscar` skill. The start-up hook clones the library to `~/lemo-opuscar` and installs its core packages
+  (log `/tmp/lemo-setup.log`, done when `~/.cache/vibe/lemo.ok` exists). Run every library command through
+  `sh tools/lemo.sh <cmd>` (ffmpeg 9 instead of the system 6.1, the preinstalled browser, runs from the library root,
+  pass absolute project paths). Vertical 1080x1920 by default (`--size 1080x1920`). The skill's house rules override
+  the library: stills before any render, ElevenLabs voice and Scribe check (never its Kokoro or Whisper), Openverse
+  SFX, projects in `projects/<name>/`, own styles kept in `styles-own/`. The user does not monetise, so copying from
+  the library's CC BY-NC docs is fine.
 - **Rendering with HyperFrames:** `HYPERFRAMES_BROWSER_PATH` is set by the session start hook
-  (`/opt/pw-browsers/chromium_headless_shell-1194/chrome-linux/headless_shell`). CLI: `npx hyperframes@0.8.150`.
+  (the newest `/opt/pw-browsers/chromium_headless_shell-*` headless shell; `-1243` on 2026-11-13). CLI: `npx hyperframes@0.8.150`.
 - **Web/shader renders (`templates/web/render.mjs`):** never run `npx playwright install`. Chromium is preinstalled
   at `/opt/pw-browsers` and Playwright finds it on its own.
 - **Setup:** `.claude/hooks/session-start.sh` installs the Python packages and system libraries each new session
@@ -271,6 +281,10 @@ Learned on the Openverse setup (2026-11-06):
 - **"Do you get what I want?" gets a direct yes and his goal restated, first.** Blockers and plans come after.
 - **Sound design on every edit, real sounds first:** `tools/openverse_sfx.py` (rule above). Freesound and Wikimedia
   block this cloud IP: send him the sound links to download, never fake a browser.
+
+Learned on the Lemo-Opuscar setup (2026-11-13):
+- **Container ffmpeg is 6.1; tools wanting 7+ use imageio-ffmpeg's ffmpeg 9** (`~/.local/lemo-bin`, set by
+  `tools/lemo.sh`). Browser folder names in `/opt/pw-browsers` change with the image: glob for the newest, never hard-code.
 
 Learned on reel-07 (2026-11-11), a meme template caption swap:
 - **Post captions: explain, don't preach.** Approved after two rejected tries ("sounds AI", then "not rant"): two short

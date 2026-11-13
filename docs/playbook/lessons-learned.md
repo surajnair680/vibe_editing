@@ -3,7 +3,7 @@
 Read this whole file before starting any new video, and again before the stills step. Every entry came from a real
 edit and cost a revision, a re-render or a question once. Newest videos at the bottom of each section. Tags say where
 each lesson came from: [r01] reel-01, [r02] reel-02, [r03] reel-03, [vlog] the mini vlog style study (2026-10-30),
-[codex] the Codex CLI setup session (2026-11-01), [r04] reel-04 (cinematic work-session edit, 2026-11-01), [r05] reel-05 (Automance logo intro, 2026-11-04), [openverse] the Openverse sound library setup (2026-11-06), [r06] reel-06 (YouTube Shorts music swap of a finished reel, 2026-11-06), [r07] reel-07 (meme template caption swap, 2026-11-11).
+[codex] the Codex CLI setup session (2026-11-01), [r04] reel-04 (cinematic work-session edit, 2026-11-01), [r05] reel-05 (Automance logo intro, 2026-11-04), [openverse] the Openverse sound library setup (2026-11-06), [r06] reel-06 (YouTube Shorts music swap of a finished reel, 2026-11-06), [r07] reel-07 (meme template caption swap, 2026-11-11), [lemo] the Lemo-Opuscar setup (2026-11-13).
 
 How this file grows: see "Learning loop" in CLAUDE.md. Add to it during every video, not only at the end.
 Other docs and when to read them: `docs/README.md`.
@@ -327,6 +327,17 @@ All in `projects/reel-03/work/build/fx.py` (helpers) and `edit.py` (beats). Dete
   `codex exec` generates images with no API billing (test: `codex-images/manga-laptop.png`, a clean manga panel with
   legible thought-cloud text on the first try). A new session once wrongly said Codex needed an API key because no rule
   existed yet: any tool the user sets up needs a CLAUDE.md rule the same day. [codex]
+- Lemo-Opuscar (2026-11-13): he saw a YouTube short about it and asked to "add it to our setup". It is a Claude Code
+  plugin with 99 code-made film styles (the video said 66; 33 were added on 2026-11-12). He does not monetise, so
+  copying from its CC BY-NC docs is fine. Set up as the `lemo-opuscar` skill (vendored SKILL + setup.sh, house rules on
+  top), `tools/lemo.sh` wrapper and a start-up hook step. Container facts found on the way: the library wants ffmpeg 7+
+  (system is 6.1: `loudnorm` under-reports length and its `mux.sh` rejects the file), and imageio-ffmpeg already ships
+  ffmpeg 9, so the wrapper puts that first on PATH; the global Playwright (1.63) matches the library's playwright-core,
+  so its browser install is a no-op; WebGL is SwiftShader (software), so 3D and shader styles render slowly. Tested: a
+  sparse clone is 33 MB, core packages install in about 5 s, watercolor demo stills render in about 0.1 s each, a 3 s
+  1080x1920 film in 3.5 s. Pages outside the library import `/core/lib.js` fine. Codex is detected as the image
+  generator for the ✦ styles. Also noticed: `HYPERFRAMES_BROWSER_PATH` in the start-up hook points at
+  `chromium_headless_shell-1194`, but the container now has `-1243`. [lemo]
 - Environment checks: curl on auth.openai.com / chatgpt.com returns 403 with `cf-mitigated: challenge` (Cloudflare,
   fine); a real proxy block fails the CONNECT instead (see `curl -sS "$HTTPS_PROXY/__agentproxy/status"`, recent relay
   failures). developers.openai.com is not on the allowed list, so OpenAI docs come only through web search. Codex login
