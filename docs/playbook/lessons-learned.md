@@ -3,7 +3,7 @@
 Read this whole file before starting any new video, and again before the stills step. Every entry came from a real
 edit and cost a revision, a re-render or a question once. Newest videos at the bottom of each section. Tags say where
 each lesson came from: [r01] reel-01, [r02] reel-02, [r03] reel-03, [vlog] the mini vlog style study (2026-10-30),
-[codex] the Codex CLI setup session (2026-11-01), [r04] reel-04 (cinematic work-session edit, 2026-11-01), [r05] reel-05 (Automance logo intro, 2026-11-04), [openverse] the Openverse sound library setup (2026-11-06), [r06] reel-06 (YouTube Shorts music swap of a finished reel, 2026-11-06), [r07] reel-07 (meme template caption swap, 2026-11-11), [lemo] the Lemo-Opuscar setup (2026-11-13).
+[codex] the Codex CLI setup session (2026-11-01), [r04] reel-04 (cinematic work-session edit, 2026-11-01), [r05] reel-05 (Automance logo intro, 2026-11-04), [openverse] the Openverse sound library setup (2026-11-06), [r06] reel-06 (YouTube Shorts music swap of a finished reel, 2026-11-06), [r07] reel-07 (meme template caption swap, 2026-11-11), [lemo] the Lemo-Opuscar setup (2026-11-13), [r08] reel-08 (Comeback Day 1, a test intro as a Lemo Urban Sketch animation, 2026-11-13).
 
 How this file grows: see "Learning loop" in CLAUDE.md. Add to it during every video, not only at the end.
 Other docs and when to read them: `docs/README.md`.
@@ -239,6 +239,9 @@ All in `projects/reel-03/work/build/fx.py` (helpers) and `edit.py` (beats). Dete
 - **Post captions (Instagram text under the reel):** explain, don't preach. Say what the clip shows, then the point in
   plain sentences. No rhetorical triplets, no "tag a friend", no emoji or hashtags unless he asks. See section 1. [r07]
 
+- **Caveat's digit 5 reads as an S** at caption size ("no 5am punishment" read "Sam punishment"). In handwritten fonts,
+  spell small numbers out ("five days a week") or space them ("5 a.m.") and check the line at full size. [r08]
+
 ## 7. Audio
 - Cut audio from WAV decoded from the start, never by seeking an MP4/MP3 (up to 100 ms off). Verify sync by
   cross-correlation against audio decoded from the start. [r02]
@@ -298,6 +301,10 @@ All in `projects/reel-03/work/build/fx.py` (helpers) and `edit.py` (beats). Dete
   passthrough`, no `-shortest`, then count packets against the source (3857 here) before sending. HEVC 2-pass
   3.5 Mbps for 64 s of 1080x1920 at 60 fps = 28.5 MiB, SSIM about 0.986 to the source. [r06]
 - Original reel audio with a commercial song in it stays out of git (`full_src.mp3` ignored). [r06]
+
+- ElevenLabs TTS on this account: `output_format=mp3_44100_192` is refused (403, Creator tier and up); use
+  `mp3_44100_128`. One request for the whole script (voice "Jessica" `cgSgspJ2msm6clMCkdW9`, multilingual v2,
+  stability 0.45, style 0.25) read naturally with good pauses, 75 words in 32.8 s, Scribe matched every word. [r08]
 
 ## 8. Workflow and process
 - Stills first, every time (contact sheet every 2.5 s + full-size changed frames), plus a short low-res draft clip when
@@ -381,6 +388,11 @@ All in `projects/reel-03/work/build/fx.py` (helpers) and `edit.py` (beats). Dete
   about 1.5 min); stills about 0.8 s each. [r05]
 - Before writing the beat sheet, test the riskiest step on the real asset first (here: can the logo be split into
   car, bike, letters?). The split worked in three passes and decided the whole plan. [r05]
+
+- **Lemo Urban Sketch on a tall vertical page (reel-08):** no need for the demo's 5120 px GL world. A 2D canvas page
+  with half-res wash layers per scene (revealed by noisy clip shapes), ink strokes drawn per frame with `drawPen` in
+  stroke order, and the engine's `figure()` rig renders a 1080x1920 still in about 0.15 s and a 540x960 15 fps draft
+  of 36 s in 22 s. Pass `smooth: false` for boxes or `penStroke` rounds them into blobs. Code: `projects/reel-08/film/film.js`. [r08]
 
 ## 9. Delivery and quality
 - File sizes with per-frame grain (1080x1920): reel-03, 22.2 s: crf 14 = 65 MB, crf 20 = 33 MB, crf 22 = 25 MB.
