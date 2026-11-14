@@ -3,7 +3,7 @@
 Read this whole file before starting any new video, and again before the stills step. Every entry came from a real
 edit and cost a revision, a re-render or a question once. Newest videos at the bottom of each section. Tags say where
 each lesson came from: [r01] reel-01, [r02] reel-02, [r03] reel-03, [vlog] the mini vlog style study (2026-10-30),
-[codex] the Codex CLI setup session (2026-11-01), [r04] reel-04 (cinematic work-session edit, 2026-11-01), [r05] reel-05 (Automance logo intro, 2026-11-04), [openverse] the Openverse sound library setup (2026-11-06), [r06] reel-06 (YouTube Shorts music swap of a finished reel, 2026-11-06), [r07] reel-07 (meme template caption swap, 2026-11-11), [lemo] the Lemo-Opuscar setup (2026-11-13), [r08] reel-08 (Comeback Day 1, a test intro as a Lemo Urban Sketch animation, 2026-11-13), [r09] reel-09 (bicep curl "Current vs Correct" form explainer, 2026-11-14).
+[codex] the Codex CLI setup session (2026-11-01), [r04] reel-04 (cinematic work-session edit, 2026-11-01), [r05] reel-05 (Automance logo intro, 2026-11-04), [openverse] the Openverse sound library setup (2026-11-06), [r06] reel-06 (YouTube Shorts music swap of a finished reel, 2026-11-06), [r07] reel-07 (meme template caption swap, 2026-11-11), [lemo] the Lemo-Opuscar setup (2026-11-13), [r08] reel-08 (Comeback Day 1, a test intro as a Lemo Urban Sketch animation, 2026-11-13), [r09] reel-09 (bicep curl "Current vs Correct" form explainer, 2026-11-14), [voxel] the voxel reels setup (2026-11-14).
 
 How this file grows: see "Learning loop" in CLAUDE.md. Add to it during every video, not only at the end.
 Other docs and when to read them: `docs/README.md`.
@@ -441,6 +441,24 @@ All in `projects/reel-03/work/build/fx.py` (helpers) and `edit.py` (beats). Dete
   ellipse) on the grey image, minus 18, over 50, gives clean ink lines for a pen draw-on. [r08]
 - **The library's `video.mjs` encodes drafts big** (36 s at 540x960, 15 fps = 31 MB). Re-encode drafts at crf 28
   (2.4 MB) before sending. [r08]
+
+- **Voxel reels setup (2026-11-14).** He pasted only an artifact link (@heyalok.ai's "Claude 3D cartoon reels" guide);
+  I read it, offered options with "add it to the setup" first, and he chose that. The guide's prompts were in the
+  page's script (the read summary said they were missing): extract the script text when a guide page looks empty.
+  Built as the `voxel-reels` skill with a tested kit instead of copying the 7 prompts. What the test showed: [voxel]
+  - ElevenLabs `/v1/text-to-speech/<voice>/with-timestamps` works through the injected key and returns character
+    timings with the audio: word-timed captions with no Scribe pass. One request per line costs the same (billed per
+    character) and lets one line be redone alone. Word end times can run past the trimmed line: clamp them.
+  - Software WebGL (SwiftShader) is fine for box-built 3D with soft shadows: about 0.25 s a still, 0.2 s a video frame
+    with 3 workers (45 s reel about 5 min). Don't assume 3D is too slow here; measure.
+  - Bugs caught only by looking at the stills: captions empty (a chunk's end read the next chunk's start before it was
+    set), close-ups far too tight (a 0.7 unit push-in on a vertical frame), the CTA box over the face, the mouth lost
+    in a dark beard, captions on the sidekick's face. Fixed values are in the skill's "Framing" section.
+  - Freesound still answers 403 for every whoosh and pop; the kit ships code-made fallback cues
+    (`kit/make_code_sfx.py`) for drafts, and real sounds still need his download.
+  - `/v1/voices` is not reachable, so a second voice ID has to come from him; reel-08's "Jessica" is
+    `cgSgspJ2msm6clMCkdW9`.
+  - The guide's sidekick is Anthropic's Clawd: ask before drawing it.
 
 ## 9. Delivery and quality
 - File sizes with per-frame grain (1080x1920): reel-03, 22.2 s: crf 14 = 65 MB, crf 20 = 33 MB, crf 22 = 25 MB.

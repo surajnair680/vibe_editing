@@ -1,0 +1,40 @@
+/* Voxel reels overlay. Sizes are for 1080x1920; everything scales with --u (1 at 1080 wide). */
+html, body { margin: 0; background: #0b1030; overflow: hidden; }
+body { --u: calc(100vw / 1080); --yellow: #ffd60a; font-family: 'Fredoka', system-ui, sans-serif; }
+#gl, #ui, #confetti { position: absolute; inset: 0; width: 100vw; height: 100vh; }
+#ui { pointer-events: none; }
+
+/* top label chip: below the top 250 px platform zone */
+#chip { position: absolute; top: calc(270 * var(--u)); left: 50%; transform: translateX(-50%); text-align: center; opacity: 0; }
+#chipText { display: inline-block; background: rgba(8, 10, 28, 0.82); color: #fff; font-weight: 700; letter-spacing: 0.04em;
+  font-size: calc(40 * var(--u)); padding: calc(14 * var(--u)) calc(30 * var(--u)); border-radius: calc(18 * var(--u));
+  border: calc(3 * var(--u)) solid rgba(255, 255, 255, 0.12); white-space: nowrap; box-shadow: 0 calc(8 * var(--u)) calc(30 * var(--u)) rgba(0,0,0,.35); }
+#dashes { display: flex; gap: calc(10 * var(--u)); justify-content: center; margin-top: calc(14 * var(--u)); }
+#dashes i { display: block; width: calc(46 * var(--u)); height: calc(9 * var(--u)); border-radius: calc(5 * var(--u)); background: rgba(255,255,255,.22); }
+#dashes i.on { background: var(--yellow); }
+.kw { color: var(--yellow); }
+
+/* captions: lower middle, above the bottom 400 px platform zone */
+#cap { position: absolute; left: 6%; right: 6%; top: calc(1350 * var(--u)); text-align: center; color: #fff; font-weight: 700;
+  font-size: calc(84 * var(--u)); line-height: 1.12; text-shadow: 0 calc(6 * var(--u)) 0 rgba(0,0,0,.55), 0 0 calc(24 * var(--u)) rgba(0,0,0,.45); }
+#cap span { display: inline-block; margin: 0 calc(10 * var(--u)); transform-origin: 50% 80%; }
+
+/* cards: dark rounded panel above the characters */
+#card { position: absolute; left: 50%; top: calc(410 * var(--u)); width: calc(800 * var(--u)); transform: translateX(-50%); opacity: 0;
+  background: rgba(8, 10, 28, 0.86); color: #fff; border-radius: calc(34 * var(--u)); padding: calc(34 * var(--u)) calc(44 * var(--u));
+  border: calc(3 * var(--u)) solid rgba(255,255,255,.12); box-shadow: 0 calc(20 * var(--u)) calc(60 * var(--u)) rgba(0,0,0,.45); font-weight: 600; }
+#card .title { font-size: calc(38 * var(--u)); color: rgba(255,255,255,.65); margin-bottom: calc(16 * var(--u)); font-weight: 600; }
+#card .row { font-size: calc(48 * var(--u)); display: flex; align-items: center; gap: calc(20 * var(--u)); margin: calc(10 * var(--u)) 0; }
+#card .tick { width: calc(52 * var(--u)); height: calc(52 * var(--u)); border-radius: calc(12 * var(--u)); border: calc(4 * var(--u)) solid rgba(255,255,255,.35);
+  display: flex; align-items: center; justify-content: center; font-size: calc(38 * var(--u)); color: #0b1030; flex: none; }
+#card .tick.on { background: var(--yellow); border-color: var(--yellow); }
+#card .big { font-size: calc(150 * var(--u)); font-weight: 700; color: var(--yellow); text-align: center; line-height: 1; }
+#card .sub { font-size: calc(42 * var(--u)); text-align: center; margin-top: calc(10 * var(--u)); }
+#card .type { font-size: calc(50 * var(--u)); white-space: pre-wrap; min-height: 1.2em; }
+#card .type b { display: inline-block; width: 0.5em; height: 1em; background: var(--yellow); vertical-align: -0.12em; margin-left: 0.05em; }
+
+/* ending */
+#cta { position: absolute; left: 0; right: 0; top: calc(300 * var(--u)); text-align: center; opacity: 0; }
+#ctaSmall { color: #fff; font-weight: 700; font-size: calc(60 * var(--u)); text-shadow: 0 calc(5 * var(--u)) 0 rgba(0,0,0,.5); margin-bottom: calc(24 * var(--u)); }
+#ctaBox { display: inline-block; background: var(--yellow); color: #0b1030; font-weight: 700; font-size: calc(150 * var(--u));
+  padding: calc(10 * var(--u)) calc(60 * var(--u)); border-radius: calc(36 * var(--u)); box-shadow: 0 calc(16 * var(--u)) 0 rgba(0,0,0,.35); }
