@@ -22,6 +22,7 @@ If the user hasn't said, show this menu and ask what they want to make (and whet
 | 2 | **Launch videos & ads** | promo reels, product launches, social ads + variants, app demos, product videos | `vibe-launch-ads` |
 | 3 | **Motion graphics** | showreels, explainers, kinetic type, logo reveals, infographics, lower-third packs | `vibe-motion-graphics` |
 | 3b | **Styled explainers & short films (Lemo-Opuscar)** | an idea or story told as an animated film in one of 99 styles (watercolor, chalkboard, newsreel, whiteboard, blueprint, pixel RPG...) or the user's own style | `lemo-opuscar` |
+| 3c | **Voxel 3D dialogue reels** | him as a blocky 3D character plus a sidekick explaining a topic, word-popping captions, step cards, "Comment X" ending | `voxel-reels` |
 | 4 | **Stylised animation** | claymation, crayon, paper-cut, doodle, cartoon mascots, kids' stories | `vibe-stylised-animation` |
 | 5 | **VFX & editing magic** | background swap, text behind you, layers, tracking, cinematic looks, slow-mo | `vibe-vfx` |
 | 6 | **AI footage → films** | Veo/Sora/Kling clips into brand films, faceless channels, AI music videos | `vibe-ai-footage` |

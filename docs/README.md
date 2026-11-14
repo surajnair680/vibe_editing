@@ -25,6 +25,8 @@ one line below. Don't nest deeper than these three folders.
 - `.claude/skills/vibe-mini-vlog/`: the user's own skill for mini vlogs (camcorder overlay pack, reference reel breakdown).
 - `.claude/skills/lemo-opuscar/`: animated explainers and short films in the Lemo-Opuscar library's 99 code-made styles
   (library cloned to `~/lemo-opuscar` each session, run through `tools/lemo.sh`), with this repo's house rules on top.
+- `.claude/skills/voxel-reels/`: blocky 3D cartoon dialogue reels in code (Three.js kit, ElevenLabs voices with word
+  timings, captions, cards, CTA), adapted from @heyalok.ai's guide; renders through the lemo-opuscar tools.
 - `.claude/skills/vibe-wrap-up/`: run at the end of every session (`/vibe-wrap-up`): reviews the session, explains what was
   learned and writes it into `playbook/lessons-learned.md` and `CLAUDE.md` for all future sessions.
 - `projects/<reel>/`: each video's brief, RENDER.md and code. The lessons file points to reusable recipes there.

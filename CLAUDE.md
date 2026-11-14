@@ -12,7 +12,8 @@ folder and add one line to `docs/README.md`. The two guides are the source of tr
 
 The skills in `.claude/skills/` are the playbooks per video type (`vibe-editing-system` picks the type; `vibe-talking-head`
 for talking-head footage; `vibe-mini-vlog` for mini vlogs / day in my life with the camcorder overlay pack, vertical by
-default; `lemo-opuscar` for animated explainers and short films in one of 99 code-made film styles or the user's own). Follow the workflow below for the order of work, and the matching skill for the techniques.
+default; `lemo-opuscar` for animated explainers and short films in one of 99 code-made film styles or the user's own;
+`voxel-reels` for blocky 3D cartoon dialogue reels, him as a voxel character plus a sidekick). Follow the workflow below for the order of work, and the matching skill for the techniques.
 
 ## The workflow (every video)
 1. **Workspace:** one project folder per video under `projects/<name>/` (`new_project.py`). Check tools and do a short test render.
@@ -149,6 +150,11 @@ named `<project>-final.mp4`.
   the library: stills before any render, ElevenLabs voice and Scribe check (never its Kokoro or Whisper), Openverse
   SFX, projects in `projects/<name>/`, own styles kept in `styles-own/`. The user does not monetise, so copying from
   the library's CC BY-NC docs is fine.
+- **Voxel reels (user rule, 2026-11-14):** for a blocky 3D cartoon dialogue reel (him as a box-built character plus a
+  sidekick, word-popping captions, step chip, animated cards, "Comment KEYWORD" ending), load the `voxel-reels` skill.
+  Its kit (`.claude/skills/voxel-reels/kit/`) is Three.js in code, rendered with the lemo-opuscar tools through
+  `tools/lemo.sh`; `voice.py` makes each line with ElevenLabs `/with-timestamps` (word timings included, no Scribe
+  needed for captions) and never pays twice for an unchanged line. About 5 minutes to render a 45 s reel here.
 - **Rendering with HyperFrames:** `HYPERFRAMES_BROWSER_PATH` is set by the session start hook
   (the newest `/opt/pw-browsers/chromium_headless_shell-*` headless shell; `-1243` on 2026-11-13). CLI: `npx hyperframes@0.8.150`.
 - **Web/shader renders (`templates/web/render.mjs`):** never run `npx playwright install`. Chromium is preinstalled
@@ -292,6 +298,12 @@ Learned on reel-08 (2026-11-13), a Lemo Urban Sketch test intro:
   `her()` in `projects/reel-08/film/film.js`.
 - **No footage = offer the ways in at once** (AI stills + voice, placeholders, Lemo animation, plan only), and give
   every brief question a default in brackets: he answered the whole brief with "Urban Sketch, defaults".
+
+Learned on the voxel reels setup (2026-11-14):
+- **A shared tool he asks for gets a real tested kit, not copied prompts:** build it, run it end to end from a fresh
+  copy, look at the stills, fix what's wrong, then write the skill with the numbers that worked.
+- **9:16 3D framing:** frame close-ups by width (head about 45 % of the frame), keep the push-in gentle, and put the
+  CTA line and every card on a wide shot so overlays never cover a face. Values in the voxel-reels skill.
 
 Learned on reel-07 (2026-11-11), a meme template caption swap:
 - **Post captions: explain, don't preach.** Approved after two rejected tries ("sounds AI", then "not rant"): two short
