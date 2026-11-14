@@ -122,6 +122,14 @@ Other docs and when to read them: `docs/README.md`.
   `projects/reel-08/work/cutout.py` (colour-to-alpha silhouette for a paper knock, black-hat ink lines so the pen can
   still draw her before the colour blooms, walk sheet split at column gaps, torso-centre anchor). Drawn by `her()`
   in `projects/reel-08/film/film.js`; a waving hand = the forearm region rotated a few degrees around the elbow. [r08]
+- **Test runs with no footage (reel-08):** he said "This is just for testing. So no footage is present." I offered
+  four ways in one question (AI stills + AI voice, placeholder cards, a Lemo animated explainer, plan only); he chose
+  the animated explainer. When there is no footage, offer these right away instead of a footage list. [r08]
+- **Defaults in brackets get one-word answers.** I listed the brief questions with my default in brackets ("5",
+  "ElevenLabs female voice", "free music", "captions", "9:16 about 38 s"); he answered "Urban Sketch, defaults".
+  Put a sensible default on every question so he can skip them all. [r08]
+- **People on screen must look like real people to him,** even in a sketch style: his only note on round 1 was the
+  figure ("looks wierd"), not the story, captions or camera. [r08]
 
 ## 2. Remaking a reference edit shot for shot [r03]
 - **Measure the reference frame by frame.** `select='gt(scene,0.12)'` gives a first cut list; busy parts need sheets of
@@ -237,6 +245,16 @@ All in `projects/reel-03/work/build/fx.py` (helpers) and `edit.py` (beats). Dete
     letter worked. A wide soft "sheen" on black letters reads as a smudge; a 14 px glint works.
   - Wordmark: letters slam or rise in 0.035 to 0.05 s apart, the red A lands last with a small hit; an orange light
     streak under the word that opens into the tagline (his storyboard idea). [r05]
+- **Lemo Urban Sketch film kit (reel-08, `projects/reel-08/film/film.js`):** colour withheld as story (ink-only
+  flashback strip, one coral dumbbell that lifts off line by line with `drawPen(..., from)` plus coral crumbs on
+  "slowly disappeared", colour blooming back on "starting again"); a sticky-note week tracker ticked on the words
+  "five days a week" then scribbled out on "then life happened"; breath drawn as ink curls; an empty thought bubble
+  on "nothing." with a 0.4 s punch-in shake; a checklist written in the sky (ticks, coral strike-throughs) on the
+  spoken words; a page turn to a blank "Day 2" page as the series ending. Camera = eased keyframes for designed moves
+  and a pre-simulated spring (240 Hz) for the follow. [r08]
+- **Colour arriving around a moving subject:** a colour front that trails just ahead of her left big white "holes"
+  on screen. Sweep the colour across the whole view in about 2 s and keep it ahead of the camera. Text written in
+  world space next to a walker must be placed ahead of her (about +330 px), or it scrolls off half written. [r08]
 
 ## 6. Text and captions
 - Captions sit on a handheld mic at about 1440 px; ask about caption height at the stills step when he holds a mic. [r01][r02]
@@ -401,6 +419,14 @@ All in `projects/reel-03/work/build/fx.py` (helpers) and `edit.py` (beats). Dete
   with half-res wash layers per scene (revealed by noisy clip shapes), ink strokes drawn per frame with `drawPen` in
   stroke order, and the engine's `figure()` rig renders a 1080x1920 still in about 0.15 s and a 540x960 15 fps draft
   of 36 s in 22 s. Pass `smooth: false` for boxes or `penStroke` rounds them into blobs. Code: `projects/reel-08/film/film.js`. [r08]
+- **Codex for characters, speed and quality (reel-08):** a 4-view character sheet (16:9) took about 60 s, each pose
+  with `--ref <sheet>` about 30 s, through `sh tools/lemo.sh .venv/bin/python core/image/gen_image.py "<prompt>"
+  --aspect 2:3 --ref <sheet> --out <proj>/gen --name <pose>`. Ask for "plain white paper background, nothing else
+  drawn, no cast shadow, full body" so the cut-out is clean. A 4-frame walk cycle in one image stays consistent;
+  the gaps between frames can be only 15 px, so split on column gaps with a tiny merge threshold. Black-hat (9 px
+  ellipse) on the grey image, minus 18, over 50, gives clean ink lines for a pen draw-on. [r08]
+- **The library's `video.mjs` encodes drafts big** (36 s at 540x960, 15 fps = 31 MB). Re-encode drafts at crf 28
+  (2.4 MB) before sending. [r08]
 
 ## 9. Delivery and quality
 - File sizes with per-frame grain (1080x1920): reel-03, 22.2 s: crf 14 = 65 MB, crf 20 = 33 MB, crf 22 = 25 MB.
@@ -451,3 +477,8 @@ All in `projects/reel-03/work/build/fx.py` (helpers) and `edit.py` (beats). Dete
   wrong capitalisation returned nothing, so `cherry-pick` got no commit: take the hash from `git log --oneline`.
   Scribe on a music-only clip returns 0 words (costs a few credits): check for speech by ear-level loudness and
   frames first when the clip is a meme. [r07]
+- reel-08: used an array (`NOTES`) in a scene block before its `var` declaration (hoisted as undefined, page error);
+  declare shared lists at the top. `still.mjs` names explicit times `t_20.jpg` but `--range` names them `t_20.00.jpg`,
+  so re-rendering a few times into the grid folder doubled tiles in the contact sheet: render fixes with `--range`
+  names or into a fresh folder. The first seawall reveal and the first punch-in (bubble cropped) were caught at the
+  stills check, before the user saw them. [r08]
