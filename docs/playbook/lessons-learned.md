@@ -3,7 +3,7 @@
 Read this whole file before starting any new video, and again before the stills step. Every entry came from a real
 edit and cost a revision, a re-render or a question once. Newest videos at the bottom of each section. Tags say where
 each lesson came from: [r01] reel-01, [r02] reel-02, [r03] reel-03, [vlog] the mini vlog style study (2026-10-30),
-[codex] the Codex CLI setup session (2026-11-01), [r04] reel-04 (cinematic work-session edit, 2026-11-01), [r05] reel-05 (Automance logo intro, 2026-11-04), [openverse] the Openverse sound library setup (2026-11-06), [r06] reel-06 (YouTube Shorts music swap of a finished reel, 2026-11-06), [r07] reel-07 (meme template caption swap, 2026-11-11), [lemo] the Lemo-Opuscar setup (2026-11-13), [r08] reel-08 (Comeback Day 1, a test intro as a Lemo Urban Sketch animation, 2026-11-13).
+[codex] the Codex CLI setup session (2026-11-01), [r04] reel-04 (cinematic work-session edit, 2026-11-01), [r05] reel-05 (Automance logo intro, 2026-11-04), [openverse] the Openverse sound library setup (2026-11-06), [r06] reel-06 (YouTube Shorts music swap of a finished reel, 2026-11-06), [r07] reel-07 (meme template caption swap, 2026-11-11), [lemo] the Lemo-Opuscar setup (2026-11-13), [r08] reel-08 (Comeback Day 1, a test intro as a Lemo Urban Sketch animation, 2026-11-13), [r09] reel-09 (bicep curl "Current vs Correct" form explainer, 2026-11-14), [voxel] the voxel reels setup (2026-11-14).
 
 How this file grows: see "Learning loop" in CLAUDE.md. Add to it during every video, not only at the end.
 Other docs and when to read them: `docs/README.md`.
@@ -131,6 +131,11 @@ Other docs and when to read them: `docs/README.md`.
 - **People on screen must look like real people to him,** even in a sketch style: his only note on round 1 was the
   figure ("looks wierd"), not the story, captions or camera. [r08]
 
+- **Form explainers for Telegram (reel-09):** he makes short "Current vs Correct" exercise clips (red vs green,
+  15 s, 9:16) for clients who watch muted. He said **no sound effects** on this one: the house sound design rule
+  gives way when he says so. He sends a full written brief (scenes with times, text, rules) and asks "first tell me
+  what you understand": restate it, flag clashes, give defaults in brackets. [r09]
+
 ## 2. Remaking a reference edit shot for shot [r03]
 - **Measure the reference frame by frame.** `select='gt(scene,0.12)'` gives a first cut list; busy parts need sheets of
   every frame (`-ss a -t b`, `drawtext=%{pts}`), because shots can be 1 to 2 frames long (reel-03's reference: about
@@ -255,6 +260,15 @@ All in `projects/reel-03/work/build/fx.py` (helpers) and `edit.py` (beats). Dete
 - **Colour arriving around a moving subject:** a colour front that trails just ahead of her left big white "holes"
   on screen. Sweep the colour across the whole view in about 2 s and keep it ahead of the camera. Text written in
   world space next to a walker must be placed ahead of her (about +330 px), or it scrolls off half written. [r08]
+
+- **Exercise figure in code (reel-09):** a small 3D rig (torso from cross sections, tapered limbs, ellipsoid head)
+  projected orthographically and drawn flat with skia-python (preinstalled; pycairo is not). 0.04 s per 1080x1920
+  frame, so a 15 s video renders in about 20 s. **A pure side view hides the elbow-to-ribs gap** (it points at the
+  camera): use a front three-quarter view (55 deg) and curl with the far arm, so the arm sits outside the body
+  outline and the gap shows as clear space; slim the waist (V-taper) so the gap reads. Pinned elbow = upper arm
+  pulled in onto the ribs, shoulder raised with a trap line, hitchy 3-step lift + tremor, red glow and ring on the
+  contact spot; free elbow = cosine 2 s up / 2 s down, elbow drifts 6 deg forward, dashed green dumbbell arc.
+  Code: `projects/reel-09/work/fig.py`, `scene.py`. [r09]
 
 ## 6. Text and captions
 - Captions sit on a handheld mic at about 1440 px; ask about caption height at the stills step when he holds a mic. [r01][r02]
@@ -427,6 +441,24 @@ All in `projects/reel-03/work/build/fx.py` (helpers) and `edit.py` (beats). Dete
   ellipse) on the grey image, minus 18, over 50, gives clean ink lines for a pen draw-on. [r08]
 - **The library's `video.mjs` encodes drafts big** (36 s at 540x960, 15 fps = 31 MB). Re-encode drafts at crf 28
   (2.4 MB) before sending. [r08]
+
+- **Voxel reels setup (2026-11-14).** He pasted only an artifact link (@heyalok.ai's "Claude 3D cartoon reels" guide);
+  I read it, offered options with "add it to the setup" first, and he chose that. The guide's prompts were in the
+  page's script (the read summary said they were missing): extract the script text when a guide page looks empty.
+  Built as the `voxel-reels` skill with a tested kit instead of copying the 7 prompts. What the test showed: [voxel]
+  - ElevenLabs `/v1/text-to-speech/<voice>/with-timestamps` works through the injected key and returns character
+    timings with the audio: word-timed captions with no Scribe pass. One request per line costs the same (billed per
+    character) and lets one line be redone alone. Word end times can run past the trimmed line: clamp them.
+  - Software WebGL (SwiftShader) is fine for box-built 3D with soft shadows: about 0.25 s a still, 0.2 s a video frame
+    with 3 workers (45 s reel about 5 min). Don't assume 3D is too slow here; measure.
+  - Bugs caught only by looking at the stills: captions empty (a chunk's end read the next chunk's start before it was
+    set), close-ups far too tight (a 0.7 unit push-in on a vertical frame), the CTA box over the face, the mouth lost
+    in a dark beard, captions on the sidekick's face. Fixed values are in the skill's "Framing" section.
+  - Freesound still answers 403 for every whoosh and pop; the kit ships code-made fallback cues
+    (`kit/make_code_sfx.py`) for drafts, and real sounds still need his download.
+  - `/v1/voices` is not reachable, so a second voice ID has to come from him; reel-08's "Jessica" is
+    `cgSgspJ2msm6clMCkdW9`.
+  - The guide's sidekick is Anthropic's Clawd: ask before drawing it.
 
 ## 9. Delivery and quality
 - File sizes with per-frame grain (1080x1920): reel-03, 22.2 s: crf 14 = 65 MB, crf 20 = 33 MB, crf 22 = 25 MB.

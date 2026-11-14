@@ -1,0 +1,32 @@
+{
+ "fps": 30, "gap": 0.14, "lead": 0.35, "tail": 1.6,
+ "voices": {
+  "ME":       {"voice_id": "cgSgspJ2msm6clMCkdW9", "model": "eleven_multilingual_v2", "settings": {"stability": 0.45, "similarity_boost": 0.8, "style": 0.25}},
+  "SIDEKICK": {"voice_id": "PICK_A_SECOND_VOICE", "model": "eleven_multilingual_v2", "settings": {"stability": 0.3, "similarity_boost": 0.8, "style": 0.5}}
+ },
+ "characters": {
+  "ME":       {"kind": "human", "skin": "#d9a07a", "hair": "#1d130e", "shirt": "#ff6b35", "pants": "#232a3d", "shoes": "#f2f2f2", "hairStyle": "short", "beard": true},
+  "SIDEKICK": {"kind": "buddy", "body": "#2ec4b6", "face": "#0f1a2a", "accent": "#ffd60a", "antenna": true}
+ },
+ "look": {"sky": "#0b1030", "grid": "#5a6cff", "rim": "#9b6bff"},
+ "keywords": ["sleep", "protein", "PLAN"],
+ "lines": [
+  {"id": 1, "who": "ME", "text": "I trained for ten years and stayed skinny."},
+  {"id": 2, "who": "SIDEKICK", "text": "Because you skipped the boring parts.", "mood": "serious"},
+  {"id": 3, "who": "SIDEKICK", "text": "Step one: sleep eight hours.", "step": true, "chip": "STEP 1 · *SLEEP*", "mood": "happy",
+   "card": {"type": "list", "title": "Recovery", "items": [{"text": "Sleep *8 hours*", "at": "sleep"}, {"text": "Same bedtime", "at": "eight"}]}},
+  {"id": 4, "who": "SIDEKICK", "text": "Step two: protein at every meal.", "step": true, "chip": "STEP 2 · *PROTEIN*",
+   "card": {"type": "count", "from": 0, "to": 140, "suffix": " g", "sub": "protein a day", "at": "protein"}},
+  {"id": 5, "who": "ME", "text": "Comment PLAN and I'll send you the full guide.", "clear": true}
+ ],
+ "cta": {"small": "Comment", "kw": "PLAN"},
+ "sfx": {
+  "cut":   {"files": ["assets/sfx/code/whoosh.wav", "assets/sfx/code/whoosh2.wav"], "gain": -14, "peak": 0.16},
+  "pop":   {"file": "assets/sfx/code/pop.wav", "gain": -12},
+  "tick":  {"file": "assets/sfx/code/tick.wav", "gain": -10},
+  "count": {"file": "assets/sfx/code/tick.wav", "gain": -14},
+  "type":  {"file": "assets/sfx/code/type.wav", "gain": -16},
+  "chime": {"file": "assets/sfx/code/chime.wav", "gain": -12}
+ },
+ "music": null
+}
