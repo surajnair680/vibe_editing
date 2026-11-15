@@ -155,6 +155,13 @@ Other docs and when to read them: `docs/README.md`.
   word on the hook; slow hold; a fast flurry of 1 to 4 frame flashes with colour shifts and glitch; glowing silhouettes;
   pixelated face; warm framed film shots with soft edges; big coloured punch word; black close with tiny words.
 
+- **Copying one animation (a title, card, caption pop, logo move) from a reference: use the `reanimate` skill**
+  [reanimate setup, 2026-11-15]. It measures instead of eyeballing: colour tracking (`vibe/track_color.py`) +
+  `easing.ts` named the hidden curve (easeOutBack, about 470 ms) of a test title, and three compare rounds took the clone
+  from 5.9 % mismatch to 0.6 %. Compare with `--offset 0` (auto-align locked onto the wrong frame and hid a 0.33 s
+  error), and watch `animation-fill-mode: both`, which shows the element before its delay. Example and numbers in the
+  skill's `vibe/example/` and "Vibe editing house rules".
+
 ## 3. Footage handling
 - **Google Flow watermark**: small sparkle at about (0.93, 0.93) of the frame. A punch-in (zoom >= 1.15) hides it. [r03]
 - Horizontal clips in a 9:16 edit: crop (fine from 4K, soft but OK from 1080p under grain), frame in the middle with
