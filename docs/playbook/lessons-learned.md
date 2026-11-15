@@ -3,7 +3,7 @@
 Read this whole file before starting any new video, and again before the stills step. Every entry came from a real
 edit and cost a revision, a re-render or a question once. Newest videos at the bottom of each section. Tags say where
 each lesson came from: [r01] reel-01, [r02] reel-02, [r03] reel-03, [vlog] the mini vlog style study (2026-10-30),
-[codex] the Codex CLI setup session (2026-11-01), [r04] reel-04 (cinematic work-session edit, 2026-11-01), [r05] reel-05 (Automance logo intro, 2026-11-04), [openverse] the Openverse sound library setup (2026-11-06), [r06] reel-06 (YouTube Shorts music swap of a finished reel, 2026-11-06), [r07] reel-07 (meme template caption swap, 2026-11-11), [lemo] the Lemo-Opuscar setup (2026-11-13), [r08] reel-08 (Comeback Day 1, a test intro as a Lemo Urban Sketch animation, 2026-11-13), [r09] reel-09 (bicep curl "Current vs Correct" form explainer, 2026-11-14), [voxel] the voxel reels setup (2026-11-14).
+[codex] the Codex CLI setup session (2026-11-01), [r04] reel-04 (cinematic work-session edit, 2026-11-01), [r05] reel-05 (Automance logo intro, 2026-11-04), [openverse] the Openverse sound library setup (2026-11-06), [r06] reel-06 (YouTube Shorts music swap of a finished reel, 2026-11-06), [r07] reel-07 (meme template caption swap, 2026-11-11), [lemo] the Lemo-Opuscar setup (2026-11-13), [r08] reel-08 (Comeback Day 1, a test intro as a Lemo Urban Sketch animation, 2026-11-13), [r09] reel-09 (bicep curl "Current vs Correct" form explainer, 2026-11-14), [voxel] the voxel reels setup (2026-11-14), [reanimate] the reanimate skill setup (2026-11-15).
 
 How this file grows: see "Learning loop" in CLAUDE.md. Add to it during every video, not only at the end.
 Other docs and when to read them: `docs/README.md`.
@@ -467,6 +467,20 @@ All in `projects/reel-03/work/build/fx.py` (helpers) and `edit.py` (beats). Dete
     `cgSgspJ2msm6clMCkdW9`.
   - The guide's sidekick is Anthropic's Clawd: ask before drawing it.
 
+- **A bare link with no instruction (a GitHub repo, a tool) = read it, say in plain words what it does and what it would
+  do for his reels, then offer numbered options** (add as a shared skill / use it now on a clip / just your opinion).
+  He answered "Add it as a shared skill" in one line. [reanimate]
+- **Importing an outside Claude skill:** copy only its skill folder into `.claude/skills/<name>/` with its LICENSE,
+  keep the upstream text, put a "Vibe editing house rules" section at the top (what overrides what, where work goes,
+  the tested numbers), patch the code as little as possible and mark each patch in a comment, gitignore its
+  `node_modules/`, install it from the start-up hook in the background with an `.ok` file, add a video-specific test
+  example inside the skill, then rerun setup and the example from a fresh copy before pushing. Recipe:
+  `.claude/skills/reanimate/` (setup.sh, lib.ts `chromiumExecutable()`, vibe/). [reanimate]
+- **Tools that pin their own Playwright** (reanimate wants 1.64.1; the container has 1.63 and Chromium build 1243)
+  fail with "Executable doesn't exist". Pass `executablePath: "/opt/pw-browsers/chromium"` (a symlink to the newest
+  build) instead of downloading a browser. Bun 1.4 is preinstalled; npm packages that download binaries from GitHub
+  releases (ffmpeg-static) install fine through the proxy. [reanimate]
+
 ## 9. Delivery and quality
 - File sizes with per-frame grain (1080x1920): reel-03, 22.2 s: crf 14 = 65 MB, crf 20 = 33 MB, crf 22 = 25 MB.
   reel-02 paper grain, 45 s: crf 18 = 435 MB, crf 25 = 57 MB. Grain is the size driver. [r02][r03]
@@ -521,3 +535,8 @@ All in `projects/reel-03/work/build/fx.py` (helpers) and `edit.py` (beats). Dete
   so re-rendering a few times into the grid folder doubled tiles in the contact sheet: render fixes with `--range`
   names or into a fresh folder. The first seawall reveal and the first punch-in (bubble cropped) were caught at the
   stills check, before the user saw them. [r08]
+- reanimate setup: patched `setup.sh` with Python `s.replace(old, new)` where `old` came out as an empty string, which
+  inserts `new` between every character and wrecked the file. For small files, rewrite the whole file with a heredoc;
+  when replacing in Python, `assert old in s and old` first. A frame comparison's auto-align also hid a 0.33 s timing
+  error by shifting the clone 15 frames: when both sides start at t = 0, compare with a fixed offset and always read
+  the offset the report prints. [reanimate]

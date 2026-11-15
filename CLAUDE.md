@@ -312,6 +312,11 @@ Learned on the voxel reels setup (2026-11-14):
 - **9:16 3D framing:** frame close-ups by width (head about 45 % of the frame), keep the push-in gentle, and put the
   CTA line and every card on a wide shot so overlays never cover a face. Values in the voxel-reels skill.
 
+Learned on the reanimate setup (2026-11-15):
+- **Outside skills get imported, not rewritten:** skill folder + LICENSE, a "Vibe editing house rules" section on top,
+  minimal marked patches, start-up hook install, a tested reel example, a fresh-copy rerun. Recipe: `.claude/skills/reanimate/`.
+- **Tools that bring their own Playwright** must launch with `executablePath: "/opt/pw-browsers/chromium"`; never download a browser.
+
 Learned on reel-07 (2026-11-11), a meme template caption swap:
 - **Post captions: explain, don't preach.** Approved after two rejected tries ("sounds AI", then "not rant"): two short
   plain paragraphs, what the clip shows, then the fitness point. No emoji, hashtags, CTA or rhetorical lists.
