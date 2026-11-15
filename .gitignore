@@ -10,3 +10,6 @@ projects/*/work/**/*.mov
 projects/*/work/**/*.wav
 projects/*/work/matte/
 projects/*/refs/*.mp4
+
+# reanimate skill: installed by its setup.sh each session (static ffmpeg is 80 MB)
+.claude/skills/reanimate/scripts/node_modules/

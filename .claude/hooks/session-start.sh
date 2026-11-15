@@ -51,6 +51,13 @@ if [ ! -f "$VIBE_CACHE/lemo.ok" ]; then
   ' "$LEMO_SETUP" "$VIBE_CACHE" > /tmp/lemo-setup.log 2>&1 &
 fi
 
+# reanimate skill (clone an animation from a reel or a site and measure it): bun packages + static ffmpeg, in the
+# background. Uses the preinstalled Chromium. Done when ~/.cache/vibe/reanimate.ok exists; log /tmp/reanimate-setup.log.
+if [ ! -f "$VIBE_CACHE/reanimate.ok" ] && command -v bun >/dev/null 2>&1; then
+  RE_SETUP="$(cd "$(dirname "$0")/.." && pwd)/skills/reanimate/scripts/setup.sh"
+  nohup bash -c 'bash "$0" && touch "$1/reanimate.ok"' "$RE_SETUP" "$VIBE_CACHE" > /tmp/reanimate-setup.log 2>&1 &
+fi
+
 # OpenAI Codex CLI in the background (sign-in is per session: codex login --device-auth). Log in /tmp/codex-install.log.
 if ! command -v codex >/dev/null 2>&1; then
   nohup npm install -g @openai/codex > /tmp/codex-install.log 2>&1 &
