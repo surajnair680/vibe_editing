@@ -28,7 +28,7 @@ GRAIN = float(os.environ.get("GRAIN", "0.06"))
 # (file, source start, crop x0, y0, x1, y1 in the decoded frame, or None = cover the target)
 SEG_A = ("raw/c_part2.mp4", 4.25 - 0.0, (0, 560, 1080, 1115))       # close pull-up, back band
 SEG_B = ("raw/d_part1.mp4", 9.85, (0, 0, 1920, 988))                # front flex (horizontal clip)
-SEG_C = ("raw/c_part3.mp4", 2.30, None)                             # full-screen close pull-up
+SEG_C = ("raw/c_part3.mp4", 3.33, None)                             # full-screen close pull-up
 
 
 def read_frames(path, start, dur):
