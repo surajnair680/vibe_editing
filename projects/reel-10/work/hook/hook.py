@@ -22,7 +22,7 @@ BOX = (120, 729, 890, 1125)            # x0, y0, x1, y1 (reference layout scaled
 BEAT = 60 / 107.66
 # flash band hits during the pose, on the beats before the drop (first 0.56 s of the pose stays clean)
 FLASH_BEATS = [DROP - 3 * BEAT, DROP - 2 * BEAT, DROP - BEAT]
-FLASH = os.environ.get("FLASH", "sweep")   # "sweep" (diagonal light band) or "strobe" (horizontal bands)
+FLASH = os.environ.get("FLASH", "strobe")   # "sweep" (diagonal light band) or "strobe" (horizontal bands)
 GRAIN = float(os.environ.get("GRAIN", "0.06"))
 
 # (file, source start, crop x0, y0, x1, y1 in the decoded frame, or None = cover the target)
