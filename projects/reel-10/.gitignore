@@ -1,0 +1,16 @@
+# Vibe Editing: keep heavy media out of git (work/ scripts and paid .mp3 audio ARE committed)
+raw/
+out/
+work/**/*.wav
+work/**/*.mp4
+work/**/*.png
+work/**/*.jpg
+*.mp4
+*.mov
+*.wav
+*.npy
+*.npz
+*.onnx
+__pycache__/
+.DS_Store
+!out/stills/*.png
