@@ -3,7 +3,7 @@
 Read this whole file before starting any new video, and again before the stills step. Every entry came from a real
 edit and cost a revision, a re-render or a question once. Newest videos at the bottom of each section. Tags say where
 each lesson came from: [r01] reel-01, [r02] reel-02, [r03] reel-03, [vlog] the mini vlog style study (2026-10-30),
-[codex] the Codex CLI setup session (2026-11-01), [r04] reel-04 (cinematic work-session edit, 2026-11-01), [r05] reel-05 (Automance logo intro, 2026-11-04), [openverse] the Openverse sound library setup (2026-11-06), [r06] reel-06 (YouTube Shorts music swap of a finished reel, 2026-11-06), [r07] reel-07 (meme template caption swap, 2026-11-11), [lemo] the Lemo-Opuscar setup (2026-11-13), [r08] reel-08 (Comeback Day 1, a test intro as a Lemo Urban Sketch animation, 2026-11-13), [r09] reel-09 (bicep curl "Current vs Correct" form explainer, 2026-11-14), [voxel] the voxel reels setup (2026-11-14), [reanimate] the reanimate skill setup (2026-11-15).
+[codex] the Codex CLI setup session (2026-11-01), [r04] reel-04 (cinematic work-session edit, 2026-11-01), [r05] reel-05 (Automance logo intro, 2026-11-04), [openverse] the Openverse sound library setup (2026-11-06), [r06] reel-06 (YouTube Shorts music swap of a finished reel, 2026-11-06), [r07] reel-07 (meme template caption swap, 2026-11-11), [lemo] the Lemo-Opuscar setup (2026-11-13), [r08] reel-08 (Comeback Day 1, a test intro as a Lemo Urban Sketch animation, 2026-11-13), [r09] reel-09 (bicep curl "Current vs Correct" form explainer, 2026-11-14), [voxel] the voxel reels setup (2026-11-14), [reanimate] the reanimate skill setup (2026-11-15), [r10] reel-10 (home pull-up and ring dip reel, 2026-11-16).
 
 How this file grows: see "Learning loop" in CLAUDE.md. Add to it during every video, not only at the end.
 Other docs and when to read them: `docs/README.md`.
@@ -135,6 +135,23 @@ Other docs and when to read them: `docs/README.md`.
   15 s, 9:16) for clients who watch muted. He said **no sound effects** on this one: the house sound design rule
   gives way when he says so. He sends a full written brief (scenes with times, text, rules) and asks "first tell me
   what you understand": restate it, flag clashes, give defaults in brackets. [r09]
+
+- **Home workout reel (reel-10):** he sends many phone clips split in parts (5 recordings, 21 parts, about 4 min) with
+  no message: report each part in a few lines (what happens, best moments, problems like the waistband brand) and
+  keep a running table. Then he answers in pieces: a reference reel for the hook, his own song, a look note.
+- **Boxed visual hook (reel-10):** he liked a reference with a red scribble line-art head on black and the clip in a
+  wide box in the middle, but "only for the visual hook, rest of the edit normal ratio". He chose a **generic head
+  like the reference** (over his own silhouette) and no hook text. Built: Codex silhouette + code scribble lines
+  (random walks steered back inside the shape, 170 strokes, mostly 1 px, 3 boil variants every 0.5 s), box at the
+  reference's place (x 120 to 890, y 729 to 1125 at 1080x1920), song cued so the drop breaks the box out to full
+  screen in 0.3 s. Code: `projects/reel-10/work/hook/` (`scribble.py`, `hook.py`). [r10]
+- **He wants grain on his footage** ("raw and authentic"): picked **medium** from a full-size none / light / medium /
+  heavy comparison (strength 0.06, grain size 1.6 px, midtone weighted, 16-field bank). `projects/reel-10/work/look.py`. [r10]
+- **"Flash band while posing":** shown two versions on the beats of the pose, he picked **strobe** (3 to 5 bright
+  horizontal bands flickering on frames 0, 2, 3 of each hit, slight exposure lift) over a diagonal light sweep. Keep
+  the first half second of a pose clean. `flash_band()` in `projects/reel-10/work/hook/hook.py`. [r10]
+- **He supplies commercial songs** (The Box guitar remix): fine to use, keep out of git, map it (intro, build, drop)
+  and cue the song so its drop lands on the edit's big moment. [r10]
 
 ## 2. Remaking a reference edit shot for shot [r03]
 - **Measure the reference frame by frame.** `select='gt(scene,0.12)'` gives a first cut list; busy parts need sheets of
