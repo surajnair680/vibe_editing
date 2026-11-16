@@ -19,6 +19,11 @@ CUT = DROP - BAR                       # 2.22: pull-up -> flex inside the box
 BREAK = 0.30                           # box -> full frame, seconds
 END = DROP + 1.2                       # test length
 BOX = (120, 729, 890, 1125)            # x0, y0, x1, y1 (reference layout scaled to 1080)
+BEAT = 60 / 107.66
+# flash band hits during the pose, on the beats before the drop (first 0.56 s of the pose stays clean)
+FLASH_BEATS = [DROP - 3 * BEAT, DROP - 2 * BEAT, DROP - BEAT]
+FLASH = os.environ.get("FLASH", "sweep")   # "sweep" (diagonal light band) or "strobe" (horizontal bands)
+GRAIN = float(os.environ.get("GRAIN", "0.06"))
 
 # (file, source start, crop x0, y0, x1, y1 in the decoded frame, or None = cover the target)
 SEG_A = ("raw/c_part2.mp4", 4.25 - 0.0, (0, 560, 1080, 1115))       # close pull-up, back band
@@ -52,6 +57,41 @@ def cover(img, tw, th):
     return r[y0:y0 + th, x0:x0 + tw]
 
 
+def flash_band(img, t):
+    """Flash band on the pose: on each beat in FLASH_BEATS.
+    sweep: a warm white diagonal band crosses the box in 0.26 s, with a quick exposure pop.
+    strobe: 3 to 5 bright horizontal bands flicker for 4 frames (on, off, on, fade)."""
+    hit = [b for b in FLASH_BEATS if 0 <= t - b < 0.4]
+    if not hit:
+        return img
+    dt = t - hit[0]
+    h, w = img.shape[:2]
+    f = img.astype(np.float32) / 255.0
+    warm = np.float32([0.86, 0.95, 1.0])            # BGR, slightly warm white
+    if FLASH == "sweep":
+        pop = 0.30 * np.exp(-dt / 0.07)              # photo-flash exposure pop
+        f = f * (1 + pop) + pop * 0.25
+        k = dt / 0.26
+        if k <= 1.15:
+            yy, xx = np.mgrid[0:h, 0:w].astype(np.float32)
+            u = xx + (yy - h / 2) * np.tan(np.radians(22))     # distance across a tilted band
+            c = -160 + (w + 320) * k
+            band = np.exp(-((u - c) / 70.0) ** 2) * 0.85 + np.exp(-((u - c) / 22.0) ** 2) * 0.6
+            f = f + band[..., None] * warm
+    else:
+        n = int(dt * FPS)
+        if n in (0, 2, 3):
+            rng = np.random.default_rng(int(hit[0] * 1000) + (n > 1))
+            m = np.zeros((h, 1), np.float32)
+            for _ in range(int(rng.integers(3, 6))):
+                y = int(rng.integers(0, h)); bh = int(rng.integers(14, 70))
+                m[max(0, y - bh // 2): y + bh // 2] = rng.uniform(0.55, 1.0)
+            m = cv2.GaussianBlur(m, (1, 0), sigmaX=0.1, sigmaY=4)
+            a = 1.0 if n != 3 else 0.45
+            f = f * (1 + 0.22 * a) + m[..., None] * warm * a
+    return np.clip(f * 255.0, 0, 255).astype(np.uint8)
+
+
 def ease_out(x):
     x = min(max(x, 0.0), 1.0)
     return 1 - (1 - x) ** 3
@@ -59,6 +99,9 @@ def ease_out(x):
 
 class Hook:
     def __init__(self):
+        sys.path.insert(0, os.path.join(ROOT, "work"))
+        from look import Grain
+        self.grain = Grain(W, H, strength=GRAIN)
         self.bg = [cv2.imread(os.path.join(HOOK, f"bg_v{v}.png")) for v in range(3)]
         self.A = read_frames(SEG_A[0], SEG_A[1], CUT + 0.1)
         self.B = read_frames(SEG_B[0], SEG_B[1], DROP - CUT + 0.1)
@@ -70,6 +113,9 @@ class Hook:
         return f[c[1]:c[3], c[0]:c[2]] if c else f
 
     def frame(self, t):
+        return self.grain(self._frame(t), int(round(t * FPS)))
+
+    def _frame(self, t):
         n = int(round(t * FPS))
         if t < DROP:
             # whole composition drifts in slowly so it moves from frame 0
@@ -79,7 +125,10 @@ class Hook:
                 src = self.clip(SEG_A, self.A, n)
             else:
                 src = self.clip(SEG_B, self.B, n - int(round(CUT * FPS)))
-            img[y0:y1, x0:x1] = cover(src, x1 - x0, y1 - y0)
+            box = cover(src, x1 - x0, y1 - y0)
+            if t >= CUT:
+                box = flash_band(box, t)
+            img[y0:y1, x0:x1] = box
             z = 1.0 + 0.045 * (t / DROP)
             M = cv2.getRotationMatrix2D((W / 2, (y0 + y1) / 2), 0, z)
             return cv2.warpAffine(img, M, (W, H), flags=cv2.INTER_LINEAR)
@@ -109,7 +158,7 @@ class Hook:
 
 def stills(h):
     d = os.path.join(OUT, "stills"); os.makedirs(d, exist_ok=True)
-    for t in (0.0, 1.0, 2.0, 2.5, 3.5, 4.3, 4.5, 4.6, 4.8, 5.5):
+    for t in (0.0, 1.0, 2.0, 2.5, 2.85, 2.9, 3.0, 3.4, 3.5, 3.95, 4.3, 4.5, 4.6, 4.8, 5.5):
         cv2.imwrite(os.path.join(d, f"t_{t:04.2f}.png"), h.frame(t))
 
 
@@ -126,7 +175,7 @@ def draft(h, scale=0.5):
     wav = os.path.join(ROOT, "work", "audio", "thebox.wav")
     subprocess.run(["ffmpeg", "-v", "error", "-y", "-i", tmp, "-ss", f"{SONG_IN}", "-t", f"{END}", "-i", wav,
                     "-map", "0:v", "-map", "1:a", "-c:v", "copy", "-c:a", "aac", "-b:a", "192k",
-                    "-af", f"afade=t=out:st={END - 0.4}:d=0.4", os.path.join(OUT, "hook_draft.mp4")], check=True)
+                    "-af", f"afade=t=out:st={END - 0.4}:d=0.4", os.path.join(OUT, f"hook_draft_{FLASH}.mp4")], check=True)
     os.remove(tmp)
 
 
