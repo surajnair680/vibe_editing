@@ -1,0 +1,4 @@
+file '/home/user/vibe_editing/projects/reel-11/raw/her_part1.mp4'
+file '/home/user/vibe_editing/projects/reel-11/raw/her_part2.mp4'
+file '/home/user/vibe_editing/projects/reel-11/raw/her_part3.mp4'
+file '/home/user/vibe_editing/projects/reel-11/raw/her_part4.mp4'
