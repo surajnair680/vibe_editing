@@ -153,6 +153,16 @@ Other docs and when to read them: `docs/README.md`.
 - **He supplies commercial songs** (The Box guitar remix): fine to use, keep out of git, map it (intro, build, drop)
   and cue the song so its drop lands on the edit's big moment. [r10]
 
+- **Stylised edits keep real assets real (reel-11).** For a Pixel RPG treatment he said: the celebrity photo, his gym
+  B-roll and his physique photos must be "properly visible" and "used as it is". Only what we make (world, menus,
+  counters, sprites) takes the style; real photos and footage get at most a styled border or window, never a filter.
+  Same for his face: real video, never pixelated.
+- **Face visible throughout, as a head popping out of a circle (reel-11).** He showed a reference (a presenter in a
+  rounded box whose head breaks out above it) and asked for a circle instead. His face may move around and change size
+  between beats as long as it is always visible. Sample: pixel-stepped circle with a gold ring and warm dithered fill,
+  head unclipped above the circle's centre line, rembg `u2net_human_seg` matte (clean on his room footage, mic and
+  hand included). Code: `projects/reel-11/work/sample/sample_frame.py`.
+
 ## 2. Remaking a reference edit shot for shot [r03]
 - **Measure the reference frame by frame.** `select='gt(scene,0.12)'` gives a first cut list; busy parts need sheets of
   every frame (`-ss a -t b`, `drawtext=%{pts}`), because shots can be 1 to 2 frames long (reel-03's reference: about
