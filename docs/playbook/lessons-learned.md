@@ -538,6 +538,11 @@ All in `projects/reel-03/work/build/fx.py` (helpers) and `edit.py` (beats). Dete
 - reel-04 file sizes (32 s, 1080x1920, per-frame grain): crf 14 master 372 MB, crf 22 112 MB, crf 24 72 MB; two-pass
   6.6 Mbps = 27.4 MB, under the 30 MiB send limit, good enough for a phone preview. [r04]
 - A 2.5 s 1920x1080 intro at crf 16, keyframe every second, AAC 256k = 1.1 MB: one send, no parts. [r05]
+- **Splitting: read the real part lengths before muxing audio (reel-11).** `-f segment -segment_times 12.5,25` on a
+  master with sparse keyframes cut at the next keyframes (15.67 and 33.33 s), not at the asked times, so audio cut
+  for 12.5 s parts would have drifted. ffprobe each video part's duration first and cut the WAV for those ranges.
+  Master render parts each start on a keyframe, so a split there needs no re-encode. 49.9 s master (52 MB) went as
+  3 parts of 27.3 / 9.4 / 13.1 MiB, framemd5 identical to the master, audio at 0 ms. [r11]
 
 ## 10. Mistakes made (so they never repeat)
 - Copied the reference's 0.16 s photo beat literally; the physique deserved 0.7 s. [r03]
