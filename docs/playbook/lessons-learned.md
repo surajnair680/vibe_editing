@@ -3,7 +3,7 @@
 Read this whole file before starting any new video, and again before the stills step. Every entry came from a real
 edit and cost a revision, a re-render or a question once. Newest videos at the bottom of each section. Tags say where
 each lesson came from: [r01] reel-01, [r02] reel-02, [r03] reel-03, [vlog] the mini vlog style study (2026-10-30),
-[codex] the Codex CLI setup session (2026-11-01), [r04] reel-04 (cinematic work-session edit, 2026-11-01), [r05] reel-05 (Automance logo intro, 2026-11-04), [openverse] the Openverse sound library setup (2026-11-06), [r06] reel-06 (YouTube Shorts music swap of a finished reel, 2026-11-06), [r07] reel-07 (meme template caption swap, 2026-11-11), [lemo] the Lemo-Opuscar setup (2026-11-13), [r08] reel-08 (Comeback Day 1, a test intro as a Lemo Urban Sketch animation, 2026-11-13), [r09] reel-09 (bicep curl "Current vs Correct" form explainer, 2026-11-14), [voxel] the voxel reels setup (2026-11-14), [reanimate] the reanimate skill setup (2026-11-15), [r10] reel-10 (home pull-up and ring dip reel, 2026-11-16).
+[codex] the Codex CLI setup session (2026-11-01), [r04] reel-04 (cinematic work-session edit, 2026-11-01), [r05] reel-05 (Automance logo intro, 2026-11-04), [openverse] the Openverse sound library setup (2026-11-06), [r06] reel-06 (YouTube Shorts music swap of a finished reel, 2026-11-06), [r07] reel-07 (meme template caption swap, 2026-11-11), [lemo] the Lemo-Opuscar setup (2026-11-13), [r08] reel-08 (Comeback Day 1, a test intro as a Lemo Urban Sketch animation, 2026-11-13), [r09] reel-09 (bicep curl "Current vs Correct" form explainer, 2026-11-14), [voxel] the voxel reels setup (2026-11-14), [reanimate] the reanimate skill setup (2026-11-15), [r10] reel-10 (home pull-up and ring dip reel, 2026-11-16), [r11] reel-11 (sarcastic reply to an "inspiring" English-speaking clip, 2026-11-18).
 
 How this file grows: see "Learning loop" in CLAUDE.md. Add to it during every video, not only at the end.
 Other docs and when to read them: `docs/README.md`.
@@ -365,6 +365,15 @@ All in `projects/reel-03/work/build/fx.py` (helpers) and `edit.py` (beats). Dete
   passthrough`, no `-shortest`, then count packets against the source (3857 here) before sending. HEVC 2-pass
   3.5 Mbps for 64 s of 1080x1920 at 60 fps = 28.5 MiB, SSIM about 0.986 to the source. [r06]
 - Original reel audio with a commercial song in it stays out of git (`full_src.mp3` ignored). [r06]
+- **Split uploads hide audio before the picture starts (reel-11).** His phone-split parts 2, 3, 4 of one recording
+  had their audio begin 0.24 to 0.26 s before the picture (negative audio pts; check with `ffprobe -select_streams a
+  -show_entries packet=pts_time`). A normal decode to WAV silently drops that pre-roll, so a line that ran across the
+  part boundary ("while sitting / on your ass") lost a quarter second of speech and sounded chopped; he caught it on
+  the first rough cut. The previous part's picture also runs that much past its own audio. Fix: copy the raw stream
+  (`-map 0:a -c copy x.aac`) and decode that (keeps the pre-roll; cross-correlate it with the normal WAV to measure the
+  offset), then build the line as ONE piece: part A picture and audio to their real ends, part B's full audio + picture,
+  picture frames fitted to the audio length, no fades at the seam. Check every seam a used line crosses: envelope
+  stays up, no sample step, picture frame diff normal. Code: `projects/reel-11/work/make_cut.py`. [r11]
 
 - ElevenLabs TTS on this account: `output_format=mp3_44100_192` is refused (403, Creator tier and up); use
   `mp3_44100_128`. One request for the whole script (voice "Jessica" `cgSgspJ2msm6clMCkdW9`, multilingual v2,
@@ -557,3 +566,6 @@ All in `projects/reel-03/work/build/fx.py` (helpers) and `edit.py` (beats). Dete
   when replacing in Python, `assert old in s and old` first. A frame comparison's auto-align also hid a 0.33 s timing
   error by shifting the clone 15 frames: when both sides start at t = 0, compare with a fixed offset and always read
   the offset the report prints. [reanimate]
+- reel-11: a line crossing a split-part boundary came out chopped because part 2's audio pre-roll (negative pts)
+  was dropped on decode, part 1's picture was cut early and 5 ms fades dipped mid-word. Check packet pts of every
+  part before cutting across a seam (lesson in section 7). [r11]
