@@ -11,3 +11,7 @@ me_3a..d.mp4 (one recording split in 4 parts).
 3b. Part 3b's hidden audio pre-roll: `ffmpeg -i raw/me_3b.mp4 -map 0:a -c copy work/seam/3b.aac` then decode it to
     work/audio/me_3b_all.wav (starts 0.2604 s before the picture)
 4. Rough cut: `python3 work/make_cut.py v2` -> out/reel-11-rough-v1.mp4 (preview: 2-pass 4.3 Mbps, -g 30)
+5. Mattes for the face circle: `python3 work/matte_frames.py 469 959` and `... 960 1452` (two in parallel, ~10 min)
+   -> work/matte/NNNNN.png (edit frames of work/cut_v2_14.mp4 = `ffmpeg -f concat -i work/cut/list.txt -c copy`)
+6. Stills: `python3 scene.py grid` (contact sheet), `python3 scene.py sheet <out.jpg> <t...>`
+7. Picture: `python3 scene.py render` -> out/reel-11-picture.mp4 (audio mixed separately)
