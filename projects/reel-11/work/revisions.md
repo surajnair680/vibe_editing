@@ -9,3 +9,7 @@
   work/matte_frames.py 469 1452). Own fixes before sending: hero hair shortened, face circle off the dumbbell photo,
   dumbbell photo moved 200 px down so the caption clears his face, FOLLOW moved to an end card (physique 0.7 s clear
   first), hand-set caption lines, GAME SAVED box moved off his hair. Total 49.9 s (1.5 s tail after the voice).
+- v1 (2026-11-18): full render. Music from 0:00 (user), original 8-bit platformer score (work/music.py), code-made game
+  SFX (work/sfx.py, user chose option 4: no Freesound downloads), mix -14.3 LUFS, peak -1.5 dBFS, her clip +5 dB.
+  Master out/reel-11-v1-master.mp4 (52 MB), delivery out/reel-11-v1.mp4 (2-pass 4.5 Mbps, 28 MiB, SSIM 0.992),
+  1497 frames, no black frames, audio sync 0 ms.

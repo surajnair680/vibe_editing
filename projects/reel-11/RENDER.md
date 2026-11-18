@@ -15,3 +15,7 @@ me_3a..d.mp4 (one recording split in 4 parts).
    -> work/matte/NNNNN.png (edit frames of work/cut_v2_14.mp4 = `ffmpeg -f concat -i work/cut/list.txt -c copy`)
 6. Stills: `python3 scene.py grid` (contact sheet), `python3 scene.py sheet <out.jpg> <t...>`
 7. Picture: `python3 scene.py render` -> out/reel-11-picture.mp4 (audio mixed separately)
+8. Sound: `python3 work/music.py && python3 work/sfx.py && python3 work/mix.py` -> work/audio/mix_v1.wav
+9. Full picture in 4 parts: `python3 scene.py render 0 12.5 work/render/part_1.mp4` (12.5-25, 25-37.5, 37.5-49.9),
+   concat copy -> out/reel-11-picture.mp4, mux mix_v1.wav (AAC 256k) -> out/reel-11-v1-master.mp4;
+   delivery: 2-pass x264 4500k, -g 30 -keyint_min 30 -sc_threshold 0, AAC 192k -> out/reel-11-v1.mp4
