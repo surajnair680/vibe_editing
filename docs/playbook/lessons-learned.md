@@ -163,6 +163,12 @@ Other docs and when to read them: `docs/README.md`.
   head unclipped above the circle's centre line, rembg `u2net_human_seg` matte (clean on his room footage, mic and
   hand included). Code: `projects/reel-11/work/sample/sample_frame.py`.
 
+- **Music from the first frame (reel-11).** I planned no music under the clip he reacts to; he wanted it "from the
+  start even when I'm reacting to the video, so that the vibe is established from the start". Default: the edit's
+  music starts at 0:00, ducked under every voice. He asked for "Mario like music": made an original 8-bit platformer
+  track in code (pulse lead, triangle bass, noise drums, 152.5 BPM chosen so a bar lands on the key reveal), never
+  the real melodies or sounds. Code: `projects/reel-11/work/music.py`, `sfx.py`, `mix.py`.
+
 ## 2. Remaking a reference edit shot for shot [r03]
 - **Measure the reference frame by frame.** `select='gt(scene,0.12)'` gives a first cut list; busy parts need sheets of
   every frame (`-ss a -t b`, `drawtext=%{pts}`), because shots can be 1 to 2 frames long (reel-03's reference: about
