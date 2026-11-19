@@ -411,6 +411,86 @@ def media_panel(img, t):
     return x1, t0
 
 
+# ---------------------------------------------------------------- benefit lists v2 (one matching visual per item)
+import benefits as BF
+TONE_IL = dot_tone(H, W, np.full((H, W), 0.30, np.float32), cell=8)
+TONE_LIGHT = dot_tone(H, W, np.tile(np.linspace(0.16, 0.0, H)[:, None], (1, W)).astype(np.float32), cell=8)
+
+
+def item_panel(img, spec, t, ts, seed, wipe=True):
+    kind, name, x1, fx, fy, z, cm, ov = spec
+    P = [(40, PH_Y0), (x1, PH_Y0), (x1, PH_Y1 - 10), (40, PH_Y1 + 10)]
+    t0 = ts if wipe else ts - 1.0
+    dt = t - ts
+    if kind == "photo":
+        image_panel(img, P, pic(name), t, t0, fx=fx, fy=fy, z0=z, zr=0.03, t_ref=ts)
+    elif kind == "clip":
+        c0, rate, cap = cm
+        image_panel(img, P, CLIPS[name].at(min(cap, c0 + rate * max(0, dt))), t, t0, fx=fx, fy=fy, z0=z, zr=0.03, t_ref=ts)
+    else:
+        pm = poly_mask(P)
+        vis = wipe_mask(pm, t, t0)
+        img[vis] = PAPER
+        img[vis & TONE_LIGHT] = INK
+        if t >= t0 + 0.12:
+            stroke_poly(img, P, 8)
+    if dt < 0.08 and wipe:
+        return
+    pen = BF.Pen()
+    if kind == "illus":
+        cx, cy = 540, 620
+        if name == "gauge":
+            BF.il_gauge(pen, cx, cy + 120, dt)
+        elif name == "age_chart":
+            BF.il_age_chart(pen, 150, 330, 930, 900, dt)
+        elif name in ("flame", "flame_fast"):
+            BF.il_flame(pen, cx, cy, dt, speed=1.0 if name == "flame" else 2.2, count_to=250 if name == "flame" else 999)
+        elif name == "sugar":
+            BF.il_sugar(pen, 130, 380, 950, 880, dt)
+        elif name == "bone":
+            pen.done(img); pen = BF.Pen()
+            BF.il_bone(img, pen, cx, cy, dt, TONE_IL)
+        elif name == "shield":
+            BF.il_shield(pen, cx, cy + 20, dt)
+        elif name == "hourglass":
+            BF.il_hourglass(img, pen, cx, cy + 40, dt, TONE_IL)
+        elif name == "mood":
+            BF.il_mood(pen, cx, cy + 40, dt)
+        elif name == "sleep":
+            BF.il_sleep(img, pen, cx - 90, cy + 80, dt, TONE_IL)
+        pen.done(img, clip=poly_mask(P))
+        return
+    elif ov == "growth":
+        BF.ov_growth(pen, dt)
+    elif ov == "fat_muscle":
+        BF.ov_fat_muscle(pen, dt)
+    elif ov == "battery":
+        BF.battery(pen, 330, 870, dt)
+    elif ov == "sparkle":
+        BF.ov_sparkle(img, dt)
+    elif ov == "pain":
+        BF.ov_pain(pen, dt)
+    elif ov == "fat_meter":
+        BF.fat_meter(pen, 600, 330, dt)
+    elif ov == "age70":
+        if dt > 0.1:
+            BF.lbl(pen, "AGE 70?", 420, 300, 70)
+        if dt > 0.45:
+            BF.lbl(pen, "STILL LIFTING", 420, 900, 62, fill=RED)
+    pen.done(img)
+
+
+def list_panel(img, t, items, vis, header, word, seed):
+    idx = max([i for i, it in enumerate(items) if it[1] <= t] or [0])
+    ts = items[idx][1]
+    if idx > 0 and t < ts + 0.12:                      # previous panel stays under the wipe
+        item_panel(img, vis[idx - 1], t, items[idx - 1][1], seed, wipe=False)
+    item_panel(img, vis[idx], t, ts, seed + idx, wipe=True)
+    if vis[idx][2] <= 860:
+        vertical_word(img, word, vis[idx][2] + 24, 1040, PH_Y0, 1000, t, items[0][1] - 1.0, seed)
+    item_box(img, header, idx + 1, len(items), items[idx][0], ts, items[idx][2], t)
+
+
 # ---------------------------------------------------------------- circle states
 SA = dict(cx=540, cy=1450, r=320, scale=0.72, head_top=880)     # big, bottom centre
 SB = dict(cx=830, cy=1500, r=195, scale=0.45, head_top=1215)    # small, bottom right (lists, photos)
@@ -508,12 +588,7 @@ def beats(img, t):
             slam(img, sfx("MAX TO MAX?", font("bangers", 64), rot=5), 780, 900, t, 46.42)
         cap_y = 1150
     elif t < 60.70:                                            # protein list
-        r = media_panel(img, t)
-        cur = ([it for it in PROTEIN if it[1] <= t] or PROTEIN[:1])[-1]
-        i = PROTEIN.index(cur) + 1
-        if r and r[0] <= 860:
-            vertical_word(img, "PROTEIN", r[0] + 24, 1040, PH_Y0, 1000, t, r[1], 71)
-        item_box(img, "PROTEIN BENEFITS", i, 10, cur[0], cur[1], cur[2], t)
+        list_panel(img, t, PROTEIN, BF.PROTEIN_V, "PROTEIN BENEFITS", "PROTEIN", 71)
         cap_y = None
     elif t < 63.00:                                            # worth it?
         tone_panel(img, P_TOP, t, 60.80, 81, cx=540, cy=380, r_clear=260)
@@ -526,12 +601,7 @@ def beats(img, t):
             vertical_word(img, "GYM?!", r[0] + 24, 1040, PH_Y0, 1000, t, 65.70, 91)
         cap_y = 1150
     elif t < 78.55:                                            # gym list
-        r = media_panel(img, t)
-        cur = ([it for it in GYM if it[1] <= t] or GYM[:1])[-1]
-        i = GYM.index(cur) + 1
-        if r and r[0] <= 860:
-            vertical_word(img, "GYM", r[0] + 24, 1040, PH_Y0, 1000, t, max(67.50, r[1]), 93)
-        item_box(img, "GYM BENEFITS", i, 12, cur[0], cur[1], cur[2], t)
+        list_panel(img, t, GYM, BF.GYM_V, "GYM BENEFITS", "GYM", 93)
         cap_y = None
     elif t < 81.70:                                            # not worth it
         tone_panel(img, P_TOP, t, 78.73, 101, cx=540, cy=380, r_clear=260)
