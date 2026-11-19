@@ -12,3 +12,9 @@ Raw (not in git, ask the user to re-upload if missing): raw/ghar_ka_khaana_p1.mp
    for 0-741, 741-1350, 1350-1960, 1960-2556, 2556-2761 (parallel), concat -> work/render/master_v1.mp4
 6. Sound: paid audio in assets/el/ (`work/gen_sfx.sh`, `work/el_gen.py` never regenerate existing files);
    `python3 work/mix.py v1 a` -> work/audio/mix_v1.wav; mux with -c:v copy -> out/reel-12-v1-master.mp4
+7. v2 lists: frames 1440-1830 and 1990-2380 re-rendered (`scene.py render`), spliced into master_v1 at keyframes
+   (work/render/v2/list.txt) -> work/render/master_v2.mp4
+8. Final: master_v2 + work/audio/mix_v1.wav (music A) -> out/reel-12-final.mp4 (crf 18 slow, keyframe every second,
+   89 MiB); parts: video-only segment at 36/66/87 s + audio cut from the mix WAV per part -> out/parts/ (4 parts, all
+   under 30 MiB, framemd5 identical to the full file, audio at 0 ms); post file: 2-pass 2350k -> out/reel-12-final-post.mp4
+   (28 MiB, SSIM 0.979 to the final).

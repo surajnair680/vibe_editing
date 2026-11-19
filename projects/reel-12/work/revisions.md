@@ -10,3 +10,4 @@
   his assets where they show the benefit, code-drawn manga illustrations for abstract ones). Only frames 1440-1829 and
   1990-2379 re-rendered and spliced into master_v1 at keyframes; framemd5 proves every other frame identical
   (66.33-67.45 is a re-encode of identical content, PSNR 46 dB). Audio unchanged (mix_v1, music A).
+- FINAL (2026-11-19): approved v2 exported (out/reel-12-final.mp4, 4 parts, post file).
