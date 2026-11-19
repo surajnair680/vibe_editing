@@ -331,6 +331,12 @@ Learned on reel-11 (2026-11-18), a talking-head reply reel built from split uplo
 Learned on reel-12 (2026-11-19), a sarcastic "ghar ka khaana" reply reel in a manga style:
 - **Every physique pic or clip shows his face too** (crop from the hair down, make the panel taller instead of
   cutting the head). "Otherwise what the point." A faceless photo (back pose) needs his OK first.
+- **Every spoken list item gets a visual that shows that item** (his asset where it shows the benefit, a simple
+  drawing for abstract ones); cycling unrelated photos cost a revision. Show the item-to-visual table first.
+- **Anything the viewer must recognise stays real in a stylised edit:** food in full colour (Codex photo style)
+  inside manga panels; Codex manga people look like "AI slop" to him, so no drawn faces.
+- **Music level: measure stems, not the mix.** About 18 dB under the voice while he talks. Manga kit to reuse:
+  `projects/reel-12/work/mg/` (manga.py, scene.py, benefits.py).
 
 Learned on reel-07 (2026-11-11), a meme template caption swap:
 - **Post captions: explain, don't preach.** Approved after two rejected tries ("sounds AI", then "not rant"): two short
