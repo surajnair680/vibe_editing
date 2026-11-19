@@ -229,6 +229,12 @@ Other docs and when to read them: `docs/README.md`.
   a -17 dB music gain first left it 30 dB under, inaudible), ink swish only on section panels, list photos change
   silently, low pen ticks per item, stamps on the big words, two booms (impact frames). `projects/reel-12/work/mix.py`. [r12]
 
+- **Every spoken list item needs a visual that shows that item (reel-12):** in v1 the benefit lists just cycled his
+  photos and clips; he said "the assets do not correlate with what is being listed... you have not used anything to
+  portray the listed benefits". Map item by item: his physique / gym asset where it shows the benefit (back pic on
+  "less back pain", mirror pic on "better looks", dumbbell pic on "strength"), a simple code-drawn illustration for
+  abstract ones (sugar line, bone, moon). Show the mapping table before building. [r12]
+
 ## 2. Remaking a reference edit shot for shot [r03]
 - **Measure the reference frame by frame.** `select='gt(scene,0.12)'` gives a first cut list; busy parts need sheets of
   every frame (`-ss a -t b`, `drawtext=%{pts}`), because shots can be 1 to 2 frames long (reel-03's reference: about
