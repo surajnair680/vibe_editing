@@ -10,6 +10,7 @@ Other docs and when to read them: `docs/README.md`.
 
 ---
 
+
 ## 1. The user (Suraj): taste, preferences, how he works
 - Fitness coach on Instagram ("build your greatest physique"): training, muscle, fat loss, mindset. Audience judges
   real results, so **his physique is the product**. [r03]
@@ -220,6 +221,39 @@ Other docs and when to read them: `docs/README.md`.
   download the links himself, ElevenLabs sound generation (credits), or keep code-made sounds. He chose the code-made
   ones for this reel. [r11]
 
+- **Food stays in normal colour even in a manga/comic style (reel-12):** "make the food items normally... the viewer
+  wont be able to tell what food it is" in black-and-white ink. Codex photo-style food (thali, protein spread, roti
+  stack: `projects/reel-12/assets/codex/`) inside ink panels; only panels, stamps and lettering are manga. Same rule
+  as his photos: anything the viewer must recognise stays real. [r12]
+- **Sound brief for reel-12:** "dont make it ai sloppy, and dont let the viewer get distracted from the content".
+  Built: ElevenLabs music from 0:00, about 18 dB under the voice while he talks (measure stems, not the mix:
+  a -17 dB music gain first left it 30 dB under, inaudible), ink swish only on section panels, list photos change
+  silently, low pen ticks per item, stamps on the big words, two booms (impact frames). `projects/reel-12/work/mix.py`. [r12]
+
+- **Every spoken list item needs a visual that shows that item (reel-12):** in v1 the benefit lists just cycled his
+  photos and clips; he said "the assets do not correlate with what is being listed... you have not used anything to
+  portray the listed benefits". Map item by item: his physique / gym asset where it shows the benefit (back pic on
+  "less back pain", mirror pic on "better looks", dumbbell pic on "strength"), a simple code-drawn illustration for
+  abstract ones (sugar line, bone, moon). Show the mapping table before building. [r12]
+
+- **reel-12 outcome and numbers:** approved at v2 after one note (list visuals). Manga hybrid kit worth reusing:
+  `projects/reel-12/work/mg/manga.py` (screentone, focus lines, slam lettering, manga face circle with paper rim and
+  hair-edge clean-up), `scene.py` (beats, captions with Hinglish transliteration table, list item box with counter
+  and red tick), `benefits.py` (benefit illustrations: gauge, age chart, flame, sugar line, bone, shield, hourglass,
+  mood, moon). Per-frame rembg mattes: about 2 frames/s per process, 3 processes for 1,800 frames in about 5 min. Full
+  92 s render about 0.6 s a frame, 5 parallel parts about 8 min. Final: crf 18 slow = 89 MiB (4 parts), 2-pass
+  2350k post file = 28 MiB (SSIM 0.979). Revisions spliced at keyframes and proved with framemd5. [r12]
+
+- **Asked about the graphics style, he wants the repo's own menu (reel-12):** "Look at the repo you'll find premade
+  motion graphics like lemo opuscar and more". List what the repo has (his reel-motion-graphics skill: Lab notebook /
+  Stoic poster; Lemo-Opuscar's fitting styles; voxel, vlog overlays, reanimate) with what each would do for this
+  script. He then named one himself ("manga panels"); give an honest fit verdict with the catch, then test frames. [r12]
+- **He changes his mind on insert placement, so confirm it in one line before building (reel-12):** the ending meme
+  went "after the last line", then "during the last sentence, ending at the same time", then "after the ending" again.
+  Ask where an inserted clip sits (after / over which words / ending where) before rendering it. [r12]
+- **Speed notes come as rules, not times (reel-12):** "play the first 2 list items at 1x and rest at 1.5x". Apply the
+  rule to every list in the video and switch speed in the pause after item 2. [r12]
+
 ## 2. Remaking a reference edit shot for shot [r03]
 - **Measure the reference frame by frame.** `select='gt(scene,0.12)'` gives a first cut list; busy parts need sheets of
   every frame (`-ss a -t b`, `drawtext=%{pts}`), because shots can be 1 to 2 frames long (reel-03's reference: about
@@ -278,6 +312,13 @@ Other docs and when to read them: `docs/README.md`.
   25.0 s track (no overlap, no gap); video joined with concat + `setpts=N/(60*TB)`, 1500 frames. Parts of HIS
   recordings instead hide audio before the picture (section 7). Code: `projects/reel-11/RENDER.md` step 2. [r11]
 
+- **His reaction reels arrive as a ready-made composite + split takes (reel-12):** part 1 already held the other
+  creator's reel with her burned-in banner and subtitles plus his reaction inset (the hook stays untouched), then his
+  talking takes split into 4 phone parts (1080x1920, 60 fps, CFR, audio pre-roll only 5 to 9 ms this time, so the
+  seams were clean). Join all parts first into one source (picture stream copy + audio placed at each part's
+  start_time, padded to its picture length): `projects/reel-12/work/join.py`. Meme inserts can be odd sizes
+  (1080x1316): framed full width on black, never stretched. [r12]
+
 ## 4. Cut-outs (mattes)
 - **No single model does it all.** Compare on the actual image before committing: [r03]
   - MediaPipe selfie_multiclass: good person region, rough edges, lumpy heads. Class 1 = hair (useful), 0 = background.
@@ -297,6 +338,11 @@ Other docs and when to read them: `docs/README.md`.
   beard, mic and hand included, no MediaPipe refinement needed. Keep the largest component (dilated 9 px so the mic
   stays). 983 frames of 1080x1920 took about 10 minutes as two parallel jobs (about 1 s a frame each).
   `projects/reel-11/work/matte_frames.py`. [r11]
+
+- **Hair edge on his room footage (reel-12):** rembg `u2net_human_seg` keeps bits of the beige wall at the top corners
+  of his hair. Fix at compose time: inside the top 22 % of the matte and within 60 px of its edge, drop pixels with luma
+  > 82, then darken what remains of the soft edge toward the hair tone (despill). A first version without the edge
+  limit punched a hole in his forehead. `face_circle()` in `projects/reel-12/work/mg/manga.py`. [r12]
 
 ## 5. Effects that worked (copy the code from the project, never import across projects)
 All in `projects/reel-03/work/build/fx.py` (helpers) and `edit.py` (beats). Deterministic (seeded) so re-renders match.
@@ -386,6 +432,16 @@ All in `projects/reel-03/work/build/fx.py` (helpers) and `edit.py` (beats). Dete
   alpha is clipped to the circle below the centre line and free above it. Move and resize it per beat so it never
   covers UI or real photos. `face()` in `projects/reel-11/scene.py`. [r11]
 
+- **Manga hybrid over real footage (reel-12), copy `projects/reel-12/work/mg/`:** paper #F3F0E8, ink #121212, one
+  red #F03C1E (stamps, ticks, anger marks only). Every grey is a dot screen (`dot_tone`), focus lines are tapered
+  wedges re-seeded 10 times a second (boil), panels ink in right to left in 0.12 s with an 8 px border, shouts are
+  three-layer slam lettering (`sfx`), impact = 2 inverted frames + a decaying shake. His head breaks out of a manga
+  circle (ink ring, paper rim, screentone + focus lines inside) with a 12 px paper rim + ink outline where it leaves
+  the circle; the circle moves and resizes between sections (`KEYS` in `scene.py`). Real photos, clips and Codex food
+  stay full colour inside ink panels. Benefit illustrations in `benefits.py` (gauge, age chart, flame + kcal counter,
+  sugar line smoothing, X-ray bone, shield, hourglass, cloud to sun, moon + Zzz); clip drawings to their panel
+  (`Pen.done(clip=...)`) or sliding elements spill onto the page. [r12]
+
 ## 6. Text and captions
 - Captions sit on a handheld mic at about 1440 px; ask about caption height at the stills step when he holds a mic. [r01][r02]
 - Keep text off his face and beard: move the picture (crop) rather than the text when a centred word lands on the face. [r03]
@@ -406,6 +462,12 @@ All in `projects/reel-03/work/build/fx.py` (helpers) and `edit.py` (beats). Dete
 - **Check every real photo with a caption over it (reel-11):** the top caption box covered his face on the dumbbell
   photo; moved the photo 200 px down (pixel wall above). The FOLLOW button touched his face on the mirror photo;
   moved it to an end card. Both caught at my stills check. [r11]
+
+- **Hinglish captions from a Hindi Scribe transcript (reel-12):** Scribe writes Hindi words in Devanagari; keep a
+  hand-made transliteration table (`TR` + per-word `FIX` in `projects/reel-12/work/mg/scene.py`) and caption in
+  Latin script. Chunking: sentences (punctuation or a pause over 0.28 s) split into near-equal chunks of at most
+  4 words, so no orphan "hai." chunk. Narration box with the spoken word inverted (paper on ink). During spoken lists
+  the item box (counter + text + red tick on its last word) is the caption. [r12]
 
 ## 7. Audio
 - Cut audio from WAV decoded from the start, never by seeking an MP4/MP3 (up to 100 ms off). Verify sync by
@@ -483,6 +545,16 @@ All in `projects/reel-03/work/build/fx.py` (helpers) and `edit.py` (beats). Dete
 - ElevenLabs TTS on this account: `output_format=mp3_44100_192` is refused (403, Creator tier and up); use
   `mp3_44100_128`. One request for the whole script (voice "Jessica" `cgSgspJ2msm6clMCkdW9`, multilingual v2,
   stability 0.45, style 0.25) read naturally with good pauses, 75 words in 32.8 s, Scribe matched every word. [r08]
+
+- **ElevenLabs on reel-12:** voice isolation on 86 s of his part came back 3.5 ms early with -0.11 ms/s drift
+  (envelope fit fixed it: `projects/reel-12/work/align_voice.py`). Music: both 90 s requests ended about 84 s again;
+  option A (pizzicato comedy, measured 161 = 80.7 BPM, steady) won over B (groove with frequent full stops, choppy
+  under a voice). SFX generation quirks: "pop" came out at -45 dBFS, riser / swell / whoosh clipped above 0 dBFS,
+  shimmer and tick are 94 to 98 % above 3 kHz: normalise and low-pass before placing. Measure generated sounds with
+  `projects/reel-12/work/measure_sfx.py` (the Openverse `measure` needs an Openverse id). [r12]
+- **Measure music against voice on separate stems, never on the mix (reel-12):** a -17 dB music gain looked fine
+  until the stems showed it 30 dB under the voice (inaudible); -5 dB put it 17 to 19 dB under while he talks and about
+  -25 dB in pauses. Write `_stem_music.wav` / `_stem_sfx.wav` from the mix script and compare RMS per section. [r12]
 
 ## 8. Workflow and process
 - Stills first, every time (contact sheet every 2.5 s + full-size changed frames), plus a short low-res draft clip when
@@ -619,6 +691,15 @@ All in `projects/reel-03/work/build/fx.py` (helpers) and `edit.py` (beats). Dete
   put intermediates in the project `.gitignore` up front: `*.aac` (streams copied out of raw footage), `work/parts/`
   (split pieces), `work/**/*.png|jpg` (stills, mattes). [r11]
 
+- **Check the stills against the beat sheet line by line (reel-12):** the anger mark at "yeh khud ko kya samajhti
+  hai" was in the approved beat sheet but missing from the build; it was caught only while placing sounds. Tick off
+  every beat-sheet row in the stills before sending them. [r12]
+- **Revision ranges must start on the master's keyframes (reel-12):** parts rendered in parallel each restart the
+  keyframe grid (keyframes at part start + 30k), so pick splice points on those frames, split the old master with
+  `-f segment -segment_frames`, concat copy, and prove the rest unchanged with framemd5 per frame. [r12]
+- **Guard "current item" lookups for the gap before the first item (reel-12):** a list branch that starts 0.05 s
+  before item 1 crashed two render parts (`[...][-1]` on an empty list). Fall back to the first item. [r12]
+
 ## 9. Delivery and quality
 - File sizes with per-frame grain (1080x1920): reel-03, 22.2 s: crf 14 = 65 MB, crf 20 = 33 MB, crf 22 = 25 MB.
   reel-02 paper grain, 45 s: crf 18 = 435 MB, crf 25 = 57 MB. Grain is the size driver. [r02][r03]
@@ -693,3 +774,9 @@ All in `projects/reel-03/work/build/fx.py` (helpers) and `edit.py` (beats). Dete
   stills check). Pushed the session branch HEAD to the default branch with a lessons commit, which carried the
   unfinished reel-11 folder along: push lessons by cherry-picking the lessons commit onto the default branch in a
   temporary worktree (vibe-wrap-up step 5). [r11]
+- reel-12: the stills claimed "every beat" but the 27.3 s anger mark was missing (caught later, fixed before v1);
+  a chained `cd && mkdir && cd && nohup ... &` backgrounded the whole chain, so the next line ran before the folder
+  existed; `sed` with a `\u2713` pattern never matched the literal tick (grep showed 0) and a Python replace on the
+  escaped text failed too: find the line with grep -n and replace by line number; `rm -f dir/*` after `cd` was blocked
+  again (use explicit file names); an interrupted tool call still wrote its edit, so check and revert after any stop;
+  a stale still from an earlier run sneaked into a contact sheet folder again. [r12]

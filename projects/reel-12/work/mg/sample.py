@@ -222,59 +222,67 @@ def protein_shout(img, t, P):
 
 
 def protein_list(img, t, P):
+    """photo panel (face + physique always in frame, user rule) + ONE current item box with a counter"""
     if t < 48.44:
         return
-    # photo panel: inks in on "Faster", swaps on "losing"
     cur = [it for it in ITEMS if it[1] <= t + 0.001][-1] if t >= ITEMS[0][1] else ITEMS[0]
     t_sw = max(it[1] for it in ITEMS if it[1] <= max(t, ITEMS[0][1]) and (it[3] != ITEMS[0][3] or it is ITEMS[0]))
+    PH = 980
+    # panel shape follows the photo so face + physique both fit (front mirror pic: hair to abs, portrait panel)
+    FRAME = {"back": dict(x1=1040, fx=0.5, fy=0.47, z=1.0), "front": dict(x1=800, fx=0.5, fy=0.47, z=1.0)}
+
+    def pan(name):
+        x1 = FRAME[name]["x1"]
+        return [(40, 130), (x1, 130), (x1, 130 + PH - 10), (40, 130 + PH + 10)]
+
+    def photo(name, dt):
+        fr = FRAME[name]
+        c = cover(pic(name), fr["x1"] - 40, PH, fx=fr["fx"], fy=fr["fy"], zoom=fr["z"] + 0.02 * dt)
+        f = np.zeros((H, W, 3), np.float32)
+        f[130:130 + PH, 40:fr["x1"]] = c
+        return f
+    P = pan(cur[3])
     pm = poly_mask(P)
     xvis = panel_wipe(t, t_sw)
-    zoom = 1.10 + 0.03 * (t - t_sw)
-    crop = cover(pic(cur[3]), 1000, 760, fx=0.52, fy=0.45 if cur[3] == "back" else 0.62, zoom=zoom)
-    full = np.zeros((H, W, 3), np.float32)
-    full[130:890, 40:1040] = crop
     if t_sw != ITEMS[0][1] and t < t_sw + 0.12:          # previous photo still under the wipe
-        prev = cover(pic(ITEMS[0][3]), 1000, 760, fx=0.52, fy=0.45, zoom=1.10 + 0.03 * (t_sw - ITEMS[0][1]))
-        pf = np.zeros((H, W, 3), np.float32)
-        pf[130:890, 40:1040] = prev
-        img[pm] = pf[pm]
+        pp = pan(ITEMS[0][3]); ppm = poly_mask(pp)
+        pf = photo(ITEMS[0][3], t_sw - ITEMS[0][1])
+        img[ppm] = pf[ppm]
+        stroke_poly(img, pp, 8)
+    full = photo(cur[3], t - t_sw)
     vis = pm.copy()
     vis[:, :xvis] = False
     img[vis] = full[vis]
     stroke_poly(img, P, 8)
-    # header tab
-    done = sum(1 for it in ITEMS if it[1] <= t)
-    box(img, 50, 820, 440, 886, border=0, shadow=0, fill=INK)
-    hdr = layer_text(f"PROTEIN BENEFITS  {done}/10", font("anton", 40), fill=PAPER, pad=8)
-    paste(img, hdr, 245, 853)
-    # items stack below
-    for i, (txt, ts, te, _) in enumerate(ITEMS):
-        if t < ts:
-            continue
-        y0 = 920 + i * 112
-        k = ease_out_back((t - ts) / 0.22)
-        dx = int((1 - k) * 70)
-        lay = Image.new("RGBA", (640, 120), (0, 0, 0, 0))
-        d = ImageDraw.Draw(lay)
-        d.rectangle([10, 10, 620, 106], fill=INK + (255,))
-        d.rectangle([0, 0, 610, 96], fill=INK + (255,))
-        d.rectangle([5, 5, 605, 91], fill=PAPER + (255,))
-        d.text((18, 14), f"0{i + 1}", font=font("dela", 52), fill=RED + (255,))
-        d.text((118, 18), txt, font=font("anton", 48), fill=INK + (255,))
-        if t >= te:
-            kk = smooth((t - te) / 0.10)
-            pts = [(556, 52), (571, 74), (598, 26)]
-            seg = [pts[0], (pts[0][0] + (pts[1][0] - pts[0][0]) * min(1, kk * 2), pts[0][1] + (pts[1][1] - pts[0][1]) * min(1, kk * 2))]
-            if kk > 0.5:
-                f2 = (kk - 0.5) * 2
-                seg = [pts[0], pts[1], (pts[1][0] + (pts[2][0] - pts[1][0]) * f2, pts[1][1] + (pts[2][1] - pts[1][1]) * f2)]
-            d.line(seg, fill=RED + (255,), width=10, joint="curve")
-        paste(img, lay, 50 + 320 + dx, y0 + 60)
+    # current item: counter tab + one big box, slams in from the left on its word, red tick on its last word
+    i = ITEMS.index(cur)
+    txt, ts, te, _ = cur
+    k = ease_out_back((t - ts) / 0.22)
+    dx = int((1 - k) * -90)
+    box(img, 50 + dx, 1020, 360 + dx, 1080, border=0, shadow=0, fill=INK)
+    hdr = layer_text(f"PROTEIN BENEFITS  {i + 1:02d}/10", font("anton", 36), fill=PAPER, pad=6)
+    paste(img, hdr, 205 + dx, 1050)
+    lay = Image.new("RGBA", (700, 130), (0, 0, 0, 0))
+    d = ImageDraw.Draw(lay)
+    d.rectangle([12, 12, 690, 124], fill=INK + (255,))
+    d.rectangle([0, 0, 678, 112], fill=INK + (255,))
+    d.rectangle([6, 6, 672, 106], fill=PAPER + (255,))
+    d.text((22, 18), f"{i + 1:02d}", font=font("dela", 60), fill=RED + (255,))
+    d.text((150, 22), txt, font=font("anton", 56), fill=INK + (255,))
+    if t >= te:
+        kk = smooth((t - te) / 0.10)
+        pts = [(612, 58), (630, 84), (662, 28)]
+        seg = [pts[0], (pts[0][0] + (pts[1][0] - pts[0][0]) * min(1, kk * 2), pts[0][1] + (pts[1][1] - pts[0][1]) * min(1, kk * 2))]
+        if kk > 0.5:
+            f2 = (kk - 0.5) * 2
+            seg = [pts[0], pts[1], (pts[1][0] + (pts[2][0] - pts[1][0]) * f2, pts[1][1] + (pts[2][1] - pts[1][1]) * f2)]
+        d.line(seg, fill=RED + (255,), width=11, joint="curve")
+    paste(img, lay, 50 + 350 + dx, 1080 + 65)
 
 
 # ---------------- circle states ----------------
 CA = dict(cx=540, cy=1450, r=320, scale=0.72, head_top=880)
-CB = dict(cx=800, cy=1575, r=235, scale=0.53, head_top=1225)
+CB = dict(cx=830, cy=1500, r=195, scale=0.45, head_top=1215)
 
 
 def circle_state(t):
@@ -290,7 +298,7 @@ def frame(t):
         spec_card(img, t, P_A)
     else:
         protein_shout(img, t, P_B)
-        protein_list(img, t, [(40, 130), (1040, 130), (1040, 870), (40, 890)])
+        protein_list(img, t, [(40, 130), (1040, 130), (1040, 1170), (40, 1190)])
     caption(img, t)
     me, al = video_frame(t)
     s = circle_state(t)
