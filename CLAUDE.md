@@ -321,6 +321,16 @@ Learned on reel-11 (2026-11-18), a talking-head reply reel built from split uplo
 - **A line that crosses a split-part boundary needs the hidden audio.** His later parts start their audio about 0.25 s
   before the picture (negative pts) and a normal decode drops it, chopping the words at the seam. Decode the copied
   raw AAC stream instead and build the line as one continuous piece with no fades. `projects/reel-11/work/make_cut.py`.
+- **Music starts at 0:00, even under a clip he reacts to** ("so that the vibe is established from the start"),
+  ducked under every voice. "Mario like" = an original 8-bit track in code, never the real melodies.
+  `projects/reel-11/work/music.py`, `mix.py`.
+- **Stylised graphics never touch real assets:** celebrity photos, his B-roll, physique photos and his face stay
+  unfiltered; the style only frames them. His face stays visible all reel (head breaking out of a circle):
+  `face()` in `projects/reel-11/scene.py`. Pixel RPG graphics layer: the same file.
+
+Learned on reel-12 (2026-11-19), a sarcastic "ghar ka khaana" reply reel in a manga style:
+- **Every physique pic or clip shows his face too** (crop from the hair down, make the panel taller instead of
+  cutting the head). "Otherwise what the point." A faceless photo (back pose) needs his OK first.
 
 Learned on reel-07 (2026-11-11), a meme template caption swap:
 - **Post captions: explain, don't preach.** Approved after two rejected tries ("sounds AI", then "not rant"): two short

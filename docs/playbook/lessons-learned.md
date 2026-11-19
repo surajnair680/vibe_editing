@@ -3,7 +3,7 @@
 Read this whole file before starting any new video, and again before the stills step. Every entry came from a real
 edit and cost a revision, a re-render or a question once. Newest videos at the bottom of each section. Tags say where
 each lesson came from: [r01] reel-01, [r02] reel-02, [r03] reel-03, [vlog] the mini vlog style study (2026-10-30),
-[codex] the Codex CLI setup session (2026-11-01), [r04] reel-04 (cinematic work-session edit, 2026-11-01), [r05] reel-05 (Automance logo intro, 2026-11-04), [openverse] the Openverse sound library setup (2026-11-06), [r06] reel-06 (YouTube Shorts music swap of a finished reel, 2026-11-06), [r07] reel-07 (meme template caption swap, 2026-11-11), [lemo] the Lemo-Opuscar setup (2026-11-13), [r08] reel-08 (Comeback Day 1, a test intro as a Lemo Urban Sketch animation, 2026-11-13), [r09] reel-09 (bicep curl "Current vs Correct" form explainer, 2026-11-14), [voxel] the voxel reels setup (2026-11-14), [reanimate] the reanimate skill setup (2026-11-15), [r10] reel-10 (home pull-up and ring dip reel, 2026-11-16), [r11] reel-11 (sarcastic reply to an "inspiring" English-speaking clip, 2026-11-18).
+[codex] the Codex CLI setup session (2026-11-01), [r04] reel-04 (cinematic work-session edit, 2026-11-01), [r05] reel-05 (Automance logo intro, 2026-11-04), [openverse] the Openverse sound library setup (2026-11-06), [r06] reel-06 (YouTube Shorts music swap of a finished reel, 2026-11-06), [r07] reel-07 (meme template caption swap, 2026-11-11), [lemo] the Lemo-Opuscar setup (2026-11-13), [r08] reel-08 (Comeback Day 1, a test intro as a Lemo Urban Sketch animation, 2026-11-13), [r09] reel-09 (bicep curl "Current vs Correct" form explainer, 2026-11-14), [voxel] the voxel reels setup (2026-11-14), [reanimate] the reanimate skill setup (2026-11-15), [r10] reel-10 (home pull-up and ring dip reel, 2026-11-16), [r11] reel-11 (sarcastic reply to an "inspiring" English-speaking clip, 2026-11-18), [r12] reel-12 ("Ghar ka khaana" sarcastic reply reel, 2026-11-19).
 
 How this file grows: see "Learning loop" in CLAUDE.md. Add to it during every video, not only at the end.
 Other docs and when to read them: `docs/README.md`.
@@ -27,6 +27,9 @@ Other docs and when to read them: `docs/README.md`.
 - He likes to understand why an effect exists ("what is the point of pixelating half the face?"). Explain meaning
   briefly when proposing effects. Explain any decorative element (he had the "Rx" stamp and a barcode removed). [r02][r03]
 - He asks "first tell me if you understand" before revisions: restate his note, propose the fix, wait. [r03]
+  Same on reel-11 with a fault note: "this part is not cut properly. First tell me what you notice". List the causes
+  you measured in plain words (here three: missing audio at a part seam, picture cut early, fades mid-word), propose
+  the fix, wait for "yes fix it". [r11]
 - **When he asks "do you get what I want?", answer that first, in two or three plain lines, before anything else.** On
   the Openverse request I replied with a plan, a network blocker and a domain list; he came back with "At least tell me
   if you understood what I want." Restate the goal in his terms, then (separately, or after he confirms) the blockers
@@ -153,6 +156,70 @@ Other docs and when to read them: `docs/README.md`.
 - **He supplies commercial songs** (The Box guitar remix): fine to use, keep out of git, map it (intro, build, drop)
   and cue the song so its drop lands on the edit's big moment. [r10]
 
+- **Stylised edits keep real assets real (reel-11).** For a Pixel RPG treatment he said: the celebrity photo, his gym
+  B-roll and his physique photos must be "properly visible" and "used as it is". Only what we make (world, menus,
+  counters, sprites) takes the style; real photos and footage get at most a styled border or window, never a filter.
+  Same for his face: real video, never pixelated.
+- **Face visible throughout, as a head popping out of a circle (reel-11).** He showed a reference (a presenter in a
+  rounded box whose head breaks out above it) and asked for a circle instead. His face may move around and change size
+  between beats as long as it is always visible. Sample: pixel-stepped circle with a gold ring and warm dithered fill,
+  head unclipped above the circle's centre line, rembg `u2net_human_seg` matte (clean on his room footage, mic and
+  hand included). Code: `projects/reel-11/work/sample/sample_frame.py`.
+
+- **Music from the first frame (reel-11).** I planned no music under the clip he reacts to; he wanted it "from the
+  start even when I'm reacting to the video, so that the vibe is established from the start". Default: the edit's
+  music starts at 0:00, ducked under every voice. He asked for "Mario like music": made an original 8-bit platformer
+  track in code (pulse lead, triangle bass, noise drums, 152.5 BPM chosen so a bar lands on the key reveal), never
+  the real melodies or sounds. Code: `projects/reel-11/work/music.py`, `sfx.py`, `mix.py`.
+  Mix numbers that worked (measured, since I can't listen): bed 7 dB under the voice level in gaps, -10 dB duck keyed
+  from the voice (15 ms attack, 300 ms release, 120 ms hold), the lead a further -5 dB under speech and a sparser line
+  while he talks; voice 17 to 20 dB above the music under speech; her quieter clip +5 dB to match his takes; music
+  gated during the PAUSED screen like a real game; -14.3 LUFS, -1.5 dBFS peak. Measure voice vs music RMS per section
+  under the speech key before sending. [r11]
+
+- **His gym's logos are fine on screen (reel-12):** "You dont have to hide the logo i dont mind" (the "cloud" sign and
+  Hammer Strength machines in his gym B-roll). Don't crop or blur them; still check for other brands' logos. [r12]
+- **B-roll clips are raw material, not fixed lengths (reel-12):** he said trimming is expected; use only the best part
+  of each clip (one clean rep, the first clean second before someone walks in) without asking. [r12]
+- **Rough cut notes he gave on reel-12:** voice cleaned with ElevenLabs isolation, every pause cut ("everything I say
+  should be clearly heard, the gaps should be cut obviously"), long spoken lists after the first 2 items at 1.5x (pitch
+  kept with ffmpeg `rubberband=tempo=1.5:window=short`, Scribe confirmed every word). He decides sound and graphics
+  only after the cut is right. Code: `projects/reel-12/work/plan_cut.py`, `make_cut.py`. [r12]
+
+- **Codex manga characters have an "AI slop" look to him (reel-12):** "codex generates generic looking manga
+  characters that clearly have that ai slop look". Codex is still allowed; guard against the look: ask for a specific
+  hand (G-pen ink, uneven tapered line weight, flat black spots, no glossy shading, no soft gradients, no big shiny
+  anime eyes or symmetrical pretty faces), re-print every drawing through the code screentone step (threshold the
+  lines, dot-screen the flats) so it reads as printed ink, prefer objects and props over faces, keep any drawn people
+  small or partial (hands, silhouettes, backs), and reject and redo anything that looks generic before he sees it.
+  The main people are his real footage and photos. [r12]
+
+- **Physique pics always show his face (reel-12):** "whenever my physique asset is used my face should be visible too
+  otherwise what the point". The sample cropped his mirror pic at the chin for "losing fat, not muscle"; he rejected it
+  at once. Frame every physique photo or clip from the hair down (face + body together); make the panel taller rather
+  than cropping the head; a photo without his face (back pose) needs his OK before use. [r12]
+
+- **Talking-head reply reels (reel-11):** he reacts to someone else's clip, then answers it on camera with deadpan
+  sarcasm (here: a village woman's "stop chasing perfection" English clip, then "I don't understand what is so
+  inspiring about her" and a mock case FOR waiting for perfection, applied to fitness). He sends it as numbered parts
+  ("1_part1..4" = her clip, "2", "3_part1..4" = his takes, retakes of the ending inside), then "That's it". Pick the
+  strongest ending take (here "next Monday since 2020" + a sarcastic follow CTA) and say why. [r11]
+- **First rough cut = cut and trim only (reel-11):** "For now just the cut and trim don't do anything else". No
+  captions, music, zooms or effects in the first pass; graphics come after the cut is right (same on reel-12). [r11]
+- **He picks the graphics style himself and comes back with constraints (reel-11):** asked for the look options, then
+  "check if there is a pixel style animation in lemo opuscar", then "Tiger shroff should be properly visible and my
+  broll and physique photo as well" (real assets stay real, above). Lemo-Opuscar styles work as the graphics layer of a
+  talking-head reel: show the style list with what each would do for HIS script, line by line. [r11]
+- **He asks where the files live (reel-11):** "Is the video stored in the server or gh?" Answer with a table: renders
+  and raw footage only on the wiped cloud server, the delivered file in the chat, everything to rebuild on GitHub
+  (raw footage must be re-uploaded). Tell him to save the delivered file to his phone. He then asked for the
+  full-quality master in parts. [r11]
+- **Blocked sound sources: he wants the honest options, then decides (reel-11).** On "Can the server block issue be
+  solved?" I tested (tunnel established, then Freesound's own empty 403 on the site, the API and cdn), explained it is
+  the site blocking cloud IPs, and offered: run downloads on his computer through Remote Control (none attached yet),
+  download the links himself, ElevenLabs sound generation (credits), or keep code-made sounds. He chose the code-made
+  ones for this reel. [r11]
+
 ## 2. Remaking a reference edit shot for shot [r03]
 - **Measure the reference frame by frame.** `select='gt(scene,0.12)'` gives a first cut list; busy parts need sheets of
   every frame (`-ss a -t b`, `drawtext=%{pts}`), because shots can be 1 to 2 frames long (reel-03's reference: about
@@ -206,6 +273,10 @@ Other docs and when to read them: `docs/README.md`.
   shots when planning; his phone clips are 1080 wide, so digital zooms stay under about 1.15 except on fast moves. [r04]
 - His phone clips (reel-04): HEVC 1920x1080 with rotation -90, so they play as 1080x1920; ffmpeg auto-rotates on
   decode. Room audio is quiet (about -30 dB mean); a close typing shot peaked at 0 dB from key clicks. [r04]
+- **Joining his split uploads of one clip (reel-11):** each part's audio starts at its own stream `start_time`
+  (0, 0.010, 0.021, 0.009 s on her clip). Placing every decoded part's audio at `8*i + start_time` gave a seamless
+  25.0 s track (no overlap, no gap); video joined with concat + `setpts=N/(60*TB)`, 1500 frames. Parts of HIS
+  recordings instead hide audio before the picture (section 7). Code: `projects/reel-11/RENDER.md` step 2. [r11]
 
 ## 4. Cut-outs (mattes)
 - **No single model does it all.** Compare on the actual image before committing: [r03]
@@ -222,6 +293,10 @@ Other docs and when to read them: `docs/README.md`.
 - Floral sofa (reel-01/02 home footage): rembg keeps the sofa; refine with MediaPipe:
   `projects/reel-02/work/refine_matte.py --grow 6 --thresh 0.3 --kill-florals --solid-below 0.68`. [r02]
 - Per-frame mattes of a clip: cache to `work/matte/<clip>/NNN.png` so re-renders don't recompute. [r03]
+- **His room talking-head footage (pink sheet, grey tee, mic in hand): rembg `u2net_human_seg` alone is clean**, hair,
+  beard, mic and hand included, no MediaPipe refinement needed. Keep the largest component (dilated 9 px so the mic
+  stays). 983 frames of 1080x1920 took about 10 minutes as two parallel jobs (about 1 s a frame each).
+  `projects/reel-11/work/matte_frames.py`. [r11]
 
 ## 5. Effects that worked (copy the code from the project, never import across projects)
 All in `projects/reel-03/work/build/fx.py` (helpers) and `edit.py` (beats). Deterministic (seeded) so re-renders match.
@@ -294,6 +369,23 @@ All in `projects/reel-03/work/build/fx.py` (helpers) and `edit.py` (beats). Dete
   contact spot; free elbow = cosine 2 s up / 2 s down, elbow drifts 6 deg forward, dashed green dumbbell arc.
   Code: `projects/reel-09/work/fig.py`, `scene.py`. [r09]
 
+- **Pixel RPG graphics layer over real footage (reel-11), approved from stills first time**, in plain Python, no
+  library engine: native 216x384 grid scaled x5 nearest-neighbour; ENDESGA-style palette; 4x4 Bayer dither for every
+  gradient; 16-bit blue windows (ink / white / silver border, dithered blue fill); Press Start 2P at 8 px native
+  (`vibe/fonts.py "Press Start 2P:400"`, PIL draws it without anti-aliasing at that size) with a 1 px ink shadow; ASCII
+  sprites with an automatic 1 px ink outline (hero with beard, friend with red cap, shield, hand cursor); a hand cursor
+  that bobs 1 px at 4 Hz and stops when a choice is made; mosaic transitions (block size steps, never alpha fades);
+  3-2-1 px screen shake; a glitch tear-away (row blocks shifted, RGB split, one inverted frame) into real footage; the
+  physique photo shrinking into a pixel-framed card for the end card. Beats: quest window, calendar pages flying, day
+  counter, CHOOSE PLAN menu with an undecided cursor, 99 % loading bar, SAVE GAME, couch + BODY FAT +1, item fanfare,
+  [LISTEN] [SKIP], quest log. 0.35 s per 1080x1920 frame; render in 4 parallel ranges.
+  Code: `projects/reel-11/scene.py`, `timeline.py`. [r11]
+- **Face circle with the head breaking out (reel-11):** a pixel-stepped circle (mask drawn on the native grid, so its
+  edge has pixel steps), 2 px gold ring + 1 px ink, warm gold-to-orange dithered fill so the face pops off the cool
+  world; his matted frame scaled `0.62 * r / 60`, placed so the hair top sits about 105 px above the circle top; the
+  alpha is clipped to the circle below the centre line and free above it. Move and resize it per beat so it never
+  covers UI or real photos. `face()` in `projects/reel-11/scene.py`. [r11]
+
 ## 6. Text and captions
 - Captions sit on a handheld mic at about 1440 px; ask about caption height at the stills step when he holds a mic. [r01][r02]
 - Keep text off his face and beard: move the picture (crop) rather than the text when a centred word lands on the face. [r03]
@@ -305,6 +397,15 @@ All in `projects/reel-03/work/build/fx.py` (helpers) and `edit.py` (beats). Dete
 
 - **Caveat's digit 5 reads as an S** at caption size ("no 5am punishment" read "Sam punishment"). In handwritten fonts,
   spell small numbers out ("five days a week") or space them ("5 a.m.") and check the line at full size. [r08]
+
+- **Typed dialog-box captions: set the line breaks by hand (reel-11).** A greedy chunker (break on gaps, punctuation,
+  line overflow) left orphans ("months", "Monday" alone) and joined "her Let's say". A hand-set list of words per
+  line (`LINES` in `projects/reel-11/scene.py`) with asserts (word count matches, 25 characters a line at 8 px from
+  x 9 on a 216 px grid) fixed it. Show a chunk from its first word's start, never earlier, or the box flashes empty.
+  Words type at 40 characters a second, the spoken word in gold. [r11]
+- **Check every real photo with a caption over it (reel-11):** the top caption box covered his face on the dumbbell
+  photo; moved the photo 200 px down (pixel wall above). The FOLLOW button touched his face on the mirror photo;
+  moved it to an end card. Both caught at my stills check. [r11]
 
 ## 7. Audio
 - Cut audio from WAV decoded from the start, never by seeking an MP4/MP3 (up to 100 ms off). Verify sync by
@@ -328,6 +429,10 @@ All in `projects/reel-03/work/build/fx.py` (helpers) and `edit.py` (beats). Dete
   answers 403 to everything (cloud IP block; the bulk of the SFX), Wikimedia comes and goes with 429. Do not spoof a
   browser to get round it (auto mode blocks it, rightly): give him the sound page links to download and upload, then
   run `measure`. Measured shapes: up to 50 ms attack = hit, 50 to 400 ms = swoosh, longer = swell. [openverse]
+- Freesound re-checked on 2026-11-18 (reel-11): the proxy tunnel is established, then freesound.org, its `/apiv2/` and
+  cdn.freesound.org answer 403 with an empty body. An API key would not help. Every Openverse SFX hit for "whoosh",
+  "swish" and "glitch" was on Freesound. Code-made 8-bit cues (`projects/reel-11/work/sfx.py`) covered a game-styled
+  reel. [r11]
 
 - Downloaded overlay packs carry their own SFX, often mastered loud (the vlog pack peaks at -0.8 to -5 dB). Mix
   them as separate tracks under the voice, never at their original level. [vlog]
@@ -507,6 +612,13 @@ All in `projects/reel-03/work/build/fx.py` (helpers) and `edit.py` (beats). Dete
   build) instead of downloading a browser. Bun 1.4 is preinstalled; npm packages that download binaries from GitHub
   releases (ffmpeg-static) install fine through the proxy. [reanimate]
 
+- **Cut points: check the picture where the envelope walks back far (reel-11).** The walk-back from each onset found
+  1 s of sound before two lines: a mic being raised (take 2) and a long breath with the mic already still. Frame strips
+  around the in-point decided the override (`lo` in `projects/reel-11/work/plan_cut.py`). [r11]
+- **The stop hook flags untracked files after every step (reel-11, five times).** Commit and push after each step, and
+  put intermediates in the project `.gitignore` up front: `*.aac` (streams copied out of raw footage), `work/parts/`
+  (split pieces), `work/**/*.png|jpg` (stills, mattes). [r11]
+
 ## 9. Delivery and quality
 - File sizes with per-frame grain (1080x1920): reel-03, 22.2 s: crf 14 = 65 MB, crf 20 = 33 MB, crf 22 = 25 MB.
   reel-02 paper grain, 45 s: crf 18 = 435 MB, crf 25 = 57 MB. Grain is the size driver. [r02][r03]
@@ -522,6 +634,13 @@ All in `projects/reel-03/work/build/fx.py` (helpers) and `edit.py` (beats). Dete
 - reel-04 file sizes (32 s, 1080x1920, per-frame grain): crf 14 master 372 MB, crf 22 112 MB, crf 24 72 MB; two-pass
   6.6 Mbps = 27.4 MB, under the 30 MiB send limit, good enough for a phone preview. [r04]
 - A 2.5 s 1920x1080 intro at crf 16, keyframe every second, AAC 256k = 1.1 MB: one send, no parts. [r05]
+- **Splitting: read the real part lengths before muxing audio (reel-11).** `-f segment -segment_times 12.5,25` on a
+  master with sparse keyframes cut at the next keyframes (15.67 and 33.33 s), not at the asked times, so audio cut
+  for 12.5 s parts would have drifted. ffprobe each video part's duration first and cut the WAV for those ranges.
+  Master render parts each start on a keyframe, so a split there needs no re-encode. 49.9 s master (52 MB) went as
+  3 parts of 27.3 / 9.4 / 13.1 MiB, framemd5 identical to the master, audio at 0 ms. [r11]
+- Pixel-art reel, 49.9 s 1080x1920 (reel-11): crf 14 master 52 MB; two-pass 4.5 Mbps, keyframe every second, AAC 192k
+  = 28 MiB, SSIM 0.992 to the master, one send. [r11]
 
 ## 10. Mistakes made (so they never repeat)
 - Copied the reference's 0.16 s photo beat literally; the physique deserved 0.7 s. [r03]
@@ -569,3 +688,8 @@ All in `projects/reel-03/work/build/fx.py` (helpers) and `edit.py` (beats). Dete
 - reel-11: a line crossing a split-part boundary came out chopped because part 2's audio pre-roll (negative pts)
   was dropped on decode, part 1's picture was cut early and 5 ms fades dipped mid-word. Check packet pts of every
   part before cutting across a seam (lesson in section 7). [r11]
+- reel-11: planned no music under the clip he reacts to (he wanted it from 0:00); an automatic caption chunker left
+  orphan words; text and a button over his face on two real photos and the face circle over his arm (caught at my
+  stills check). Pushed the session branch HEAD to the default branch with a lessons commit, which carried the
+  unfinished reel-11 folder along: push lessons by cherry-picking the lessons commit onto the default branch in a
+  temporary worktree (vibe-wrap-up step 5). [r11]
