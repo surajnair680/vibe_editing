@@ -31,6 +31,15 @@ for k, g in enumerate(plan["segments"]):
     seg[-FADE:] *= np.linspace(1, 0, FADE)
     audio.append(seg); pieces.append(out)
     print(k, n, "frames")
+# ending meme (user, 2026-11-19): raw/ending_clip.mp4 (1080x1316, 6.83 s) hard cut right after "...agar bola to",
+# its own audio muted (silence for now), framed full width in the middle on black (no crop, nothing lost)
+n = int(6.8267 * FPS)
+out = f"work/cut/piece_{len(pieces):02d}.mp4"
+subprocess.run(["ffmpeg", "-v", "error", "-y", "-i", "raw/ending_clip.mp4", "-vf",
+                "fps=30,scale=1080:-2,pad=1080:1920:0:(oh-ih)/2:black,setsar=1", "-an", "-frames:v", str(n),
+                "-c:v", "libx264", "-crf", "14", "-preset", "veryfast", "-pix_fmt", "yuv420p", out], check=True)
+audio.append(np.zeros(int(round(n / FPS * SR)))); pieces.append(out)
+print("ending", n, "frames")
 mix = np.concatenate(audio)
 sf.write(f"work/audio/rough_{VER}.wav", mix, SR, subtype="PCM_24")
 with open("work/cut/list.txt", "w") as fh:
