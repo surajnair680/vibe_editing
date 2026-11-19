@@ -3,7 +3,7 @@
 Read this whole file before starting any new video, and again before the stills step. Every entry came from a real
 edit and cost a revision, a re-render or a question once. Newest videos at the bottom of each section. Tags say where
 each lesson came from: [r01] reel-01, [r02] reel-02, [r03] reel-03, [vlog] the mini vlog style study (2026-10-30),
-[codex] the Codex CLI setup session (2026-11-01), [r04] reel-04 (cinematic work-session edit, 2026-11-01), [r05] reel-05 (Automance logo intro, 2026-11-04), [openverse] the Openverse sound library setup (2026-11-06), [r06] reel-06 (YouTube Shorts music swap of a finished reel, 2026-11-06), [r07] reel-07 (meme template caption swap, 2026-11-11), [lemo] the Lemo-Opuscar setup (2026-11-13), [r08] reel-08 (Comeback Day 1, a test intro as a Lemo Urban Sketch animation, 2026-11-13), [r09] reel-09 (bicep curl "Current vs Correct" form explainer, 2026-11-14), [voxel] the voxel reels setup (2026-11-14), [reanimate] the reanimate skill setup (2026-11-15), [r10] reel-10 (home pull-up and ring dip reel, 2026-11-16), [r11] reel-11 (sarcastic reply to an "inspiring" English-speaking clip, 2026-11-18).
+[codex] the Codex CLI setup session (2026-11-01), [r04] reel-04 (cinematic work-session edit, 2026-11-01), [r05] reel-05 (Automance logo intro, 2026-11-04), [openverse] the Openverse sound library setup (2026-11-06), [r06] reel-06 (YouTube Shorts music swap of a finished reel, 2026-11-06), [r07] reel-07 (meme template caption swap, 2026-11-11), [lemo] the Lemo-Opuscar setup (2026-11-13), [r08] reel-08 (Comeback Day 1, a test intro as a Lemo Urban Sketch animation, 2026-11-13), [r09] reel-09 (bicep curl "Current vs Correct" form explainer, 2026-11-14), [voxel] the voxel reels setup (2026-11-14), [reanimate] the reanimate skill setup (2026-11-15), [r10] reel-10 (home pull-up and ring dip reel, 2026-11-16), [r11] reel-11 (sarcastic reply to an "inspiring" English-speaking clip, 2026-11-18), [r12] reel-12 ("Ghar ka khaana" sarcastic reply reel, 2026-11-19).
 
 How this file grows: see "Learning loop" in CLAUDE.md. Add to it during every video, not only at the end.
 Other docs and when to read them: `docs/README.md`.
@@ -168,6 +168,15 @@ Other docs and when to read them: `docs/README.md`.
   music starts at 0:00, ducked under every voice. He asked for "Mario like music": made an original 8-bit platformer
   track in code (pulse lead, triangle bass, noise drums, 152.5 BPM chosen so a bar lands on the key reveal), never
   the real melodies or sounds. Code: `projects/reel-11/work/music.py`, `sfx.py`, `mix.py`.
+
+- **His gym's logos are fine on screen (reel-12):** "You dont have to hide the logo i dont mind" (the "cloud" sign and
+  Hammer Strength machines in his gym B-roll). Don't crop or blur them; still check for other brands' logos. [r12]
+- **B-roll clips are raw material, not fixed lengths (reel-12):** he said trimming is expected; use only the best part
+  of each clip (one clean rep, the first clean second before someone walks in) without asking. [r12]
+- **Rough cut notes he gave on reel-12:** voice cleaned with ElevenLabs isolation, every pause cut ("everything I say
+  should be clearly heard, the gaps should be cut obviously"), long spoken lists after the first 2 items at 1.5x (pitch
+  kept with ffmpeg `rubberband=tempo=1.5:window=short`, Scribe confirmed every word). He decides sound and graphics
+  only after the cut is right. Code: `projects/reel-12/work/plan_cut.py`, `make_cut.py`. [r12]
 
 ## 2. Remaking a reference edit shot for shot [r03]
 - **Measure the reference frame by frame.** `select='gt(scene,0.12)'` gives a first cut list; busy parts need sheets of
