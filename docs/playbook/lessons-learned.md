@@ -186,6 +186,11 @@ Other docs and when to read them: `docs/README.md`.
   small or partial (hands, silhouettes, backs), and reject and redo anything that looks generic before he sees it.
   The main people are his real footage and photos. [r12]
 
+- **Physique pics always show his face (reel-12):** "whenever my physique asset is used my face should be visible too
+  otherwise what the point". The sample cropped his mirror pic at the chin for "losing fat, not muscle"; he rejected it
+  at once. Frame every physique photo or clip from the hair down (face + body together); make the panel taller rather
+  than cropping the head; a photo without his face (back pose) needs his OK before use. [r12]
+
 ## 2. Remaking a reference edit shot for shot [r03]
 - **Measure the reference frame by frame.** `select='gt(scene,0.12)'` gives a first cut list; busy parts need sheets of
   every frame (`-ss a -t b`, `drawtext=%{pts}`), because shots can be 1 to 2 frames long (reel-03's reference: about
