@@ -191,6 +191,15 @@ Other docs and when to read them: `docs/README.md`.
   at once. Frame every physique photo or clip from the hair down (face + body together); make the panel taller rather
   than cropping the head; a photo without his face (back pose) needs his OK before use. [r12]
 
+- **Food stays in normal colour even in a manga/comic style (reel-12):** "make the food items normally... the viewer
+  wont be able to tell what food it is" in black-and-white ink. Codex photo-style food (thali, protein spread, roti
+  stack: `projects/reel-12/assets/codex/`) inside ink panels; only panels, stamps and lettering are manga. Same rule
+  as his photos: anything the viewer must recognise stays real. [r12]
+- **Sound brief for reel-12:** "dont make it ai sloppy, and dont let the viewer get distracted from the content".
+  Built: ElevenLabs music from 0:00, about 18 dB under the voice while he talks (measure stems, not the mix:
+  a -17 dB music gain first left it 30 dB under, inaudible), ink swish only on section panels, list photos change
+  silently, low pen ticks per item, stamps on the big words, two booms (impact frames). `projects/reel-12/work/mix.py`. [r12]
+
 ## 2. Remaking a reference edit shot for shot [r03]
 - **Measure the reference frame by frame.** `select='gt(scene,0.12)'` gives a first cut list; busy parts need sheets of
   every frame (`-ss a -t b`, `drawtext=%{pts}`), because shots can be 1 to 2 frames long (reel-03's reference: about
