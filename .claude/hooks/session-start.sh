@@ -8,14 +8,16 @@ fi
 
 # System libraries the skia graphics engine needs, plus libGLESv2 for MediaPipe (person masks for cut-outs)
 if ! ldconfig -p | grep -q 'libEGL.so.1' || ! ldconfig -p | grep -q 'libGLESv2.so.2'; then
-  apt-get install -y -q libegl1 libgl1 libgles2 >/dev/null 2>&1 \
-    || { apt-get update -q >/dev/null 2>&1 && apt-get install -y -q libegl1 libgl1 libgles2 >/dev/null 2>&1; }
+  timeout 60 apt-get install -y -q libegl1 libgl1 libgles2 >/dev/null 2>&1 \
+    || { timeout 60 apt-get update -q >/dev/null 2>&1 && timeout 60 apt-get install -y -q libegl1 libgl1 libgles2 >/dev/null 2>&1; } \
+    || echo "Note: graphics libraries could not be installed (package server unreachable)."
 fi
 
 # Python packages (faster-whisper skipped: transcription goes through ElevenLabs)
 if ! python3 -c "import scipy, imageio_ffmpeg, skia, soundfile, cv2" >/dev/null 2>&1; then
-  python3 -m pip install -q --root-user-action=ignore \
-    scipy imageio-ffmpeg skia-python soundfile opencv-python-headless
+  timeout 180 python3 -m pip install -q --root-user-action=ignore \
+    scipy imageio-ffmpeg skia-python soundfile opencv-python-headless \
+    || echo "Note: some Python packages did not install in time."
 fi
 
 # Cut-out tools (rembg + MediaPipe + their models) in the background, so the session starts at once.
