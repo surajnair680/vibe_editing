@@ -17,7 +17,7 @@ SHOTS = [
     (t(6, 2), t(7), "b_part4", 4.87, "front ring dip"),
     (t(7), t(8), "b_part5", 7.20, "lets go of the rings, shakes the arms out"),
     # phrase 3: payoff
-    (t(8), t(9), "d_part2", 2.00, "front physique, slow turn (horizontal clip, cropped 9:16)"),
+    (t(8), t(9), "d_part2", 3.00, "front physique, slow turn (horizontal clip, cropped 9:16)"),
     (t(9), t(10), "part4", 9.60, "walks back up to the camera, front close-up"),
     (t(10), t(11), "e_part5", 3.60, "turns, walks to the lens, eyes closed, exhale"),
     (t(11), t(12), "e_part5", 6.30, "empty rings swinging, music fades"),
