@@ -8,7 +8,7 @@
 - Style: Lemo-Opuscar "Manga Panels" grammar, hybrid with real footage. Paper #F3F0E8, ink #121212, one red #F03C1E
   (stamps, ticks, anger marks only). His face always visible: real head breaking out of a manga circle (ink ring, paper
   rim, screentone + boiling focus lines inside). Physique pics always show his face (user rule). Real photos and
-  footage stay real colour inside ink panels. Codex only for objects, re-printed through screentone.
+  footage stay real colour inside ink panels. Food shows in normal full colour (user: B/W manga food can't be recognised): Codex photo-style images inside ink panels, assets/codex/thali.png and protein.png.
 - Captions: Hinglish narration box, spoken word inverted; during lists the item box is the caption.
 - Sound: to be decided after the graphics (user).
 
@@ -16,14 +16,14 @@
 | time | line | visual |
 |---|---|---|
 | 0-24.7 | her clip + inset | untouched |
-| 24.7 | Didi ne ghar ke khaane ko target kar diya | page snaps in, big circle, Codex ink thali panel, target crosshair lands |
+| 24.7 | Didi ne ghar ke khaane ko target kar diya | page snaps in, big circle, colour Codex thali photo panel, target crosshair lands |
 | 27.3 | Yeh khud ko kya samajhti hai? | "KYA SAMAJHTI HAI?!" shout, red anger mark by his head |
 | 28.8 | Hamare maa ke haath ke khaane mein kya problem hai? | thali glows with manga sparkles, "MAA KE HAATH KA KHAANA" |
 | 31.5 | It's perfect, flawless, zero flaws | PERFECT / FLAWLESS / ZERO FLAWS stamps, 2-frame invert on the last |
 | 34.4 | Zaroorat se zyada carbs khaane se kya ho jaayega | ink roti stack grows |
 | 37.4 | Type 2 diabetes ... standard feature hai ... | spec card + red stamp (sample) |
 | 43.0 | Aur yeh balanced meal se kya obsession hai | screentone balanced-plate pie, "OBSESSION?" |
-| 45.6 | Protein khaane se max to max kya hi benefits | "PROTEIN?" slam, Codex protein spread |
+| 45.6 | Protein khaane se max to max kya hi benefits | "PROTEIN?" slam, colour Codex protein spread |
 | 48.4-60.6 | protein list (10) | one item box + counter + red tick; back pic 01-02, front 03-05, dumbbell 06-07, flex clip 08-10 |
 | 60.8 | I mean are these benefits even worth it? | circle big centre, "WORTH IT?", sweat drop |
 | 63.0 | Phir pata chala yeh logon ko gym jaane bolegi | pec fly clip panel, one rep |
