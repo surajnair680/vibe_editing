@@ -235,6 +235,14 @@ Other docs and when to read them: `docs/README.md`.
   "less back pain", mirror pic on "better looks", dumbbell pic on "strength"), a simple code-drawn illustration for
   abstract ones (sugar line, bone, moon). Show the mapping table before building. [r12]
 
+- **reel-12 outcome and numbers:** approved at v2 after one note (list visuals). Manga hybrid kit worth reusing:
+  `projects/reel-12/work/mg/manga.py` (screentone, focus lines, slam lettering, manga face circle with paper rim and
+  hair-edge clean-up), `scene.py` (beats, captions with Hinglish transliteration table, list item box with counter
+  and red tick), `benefits.py` (benefit illustrations: gauge, age chart, flame, sugar line, bone, shield, hourglass,
+  mood, moon). Per-frame rembg mattes: about 2 frames/s per process, 3 processes for 1,800 frames in about 5 min. Full
+  92 s render about 0.6 s a frame, 5 parallel parts about 8 min. Final: crf 18 slow = 89 MiB (4 parts), 2-pass
+  2350k post file = 28 MiB (SSIM 0.979). Revisions spliced at keyframes and proved with framemd5. [r12]
+
 ## 2. Remaking a reference edit shot for shot [r03]
 - **Measure the reference frame by frame.** `select='gt(scene,0.12)'` gives a first cut list; busy parts need sheets of
   every frame (`-ss a -t b`, `drawtext=%{pts}`), because shots can be 1 to 2 frames long (reel-03's reference: about
