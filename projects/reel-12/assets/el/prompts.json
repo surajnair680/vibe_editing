@@ -1,0 +1,14 @@
+{"kind": "music", "name": "music_a", "sec": 90.0, "prompt": "Playful light anime slice-of-life comedy background music. Plucky pizzicato strings, bouncy upright bass, soft glockenspiel accents, light brushed drums, around 112 BPM, mischievous and cheeky mood. Instrumental, no vocals. Steady energy all the way through, sits quietly under dialogue, warm and organic, real instruments, not cheesy."}
+{"kind": "music", "name": "music_b", "sec": 90.0, "prompt": "Laid-back playful comedy groove for a sarcastic talking video. Muted funky guitar, warm round bass, soft finger snaps and light kick, a little marimba, around 100 BPM, deadpan and sneaky mood. Instrumental, no vocals, minimal, consistent energy, leaves space for a voice, natural recorded sound, not cheesy."}
+{"kind": "sfx", "name": "ink_swish", "sec": 0.6, "prompt": "a single soft quick brush stroke swish on paper, dry, close, short"}
+{"kind": "sfx", "name": "hit", "sec": 0.7, "prompt": "a single punchy comic book hit, short thump with a small snap, dry, no reverb"}
+{"kind": "sfx", "name": "stamp", "sec": 0.8, "prompt": "a heavy rubber stamp slammed once on a wooden desk, single thud, dry, close"}
+{"kind": "sfx", "name": "tick", "sec": 0.5, "prompt": "a single quick pen tick mark scratched on paper, short, dry"}
+{"kind": "sfx", "name": "lockon", "sec": 0.8, "prompt": "a short electronic target lock-on sound, two quick clean beeps"}
+{"kind": "sfx", "name": "shimmer", "sec": 1.2, "prompt": "a soft gentle sparkle shimmer, light glassy chimes, short"}
+{"kind": "sfx", "name": "swell", "sec": 1.6, "prompt": "a short soft rising whoosh swell that builds and stops abruptly"}
+{"kind": "sfx", "name": "whoosh", "sec": 0.6, "prompt": "a quick soft air whoosh passing by, short"}
+{"kind": "sfx", "name": "drip", "sec": 0.6, "prompt": "a single cartoon water drop, plip, short"}
+{"kind": "sfx", "name": "pop", "sec": 0.5, "prompt": "a single cartoon bubble pop, short and playful"}
+{"kind": "sfx", "name": "boom", "sec": 1.6, "prompt": "a big deep cinematic boom impact with a short tail"}
+{"kind": "sfx", "name": "riser", "sec": 3.5, "prompt": "a tense rising tension riser that builds louder and stops abruptly"}

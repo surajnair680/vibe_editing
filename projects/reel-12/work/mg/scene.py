@@ -509,7 +509,7 @@ def beats(img, t):
         cap_y = 1150
     elif t < 60.70:                                            # protein list
         r = media_panel(img, t)
-        cur = [it for it in PROTEIN if it[1] <= t][-1]
+        cur = ([it for it in PROTEIN if it[1] <= t] or PROTEIN[:1])[-1]
         i = PROTEIN.index(cur) + 1
         if r and r[0] <= 860:
             vertical_word(img, "PROTEIN", r[0] + 24, 1040, PH_Y0, 1000, t, r[1], 71)
@@ -527,7 +527,7 @@ def beats(img, t):
         cap_y = 1150
     elif t < 78.55:                                            # gym list
         r = media_panel(img, t)
-        cur = [it for it in GYM if it[1] <= t][-1]
+        cur = ([it for it in GYM if it[1] <= t] or GYM[:1])[-1]
         i = GYM.index(cur) + 1
         if r and r[0] <= 860:
             vertical_word(img, "GYM", r[0] + 24, 1040, PH_Y0, 1000, t, max(67.50, r[1]), 93)
@@ -581,6 +581,8 @@ def frame(t):
     s = circle_state(t)
     face_circle(img, me, al, int(s["cx"]), int(s["cy"]), int(s["r"]), s["scale"], s["head_top"],
                 seed=7 + int(t * 10) % 3)
+    if 27.31 <= t < 28.83:                                   # "yeh khud ko kya samajhti hai?"
+        anger(img, s["cx"] + s["r"] * 0.62, s["head_top"] + 90, 70, t, 27.31)
     if t >= 81.70:
         anger(img, s["cx"] + s["r"] * 0.62, s["head_top"] + 90, 85, t, 82.68)
     if cap_y is not None:
