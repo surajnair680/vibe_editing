@@ -56,10 +56,21 @@ for g in segs[1:]:
         out[-1] = {"src_in": out[-1]["src_in"], "src_out": g["src_out"], "text": out[-1]["text"] + " / " + g["text"]}
     else:
         out.append(g)
+# benefit lists (user, rough v3): first 2 items at 1x, the rest at 1.5x. Switch in the pause after item 2
+# ("reduced hunger," | "losing" and "better looks," | "more"), to the end of each list ("nails." / "sleep.").
+FAST = [(56.39, 72.30), (86.14, 100.05)]
+SPEED = 1.5
+split = []
+for g in out:
+    cuts = sorted({g["src_in"], g["src_out"]} | {c for f in FAST for c in f if g["src_in"] < c < g["src_out"]})
+    for a, b in zip(cuts[:-1], cuts[1:]):
+        fast = any(f0 <= a + 1e-6 and b <= f1 + 1e-6 for f0, f1 in FAST)
+        split.append({"src_in": a, "src_out": b, "speed": SPEED if fast else 1.0, "text": g["text"]})
+out = split
 t = 0.0
 for g in out:
-    g["edit_in"] = round(t, 4); t += g["src_out"] - g["src_in"]
+    g["edit_in"] = round(t, 4); t += (g["src_out"] - g["src_in"]) / g["speed"]
 json.dump({"fps": FPS, "length": round(t, 4), "segments": out}, open("work/cut_plan.json", "w"), indent=1, ensure_ascii=False)
 for g in out:
-    print(f"{g['edit_in']:6.2f}  src {g['src_in']:7.2f}-{g['src_out']:7.2f}  {g['text'][:70]}")
+    print(f"{g['edit_in']:6.2f}  src {g['src_in']:7.2f}-{g['src_out']:7.2f} x{g['speed']}  {g['text'][:60]}")
 print("length", round(t, 2), "removed", round(dur - t, 2))
