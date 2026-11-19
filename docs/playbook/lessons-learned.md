@@ -178,6 +178,10 @@ Other docs and when to read them: `docs/README.md`.
   kept with ffmpeg `rubberband=tempo=1.5:window=short`, Scribe confirmed every word). He decides sound and graphics
   only after the cut is right. Code: `projects/reel-12/work/plan_cut.py`, `make_cut.py`. [r12]
 
+- **Codex manga characters look generic to him (reel-12):** "codex generated manga characters look very generic".
+  In manga or comic styles, let Codex draw objects only (food, props, cards); the people are his real footage and
+  photos, the manga look comes from code (panels, screentone, focus lines, lettering). [r12]
+
 ## 2. Remaking a reference edit shot for shot [r03]
 - **Measure the reference frame by frame.** `select='gt(scene,0.12)'` gives a first cut list; busy parts need sheets of
   every frame (`-ss a -t b`, `drawtext=%{pts}`), because shots can be 1 to 2 frames long (reel-03's reference: about
