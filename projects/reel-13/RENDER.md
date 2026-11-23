@@ -8,4 +8,4 @@ Raw (not in git, ask the user to re-upload if missing): raw/ep0_part1.mp4, ep0_p
    `python3 work/align_voice.py` -> work/audio/full_iso.wav (offset 2.6 ms, aligned within 1 ms)
 3. Transcripts (Scribe): work/words.json, work/p2/words.json, work/p3/words.json (part-local times)
 4. `python3 work/plan_cut.py` -> work/words_full.json, work/cut_plan.json (mic-raise in-point floors inside)
-5. `python3 work/make_cut.py v1` -> out/reel-13-rough-v1.mp4 + -preview.mp4 (53.9 s)
+5. `python3 work/make_cut.py v2` -> out/reel-13-rough-v2.mp4 + -preview.mp4 (53.67 s, approved cut)

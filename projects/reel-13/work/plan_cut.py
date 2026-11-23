@@ -16,6 +16,9 @@ for off, f in zip(P["offsets"], ["work/words.json", "work/p2/words.json", "work/
 json.dump(W, open("work/words_full.json", "w"), indent=0)
 # per-line earliest in-point, keyed by the first word's start: the mic is still being raised into frame before
 # these (frame strips work/frames/inpoints.jpg, motion work/mic_motion.py), so start once it is up
+# per-line latest out-point, keyed by the line's last word end (user note on rough v1: after "supplements" he
+# reaches out to stop the camera; the word's "s" has decayed by 71.70, the mic leaves frame from 71.60)
+OUT_CEIL = {71.58: 71.70}
 IN_FLOOR = {5.82: 5.66, 10.24: 10.10, 32.12: 32.00, 56.5: 56.30, 69.32: 69.10}
 x, sr = sf.read("work/audio/full_iso.wav")
 n = int(HOP * sr)
@@ -48,6 +51,7 @@ for k, ln in enumerate(lines):
     while j * HOP < hi and not decayed[j:j + 8].all():
         j += 1
     b = min(hi, j * HOP + 0.05)
+    b = min(b, OUT_CEIL.get(round(e, 2), 1e9))
     a, b = round(a * FPS) / FPS, round(b * FPS) / FPS
     segs.append({"src_in": round(a, 4), "src_out": round(b, 4), "text": " ".join(w["w"] for w in ln)})
 out = [segs[0]]

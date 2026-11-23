@@ -1,6 +1,6 @@
 {
  "fps": 30,
- "length": 53.8999,
+ "length": 53.6666,
  "segments": [
   {
    "src_in": 0.8667,
@@ -124,7 +124,7 @@
   },
   {
    "src_in": 70.8667,
-   "src_out": 71.9333,
+   "src_out": 71.7,
    "text": "supplements",
    "edit_in": 44.6999
   },
@@ -132,31 +132,31 @@
    "src_in": 73.1333,
    "src_out": 75.4,
    "text": "The wins and the days it goes wrong.",
-   "edit_in": 45.7665
+   "edit_in": 45.5332
   },
   {
    "src_in": 77.0,
    "src_out": 78.1333,
    "text": "How long will it take?",
-   "edit_in": 48.0332
+   "edit_in": 47.7999
   },
   {
    "src_in": 78.2,
    "src_out": 79.8667,
    "text": "Six months? A year?",
-   "edit_in": 49.1665
+   "edit_in": 48.9332
   },
   {
    "src_in": 80.3333,
    "src_out": 81.0333,
    "text": "I don't know,",
-   "edit_in": 50.8332
+   "edit_in": 50.5999
   },
   {
    "src_in": 81.3,
    "src_out": 83.6667,
    "text": "but I'm not stopping until I look like him",
-   "edit_in": 51.5332
+   "edit_in": 51.2999
   }
  ]
 }
