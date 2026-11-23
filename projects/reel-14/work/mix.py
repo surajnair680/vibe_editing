@@ -11,7 +11,12 @@ import sys, json, subprocess
 import numpy as np, soundfile as sf
 from scipy.signal import butter, sosfiltfilt
 sys.path.insert(0, "work/build")
-import scene
+import importlib
+V2 = "--v2" in sys.argv
+if V2:
+    sys.path.insert(0, "work/build2"); import scene2 as scene
+else:
+    import scene
 
 VER = sys.argv[1] if len(sys.argv) > 1 and not sys.argv[1].startswith("--") else "v1"
 SR = 48000
@@ -99,7 +104,23 @@ def place(name, t, gdb, semis=0.0, lp=None):
     sfx[a0:a0 + n] += x[:n]
 
 
-cards = sorted([e for e in scene.EV if e[0] in ("card", "outliers", "slit")], key=lambda e: e[1])
+if V2:
+    # v2 (reference look): a soft low hit as each title starts, boom on SCREW and the ending, shutter on photos
+    for i, (text, t0, t1, col, y, size) in enumerate(scene.TIT):
+        if text == "SCREW":
+            place("boom", t0, -5); place("metal_hit", t0, -9, -5, lp=4000)
+        elif text == "NORMAL" and t0 > 100:
+            place("boom", t0, -4); place("metal_hit", t0, -9, -3, lp=4000)
+        elif text in ("BALANCE",) and t0 > 69:
+            place("shield_bash", t0 + 0.35, -11)
+        else:
+            place("metal_hit", t0, -17, -6, lp=3500)
+    for t0, t1, kind, p in scene.INS:
+        if kind in ("photo", "frame", "cutout"):
+            place("shutter", t0, -8)
+        if p.get("title"):
+            place("metal_hit", p.get("title_from", t0), -17, -6, lp=3500)
+cards = [] if V2 else sorted([e for e in scene.EV if e[0] in ("card", "outliers", "slit")], key=lambda e: e[1])
 n_c = len(cards)
 for i, (k, f0, f1, p) in enumerate(cards):
     t = f0 / scene.FPS
@@ -112,7 +133,7 @@ for i, (k, f0, f1, p) in enumerate(cards):
         place("boom", t, -2); place("metal_hit", t, -5, -3)
     else:
         place("metal_hit", t, -15 + 3 * i / n_c, -4 + 6 * i / n_c, lp=6500)
-for k, f0, f1, p in scene.EV:
+for k, f0, f1, p in ([] if V2 else scene.EV):
     if k == "photo" and f1 - f0 >= 15:
         place("shutter", f0 / scene.FPS, -6)
 

@@ -51,29 +51,29 @@ ins(s("were", 99.97), s("normal", 101.0), "photo", path="assets/photos/me_physiq
 
 # titles behind him on his cut-out scenes: (text, t0, t1, color, y, size or None = fit)
 TIT = [
-    ("NORMAL", s("Normal", 27.4), s("a", 28.75), fx2.OFFWHITE, 470, None),
-    ("OBSESSED", s("obsessed", 35.4), s("abnormal", 36.2), fx2.RED, 470, None),
-    ("ABNORMAL", s("abnormal", 36.2), 37.9, fx2.OFFWHITE, 470, None),
-    ("ABNORMAL", s("Success", 42.6) + 0.25, s("by", 44.0), fx2.RED, 470, None),
-    ("A", s("A", 67.3), s("Screw", 68.8), fx2.RED, 330, 1100),
-    ("SCREW", s("Screw", 68.8), s("You", 69.8), fx2.OFFWHITE, 300, 420),
-    ("BALANCE", s("balance", 69.15), s("You", 69.8), fx2.RED, 690, None),
+    ("NORMAL", s("Normal", 27.4), s("a", 28.75), fx2.OFFWHITE, 400, None),
+    ("OBSESSED", s("obsessed", 35.4), s("abnormal", 36.2), fx2.RED, 400, None),
+    ("ABNORMAL", s("abnormal", 36.2), 37.9, fx2.OFFWHITE, 400, None),
+    ("ABNORMAL", s("Success", 42.6) + 0.25, s("by", 44.0), fx2.RED, 400, None),
+    ("A", s("A", 67.3), s("Screw", 68.8), fx2.RED, 280, 700),
+    ("SCREW", s("Screw", 68.8), s("You", 69.8), fx2.OFFWHITE, 330, 300),
+    ("BALANCE", s("balance", 69.15), s("You", 69.8), fx2.RED, 560, 300),
     ("CRAZY", s("Crazy", 94.24), 97.0, fx2.OFFWHITE, 330, 250),
     ("BORING", s("boring", 95.0), 97.0, fx2.OFFWHITE, 580, 250),
     ("OBSESSED", s("obsessed", 95.5), 97.0, fx2.RED, 830, 250),
-    ("NORMAL", s("normal", 101.0), LEN + 1, fx2.OFFWHITE, 470, None),
+    ("NORMAL", s("normal", 101.0), LEN + 1, fx2.OFFWHITE, 400, None),
 ]
-STRIKE = {("A", 330): s("nothing", 68.3), ("BALANCE", 690): s("balance", 69.15) + 0.35}
+STRIKE = {("A", 280): s("nothing", 68.3), ("BALANCE", 560): s("balance", 69.15) + 0.35}
 GREY = (s("Balance", 60.3) - 0.05, s("Screw", 68.8))
 # his cut-out moves for the stacked list (scale, dx) with 0.35 s eases
-MOVES = [(0, 1.0, 0), (s("Crazy", 94.24) - 0.2, 0.78, 210), (97.0, 1.0, 0)]
+MOVES = [(0, 0.82, 0), (s("Crazy", 94.24) - 0.2, 0.70, 230), (97.0, 0.82, 0)]   # 0.82: titles read above his head
 
 
 def his_xf(t):
-    sc, dx = 1.0, 0
+    sc, dx = MOVES[0][1], MOVES[0][2]
     for i, (t0, s1, d1) in enumerate(MOVES):
-        if t >= t0:
-            p0 = MOVES[i - 1] if i else (0, 1.0, 0)
+        if t >= t0 and i:
+            p0 = MOVES[i - 1]
             u = fx2.ease_out((t - t0) / 0.35)
             sc = p0[1] + (s1 - p0[1]) * u; dx = p0[2] + (d1 - p0[2]) * u
     return sc, dx
@@ -135,6 +135,12 @@ def edge_fix(base, m):
 def his_layer(bg, base, f, t):
     m = matte(f)
     base, m = edge_fix(base, m)
+    # the frame edge cuts his shoulders in a straight line once he is scaled down: fade the outer 170 px instead
+    xs = np.arange(W, dtype=np.float32)
+    ramp = np.clip(np.minimum(xs, W - 1 - xs) / 170.0, 0, 1); ramp = ramp * ramp * (3 - 2 * ramp)
+    ys = np.arange(H, dtype=np.float32)
+    rb = np.clip((H - 1 - ys) / 60.0, 0, 1)
+    m = (m.astype(np.float32) * ramp[None, :] * np.maximum(rb[:, None], 0.0 + (ys[:, None] < H - 60))).astype(np.uint8)
     sc, dx = his_xf(t)
     if abs(sc - 1) > 1e-3 or dx:
         M = np.float32([[sc, 0, (1 - sc) * W / 2 + dx], [0, sc, (1 - sc) * H]])
@@ -151,7 +157,7 @@ def draw_titles(img, t, only=None):
         if not (t0 <= t < t1):
             continue
         if size is None:
-            size = 470
+            size = 400
             while fx2.font(fx2.F_TITLE, size).getlength(text) > W - 110: size -= 10
         img, tw, th = fx2.title(img, text, t, t0, 0, y, size, col, seed=hash(text) % 97, align="center" if size > 300 or text in ("NORMAL", "ABNORMAL", "OBSESSED", "SCREW", "BALANCE", "A") else "left")
         if text in ("CRAZY", "BORING", "OBSESSED") and size == 250:
