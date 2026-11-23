@@ -3,7 +3,7 @@
 Read this whole file before starting any new video, and again before the stills step. Every entry came from a real
 edit and cost a revision, a re-render or a question once. Newest videos at the bottom of each section. Tags say where
 each lesson came from: [r01] reel-01, [r02] reel-02, [r03] reel-03, [vlog] the mini vlog style study (2026-10-30),
-[codex] the Codex CLI setup session (2026-11-01), [r04] reel-04 (cinematic work-session edit, 2026-11-01), [r05] reel-05 (Automance logo intro, 2026-11-04), [openverse] the Openverse sound library setup (2026-11-06), [r06] reel-06 (YouTube Shorts music swap of a finished reel, 2026-11-06), [r07] reel-07 (meme template caption swap, 2026-11-11), [lemo] the Lemo-Opuscar setup (2026-11-13), [r08] reel-08 (Comeback Day 1, a test intro as a Lemo Urban Sketch animation, 2026-11-13), [r09] reel-09 (bicep curl "Current vs Correct" form explainer, 2026-11-14), [voxel] the voxel reels setup (2026-11-14), [reanimate] the reanimate skill setup (2026-11-15), [r10] reel-10 (home pull-up and ring dip reel, 2026-11-16), [r11] reel-11 (sarcastic reply to an "inspiring" English-speaking clip, 2026-11-18), [r12] reel-12 ("Ghar ka khaana" sarcastic reply reel, 2026-11-19).
+[codex] the Codex CLI setup session (2026-11-01), [r04] reel-04 (cinematic work-session edit, 2026-11-01), [r05] reel-05 (Automance logo intro, 2026-11-04), [openverse] the Openverse sound library setup (2026-11-06), [r06] reel-06 (YouTube Shorts music swap of a finished reel, 2026-11-06), [r07] reel-07 (meme template caption swap, 2026-11-11), [lemo] the Lemo-Opuscar setup (2026-11-13), [r08] reel-08 (Comeback Day 1, a test intro as a Lemo Urban Sketch animation, 2026-11-13), [r09] reel-09 (bicep curl "Current vs Correct" form explainer, 2026-11-14), [voxel] the voxel reels setup (2026-11-14), [reanimate] the reanimate skill setup (2026-11-15), [r10] reel-10 (home pull-up and ring dip reel, 2026-11-16), [r11] reel-11 (sarcastic reply to an "inspiring" English-speaking clip, 2026-11-18), [r12] reel-12 ("Ghar ka khaana" sarcastic reply reel, 2026-11-19), [r14] reel-14 ("Successful people are not normal" reaction reel, 2026-11-23).
 
 How this file grows: see "Learning loop" in CLAUDE.md. Add to it during every video, not only at the end.
 Other docs and when to read them: `docs/README.md`.
@@ -561,6 +561,13 @@ All in `projects/reel-03/work/build/fx.py` (helpers) and `edit.py` (beats). Dete
   for it cut. At every part's last line, end where the word has decayed (about -35 dB on the isolated voice) and check
   the frames for the hand going to the phone. Same for line starts where the mic is lifted into frame: start once it
   is up (`IN_FLOOR` / `OUT_CEIL` in `projects/reel-13/work/plan_cut.py`, motion check `work/mic_motion.py`). [r13]
+
+- **He raises the mic before every line and drops it after (reel-14).** The inhale walk-back put most in-points
+  0.3 to 0.5 s before the first word, with the mic still rising into frame. Automatic rule that fixed all 32 lines
+  at once: start no earlier than 0.10 s before the first word (the mic is up by then), and if the lower half of the
+  frame starts moving before the out-point, end at the later of the -35 dB decay + 1 frame and the first moving
+  frame. Merge pieces whose gap is under 0.1 s so the out rule never leaves a 2-frame jump cut mid-sentence.
+  `projects/reel-14/work/plan_cut.py` (`LEAD`, `first_motion`). [r14]
 
 ## 8. Workflow and process
 - Stills first, every time (contact sheet every 2.5 s + full-size changed frames), plus a short low-res draft clip when
