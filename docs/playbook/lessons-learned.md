@@ -263,6 +263,14 @@ Other docs and when to read them: `docs/README.md`.
   clips of me bench pressing"): raw video is never in git, so say so and ask for a re-upload; photos are in git on
   other branches (`git ls-tree -r origin/<branch>` + `git show`). [r14]
 
+- **Flash cards are "a stun grenade" to him (reel-14 v1).** Text Flash Cuts cards held 2 to 9 frames (the style's
+  own rule) plus 3 to 7 frame clip flashes: "several parts are so brief that the viewer doesn't know what the hell is
+  going on". Every word, photo or clip must stay readable, about 0.8 s at least, whatever a style guide says. He then
+  dropped the style for a reference he supplied (a premium dark red motion-graphics reel: cut-out subjects on deep
+  red with drifting hairlines, condensed titles whose letters fade in scattered, captions that build word by word
+  with a blur-in, a light grey section with red circles) and asked for the reanimate skill to copy it. Build of that
+  look: `projects/reel-14/work/build2/` (fx2.py, scene2.py), spec `projects/reel-14/reanimate/spec.md`. [r14]
+
 ## 2. Remaking a reference edit shot for shot [r03]
 - **Measure the reference frame by frame.** `select='gt(scene,0.12)'` gives a first cut list; busy parts need sheets of
   every frame (`-ss a -t b`, `drawtext=%{pts}`), because shots can be 1 to 2 frames long (reel-03's reference: about
