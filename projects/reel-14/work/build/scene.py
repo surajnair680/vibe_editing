@@ -118,6 +118,11 @@ def chunks():
 
 
 CH = chunks()
+# Scribe capitalises the first word of each phone part; "So / Is something" is one sentence
+for c in CH:
+    for w in c:
+        if w["w"] == "Is" and abs(w["s"] - 37.27) < 0.2:
+            w["w"] = "is"
 
 
 def chunk_at(t):
