@@ -254,6 +254,15 @@ Other docs and when to read them: `docs/README.md`.
 - **Speed notes come as rules, not times (reel-12):** "play the first 2 list items at 1x and rest at 1.5x". Apply the
   rule to every list in the video and switch speed in the pause after item 2. [r12]
 
+- **Asset answers on reel-14 (reaction reel in Text Flash Cuts):** faceless *training* clips (pull-ups from behind,
+  a press filmed from behind his head) are fine, unlike faceless physique photos; another brand's poster in his gym
+  (INJA collagen) can stay, no crop; no extra held lines under celebrity photos. He adds famous people as proof
+  ("Elon Musk and Steve Jobs to showcase people who dont live like normal people", then "Arnold too") and sends the
+  photos himself, since Wikimedia Commons is unreachable from the container (connection refused, 000). Small photos
+  (365 px wide) go in a framed card, never stretched full screen. He remembers clips from older sessions ("you have
+  clips of me bench pressing"): raw video is never in git, so say so and ask for a re-upload; photos are in git on
+  other branches (`git ls-tree -r origin/<branch>` + `git show`). [r14]
+
 ## 2. Remaking a reference edit shot for shot [r03]
 - **Measure the reference frame by frame.** `select='gt(scene,0.12)'` gives a first cut list; busy parts need sheets of
   every frame (`-ss a -t b`, `drawtext=%{pts}`), because shots can be 1 to 2 frames long (reel-03's reference: about
