@@ -13,7 +13,7 @@ from scipy.signal import butter, sosfiltfilt
 sys.path.insert(0, "work/build")
 import scene
 
-VER = sys.argv[1] if len(sys.argv) > 1 else "v1"
+VER = sys.argv[1] if len(sys.argv) > 1 and not sys.argv[1].startswith("--") else "v1"
 SR = 48000
 LEN = scene.LEN
 N = int(round(LEN * SR)) + int(0.6 * SR)       # 0.6 s tail after the last frame for the final hit ring (cut at mux)
@@ -117,6 +117,8 @@ for k, f0, f1, p in scene.EV:
         place("shutter", f0 / scene.FPS, -6)
 
 # ---------------------------------------------------------------- master
+if "--no-music" in sys.argv:          # user note on v1: "Don't add music yet"
+    music[:] = 0
 mix = V + music + sfx
 pk = np.abs(mix).max()
 # fixed gain to about -14 LUFS-ish: scale so speech RMS (voice stem) sits at -18 dBFS, then soft limit at -1.5 dBFS
