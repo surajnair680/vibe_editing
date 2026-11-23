@@ -556,6 +556,12 @@ All in `projects/reel-03/work/build/fx.py` (helpers) and `edit.py` (beats). Dete
   until the stems showed it 30 dB under the voice (inaudible); -5 dB put it 17 to 19 dB under while he talks and about
   -25 dB in pauses. Write `_stem_music.wav` / `_stem_sfx.wav` from the mix script and compare RMS per section. [r12]
 
+- **The last line of every split part ends with him reaching to stop the camera (reel-13).** The out-point walk
+  (voice under -45 dB for 80 ms) ran 0.23 s past "supplements" into the reach sound, and the mic left frame; he asked
+  for it cut. At every part's last line, end where the word has decayed (about -35 dB on the isolated voice) and check
+  the frames for the hand going to the phone. Same for line starts where the mic is lifted into frame: start once it
+  is up (`IN_FLOOR` / `OUT_CEIL` in `projects/reel-13/work/plan_cut.py`, motion check `work/mic_motion.py`). [r13]
+
 ## 8. Workflow and process
 - Stills first, every time (contact sheet every 2.5 s + full-size changed frames), plus a short low-res draft clip when
   timing matters. For reel-03 the user approved from stills + a 2.6 s draft of the changed range. [all]
