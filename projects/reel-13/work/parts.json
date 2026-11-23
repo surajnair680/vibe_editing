@@ -1,0 +1,13 @@
+{
+ "parts": [
+  "raw/ep0_part1.mp4",
+  "raw/ep0_part2.mp4",
+  "raw/ep0_part3.mp4"
+ ],
+ "offsets": [
+  0.0,
+  36.0,
+  72.0
+ ],
+ "length": 85.1
+}
