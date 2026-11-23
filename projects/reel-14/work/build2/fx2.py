@@ -68,7 +68,8 @@ def _grey_static():
 def bg_grey(t, circles=True):
     """light grey paper with big red circles joined by a rounded path line, soft shadows (reference 29-35 s)."""
     img = _grey_static().copy()
-    pts = [(int(W * 0.10), int(H * 0.30)), (int(W * 0.95), int(H * 0.47)), (int(W * 0.06), int(H * 0.66)), (int(W * 0.90), int(H * 0.86))]
+    # circles only below the title band (titles sit at y 400-760)
+    pts = [(int(W * 0.04), int(H * 0.44)), (int(W * 0.97), int(H * 0.56)), (int(W * 0.05), int(H * 0.72)), (int(W * 0.93), int(H * 0.88))]
     path = np.zeros((H, W), np.uint8)
     for (x0, y0), (x1, y1) in zip(pts, pts[1:]):
         ym = (y0 + y1) // 2

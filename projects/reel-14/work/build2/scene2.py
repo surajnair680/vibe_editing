@@ -40,7 +40,7 @@ ins(s("outliers", 46.0), s("belong", 47.6), "frame", path="assets/photos/celebri
 ins(s("belong", 47.6), s("Which", 48.95) - 0.1, "frame", path="assets/photos/celebrity_musk.jpg", width=700, yc=0.56)
 ins(s("Pain", 52.8), s("discomfort", 53.4), "clip", path="raw/vid_1111c.mp4", src=4.3, zoom=1.2, cx=0.0, cy=1.0, title="PAIN")
 ins(s("discomfort", 53.4), s("than", 54.9) + 0.6, "clip", path="raw/pullups.mp4", src=7.7, title="DISCOMFORT", title_until=54.3)
-ins(s("You", 69.8), s("But", 71.0), "clip", path="raw/vid_1111b.mp4", src=0.7, zoom=1.04, zoom1=1.10)
+ins(s("need", 69.9) + 0.06, s("But", 71.0), "clip", path="raw/vid_1111b.mp4", src=0.7, zoom=1.04, zoom1=1.10)   # BALANCE holds 0.8 s
 ins(s("exact", 74.9), s("That", 76.87), "clip", path="raw/vid_1111.mp4", src=5.0, zoom=1.15, zoom1=1.18, cx=0.62, cy=0.55,
     title="KEEP GOING", title_from=s("keep", 76.2))
 ins(s("is", 77.75), s("grow", 78.6) + 0.25, "clip", path="raw/flex_p1.mp4", src=7.2, zoom=1.06, zoom1=1.10, cy=0.3)
@@ -55,15 +55,25 @@ TIT = [
     ("OBSESSED", s("obsessed", 35.4), s("abnormal", 36.2), fx2.RED, 400, None),
     ("ABNORMAL", s("abnormal", 36.2), 37.9, fx2.OFFWHITE, 400, None),
     ("ABNORMAL", s("Success", 42.6) + 0.25, s("by", 44.0), fx2.RED, 400, None),
-    ("A", s("A", 67.3), s("Screw", 68.8), fx2.RED, 280, 700),
-    ("SCREW", s("Screw", 68.8), s("You", 69.8), fx2.OFFWHITE, 330, 300),
-    ("BALANCE", s("balance", 69.15), s("You", 69.8), fx2.RED, 560, 300),
+    ("PRICE", s("price", 51.1), s("Pain", 52.8), fx2.OFFWHITE, 400, None),
+    ("BALANCE", s("balance", 57.4), s("Balance", 60.3) - 0.05, fx2.RED, 400, None),
+    ("EVERYBODY", s("everybody", 61.4), s("no", 64.3), fx2.RED, 400, None),
+    ("NO VALUE", s("no", 64.3), s("It's", 65.25), fx2.RED, 400, None),
+    ("A", s("A", 67.3), s("Screw", 68.8), fx2.RED, 360, 470),
+    ("PROBLEM", s("problem", 72.0), s("exact", 74.9), fx2.OFFWHITE, 400, None),
+    ("NO OPTION", s("no", 81.0), s("adapt", 82.2), fx2.OFFWHITE, 400, None),
+    ("COMFORT", s("comfort", 87.3), s("Outliers", 87.9), fx2.RED, 400, None),
+    ("JUDGING", s("judging", 90.45), s("Normal", 91.4), fx2.OFFWHITE, 400, None),
+    ("LOOK AT YOU", s("look", 93.55), s("Crazy", 94.24) - 0.2, fx2.RED, 400, None),
+    ("MEDIOCRITY", s("mediocrity", 98.4), s("were", 99.97), fx2.OFFWHITE, 400, None),
+    ("SCREW", s("Screw", 68.8), s("need", 69.9) + 0.06, fx2.OFFWHITE, 330, 300),
+    ("BALANCE", s("balance", 69.15), s("need", 69.9) + 0.06, fx2.RED, 560, 300),
     ("CRAZY", s("Crazy", 94.24), 97.0, fx2.OFFWHITE, 330, 250),
     ("BORING", s("boring", 95.0), 97.0, fx2.OFFWHITE, 580, 250),
     ("OBSESSED", s("obsessed", 95.5), 97.0, fx2.RED, 830, 250),
     ("NORMAL", s("normal", 101.0), LEN + 1, fx2.OFFWHITE, 400, None),
 ]
-STRIKE = {("A", 280): s("nothing", 68.3), ("BALANCE", 560): s("balance", 69.15) + 0.35}
+STRIKE = {("A", 360): s("nothing", 68.3), ("BALANCE", 560): s("balance", 69.15) + 0.35}
 GREY = (s("Balance", 60.3) - 0.05, s("Screw", 68.8))
 # his cut-out moves for the stacked list (scale, dx) with 0.35 s eases
 MOVES = [(0, 0.82, 0), (s("Crazy", 94.24) - 0.2, 0.70, 230), (97.0, 0.82, 0)]   # 0.82: titles read above his head
@@ -154,7 +164,7 @@ def his_layer(bg, base, f, t):
 
 def draw_titles(img, t, only=None):
     for text, t0, t1, col, y, size in TIT:
-        if not (t0 <= t < t1):
+        if not (t0 <= t < t1) or (text in ("CRAZY", "BORING", "OBSESSED") and size == 250):
             continue
         if size is None:
             size = 400
@@ -165,7 +175,9 @@ def draw_titles(img, t, only=None):
         st = STRIKE.get((text, y))
         if st is not None and t >= st:
             u = fx2.ease_out((t - st) / 0.25)
-            x0 = (W - tw) // 2 - 20; x1 = x0 + int((tw + 40) * u); ym = y + int(th * 0.55)
+            img = np.ascontiguousarray(img).copy()
+            bb = fx2.font(fx2.F_TITLE, size).getbbox(text)
+            x0 = (W - tw) // 2 - 20; x1 = x0 + int((tw + 40) * u); ym = y + (bb[1] + bb[3]) // 2
             cv2.rectangle(img, (x0, ym - 14), (x1, ym + 14), (20, 20, 22) if text == "A" else fx2.OFFWHITE, -1)
     return img
 
