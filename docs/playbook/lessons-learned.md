@@ -28,6 +28,9 @@ Other docs and when to read them: `docs/README.md`.
   noise into gritty skin; the version that worked boosts a denoised layer: bilateral on lightness, CLAHE 2.0 (8x8),
   clarity 0.40 at sigma 18, detail 0.35 at sigma 2, add back half the noise, saturation x1.12. About 90 ms a frame.
   `hdr()` in `projects/reel-14/work/build3/scene3.py`. Always check a full-size crop of skin before sending. [r14]
+- **Grainy Vox reels are huge at real quality (reel-14).** 1:42 at 1080x1920 with heavy grain: master crf 14 = 1.2 GB,
+  crf 22 = about 8 MB a second (about 600 MB, 21 parts), 8 Mbps = about 120 MB (5 parts), 2-pass 2150k = 28 MB in one
+  file (grain softened, face fine). Audio-only revisions remux the last review video with the new mix in a minute. [r14]
 - **Music level for phone speakers (reel-14).** With his own track (Jake Chudnow "Turquoise") ducked 18 dB under the
   voice he "cannot hear it without earphones". About 10 dB under the voice while he talks (+4 dB in pauses) works for
   phone speakers. The reel-12 "18 dB under" figure was for a busy track; check on a phone-speaker basis. [r14]
