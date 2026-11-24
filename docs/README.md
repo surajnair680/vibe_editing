@@ -13,6 +13,7 @@ one line below. Don't nest deeper than these three folders.
 | File | Read it when |
 |---|---|
 | `playbook/lessons-learned.md` | Every video, in full, at the start and again before stills. Taste, recipes, mistakes. |
+| `playbook/toolkit.md` | Every video, at the start (toolkit pass) and before the beat sheet: every skill, tool and recipe by what a moment needs. |
 
 ## library/ : outside references the user shared (read when the video needs them)
 | File | Read it when |

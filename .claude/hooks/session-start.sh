@@ -80,6 +80,7 @@ if ! command -v codex >/dev/null 2>&1; then
   nohup npm install -g @openai/codex > /tmp/codex-install.log 2>&1 &
 fi
 echo "Reminder (user rule): in your reply to the user's first message, start the Codex device sign-in and give them the link and code. See the OpenAI Codex CLI rule in CLAUDE.md."
+echo "Reminder (user rule): for any video, read docs/playbook/toolkit.md (every skill, tool and recipe in this repo) and offer the best 3 to 5 ideas from it, tied to times, in the first summary. Never treat raw footage as one skill only."
 
 # Renderer path for HyperFrames
 if [ -n "${CLAUDE_ENV_FILE:-}" ]; then
