@@ -23,6 +23,9 @@ Other docs and when to read them: `docs/README.md`.
   vertical cut on the deadlift outline. Check every cut-out at full size, especially head, hands and edges. [r03]
 - Long static holds bore him: a 4 s hold of one shot "becomes monotonous". Something must happen in its second half
   (in reel-03: a rim light builds, then the body fills with glowing grain on the key word). [r03]
+- **His look: darker and grainier = "important" (brand intake, 2026-11-24).** He couldn't answer brand questions in
+  the abstract; fill them from what you know and ask him to correct. Master look in `docs/playbook/brand/MOTION.md`:
+  black and deep red (#4A0005 to #1C0202), heavy grain (about 2x the house default), bone titles, ash captions. [brand]
 - He wants his face visible and recognisable. Pixelating half the face (reference style) works against him; the
   version he chose: start pixelated, resolve to the clear face. [r03]
 - He likes to understand why an effect exists ("what is the point of pixelating half the face?"). Explain meaning
