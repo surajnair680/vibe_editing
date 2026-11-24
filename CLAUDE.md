@@ -13,7 +13,7 @@ folder and add one line to `docs/README.md`. The two guides are the source of tr
 The skills in `.claude/skills/` are the playbooks per video type (`vibe-editing-system` picks the type; `vibe-talking-head`
 for talking-head footage; `vibe-mini-vlog` for mini vlogs / day in my life with the camcorder overlay pack, vertical by
 default; `lemo-opuscar` for animated explainers and short films in one of 99 code-made film styles or the user's own;
-`voxel-reels` for blocky 3D cartoon dialogue reels, him as a voxel character plus a sidekick; `reanimate` to copy an animation from a reference reel, clip or site and measure the copy against it). Follow the workflow below for the order of work, and the matching skill for the techniques.
+`voxel-reels` for blocky 3D cartoon dialogue reels, him as a voxel character plus a sidekick; `reanimate` to copy an animation from a reference reel, clip or site and measure the copy against it; `session-handoff` to write a full handoff of the chat into the repo so a new session continues with nothing lost). Follow the workflow below for the order of work, and the matching skill for the techniques.
 
 ## The workflow (every video)
 1. **Workspace:** one project folder per video under `projects/<name>/` (`new_project.py`). Check tools and do a short test render.
@@ -162,6 +162,10 @@ named `<project>-final.mp4`.
   Read its "Vibe editing house rules" first: the start-up hook installs it (`~/.cache/vibe/reanimate.ok`, log
   `/tmp/reanimate-setup.log`), it uses the preinstalled Chromium (never `playwright install`), video references are
   tracked by colour with `vibe/track_color.py`, compare with `--offset 0`, and work goes in `projects/<name>/reanimate/`.
+- **Session handoff (user rule, 2026-11-24):** when the user asks for a handoff, a summary to move to a new chat, or
+  says the chat is getting long, load the `session-handoff` skill. Its house rules: save the summary to
+  `projects/<name>/HANDOFF.md` (setup sessions: `docs/playbook/handoffs/`), commit and push it, paste it in the reply
+  too, list secret names only (never values), and list the raw files the next session must ask for again.
 - **Rendering with HyperFrames:** `HYPERFRAMES_BROWSER_PATH` is set by the session start hook
   (the newest `/opt/pw-browsers/chromium_headless_shell-*` headless shell; `-1243` on 2026-11-13). CLI: `npx hyperframes@0.8.150`.
 - **Web/shader renders (`templates/web/render.mjs`):** never run `npx playwright install`. Chromium is preinstalled
