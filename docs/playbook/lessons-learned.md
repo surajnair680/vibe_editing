@@ -489,6 +489,11 @@ All in `projects/reel-03/work/build/fx.py` (helpers) and `edit.py` (beats). Dete
   (`--plate codex --remove "<all the near things>"`, about 1 minute): it kept the framing to 0.1 px and painted real
   sand, crowd and shadows, far better than any code patch. Prompt with the image goes after the text: `codex exec ...
   "<prompt>" -i photo.jpg` (with `-i` first, Codex reads the prompt as another image path and waits on stdin). [parallax]
+  He also reminded: "we use this for vox motion graphics". So parallax lives inside the Vox kit: `kit/parallax.js` in
+  the photo-parallax skill, tested shot `.claude/skills/vox-explainer/example/parallax.html`, layers made with
+  `--web 1600` (WebP + layers.js, 0.5 MB). Camera smooth on real time while graphics step on twos; `focus` on the face
+  (a centred push hid his head under the headline strip); captions and strips off the face and off the nearest layer.
+  When saving a new technique, wire it into every skill that would use it the same day, not just a standalone tool. [parallax]
 
 ## 6. Text and captions
 - Captions sit on a handheld mic at about 1440 px; ask about caption height at the stills step when he holds a mic. [r01][r02]

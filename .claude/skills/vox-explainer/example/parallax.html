@@ -1,0 +1,168 @@
+<!doctype html>
+<html><head><meta charset="utf-8"><title>Vox parallax shot</title>
+<!-- Vox parallax shot (2026-11-24): a historical photo moving in 2.5D inside a torn-paper card, the trick from
+     "How Vox makes images look like videos". Helpers copied from index.html; parallax from parallax.js (copy of
+     .claude/skills/photo-parallax/kit/parallax.js). Graphics land on twos, the photo's camera is smooth.
+     node tools/seek_render.mjs .claude/skills/vox-explainer/example/parallax.html --size 1080x1920 --fps 24 --dur 7 ... -->
+<style>
+@font-face{font-family:Anton;src:url(fonts/Anton-400.ttf)}
+@font-face{font-family:Inter;src:url(fonts/Inter-600.ttf);font-weight:600}
+@font-face{font-family:Mono;src:url(fonts/JetBrainsMono-700.ttf);font-weight:700}
+html,body{margin:0;background:#000;overflow:hidden}
+canvas{display:block}
+</style></head>
+<body><canvas id="c" width="1080" height="1920"></canvas>
+<script src="parallax.js"></script>
+<script src="assets/parallax/beach/layers.js"></script>
+<script>
+const W = 1080, H = 1920, DUR = 7;
+const C = { red: '#B8312A', cream: '#F1E6D0', paper: '#FBF7EE', navy: '#14213D', yellow: '#F2C230', ink: '#1B1B1B' };
+const cv = document.getElementById('c'), x = cv.getContext('2d');
+
+// ---------- helpers ----------
+function rng(seed) { let s = seed >>> 0 || 1; return () => (s = (s * 1664525 + 1013904223) >>> 0) / 4294967296; }
+const clamp = (v, a = 0, b = 1) => Math.max(a, Math.min(b, v));
+const ease = p => 1 - Math.pow(1 - clamp(p), 3);          // ease-out cubic, no overshoot (no bouncing)
+const easeIO = p => { p = clamp(p); return p < .5 ? 4 * p * p * p : 1 - Math.pow(-2 * p + 2, 3) / 2; };
+const span = (t, a, b) => clamp((t - a) / (b - a));
+const twos = t => Math.floor(t * 12 + 1e-6) / 12;          // hold each pose for 2 frames at 24 fps
+const step = t => Math.floor(t * 12 + 1e-6);               // which drawing we are on (for boil and grain)
+
+// A torn-paper rectangle: jagged outline, cached per seed so the edge is the same paper every frame.
+const tornCache = {};
+function tornPath(w, h, seed, rough = 9) {
+  const k = [w, h, seed, rough].join();
+  if (tornCache[k]) return tornCache[k];
+  const r = rng(seed), pts = [];
+  const edge = (x0, y0, x1, y1, nx, ny) => {
+    const len = Math.hypot(x1 - x0, y1 - y0), n = Math.max(4, Math.round(len / 14));
+    for (let i = 0; i < n; i++) {
+      const f = i / n, j = (r() - .5) * rough + (r() < .12 ? (r() - .5) * rough * 1.6 : 0);
+      pts.push([x0 + (x1 - x0) * f + nx * j, y0 + (y1 - y0) * f + ny * j]);
+    }
+  };
+  edge(0, 0, w, 0, 0, 1); edge(w, 0, w, h, -1, 0); edge(w, h, 0, h, 0, -1); edge(0, h, 0, 0, 1, 0);
+  return tornCache[k] = pts;
+}
+function tracePts(pts, dx = 0, dy = 0, grow = 0, cx = 0, cy = 0) {
+  x.beginPath();
+  pts.forEach(([px, py], i) => {
+    const gx = px + (px - cx) * grow, gy = py + (py - cy) * grow;
+    i ? x.lineTo(gx + dx, gy + dy) : x.moveTo(gx + dx, gy + dy);
+  });
+  x.closePath();
+}
+// Draw a torn sheet centred on (cx, cy): white fibre fringe, shadow, colour, optional halftone.
+function sheet(cx, cy, w, h, color, seed, rot = 0, opt = {}) {
+  const pts = tornPath(w, h, seed, opt.rough || 9);
+  x.save(); x.translate(cx, cy); x.rotate(rot); x.translate(-w / 2, -h / 2);
+  if (!opt.flat) { x.shadowColor = 'rgba(20,20,30,.35)'; x.shadowBlur = 18; x.shadowOffsetX = 6; x.shadowOffsetY = 10; }
+  x.fillStyle = opt.fringe || '#FFFDF6';                     // the fibre edge, a little bigger than the colour
+  tracePts(tornPath(w + 10, h + 10, seed + 7, (opt.rough || 9) * 1.2), -5, -5); x.fill();
+  x.shadowColor = 'transparent';
+  x.fillStyle = color; tracePts(pts); x.fill();
+  if (opt.halftone) { x.save(); tracePts(pts); x.clip(); x.globalAlpha = opt.halftone; x.fillStyle = dotPattern; x.fillRect(0, 0, w, h); x.restore(); }
+  if (opt.draw) { x.save(); tracePts(pts); x.clip(); opt.draw(w, h); x.restore(); }
+  x.restore();
+}
+function text(s, px, py, size, color, font = 'Anton', align = 'center', base = 'middle', track = 0) {
+  x.font = `${font === 'Inter' ? '600 ' : font === 'Mono' ? '700 ' : ''}${size}px ${font}`;
+  x.fillStyle = color; x.textAlign = align; x.textBaseline = base;
+  if ('letterSpacing' in x) x.letterSpacing = track + 'px';
+  x.fillText(s, px, py);
+  if ('letterSpacing' in x) x.letterSpacing = '0px';
+}
+function textW(s, size, font = 'Anton') { x.font = `${size}px ${font}`; return x.measureText(s).width; }
+
+// Halftone dots and grain (built once, then reused: fast).
+let dotPattern, grain = [];
+function buildTextures() {
+  const d = document.createElement('canvas'); d.width = d.height = 16; const g = d.getContext('2d');
+  g.fillStyle = '#000'; g.beginPath(); g.arc(8, 8, 3.2, 0, 7); g.fill();
+  dotPattern = x.createPattern(d, 'repeat');
+  for (let k = 0; k < 6; k++) {
+    const n = document.createElement('canvas'); n.width = 540; n.height = 960; const ng = n.getContext('2d');
+    const im = ng.createImageData(540, 960), r = rng(99 + k * 31);
+    for (let i = 0; i < im.data.length; i += 4) { const v = r() * 255; im.data[i] = im.data[i + 1] = im.data[i + 2] = v; im.data[i + 3] = 255; }
+    ng.putImageData(im, 0, 0); grain.push(n);
+  }
+}
+const img = {};
+function loadImg(k, src) { return new Promise(r => { const i = new Image(); i.onload = () => { img[k] = i; r(); }; i.onerror = r; i.src = src; }); }
+
+// ---------- finish (over everything) ----------
+function finish(t) {
+  const s = step(t);
+  x.save();
+  x.globalCompositeOperation = 'overlay'; x.globalAlpha = .16;    // paper and film grain, changes on twos
+  x.drawImage(grain[s % 6], 0, 0, W, H);
+  x.globalCompositeOperation = 'multiply'; x.globalAlpha = .9;     // soft vignette
+  const v = x.createRadialGradient(W / 2, H / 2, H * .3, W / 2, H / 2, H * .75);
+  v.addColorStop(0, 'rgba(255,255,255,1)'); v.addColorStop(1, 'rgba(150,135,120,1)');
+  x.fillStyle = v; x.fillRect(0, 0, W, H);
+  x.globalCompositeOperation = 'screen'; x.globalAlpha = .10;      // colour fringing at the edges only
+  let gl = x.createLinearGradient(0, 0, 60, 0); gl.addColorStop(0, '#ff3040'); gl.addColorStop(1, '#000');
+  x.fillStyle = gl; x.fillRect(0, 0, 60, H);
+  gl = x.createLinearGradient(W, 0, W - 60, 0); gl.addColorStop(0, '#30c0ff'); gl.addColorStop(1, '#000');
+  x.fillStyle = gl; x.fillRect(W - 60, 0, 60, H);
+  x.restore();
+}
+
+// ---------- shots ----------
+
+// ---------- the shot ----------
+// Safe zone for Reels: words between y 250 and 1420, nothing in the right 120 px.
+function paperGround() { x.fillStyle = C.paper; x.fillRect(0, 0, W, H); }
+
+// A photo card: torn white margin, the parallax photo inside (unfiltered, house rule), caption strip under it.
+function parallaxCard(cx, cy, w, h, key, u, camera, seed, rot, p, caption) {
+  if (p <= 0) return;
+  const lift = (1 - p) * -220, sc = 1 + (1 - p) * .18;
+  x.save(); x.translate(cx, cy + lift); x.scale(sc, sc);
+  sheet(0, 0, w, h, '#FFFDF6', seed, rot, {
+    rough: 7, draw: (sw, sh) => {
+      const m = 20, ih = sh - m * 2 - (caption ? 74 : 0);
+      Parallax.draw(x, key, u, camera, m, m, sw - m * 2, ih);
+      if (caption) text(caption, sw / 2, sh - 46, 34, C.ink, 'Mono', 'center', 'middle', 2);
+    }
+  });
+  x.restore();
+}
+
+function shot(t) {
+  paperGround();
+  const tt = twos(t);
+  sheet(W / 2 - 30, 1000, 1260, 1500, C.navy, 311, -.02, { halftone: .1, flat: true });
+  // the camera: smooth over the whole shot (real time, not twos), a gentle push in
+  const u = easeIO(t / DUR);
+  parallaxCard(W / 2 - 40, 860, 720, 1000, 'beach', u, { dolly: .22, focus: [.47, .3] }, 321, .012, ease(span(tt, -.3, .2)), 'SANTA MONICA, 1954');
+  // headline strip, already landing on frame 0
+  const p1 = ease(span(tt, -.35, .2));
+  if (p1 > 0) sheet(W / 2 - 40 - (1 - p1) * 900, 290, 760, 150, C.red, 331, -.025, {
+    draw: (w, h) => text('MUSCLE BEACH', w / 2, h / 2 + 4, 112, C.cream)
+  });
+  // the point lands later, under the card (never over the face or the bench, the nearest layer that sells the depth)
+  const p2 = ease(span(tt, 3.2, 3.6)), sw = span(tt, 3.9, 4.4);
+  if (p2 > 0) sheet(W / 2 - 40 + (1 - p2) * 900, 1430, 840, 150, C.cream, 341, .02, {
+    draw: (w, h) => {
+      if (sw > 0) { x.fillStyle = C.yellow; x.globalAlpha = .95; x.fillRect(36, h * .22, (w - 72) * easeIO(sw), h * .58); x.globalAlpha = 1; }
+      text('THE FIRST GYM INFLUENCERS', w / 2, h / 2 + 4, 64, C.navy);
+    }
+  });
+}
+
+function draw(t) {
+  t = clamp(t, 0, DUR - 1e-4);
+  x.setTransform(1, 0, 0, 1, 0, 0);
+  shot(t);
+  finish(t);
+}
+
+window.ready = (async () => {
+  await Promise.all([Parallax.load('beach', 'assets/parallax/beach/'),
+    document.fonts.load('100px Anton'), document.fonts.load('600 40px Inter'), document.fonts.load('700 40px Mono')]);
+  buildTextures();
+})();
+window.seek = async t => { await window.ready; draw(t); };
+if (!location.search.includes('render')) window.ready.then(() => { const t0 = performance.now(); const loop = () => { draw(((performance.now() - t0) / 1000) % DUR); requestAnimationFrame(loop); }; loop(); });
+</script></body></html>
