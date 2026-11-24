@@ -485,6 +485,10 @@ All in `projects/reel-03/work/build/fx.py` (helpers) and `edit.py` (beats). Dete
   that turned the fill black). Each layer reaches 10 % of the image size under the nearer one, or a dark seam shows
   above the bench at the end of a dolly. 6 s dolly-in 0.22: front +28 %, back +5 %, reads well on a phone. Layers
   in 3 to 8 s, a 6 s 1080x1920 render in about 33 s. Tested example: `.claude/skills/photo-parallax/example/`. [parallax]
+  He reminded: "You have codex image generation don't forget". So the hidden areas are painted by Codex by default
+  (`--plate codex --remove "<all the near things>"`, about 1 minute): it kept the framing to 0.1 px and painted real
+  sand, crowd and shadows, far better than any code patch. Prompt with the image goes after the text: `codex exec ...
+  "<prompt>" -i photo.jpg` (with `-i` first, Codex reads the prompt as another image path and waits on stdin). [parallax]
 
 ## 6. Text and captions
 - Captions sit on a handheld mic at about 1440 px; ask about caption height at the stills step when he holds a mic. [r01][r02]
