@@ -16,3 +16,13 @@ Lines cross the p1/p2 and p2/p3 seams; audio start_times are 0 to 13 ms (no hidd
 7. Sound: `python3 work/mix.py v1 --no-music` (v1 as approved for now: voice + SFX), without the flag for music A.
 8. Mux: concat work/render/p_*.mp4 + work/audio/mix_v1.wav -> out/reel-14-v1-master.mp4 (crf 14, 135 MB);
    delivery 2-pass x264 2150k + AAC 192k -> out/reel-14-v1.mp4 (28.5 MiB).
+
+## v2 (reference look, current)
+9. Mattes of his takes: `python3 work/matte_frames.py 819 1374` (and 1375 1930, 1931 2486, 2487 3042 in parallel)
+   -> work/matte/NNNNN.png (rembg u2net_human_seg, about 30 min on 4 cores; not in git, rebuild after a wipe).
+   Celebrity cut-outs build themselves on first use into work/cutouts/ (rembg isnet-general-use).
+10. Stills: `python3 work/build2/scene2.py still <t> ...` -> out/stills/v2/. Picture: 4 parallel ranges
+   `python3 work/build2/scene2.py render 0 26 work/render/v2_0.mp4` (26-52, 52-77, 77-103); LEN = cut + 0.9 s.
+11. Sound: `python3 work/mix.py v2 --no-music --v2` -> work/audio/mix_v2.wav (voice + SFX on titles; drop
+   --no-music for music A, re-arranged so its break lands before "Screw").
+12. Mux and deliver as in step 8 (2-pass about 2150k for under 30 MiB).
