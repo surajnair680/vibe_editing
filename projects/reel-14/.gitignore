@@ -22,3 +22,4 @@ work/*.log
 reanimate/caption/
 reanimate/title/
 !assets/sfx/openverse/*.wav
+work/render/*.log
