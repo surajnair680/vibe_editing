@@ -23,6 +23,9 @@ Other docs and when to read them: `docs/README.md`.
   vertical cut on the deadlift outline. Check every cut-out at full size, especially head, hands and edges. [r03]
 - Long static holds bore him: a 4 s hold of one shot "becomes monotonous". Something must happen in its second half
   (in reel-03: a rim light builds, then the body fills with glowing grain on the key word). [r03]
+- **Charts carry meaning by position (reel-14).** He caught Elon Musk placed on the LEFT end of the bell curve, which
+  reads as below average. Outliers and "you" always sit on the right (high) end; check where each element sits on a
+  chart, not just that it is visible. Also keep recognisable people big (Jobs about 520 px, not 300). [r14]
 - **The child test (reel-14, 2026-11-24).** He asked: would a child understand every frame? Fixes that made abstract
   visuals readable: a word label on every symbol (NORMAL PEOPLE, BALANCE, MIND / BODY, COMFORT, JUDGING), name strips
   under celebrity photos, people instead of charts (a crowd labelled MOST PEOPLE inside a bell curve with you as a lone

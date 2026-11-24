@@ -119,17 +119,17 @@ def curve_card(t, t_draw, dot_t, show_avg=None, labels=True):
     return sheet
 
 
-def curve(img, t, t_draw, dot_t, cy=690, avg_t=None):
+def curve(img, t, t_draw, dot_t, cy=690, avg_t=None, cxc=W / 2, k=1.0):
     """bell curve with a crowd of grey figures in the middle (MOST PEOPLE) and you alone far out (YOU)."""
     sheet = curve_card(t, t_draw, dot_t)
-    img = paste(img, sheet, W / 2, cy, rot=-1.5)
+    img = paste(img, sheet, cxc, cy, rot=-1.5, scale=k)
     tc = t_draw + .45
     for i in range(7):
-        img = drop(img, figure((150, 146, 140), 110, 2), W / 2 + (i - 3) * 56, cy + 128, t, tc + i * .04, dy=-120, shadow=.3)
-    img = label(img, "MOST PEOPLE", W / 2, cy + 20, t, tc + .3, size=58, bg=INK, fg=BONE, rot=-2)   # inside the bell, over the crowd
+        img = drop(img, figure((150, 146, 140), int(110 * k), 2), cxc + (i - 3) * 56 * k, cy + 128 * k, t, tc + i * .04, dy=-120, shadow=.3)
+    img = label(img, "MOST PEOPLE", cxc, cy + 20 * k, t, tc + .3, size=int(58 * max(k, .85)), bg=INK, fg=BONE, rot=-2)   # inside the bell, over the crowd
     if dot_t is not None and t >= dot_t - 0.2:
         q = land(t, dot_t, .2)
-        x, y = W / 2 + 370, cy + 180
+        x, y = cxc + 370 * k, cy + 180 * k
         cv2.circle(img, (int(x), int(y)), int(26 * q), MARK, -1, cv2.LINE_AA)
         if q >= 1:
             img = paste(img, vox.strip("YOU", 70, bg=MARK, fg=BONE, seed=61), x - 10, y - 90, rot=4, shadow=.3)
@@ -401,16 +401,17 @@ def behind(img, t):
         img = curve(img, t, s("You", 40.25), s("normal", 40.73) + .3)
     # 7. dictionary + Jobs
     if s("Success", 42.62) <= t < s("Successful", 44.89):
-        img = drop(img, clipping("ab·nor·mal", "adjective", "not normal; unusual."), 500, 560, t, s("Success", 42.62) + .1, rot=-2, dy=-300)
+        img = drop(img, clipping("ab·nor·mal", "adjective", "not normal; unusual."), 470, 500, t, s("Success", 42.62) + .1, rot=-2, dy=-300)
         hp = span(twos(t), s("abnormal", 43.34), s("abnormal", 43.34) + .45)
-        img = highlight(img, 130, 700, 600, 760, hp)
-        img = celeb(img, "assets/photos/celebrity_jobs.jpg", 300, 800, 730, t, s("by", 43.98), 5, "STEVE JOBS", 21)
+        img = highlight(img, 100, 640, 570, 700, hp)
+        img = celeb(img, "assets/photos/celebrity_jobs.jpg", 440, 720, 900, t, s("by", 43.98), 4, "STEVE JOBS", 21)
     # 8. outliers on the curve, the average
     if s("Successful", 44.89) <= t < s("Which", 48.95):
-        img = curve(img, t, s("Successful", 44.89) - .5, None)
-        img = celeb(img, "assets/photos/celebrity_arnold.jpg", 230, 880, 640, t, s("outliers", 46.03), 6, "ARNOLD", 22)
-        img = celeb(img, "assets/photos/celebrity_musk.jpg", 150, 190, 640, t, s("outliers", 46.03) + .25, -6, "ELON MUSK", 23)
-        img = label(img, "OUTLIERS", W / 2, 470, t, s("outliers", 46.03) + .4, size=84, bg=MARK, fg=BONE, rot=-2)
+        img = curve(img, t, s("Successful", 44.89) - .5, None, cxc=390, k=0.74)
+        # both outliers on the RIGHT end (above average), never the left end (that would read as below average)
+        img = celeb(img, "assets/photos/celebrity_musk.jpg", 220, 870, 560, t, s("outliers", 46.03), 5, "ELON MUSK", 23)
+        img = celeb(img, "assets/photos/celebrity_arnold.jpg", 280, 860, 900, t, s("outliers", 46.03) + .25, -4, "ARNOLD", 22)
+        img = label(img, "OUTLIERS", 650, 560, t, s("outliers", 46.03) + .4, size=80, bg=MARK, fg=BONE, rot=-8)
     # 9. receipt
     if s("Which", 48.95) <= t < s("Pain", 52.76):
         lines = [(s("except", 50.01), "DRINKS", "SKIPPED", False), (s("comes", 50.63), "PIZZA", "SKIPPED", False),
@@ -513,6 +514,17 @@ def behind(img, t):
                     hh = hand[:, ::-1] if flip else hand
                     dx = (1 - q) * (-300 if not flip else 300)
                     img = paste(img, np.ascontiguousarray(hh), x + (150 if not flip else -150) + dx, y, rot=rot, shadow=.35)
+    # 23. crazy, boring, obsessed: what people called them too
+    if s("Crazy", 94.24) <= t < s("whatever", 96.09):
+        for k, (word, near, path, name, x, y, wdt, rot) in enumerate([
+                ("Crazy", 94.24, "assets/photos/celebrity_musk.jpg", "ELON MUSK", 200, 640, 250, -5),
+                ("boring", 95.02, "assets/photos/celebrity_jobs.jpg", "STEVE JOBS", 540, 600, 310, 2),
+                ("obsessed", 95.50, "assets/photos/celebrity_arnold.jpg", "ARNOLD", 860, 660, 300, 6)]):
+            ti = s(word, near)
+            img = celeb(img, path, wdt, x, y, t, ti, rot, name, 130 + k)
+            if twos(t) >= ti + .12:
+                q = ease(span(twos(t), ti + .12, ti + .29))
+                img = paste(img, name_tag(word.upper(), 120 + k), x, y + 250, rot=-rot * 1.5, scale=1.35 - .35 * q, shadow=.4)
     # 24. mediocrity
     if s("whatever", 96.09) <= t < s("You", 99.05):
         img = drop(img, clipping("me·di·o·cri·ty", "noun", "being average. Not very good."), 520, 560, t, s("whatever", 96.09) + .1, rot=-2, dy=-300)
@@ -528,7 +540,7 @@ def behind(img, t):
 
 def front(img, t, st):
     """in front of him: name tags on the paper circle around him."""
-    if s("Crazy", 94.24) <= t < s("whatever", 96.09):
+    if False:
         cx, cy, r = st["cx"], st["cy"], st["r"]
         for k, (word, near, x, y, rot) in enumerate([("Crazy", 94.24, cx - r * .95, cy + r * .05, -12), ("boring", 95.02, cx, cy + r * .55, 4),
                                                       ("obsessed", 95.50, cx + r * .95, cy + r * .05, 12)]):
@@ -605,9 +617,9 @@ def _wipe_sheet(k):
 import circle as circ
 # where he sits (time, state): BIG for punchy lines, small left / right when the visual does the work
 _K = [("Normal", 27.40, "BIG"), ("You", 30.07, "SR"), ("and", 33.63, "SL"), ("So", 36.91, "SR"), ("Actually", 38.96, "BIG"),
-      ("Success", 42.62, "SL"), ("Successful", 44.89, "SR"), ("Which", 48.95, "SL"), ("going", 54.27, "SR"),
+      ("Success", 42.62, "SL"), ("Successful", 44.89, "SL"), ("Which", 48.95, "SL"), ("going", 54.27, "SR"),
       ("That's", 56.82, "SL"), ("Balance", 60.32, "SR"), ("It's", 65.25, "SL"), ("Screw", 68.83, "BIG"),
-      ("The", 72.65, "SR"), ("That", 76.87, "SL"), ("It", 78.99, "SR"), ("And", 83.66, "SL"), ("and", 89.29, "BIG"),
+      ("The", 72.65, "SR"), ("That", 76.87, "SL"), ("It", 78.99, "SR"), ("And", 83.66, "SL"), ("and", 89.29, "BIG"), ("Crazy", 94.24, "SR"),
       ("whatever", 96.09, "SR"), ("You", 99.05, "BIG")]
 STATES = [(HIS if i == 0 else s(w, n) - 0.12, n_) for i, (w, n, n_) in enumerate(_K)]
 ZOOM = {"BIG": (1.0, 0.0), "SR": (1.1, 150.0), "SL": (1.1, 150.0)}     # visual layer zoom about (540, 380), push down
