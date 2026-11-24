@@ -18,9 +18,13 @@ default; `lemo-opuscar` for animated explainers and short films in one of 99 cod
 ## The workflow (every video)
 1. **Workspace:** one project folder per video under `projects/<name>/` (`new_project.py`). Check tools and do a short test render.
 2. **Reference:** the two guides above are already loaded. Also read `docs/playbook/lessons-learned.md` in full (everything
-   learned on past videos: the user's taste, recipes, mistakes). Note any gap between them and this environment before editing.
+   learned on past videos: the user's taste, recipes, mistakes) and **`docs/playbook/toolkit.md`** (the menu of every
+   skill, tool and proven recipe in this repo, by what a moment needs). Note any gap before editing.
 3. **Inputs:** confirm every file opens. Report duration, frame size and audio. Transcribe with word timings, inspect frames,
    get the language and correct spellings of names and brands, what must stay and what to leave out. Summarise before cutting.
+   **Toolkit pass (user rule, 2026-11-24):** raw footage never means "one skill only". Go through `toolkit.md` against the
+   transcript and frames, and put the best 3 to 5 ideas in this summary, each tied to a time or line ("0:12 'back in
+   1950' -> Vox card with a parallax archive photo", "0:30 the story -> 6 s Lemo newsreel insert"), plus what each needs.
 4. **Finished video:** purpose, audience, platform and aspect ratio, length, hook / main points / CTA, voice and caption language.
    Flag any clash between target length and required content.
 5. **Cuts and pacing:** natural, tight, high-energy or story-led. Give a cut list with source timestamps and estimated
@@ -33,7 +37,7 @@ default; `lemo-opuscar` for animated explainers and short films in one of 99 cod
    complex effects first. No repeated whooshes, nothing over the face or captions.
 9. **Theme:** two or three feeling words, what to avoid, and which reference controls colour, motion and pacing.
 10. **Build:** combine decisions into a saved brief (`brief.md`). Show a beat sheet first (edit time, source clip and time,
-    spoken line, graphic, caption treatment, audio cue) plus missing assets and effects needing a test. Wait for approval.
+    spoken line, graphic, **tool** (the skill or recipe from `toolkit.md` that makes it), caption treatment, audio cue) plus missing assets and effects needing a test. Wait for approval.
     Build in passes: cut, then style, then graphics and audio. Save v1 and give a preview. Report anything incomplete.
 11. **Review:** notes use timestamps from the current preview, not the source. Save the current version before every
     revision, apply only the notes, keep approved parts unchanged, save as v2, v3... and re-check alignment.
@@ -228,6 +232,9 @@ nothing missed. Memory does not survive between sessions; only this repo does. S
    (rule 4 of "Working in several sessions at once"), so the next session starts with them. No need to ask first.
 6. Reusable code (effects, matte recipes) stays in its project folder; the lessons file points to it by path and the
    next project copies it in.
+7. **Every new skill, tool, kit or proven recipe gets a line in `docs/playbook/toolkit.md` the same day,** under the
+   moment it serves, and gets wired into the skills that would use it (e.g. parallax inside `vox-explainer`). A tool
+   that is not on the menu will be forgotten by the next session.
 
 ## Lessons from past edits (keep adding to this list; full detail in docs/playbook/lessons-learned.md)
 Learned on reel-02 (2026-10-14). Each one cost a revision or a re-render once; follow them from the start.
@@ -371,6 +378,11 @@ Learned on the Vox photo parallax lesson (2026-11-24):
   or made (clean plates, missing B-roll, stills). He had to remind: "You have codex image generation don't forget".
 - **Wire a new technique into every skill that uses it, the same day.** Parallax is the core of Vox motion graphics:
   every photo in a `vox-explainer` edit moves with `parallax.js` (`example/parallax.html`). He had to remind this too.
+
+Learned on the toolkit menu (2026-11-24):
+- **Sessions forgot tools they had** ("once you were not even aware that you had lemo opuscar in you. I had to tell
+  you specifically"). Every video starts with the toolkit pass: read `docs/playbook/toolkit.md`, offer the best 3 to 5
+  ideas tied to times in the first summary, and fill the beat sheet's tool column. New tools go on the menu the same day.
 
 Learned on reel-07 (2026-11-11), a meme template caption swap:
 - **Post captions: explain, don't preach.** Approved after two rejected tries ("sounds AI", then "not rant"): two short

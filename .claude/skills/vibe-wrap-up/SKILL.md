@@ -24,6 +24,8 @@ Go through, in order:
   gave, every "why did you...", every request that changed course. Note what you proposed and what they chose.
 - **The project folder** (`projects/<name>/`): `brief.md` (decisions, beat sheet), `work/revisions.md` (each round and
   why), `RENDER.md`, the code (`scene.py`, `work/build/`, `work/matte/`...), `git log -- projects/<name>`.
+- **The toolkit menu:** every skill, tool, kit or recipe made or proven this session has a line in
+  `docs/playbook/toolkit.md` under the moment it serves, and is wired into the skills that would use it.
 - **Anything already added to the lessons file during this session** (learning loop step 2), so you only add what is
   missing and improve what is there.
 

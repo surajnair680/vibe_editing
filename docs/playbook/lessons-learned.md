@@ -3,7 +3,7 @@
 Read this whole file before starting any new video, and again before the stills step. Every entry came from a real
 edit and cost a revision, a re-render or a question once. Newest videos at the bottom of each section. Tags say where
 each lesson came from: [r01] reel-01, [r02] reel-02, [r03] reel-03, [vlog] the mini vlog style study (2026-10-30),
-[codex] the Codex CLI setup session (2026-11-01), [r04] reel-04 (cinematic work-session edit, 2026-11-01), [r05] reel-05 (Automance logo intro, 2026-11-04), [openverse] the Openverse sound library setup (2026-11-06), [r06] reel-06 (YouTube Shorts music swap of a finished reel, 2026-11-06), [r07] reel-07 (meme template caption swap, 2026-11-11), [lemo] the Lemo-Opuscar setup (2026-11-13), [r08] reel-08 (Comeback Day 1, a test intro as a Lemo Urban Sketch animation, 2026-11-13), [r09] reel-09 (bicep curl "Current vs Correct" form explainer, 2026-11-14), [voxel] the voxel reels setup (2026-11-14), [reanimate] the reanimate skill setup (2026-11-15), [r10] reel-10 (home pull-up and ring dip reel, 2026-11-16), [r11] reel-11 (sarcastic reply to an "inspiring" English-speaking clip, 2026-11-18), [r12] reel-12 ("Ghar ka khaana" sarcastic reply reel, 2026-11-19), [r14] reel-14 ("Successful people are not normal" reaction reel, 2026-11-23), [parallax] the Vox photo parallax lesson (2026-11-24).
+[codex] the Codex CLI setup session (2026-11-01), [r04] reel-04 (cinematic work-session edit, 2026-11-01), [r05] reel-05 (Automance logo intro, 2026-11-04), [openverse] the Openverse sound library setup (2026-11-06), [r06] reel-06 (YouTube Shorts music swap of a finished reel, 2026-11-06), [r07] reel-07 (meme template caption swap, 2026-11-11), [lemo] the Lemo-Opuscar setup (2026-11-13), [r08] reel-08 (Comeback Day 1, a test intro as a Lemo Urban Sketch animation, 2026-11-13), [r09] reel-09 (bicep curl "Current vs Correct" form explainer, 2026-11-14), [voxel] the voxel reels setup (2026-11-14), [reanimate] the reanimate skill setup (2026-11-15), [r10] reel-10 (home pull-up and ring dip reel, 2026-11-16), [r11] reel-11 (sarcastic reply to an "inspiring" English-speaking clip, 2026-11-18), [r12] reel-12 ("Ghar ka khaana" sarcastic reply reel, 2026-11-19), [r14] reel-14 ("Successful people are not normal" reaction reel, 2026-11-23), [parallax] the Vox photo parallax lesson (2026-11-24), [toolkit] the toolkit menu (2026-11-24).
 
 How this file grows: see "Learning loop" in CLAUDE.md. Add to it during every video, not only at the end.
 Other docs and when to read them: `docs/README.md`.
@@ -777,6 +777,11 @@ All in `projects/reel-03/work/build/fx.py` (helpers) and `edit.py` (beats). Dete
   installs and renderers with ours (`tools/seek_render.mjs` for `window.seek` pages), build and render one tested
   example, and only then write the numbers into the rules. skills.sh pages don't resolve from this container; the
   GitHub repo behind them clones fine. [mg-pack]
+
+- **Toolkit pass at the start of every video (2026-11-24):** sessions handed raw footage reached for one skill and
+  forgot the rest; he once had to tell a session it had Lemo-Opuscar. Now `docs/playbook/toolkit.md` lists every skill,
+  tool and proven recipe by what a moment needs. Read it with the lessons file, offer the best 3 to 5 ideas tied to
+  times in the first summary, fill the beat sheet's tool column, and add every new tool to the menu the same day. [toolkit]
 
 ## 9. Delivery and quality
 - File sizes with per-frame grain (1080x1920): reel-03, 22.2 s: crf 14 = 65 MB, crf 20 = 33 MB, crf 22 = 25 MB.
