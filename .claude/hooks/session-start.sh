@@ -36,6 +36,21 @@ if [ ! -f "$VIBE_CACHE/extras.ok" ]; then
   ' "$VIBE_CACHE" > /tmp/vibe-extras.log 2>&1 &
 fi
 
+# Photo parallax (skill photo-parallax, tools/parallax.py): depth model from GitHub releases (Hugging Face is blocked)
+# and rembg's isnet-general-use cut-out model, in the background. Done when ~/.cache/vibe/parallax.ok exists;
+# log in /tmp/parallax-setup.log.
+if [ ! -f "$VIBE_CACHE/parallax.ok" ]; then
+  nohup bash -c '
+    set -e
+    mkdir -p "$0/depth"
+    [ -s "$0/depth/depth_anything_v2_vits.onnx" ] || curl -sSfL -o "$0/depth/depth_anything_v2_vits.onnx" \
+      https://github.com/fabio-sim/Depth-Anything-ONNX/releases/download/v2.0.0/depth_anything_v2_vits.onnx
+    for i in $(seq 180); do [ -f "$0/extras.ok" ] && break; sleep 5; done
+    python3 -c "from rembg import new_session; new_session(\"isnet-general-use\")"
+    touch "$0/parallax.ok"
+  ' "$VIBE_CACHE" > /tmp/parallax-setup.log 2>&1 &
+fi
+
 # Lemo-Opuscar film style library (skill lemo-opuscar) in the background: clone to ~/lemo-opuscar, core packages.
 # Done when ~/.cache/vibe/lemo.ok exists; log in /tmp/lemo-setup.log.
 if [ ! -f "$VIBE_CACHE/lemo.ok" ]; then
