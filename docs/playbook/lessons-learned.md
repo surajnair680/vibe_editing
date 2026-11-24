@@ -28,6 +28,9 @@ Other docs and when to read them: `docs/README.md`.
   noise into gritty skin; the version that worked boosts a denoised layer: bilateral on lightness, CLAHE 2.0 (8x8),
   clarity 0.40 at sigma 18, detail 0.35 at sigma 2, add back half the noise, saturation x1.12. About 90 ms a frame.
   `hdr()` in `projects/reel-14/work/build3/scene3.py`. Always check a full-size crop of skin before sending. [r14]
+- **Physique shots need time: at least about 2 s each (reel-14).** At 0.7 to 1.4 s his photos and training clips
+  "just look like glimpses". Give every physique photo or clip 2 s or more (the ending 3 s), taking the time from the
+  graphics around it, and keep graphics windows from running under a full-screen print. [r14]
 - **Never caption an emotional image (reel-14).** Labels DISCOMFORT, GROW and NO OPTION on the statue photos were
   "fucking lame". Labels help abstract symbols (a scale = BALANCE); a strong image plus his voice needs nothing on it. [r14]
 - **Emotion beats diagrams (reel-14).** He called the brain and bicep drawings "so boring" and sent two dark B&W

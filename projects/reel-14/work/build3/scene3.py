@@ -351,6 +351,16 @@ def cracks(img, cx, cy, p, seed=3):
 
 
 # ------------------------------------------------------------------ the beats
+# physique shot windows, v4 (his note on v3: "they just look like glimpses"), each about 2 s or more
+P_MIRROR = (s("a", 28.75) - .45, s("You", 30.07) + .55)
+P_PAIN = (52.60, 53.90)
+P_PULL = (53.90, 55.60)
+P_CLOSE = (s("need", 69.91) + .06, s("problem", 71.99) - .10)
+P_INCL = (74.40, s("That", 76.87))
+P_FLEX = (77.45, 79.60)
+P_DUMB = (81.80, 84.40)
+P_OUT = (87.70, 90.00)
+P_FRONT = (s("You", 99.05), None)
 SEC_CREAM = (s("Balance", 60.32) - 0.05, s("Screw", 68.83))
 
 
@@ -364,15 +374,15 @@ def ground(t):
 def behind(img, t):
     """visuals behind him, by beat."""
     # 1. Normal people: rows of identical figures
-    if HIS <= t < s("a", 28.75):
+    if HIS <= t < P_MIRROR[0]:
         t0 = s("Normal", 27.4)
         for i in range(10):
             r_, c_ = divmod(i, 5)
             img = drop(img, figure(), 240 + c_ * 150, 640 + r_ * 210, t, t0 + 0.05 + i * 0.05, dy=-200, shadow=.35)
         img = label(img, "NORMAL PEOPLE", 540, 470, t, t0 + .1, size=96)
     # 2. drinks, pizza
-    if s("You", 30.07) <= t < s("and", 33.63):
-        td, tp = s("drinks", 30.63), s("pizza", 32.17)
+    if P_MIRROR[1] <= t < s("and", 33.63):
+        td, tp = max(s("drinks", 30.63), P_MIRROR[1] + .25), s("pizza", 32.17)
         img = drop(img, vox.cutout(C + "drinks.png", 400, seed=11), 350, 640, t, td, rot=3, dy=-500)
         if t >= td + .27: img = vox.marker_x(img, 350, 640, 340, span(t, td + .27, td + .77), seed=4)
         img = drop(img, vox.cutout(C + "pizza.png", 540, seed=12), 750, 620, t, tp, rot=-5, dy=-560)
@@ -413,14 +423,14 @@ def behind(img, t):
         img = celeb(img, "assets/photos/celebrity_arnold.jpg", 280, 860, 900, t, s("outliers", 46.03) + .25, -4, "ARNOLD", 22)
         img = label(img, "OUTLIERS", 650, 560, t, s("outliers", 46.03) + .4, size=80, bg=MARK, fg=BONE, rot=-8)
     # 9. receipt
-    if s("Which", 48.95) <= t < s("Pain", 52.76):
+    if s("Which", 48.95) <= t < P_PAIN[0]:
         lines = [(s("except", 50.01), "DRINKS", "SKIPPED", False), (s("comes", 50.63), "PIZZA", "SKIPPED", False),
-                 (s("price", 51.11), "NIGHTS OUT", "SKIPPED", False), (s("won't", 52.19), "TOTAL", "THE PRICE", True)]
+                 (s("price", 51.11), "NIGHTS OUT", "SKIPPED", False), (s("people", 51.85), "TOTAL", "THE PRICE", True)]
         rc = receipt(twos(t), lines)
         img = drop(img, rc, 540, 470 + rc.shape[0] / 2, t, s("Which", 48.95) + .25, rot=-1.5, dy=-300)
     # 10b. gauge
-    if s("going", 54.27) <= t < s("That's", 56.82):
-        img = stopline(img, t, s("going", 54.27), s("people", 55.35), s("tolerate", 56.15))
+    if P_PULL[1] <= t < s("That's", 56.82):
+        img = stopline(img, t, P_PULL[1], s("tolerate", 56.15), s("tolerate", 56.15) + .5)
     # 11. balance scale wobbles
     if s("That's", 56.82) <= t < SEC_CREAM[0] and os.path.exists(C + "scale.png"):
         tt = twos(t)
@@ -453,7 +463,7 @@ def behind(img, t):
         img = paste(img, torn_half(sc, "L"), 540 - 150 * q, 520 + 30 * q, rot=-12 * q)
         img = paste(img, torn_half(sc, "R"), 540 + 150 * q, 520 + 40 * q, rot=14 * q)
     # 15. warning tape: THE PROBLEM
-    if s("But", 71.01) <= t < s("The", 72.65):
+    if P_CLOSE[1] <= t < 73.15:
         tp = s("problem", 71.99)
         for k, (y, rot) in enumerate([(520, -9), (700, 7)]):
             q = ease(span(twos(t), tp - .25 + k * .1, tp + k * .1))
@@ -461,22 +471,22 @@ def behind(img, t):
                 img = paste(img, vox.strip("THE PROBLEM   THE PROBLEM   THE PROBLEM", 80, bg=MARK, fg=BONE, seed=111 + k),
                             540 + (1 - q) * (1400 if k else -1400), y, rot=rot, shadow=.4)
     # 16a. progress bar into uncomfortable
-    if s("The", 72.65) <= t < s("exact", 74.93):
-        img = drop(img, progress(t, s("moment", 72.81), s("uncomfortable", 73.61), s("is", 74.59)), 540, 640, t, s("moment", 72.81), rot=-1.5, dy=-300)
+    if 73.15 <= t < P_INCL[0]:
+        img = drop(img, progress(t, 73.15, s("uncomfortable", 73.61), P_INCL[0] - .1), 540, 640, t, 73.3, rot=-1.5, dy=-300)
     # 17a. muscle fibres tear
-    if s("That", 76.87) <= t < s("is", 77.75):
+    if s("That", 76.87) <= t < P_FLEX[0]:
         # Sisyphus pushing the boulder: the struggle you push through (his photo, unfiltered)
         img = drop(img, vox.print_frame(_photo("assets/photos/statue_sisyphus.jpg"), 440, seed=27), 560, 700, t, s("That", 76.87) + .1, rot=-2, dy=-400)
     # 18a. brain -> muscle
-    if s("It", 78.99) <= t < s("adapt", 82.21):
+    if P_FLEX[1] <= t < P_DUMB[0]:
         # the self-made man carving himself out of stone: you build yourself (photo, unfiltered, slow push-in)
-        pin = 1 + 0.06 * span(t, s("It", 78.99), s("adapt", 82.21))
-        p = land(t, s("It", 78.99) + .15)
+        pin = 1 + 0.06 * span(t, P_FLEX[1], P_DUMB[0])
+        p = land(t, P_FLEX[1] + .15)
         if p > 0:
             img = paste(img, vox.print_frame(_photo("assets/photos/statue_selfmade_crop.jpg"), 440, seed=28), 500, 700 - 400 * (1 - p),
                         rot=2, scale=pin, shadow=.5)
     # 19. sofa, figures crawl to it
-    if s("And", 83.66) <= t < s("Outliers", 87.89):
+    if P_DUMB[1] <= t < P_OUT[0]:
         if os.path.exists(C + "sofa.png"):
             img = drop(img, vox.cutout(C + "sofa.png", 420, seed=18), 720, 640, t, s("comfort", 87.28) - 2.2, rot=-2, dy=-400)
         tc = s("crawl", 86.40)
@@ -485,14 +495,14 @@ def behind(img, t):
             img = drop(img, figure((150, 146, 140), 190, 2), x, 800, t, s("people", 85.12) + i * .08, dy=-160, rot=-20, shadow=.3)
         img = label(img, "COMFORT", 720, 900, t, s("comfort", 87.28) - 2.0, size=80, bg=BONE, fg=INK)
     # 21. judging eyes
-    if s("and", 89.29) <= t < s("Normal", 91.37) and os.path.exists(C + "eyes.png"):
-        tj = s("that", 89.55)                       # eyes start on "that" so the frame is never empty, one every 0.22 s
+    if P_OUT[1] <= t < s("Normal", 91.37) and os.path.exists(C + "eyes.png"):
+        tj = P_OUT[1] + .05                          # eyes pop in one every 0.15 s once the flex clip ends
         for k, (x, y, sc_, rot) in enumerate([(200, 560, 250, -8), (870, 540, 230, 7), (540, 500, 210, 2), (150, 800, 200, 10), (930, 790, 220, -9)]):
-            ti = tj + k * .22
+            ti = tj + k * .15
             if twos(t) >= ti:
                 q = ease(span(twos(t), ti, ti + .17))
                 img = paste(img, vox.cutout(C + "eyes.png", sc_, margin=10, seed=30 + k), x, y, rot=rot, scale=.5 + .5 * q, shadow=.35)
-        img = label(img, "JUDGING", 540, 690, t, s("judging", 90.45) + .05, size=100, bg=MARK, fg=BONE)
+        img = label(img, "JUDGING", 540, 690, t, max(s("judging", 90.45) + .05, P_OUT[1] + .7), size=100, bg=MARK, fg=BONE)
     # 22. mirror turned away, pointing hands
     if s("Normal", 91.37) <= t < s("Crazy", 94.24):
         mp = C + ("mirror_front.png" if os.path.exists(C + "mirror_front.png") else "mirror.png")
@@ -527,7 +537,7 @@ def behind(img, t):
         for i in range(6):
             img = drop(img, figure((150, 146, 140), 110, 2), 250 + i * 110, 870, t, s("better", 97.27) + i * .05, dy=-100, shadow=.3)
     # 25a. YOU on the curve before the last photo
-    if s("You", 99.05) <= t < s("were", 99.97):
+    if False:                                       # v4: the YOU curve gave way to a longer last photo
         img = curve(img, t, s("You", 99.05) - 1.0, s("You", 99.05))
     return img
 
@@ -552,16 +562,16 @@ def _photo(path):
 
 # full-scene prints of his photos and clips: (t0, t1, kind, path, src, zoom, cx, cy, width, label, label_t)
 PRINTS = [
-    (s("a", 28.75), s("You", 30.07), "photo", "assets/photos/me_physique_mirror.jpg", 0, 1, .5, .5, 720, None, None),
-    (s("Pain", 52.76), s("discomfort", 53.44), "clip", "raw/vid_1111c.mp4", 4.3, 1.2, 0.0, 1.0, 700, None, None),
-    (s("discomfort", 53.44), s("going", 54.27), "clip", "raw/pullups.mp4", 7.7, 1.0, .5, .5, 700, None, None),
-    (s("exact", 74.93), s("That", 76.87), "clip", "raw/vid_1111.mp4", 5.0, 1.15, .62, .55, 720, "KEEP GOING", s("keep", 76.19)),
-    (s("is", 77.75), s("It", 78.99), "clip", "raw/flex_p1.mp4", 7.2, 1.06, .5, .3, 560, None, None),
-    (s("adapt", 82.21), s("And", 83.66), "photo", "assets/photos/me_gym_dumbbell.jpg", 0, 1, .5, .5, 720, None, None),
-    (s("Outliers", 87.89), s("and", 89.29), "clip", "raw/flex_p1.mp4", 10.9, 1.04, .5, .3, 720, "OUTLIERS", s("Outliers", 87.89)),
-    (s("were", 99.97), LEN + 1, "photo", "assets/photos/me_physique_front.jpg", 0, 1, .5, .5, 720, "YOU.", s("normal", 101.01)),
+    (*P_MIRROR, "photo", "assets/photos/me_physique_mirror.jpg", 0, 1, .5, .5, 720, None, None),
+    (*P_PAIN, "clip", "raw/vid_1111c.mp4", 4.1, 1.2, 0.0, 1.0, 700, None, None),
+    (*P_PULL, "clip", "raw/pullups.mp4", 7.6, 1.0, .5, .5, 700, None, None),
+    (*P_INCL, "clip", "raw/vid_1111.mp4", 4.5, 1.15, .62, .55, 720, "KEEP GOING", s("keep", 76.19)),
+    (*P_FLEX, "clip", "raw/flex_p1.mp4", 6.9, 1.06, .5, .3, 560, None, None),
+    (*P_DUMB, "photo", "assets/photos/me_gym_dumbbell.jpg", 0, 1, .5, .5, 720, None, None),
+    (*P_OUT, "clip", "raw/flex_p1.mp4", 10.7, 1.04, .5, .3, 720, "OUTLIERS", P_OUT[0] + .2),
+    (P_FRONT[0], LEN + 1, "photo", "assets/photos/me_physique_front.jpg", 0, 1, .5, .5, 720, "YOU.", s("normal", 101.01)),
 ]
-FULLCLIP = (s("need", 69.91) + .06, s("But", 71.01))      # close press full frame, as v2
+FULLCLIP = P_CLOSE                                         # close press full frame, about 1.9 s
 
 
 def print_scene(t):
@@ -590,7 +600,7 @@ def caption(img, t):
     return img
 
 
-WIPES = [s("You", 40.25), s("That's", 56.82), s("But", 71.01), s("You", 99.05)]
+WIPES = [s("You", 40.25), s("That's", 56.82), P_CLOSE[1], s("You", 99.05)]
 
 
 def wipe(img, t):
