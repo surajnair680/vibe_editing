@@ -122,8 +122,8 @@ for i, v in enumerate(talk):                           # attack 60 ms, release 4
 def speech_rms_(x):
     hh = SR // 20; f = np.sqrt((x[:len(x) // hh * hh].reshape(-1, hh) ** 2).mean(1)); return np.sqrt(np.mean(f[f > np.percentile(f, 50)] ** 2))
 m_rms = np.sqrt(np.mean(MUSIC[int(30 * SR):int(100 * SR)] ** 2))
-under = speech_rms_(voice) * db(-18) / m_rms           # level while talking
-gaps = under * db(6)                                   # level in pauses
+under = speech_rms_(voice) * db(-10) / m_rms           # level while talking (v6: -18 was inaudible on phone speakers)
+gaps = under * db(4)                                   # level in pauses
 gcurve = gaps + (under - gaps) * np.interp(np.arange(N) / SR, np.arange(len(duck)) / 100, duck)
 MUSIC = MUSIC * gcurve[:, None]
 fi = int(0.4 * SR); MUSIC[:fi] *= np.linspace(0, 1, fi)[:, None]
@@ -139,7 +139,7 @@ gr = np.minimum(1.0, lim / (np.abs(mix).max(1) + 1e-12))
 gr = uniform_filter1d(minimum_filter1d(gr, 2 * w + 1), w)
 mix = np.clip(mix * gr[:, None], -lim, lim)
 os.makedirs("work/audio", exist_ok=True)
-sf.write("work/audio/mix_v5.wav", mix, SR, subtype="PCM_24")
+sf.write("work/audio/mix_v6.wav", mix, SR, subtype="PCM_24")
 sf.write("work/audio/_stem3_music.wav", MUSIC * G, SR, subtype="PCM_16")
 sf.write("work/audio/_stem3_sfx.wav", sfx * G, SR, subtype="PCM_16")
 # report: loudest effect vs the voice, and brightness of the effects

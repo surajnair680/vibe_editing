@@ -28,6 +28,9 @@ Other docs and when to read them: `docs/README.md`.
   noise into gritty skin; the version that worked boosts a denoised layer: bilateral on lightness, CLAHE 2.0 (8x8),
   clarity 0.40 at sigma 18, detail 0.35 at sigma 2, add back half the noise, saturation x1.12. About 90 ms a frame.
   `hdr()` in `projects/reel-14/work/build3/scene3.py`. Always check a full-size crop of skin before sending. [r14]
+- **Music level for phone speakers (reel-14).** With his own track (Jake Chudnow "Turquoise") ducked 18 dB under the
+  voice he "cannot hear it without earphones". About 10 dB under the voice while he talks (+4 dB in pauses) works for
+  phone speakers. The reel-12 "18 dB under" figure was for a busy track; check on a phone-speaker basis. [r14]
 - **Draft before every full render, without being asked (reel-14).** He asked "why not show me the preview first, to
   save time?" A half-size 15 fps draft of the changed range takes about 3 minutes against 20 for the full render
   (`scene3.py draft a b out.mp4`, 4 ranges in parallel, voice mix muxed from the same start). Send it first, render
