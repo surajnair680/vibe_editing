@@ -361,6 +361,12 @@ Other docs and when to read them: `docs/README.md`.
   > 82, then darken what remains of the soft edge toward the hair tone (despill). A first version without the edge
   limit punched a hole in his forehead. `face_circle()` in `projects/reel-12/work/mg/manga.py`. [r12]
 
+- **Cut-out of his room footage onto a new background (reel-14 v2):** the reel-12 hair-edge fix (drop pixels with
+  luma > 95 within 40 px of the matte edge) must be limited to the hair band (matte top row + 300 px): run over the
+  whole head it ate his ears and cheeks. Scaling him to 0.82 (bottom anchored) leaves room for titles above his head
+  but cuts the shoulders in a hard vertical line at the old frame edge: fade the matte over the outer 170 px.
+  `edge_fix()` and `his_layer()` in `projects/reel-14/work/build2/scene2.py`; mattes `work/matte_frames.py`. [r14]
+
 ## 5. Effects that worked (copy the code from the project, never import across projects)
 All in `projects/reel-03/work/build/fx.py` (helpers) and `edit.py` (beats). Deterministic (seeded) so re-renders match.
 - Light-snap silhouette from one photo: normal for a beat, flash to blown-out white with rays, body to black, one
@@ -585,6 +591,11 @@ All in `projects/reel-03/work/build/fx.py` (helpers) and `edit.py` (beats). Dete
   frame starts moving before the out-point, end at the later of the -35 dB decay + 1 frame and the first moving
   frame. Merge pieces whose gap is under 0.1 s so the out rule never leaves a 2-frame jump cut mid-sentence.
   `projects/reel-14/work/plan_cut.py` (`LEAD`, `first_motion`). [r14]
+
+- **Freesound from the container, 2026-11-23 (reel-14):** some downloads worked (metal hit, boom, shield bash, shutter,
+  riser) and others answered 403 from cdn.freesound.org on the same run; retrying with waits got 3 more. Try `get` a
+  few times before asking him to download by hand. The project `.gitignore` ignores `*.wav`: add
+  `!assets/sfx/openverse/*.wav` so the trimmed sounds are committed. [r14]
 
 ## 8. Workflow and process
 - Stills first, every time (contact sheet every 2.5 s + full-size changed frames), plus a short low-res draft clip when

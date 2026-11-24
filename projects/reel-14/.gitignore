@@ -19,3 +19,6 @@ __pycache__/
 work/*.log
 *.mbtree
 *.log.mbtree
+reanimate/caption/
+reanimate/title/
+!assets/sfx/openverse/*.wav
