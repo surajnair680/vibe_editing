@@ -26,3 +26,11 @@ Lines cross the p1/p2 and p2/p3 seams; audio start_times are 0 to 13 ms (no hidd
 11. Sound: `python3 work/mix.py v2 --no-music --v2` -> work/audio/mix_v2.wav (voice + SFX on titles; drop
    --no-music for music A, re-arranged so its break lands before "Screw").
 12. Mux and deliver as in step 8 (2-pass about 2150k for under 30 MiB).
+
+## v3 (dark Vox collage, 2026-11-24)
+13. Picture: `python3 work/build3/scene3.py render 0 26 work/render/v3_0.mp4` (and 26-52, 52-77, 77-103 in parallel,
+    about 20 min on 4 cores). Needs raw/, work/base.mp4 and work/matte/ (steps 1 to 9) and the committed
+    assets/codex/*.png, assets/photos/statue_*.jpg. Stills: `python3 work/build3/scene3.py still <t> ...`.
+14. Sound: `python3 work/build3/mix3.py` -> work/audio/mix_v3.wav (voice + soft low-passed paper sounds, no music).
+15. Master: concat the 4 parts (`-f concat -c:v copy`) + mix_v3.wav (aac 256k, `-t` LEN) -> out/reel-14-v3-master.mp4
+    (about 1.26 GB at crf 14 because of the grain). Review copy under 30 MiB: 2-pass x264 at 2150k + aac 160k.
