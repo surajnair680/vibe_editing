@@ -15,6 +15,14 @@ full render, real Openverse sounds with peaks on their frames, his photos and fo
   changes on twos, vignette, edge-only colour fringe, paper wipes between shots, a stepped grid with one flipping card,
   photo cards (photo unfiltered inside a torn white margin), a marker circle that draws itself and a highlighter sweep.
   Sound: `example/mix.py` places Openverse CC0 paper flips, swooshes, thuds and a marker (in `example/assets/sfx/`).
+- **Photos move with parallax (the Vox trick, user rule 2026-11-24):** every photo in a Vox explainer gets a slow 2.5D
+  camera move inside its card instead of sitting still. Tested shot: `example/parallax.html` (7 s): a torn white card
+  with the parallax photo inside, strips landing on twos around it. Make the layers with `tools/parallax.py layers
+  <photo> -o <page>/assets/parallax/<key> --n 4 --subject --plate codex --remove "..." --web 1600` (Codex paints what
+  was hidden), include `parallax.js` + `assets/parallax/<key>/layers.js`, and call `Parallax.draw(x, key, u, {dolly:
+  .22, focus: [fx, fy]}, ...)` inside the card's draw. The camera runs smooth on real time (not twos), with `focus` on
+  the face so the push never crops it. Keep strips off the face and off the nearest layer (it sells the depth). Full
+  detail: the `photo-parallax` skill. Render: 7 s at 24 fps in 37 s.
 - **Numbers from the test:** `twos(t) = floor(t*12)/12` for all motion; strips land in about 0.42 s, one every 0.32 s;
   tiles stagger 0.07 s; cards 0.35 s apart; wipes 0.5 s centred on the cut. The question's first line is already
   landing on frame 0 (a blank first frame loses the hook). Content sits between y 400 and 1450 so the frame is not

@@ -368,10 +368,23 @@ def cmd_layers(a):
         fn = f"layer_{k}.png"
         cv2.imwrite(os.path.join(a.out, fn), cv2.cvtColor(L, cv2.COLOR_RGBA2BGRA))
         files.append(fn)
-    meta = {"source": os.path.abspath(a.image), "size": [w, h], "layers": files,
+    web = []
+    if a.web:  # small WebP copies with alpha for HTML pages (vox-explainer, seek pages): kit/parallax.js
+        sw = min(1.0, a.web / max(w, h))
+        for k, L in enumerate(layers):
+            fn = f"layer_{k}.webp"
+            Ls = cv2.resize(L, (int(w * sw), int(h * sw)), interpolation=cv2.INTER_AREA) if sw < 1 else L
+            cv2.imwrite(os.path.join(a.out, fn), cv2.cvtColor(Ls, cv2.COLOR_RGBA2BGRA), [cv2.IMWRITE_WEBP_QUALITY, 90])
+            web.append(fn)
+    meta = {"source": os.path.abspath(a.image), "size": [w, h], "layers": files, "layers_web": web,
             "z": [round(z, 4) for z in zs], "nearness": [round(v, 4) for v in nearness],
             "cuts": cuts, "subject": bool(a.subject)}
     json.dump(meta, open(os.path.join(a.out, "layers.json"), "w"), indent=2)
+    if web:  # pages open as file:// and can't fetch JSON, so the same data as a script: <script src=".../layers.js">
+        key = os.path.basename(os.path.normpath(a.out))
+        wm = {"size": [int(round(w * sw)), int(round(h * sw))], "z": meta["z"], "files": web}
+        open(os.path.join(a.out, "layers.js"), "w").write(
+            f"(window.PARALLAX = window.PARALLAX || {{}})[{json.dumps(key)}] = {json.dumps(wm)};\n")
 
     # split preview: photo tinted by layer, plus each layer on a checkerboard
     cols = [(60, 110, 255), (60, 220, 120), (255, 170, 40), (240, 60, 200), (60, 230, 230)]
@@ -433,6 +446,7 @@ def camera(a):
             p[k] = v
     if a.strength != 1.0:
         p = {k: v * a.strength for k, v in p.items()}
+    p["focus"] = tuple(float(v) for v in a.focus.split(","))
     return p
 
 
@@ -447,12 +461,14 @@ def transforms(meta, cam, u, W, H, extra_zoom=1.0):
         cz0, cz1 = -cam["dolly"] * zf, 0.0
     cz = cz0 + (cz1 - cz0) * u
     out = []
+    fx = (cam.get("focus", (0.5, 0.5))[0] - 0.5) * w * fit
+    fy = (cam.get("focus", (0.5, 0.5))[1] - 0.5) * h * fit
     for z in meta["z"]:
         sc = z / (z - cz)
         # pan: the front layer slides pan*W over the shot; others slide less by 1/z
         dx = -(cam["pan_x"] * W) * (u - 0.5) * (zf / (z - cz))
         dy = -(cam["pan_y"] * H) * (u - 0.5) * (zf / (z - cz))
-        out.append((fit * sc, dx, dy))
+        out.append((fit * sc, dx + fx * (1 - sc), dy + fy * (1 - sc)))  # push toward the focus point
     return out
 
 
@@ -535,6 +551,7 @@ def main():
     l.add_argument("--band", type=float, default=0.10, help="how far each layer reaches under the next (fraction of size)")
     l.add_argument("--spread", type=float, default=1.0, help="exaggerate (>1) or flatten (<1) the depth spacing")
     l.add_argument("--max", type=int, default=2600, help="longest side to work at")
+    l.add_argument("--web", type=int, default=0, help="also write WebP layers at this longest side (e.g. 1600) for HTML pages")
     l.set_defaults(fn=cmd_layers)
     for name, fn in (("render", cmd_render), ("stills", cmd_stills)):
         r = sp.add_parser(name)
@@ -548,6 +565,7 @@ def main():
         r.add_argument("--pan-x", dest="pan_x", type=float, help="front layer slide in frame widths (+ = camera right)")
         r.add_argument("--pan-y", dest="pan_y", type=float, help="front layer slide in frame heights (+ = camera down)")
         r.add_argument("--strength", type=float, default=1.0, help="scale the whole move")
+        r.add_argument("--focus", default="0.5,0.5", help="point the camera pushes toward, 0..1 of the photo (put it on the face: 0.5,0.3)")
         r.add_argument("--ease", choices=["inout", "linear", "in", "out"], default="inout")
         r.add_argument("--blur-back", dest="blur_back", type=float, default=0.0, help="soft depth of field on the back plate (px)")
         r.add_argument("--crf", type=int, default=16)

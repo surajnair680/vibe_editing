@@ -34,7 +34,7 @@ python3 tools/parallax.py stills projects/<name>/work/parallax/photo -o projects
 python3 tools/parallax.py render projects/<name>/work/parallax/photo -o projects/<name>/out/photo.mp4 --move dolly-in --dur 6
 ```
 - Moves: `dolly-in` (default), `dolly-out`, `pan-left`, `pan-right`, `rise`, `fall`, `drift` (slow push + slide).
-  Fine control: `--dolly 0.2` (camera travel as a fraction of the front layer's distance, minus = out), `--pan-x 0.04`,
+  Fine control: `--focus 0.5,0.3` (push toward the face), `--dolly 0.2` (camera travel as a fraction of the front layer's distance, minus = out), `--pan-x 0.04`,
   `--pan-y`, `--strength 0.6` to calm any preset, `--ease inout|linear|in|out`, `--blur-back 2` for a touch of depth of
   field. The original framing shows at the start of a dolly-in, the end of a dolly-out and the middle of a pan; the
   tool computes the extra zoom so layer edges never enter the frame (about 3 to 5 % for pans).
@@ -44,6 +44,15 @@ python3 tools/parallax.py render projects/<name>/work/parallax/photo -o projects
   or give a clean background yourself with `--plate plate.jpg`.
 - `--spread 1.5` exaggerates depth spacing, `0.7` flattens it. `--band` (default 0.10) is how far each layer's
   patched texture reaches under the nearer one; raise it for big moves if a seam shows.
+
+## Inside Vox explainers (main use, user rule 2026-11-24)
+This trick is how Vox makes its motion graphics, so every photo in a `vox-explainer` edit gets it. The canvas module
+`kit/parallax.js` runs the same camera maths inside a `window.seek(t)` page: tested shot
+`.claude/skills/vox-explainer/example/parallax.html` (torn-paper card, strips on twos, smooth camera, `focus` on the
+face). Add `--web 1600` to `layers` so it writes small WebP layers plus `layers.js` (pages open as file:// and can't
+fetch JSON). 4 layers at 1600 px = about 0.5 MB.
+- `--focus 0.47,0.3` (render) / `focus: [.47, .3]` (page): the camera pushes toward that point of the photo. Put it on
+  the face: a centred push-in pushed his head up under the headline strip in the first test.
 
 ## Codex paints the hidden areas (default, user rule 2026-11-24: "You have codex image generation don't forget")
 - `--plate codex --remove "<everything in front of the far background>"` sends the photo to Codex (`codex exec ... -i`,
