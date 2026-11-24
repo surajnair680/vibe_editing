@@ -666,20 +666,42 @@ def him(img, base, f, t, st):
                      ring=BONE if cream else (158, 26, 43), seed=7)
 
 
+def hdr(rgb):
+    """HDR look for his training clips (his request): local contrast (CLAHE on lightness), clarity (large-radius
+    unsharp), fine detail sharpening and a touch of saturation, so muscle definition reads sharper."""
+    lab = cv2.cvtColor(np.ascontiguousarray(rgb), cv2.COLOR_RGB2LAB)
+    L = lab[..., 0]
+    Ld = cv2.bilateralFilter(L, 9, 18, 7)              # denoised lightness: the boost works on this, not on the noise
+    noise = L.astype(np.float32) - Ld.astype(np.float32)
+    Lf = _CLAHE.apply(Ld).astype(np.float32)           # local contrast
+    clar = cv2.GaussianBlur(Lf, (0, 0), 18)
+    Lf = Lf + 0.40 * (Lf - clar)                       # clarity: mid-scale contrast (muscle shapes)
+    fine = cv2.GaussianBlur(Lf, (0, 0), 2.0)
+    Lf = Lf + 0.35 * (Lf - fine)                       # detail: edges and striations, from the clean layer
+    Lf = Lf + 0.5 * noise                              # keep a little of the real texture, unboosted
+    lab[..., 0] = np.clip(Lf, 0, 255).astype(np.uint8)
+    ab = lab[..., 1:].astype(np.float32) - 128
+    lab[..., 1:] = np.clip(ab * 1.12 + 128, 0, 255).astype(np.uint8)
+    return cv2.cvtColor(lab, cv2.COLOR_LAB2RGB)
+
+
+_CLAHE = cv2.createCLAHE(clipLimit=2.0, tileGridSize=(8, 8))
+
+
 def compose(f, base):
     t = f / 30
     if t < HIS:
         return base                                    # her clip untouched
     if FULLCLIP[0] <= t < FULLCLIP[1]:
         u = (t - FULLCLIP[0]) / (FULLCLIP[1] - FULLCLIP[0])
-        img = fx1.clip_frame("raw/vid_1111b.mp4", 0.7 + (t - FULLCLIP[0]), 1.04 + .06 * u, .5, .5)
+        img = hdr(fx1.clip_frame("raw/vid_1111b.mp4", 0.7 + (t - FULLCLIP[0]), 1.04 + .06 * u, .5, .5))
         return caption(np.ascontiguousarray(img), t)
     g = ground(t)
     g = motion_kit.grain(np.ascontiguousarray(g), GRAIN, seed=f)
     pr = print_scene(t)
     if pr:
         t0, t1, kind, path, src, z, cx, cy, width, lab, lt = pr
-        pic = _photo(path) if kind == "photo" else fx1.clip_frame(path, src + (t - t0), z, cx, cy)
+        pic = _photo(path) if kind == "photo" else hdr(fx1.clip_frame(path, src + (t - t0), z, cx, cy))   # HDR on training clips only
         img = behind(g, t)
         pf = vox.print_frame(np.ascontiguousarray(pic), width, seed=hash(path) % 50)
         x = 760 if width < 600 else W / 2

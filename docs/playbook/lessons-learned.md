@@ -23,6 +23,11 @@ Other docs and when to read them: `docs/README.md`.
   vertical cut on the deadlift outline. Check every cut-out at full size, especially head, hands and edges. [r03]
 - Long static holds bore him: a 4 s hold of one shot "becomes monotonous". Something must happen in its second half
   (in reel-03: a rim light builds, then the body fills with glowing grain on the key word). [r03]
+- **HDR on his training clips when he asks (reel-14).** "Add HDR so my muscles look sharper" overrides the
+  no-filter default for his training clips (not his photos unless asked). A plain CLAHE + sharpen boosted the phone's
+  noise into gritty skin; the version that worked boosts a denoised layer: bilateral on lightness, CLAHE 2.0 (8x8),
+  clarity 0.40 at sigma 18, detail 0.35 at sigma 2, add back half the noise, saturation x1.12. About 90 ms a frame.
+  `hdr()` in `projects/reel-14/work/build3/scene3.py`. Always check a full-size crop of skin before sending. [r14]
 - **Never caption an emotional image (reel-14).** Labels DISCOMFORT, GROW and NO OPTION on the statue photos were
   "fucking lame". Labels help abstract symbols (a scale = BALANCE); a strong image plus his voice needs nothing on it. [r14]
 - **Emotion beats diagrams (reel-14).** He called the brain and bicep drawings "so boring" and sent two dark B&W
