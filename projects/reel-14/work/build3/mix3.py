@@ -1,0 +1,123 @@
+"""reel-14 v3 mix -> work/audio/mix_v3.wav. Voice (her clip + his isolated voice, approved rough cut) + paper sound
+design, NO music (his note). His note on sound: nothing may pierce the ears, so every effect is low-passed
+(2.4 to 3.5 kHz), kept well under the voice, and the loudest hits are soft thuds, not clicks or cracks.
+Run from the project folder: python3 work/build3/mix3.py"""
+import os, sys, subprocess
+import numpy as np, soundfile as sf
+from scipy.signal import butter, sosfiltfilt
+from scipy.ndimage import minimum_filter1d, uniform_filter1d
+sys.argv = [sys.argv[0]]
+sys.path.insert(0, "/home/user/vibe_editing/projects/reel-14/work/build3")
+import scene3
+s = scene3.s
+SR = 48000
+LEN = scene3.LEN
+N = int(round(LEN * SR)) + int(0.6 * SR)
+
+
+def load(path, ch=2):
+    a = np.frombuffer(subprocess.run(["ffmpeg", "-v", "error", "-i", path, "-ac", str(ch), "-ar", str(SR), "-f", "f32le", "-"],
+                                     capture_output=True).stdout, np.float32).astype(float)
+    return a.reshape(-1, ch)
+
+
+def db(x): return 10 ** (x / 20)
+
+
+voice = load("work/audio/rough_v1.wav", 1)[:, 0]
+voice = np.pad(voice, (0, max(0, N - len(voice))))[:N]
+
+V = "assets/sfx/openverse/vox/"
+LIB = {k: load(V + k + ".wav") for k in ("paper-01", "paper-02", "paper-03", "thud-03", "marker-01", "swoosh-01", "swoosh-02")}
+LIB["boom"] = load("assets/sfx/openverse/boom.wav")
+# each sound: (low-pass Hz, base gain dB) chosen so none is bright or sharp
+TONE = {"paper-01": (3200, -6), "paper-02": (3200, -6), "paper-03": (3000, -4), "thud-03": (2400, -16),
+        "marker-01": (3500, 12), "swoosh-01": (2600, -10), "swoosh-02": (2600, -12), "boom": (2200, -10)}
+PEAK = {}
+for k, x in LIB.items():
+    lp, g = TONE[k]
+    x = sosfiltfilt(butter(4, lp, "lowpass", fs=SR, output="sos"), x, axis=0) * db(g)
+    LIB[k] = x
+    env = np.convolve(np.abs(x).mean(1), np.ones(240) / 240, "same")
+    PEAK[k] = int(np.argmax(env))
+
+sfx = np.zeros((N, 2))
+_rot = [0]
+
+
+def put(t, name, gdb=0.0):
+    if name == "paper":                         # rotate the three paper flips so no landing repeats the last one
+        name = ("paper-01", "paper-02", "paper-03")[_rot[0] % 3]; _rot[0] += 1
+    x = LIB[name] * db(gdb)
+    a = int(round(t * SR)) - PEAK[name]
+    a0 = max(0, a); x = x[a0 - a:]
+    n = min(len(x), N - a0)
+    if n > 0: sfx[a0:a0 + n] += x[:n]
+
+
+E = []
+def ev(t, name, g=0.0): E.append((t, name, g))
+
+HIS = scene3.HIS
+ev(HIS, "swoosh-01", -2)                                           # into his take
+ev(s("Normal", 27.4) + .3, "paper", -4); ev(s("Normal", 27.4) + .45, "paper")
+ev(s("a", 28.75) + .17, "paper"); ev(s("a", 28.75) + .7, "marker-01", -4)
+ev(s("drinks", 30.63), "paper"); ev(s("drinks", 30.63) + .45, "marker-01")
+ev(s("pizza", 32.17), "paper"); ev(s("pizza", 32.17) + .3, "thud-03")
+ev(s("tonight", 33.79), "paper")
+for w, n in (("tonight", 33.79), ("obsessed", 35.37), ("abnormal", 36.23)): ev(s(w, n) + .12, "paper-03", -6)
+ev(s("Is", 37.27), "paper"); ev(s("wrong", 38.25), "paper", -6); ev(s("yes", 39.64) + .12, "marker-01")
+for tw in scene3.WIPES: ev(tw, "swoosh-02")
+ev(s("You", 40.25) + .4, "marker-01", -6); ev(s("You", 40.25) + .7, "paper", -4); ev(s("normal", 40.73) + .3, "thud-03", -4)
+ev(s("Success", 42.62) + .1, "paper"); ev(s("abnormal", 43.34) + .2, "marker-01", -4); ev(s("by", 43.98), "paper")
+ev(s("Successful", 44.89) - .1, "marker-01", -6)
+ev(s("outliers", 46.03), "paper"); ev(s("outliers", 46.03) + .25, "paper"); ev(s("outliers", 46.03) + .45, "thud-03", -3)
+ev(s("Which", 48.95) + .25, "paper")
+for w, n in (("except", 50.01), ("comes", 50.63), ("price", 51.11)): ev(s(w, n), "paper-03", -6)
+ev(s("won't", 52.19), "thud-03", -4)
+ev(s("Pain", 52.76) + .17, "paper"); ev(s("discomfort", 53.44) + .17, "paper")
+ev(s("going", 54.27) + .2, "paper", -4); ev(s("people", 55.35), "thud-03", -6)
+ev(s("balance", 57.42) - .1, "paper")
+ev(scene3.SEC_CREAM[0], "swoosh-01", -4); ev(s("everybody", 61.36), "paper"); ev(s("no", 64.28) + .05, "thud-03")
+for w, n in (("class", 65.71), ("everybody", 66.49), ("A", 67.33)): ev(s(w, n), "paper")
+ev(s("nothing", 68.34) + .2, "marker-01")
+ev(s("balance", 69.15) + .05, "swoosh-02", 2); ev(s("balance", 69.15) + .1, "boom", -2)   # the scale tears
+ev(s("need", 69.91) + .06, "thud-03", -6)
+ev(s("problem", 71.99) - .1, "swoosh-01", -4)
+ev(s("moment", 72.81), "paper")
+ev(s("exact", 74.93) + .17, "paper"); ev(s("keep", 76.19), "paper", -4)
+ev(s("That", 76.87) + .1, "paper"); ev(s("is", 77.75) + .17, "paper")
+ev(s("It", 78.99) + .15, "paper"); ev(s("adapt", 82.21) + .17, "paper")
+ev(s("comfort", 87.28) - 2.2, "paper"); ev(s("comfort", 87.28) - 2.0, "paper", -4)
+ev(s("Outliers", 87.89) + .17, "paper")
+for k in range(5): ev(s("that", 89.55) + k * .22 + .05, "paper-03", -7)
+ev(s("judging", 90.45) + .1, "thud-03", -4)
+ev(s("people", 91.73), "paper"); ev(s("don't", 92.11) + .35, "marker-01")
+ev(s("They", 93.41) + .1, "swoosh-02", -6)
+for w, n in (("Crazy", 94.24), ("boring", 95.02), ("obsessed", 95.50)):
+    ev(s(w, n), "paper"); ev(s(w, n) + .2, "thud-03", -8)
+ev(s("whatever", 96.09) + .1, "paper"); ev(s("mediocrity", 98.41) + .2, "marker-01", -4)
+ev(s("You", 99.05) + .05, "thud-03", -6)
+ev(s("were", 99.97) + .17, "paper"); ev(s("normal", 101.01), "boom", 0)                   # the final YOU.
+for t, name, g in scene3.SFX: ev(t, "paper-02", -8)                                         # circle jumps
+for t, name, g in E: put(t, name, g)
+
+sfx *= db(-3)                                        # one more step down: soft under the voice
+mix = np.stack([voice, voice], 1) + sfx
+def speech_rms(x):
+    hh = SR // 20; f = np.sqrt((x[:len(x) // hh * hh].reshape(-1, hh) ** 2).mean(1)); return np.sqrt(np.mean(f[f > np.percentile(f, 50)] ** 2))
+G = db(-14.5) / speech_rms(voice)
+mix *= G
+lim = db(-1.5); w = int(0.005 * SR)
+gr = np.minimum(1.0, lim / (np.abs(mix).max(1) + 1e-12))
+gr = uniform_filter1d(minimum_filter1d(gr, 2 * w + 1), w)
+mix = np.clip(mix * gr[:, None], -lim, lim)
+os.makedirs("work/audio", exist_ok=True)
+sf.write("work/audio/mix_v3.wav", mix, SR, subtype="PCM_24")
+sf.write("work/audio/_stem3_sfx.wav", sfx * G, SR, subtype="PCM_16")
+# report: loudest effect vs the voice, and brightness of the effects
+def pk(x): return 20 * np.log10(np.abs(x).max() + 1e-12)
+spec = np.abs(np.fft.rfft(sfx[:, 0] * G)); fr = np.fft.rfftfreq(len(sfx), 1 / SR)
+hi = 10 * np.log10(spec[fr > 4000].__pow__(2).sum() / spec.__pow__(2).sum())
+print(f"{len(E)} effects | voice peak {pk(voice * G):.1f} dBFS | sfx peak {pk(sfx * G):.1f} dBFS | "
+      f"energy above 4 kHz {hi:.1f} dB | mix peak {pk(mix):.1f} dBFS")
