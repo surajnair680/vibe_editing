@@ -28,6 +28,10 @@ Other docs and when to read them: `docs/README.md`.
   noise into gritty skin; the version that worked boosts a denoised layer: bilateral on lightness, CLAHE 2.0 (8x8),
   clarity 0.40 at sigma 18, detail 0.35 at sigma 2, add back half the noise, saturation x1.12. About 90 ms a frame.
   `hdr()` in `projects/reel-14/work/build3/scene3.py`. Always check a full-size crop of skin before sending. [r14]
+- **Draft before every full render, without being asked (reel-14).** He asked "why not show me the preview first, to
+  save time?" A half-size 15 fps draft of the changed range takes about 3 minutes against 20 for the full render
+  (`scene3.py draft a b out.mp4`, 4 ranges in parallel, voice mix muxed from the same start). Send it first, render
+  full quality only after he approves the motion. [r14]
 - **Physique shots need time: at least about 2 s each (reel-14).** At 0.7 to 1.4 s his photos and training clips
   "just look like glimpses". Give every physique photo or clip 2 s or more (the ending 3 s), taking the time from the
   graphics around it, and keep graphics windows from running under a full-screen print. [r14]

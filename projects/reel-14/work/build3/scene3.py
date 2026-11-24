@@ -757,3 +757,19 @@ if __name__ == "__main__":
             still(float(t), f"out/stills/v3/s_{float(t):06.2f}.png")
     elif sys.argv[1] == "render":
         render(float(sys.argv[2]), float(sys.argv[3]), sys.argv[4])
+
+
+def draft(a, b, out):
+    """quick timing preview: every other frame (15 fps), half size. About 1/4 of the full render time."""
+    f0, f1 = fr(a), min(fr(b), fr(LEN))
+    enc = subprocess.Popen(["ffmpeg", "-v", "error", "-y", "-f", "rawvideo", "-pix_fmt", "rgb24", "-s", f"{W // 2}x{H // 2}", "-r", "15",
+                            "-i", "-", "-c:v", "libx264", "-crf", "24", "-preset", "veryfast", "-pix_fmt", "yuv420p", out], stdin=subprocess.PIPE)
+    for i, bf in enumerate(scene2.base_frames(f0, f1 - f0)):
+        if i % 2: continue
+        img = compose(f0 + i, bf)
+        enc.stdin.write(np.ascontiguousarray(cv2.resize(img, (W // 2, H // 2), interpolation=cv2.INTER_AREA)).tobytes())
+    enc.stdin.close(); enc.wait()
+
+
+if __name__ == "__main__" and sys.argv[1] == "draft":
+    draft(float(sys.argv[2]), float(sys.argv[3]), sys.argv[4])
