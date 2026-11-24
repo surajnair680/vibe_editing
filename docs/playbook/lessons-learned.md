@@ -23,6 +23,8 @@ Other docs and when to read them: `docs/README.md`.
   vertical cut on the deadlift outline. Check every cut-out at full size, especially head, hands and edges. [r03]
 - Long static holds bore him: a 4 s hold of one shot "becomes monotonous". Something must happen in its second half
   (in reel-03: a rim light builds, then the body fills with glowing grain on the key word). [r03]
+- **Never caption an emotional image (reel-14).** Labels DISCOMFORT, GROW and NO OPTION on the statue photos were
+  "fucking lame". Labels help abstract symbols (a scale = BALANCE); a strong image plus his voice needs nothing on it. [r14]
 - **Emotion beats diagrams (reel-14).** He called the brain and bicep drawings "so boring" and sent two dark B&W
   statue photos instead: Sisyphus pushing the boulder (discomfort you push through) and the self-made man carving
   himself (building yourself). For feeling lines (struggle, growth, becoming stronger) use dramatic, symbolic real

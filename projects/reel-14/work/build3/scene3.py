@@ -467,7 +467,6 @@ def behind(img, t):
     if s("That", 76.87) <= t < s("is", 77.75):
         # Sisyphus pushing the boulder: the struggle you push through (his photo, unfiltered)
         img = drop(img, vox.print_frame(_photo("assets/photos/statue_sisyphus.jpg"), 440, seed=27), 560, 700, t, s("That", 76.87) + .1, rot=-2, dy=-400)
-        img = label(img, "DISCOMFORT", 740, 1000, t, s("discomfort", 77.07) + .1, size=80, bg=MARK, fg=BONE, rot=-5)
     # 18a. brain -> muscle
     if s("It", 78.99) <= t < s("adapt", 82.21):
         # the self-made man carving himself out of stone: you build yourself (photo, unfiltered, slow push-in)
@@ -476,10 +475,6 @@ def behind(img, t):
         if p > 0:
             img = paste(img, vox.print_frame(_photo("assets/photos/statue_selfmade_crop.jpg"), 440, seed=28), 500, 700 - 400 * (1 - p),
                         rot=2, scale=pin, shadow=.5)
-        tn = s("no", 81.01)
-        if twos(t) >= tn:
-            q = ease(span(twos(t), tn, tn + .17))
-            img = paste(img, vox.stamp("NO OPTION", 130, seed=8), 470, 1010, rot=-6, scale=1.5 - .5 * q, shadow=0)
     # 19. sofa, figures crawl to it
     if s("And", 83.66) <= t < s("Outliers", 87.89):
         if os.path.exists(C + "sofa.png"):
@@ -697,7 +692,6 @@ def compose(f, base):
             img = paste(img, vox.strip(lab, 96, bg=MARK, fg=BONE, seed=hash(lab) % 99), 300, 470 + (1 - ql) * -60, rot=-4, shadow=.4)
         if width < 600:                                 # side-by-side: fibres grow back next to the print
             img = paste(img, vox.print_frame(_photo("assets/photos/statue_sisyphus.jpg"), 300, seed=27), 270, 760, rot=-3, shadow=.45)
-            img = label(img, "GROW", 270, 1060, t, s("grow", 78.63), size=84, bg=MARK, fg=BONE)
         img = caption(img, t)
         return wipe(img, t)
     st, zoom = state_at(t)
