@@ -1,0 +1,13 @@
+[00:00.22 - 00:01.42] Look at this Vox animation.
+[00:01.96 - 00:02.18] See it?
+[00:02.56 - 00:04.56] Something about it feels almost like a video.
+[00:04.84 - 00:08.20] Remove the effect, and it feels kinda flat, like an iMovie slideshow.
+[00:08.50 - 00:12.42] It's called a parallax effect, and it's how Vox brings historical images to life.
+[00:12.64 - 00:13.24] Here's how to do it.
+[00:13.54 - 00:15.14] Start with an image that has plenty of depth.
+[00:15.42 - 00:17.64] Look for a clear foreground, midground, and background.
+[00:17.90 - 00:20.86] In Photoshop, separate those elements into their own layers.
+[00:21.24 - 00:24.74] Then I use the clone stamp tool to patch over any areas hidden behind them.
+[00:25.02 - 00:27.62] Bring those layers into After Effects and space them out in 3D.
+[00:27.94 - 00:31.56] I use this free plugin called Depth to do this in one click, but you can also do it manually.
+[00:31.86 - 00:37.00] From there, slowly dolly or pan the camera to create that parallax effect and immerse your viewer in the photo.

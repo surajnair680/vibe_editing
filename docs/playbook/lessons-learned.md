@@ -3,7 +3,7 @@
 Read this whole file before starting any new video, and again before the stills step. Every entry came from a real
 edit and cost a revision, a re-render or a question once. Newest videos at the bottom of each section. Tags say where
 each lesson came from: [r01] reel-01, [r02] reel-02, [r03] reel-03, [vlog] the mini vlog style study (2026-10-30),
-[codex] the Codex CLI setup session (2026-11-01), [r04] reel-04 (cinematic work-session edit, 2026-11-01), [r05] reel-05 (Automance logo intro, 2026-11-04), [openverse] the Openverse sound library setup (2026-11-06), [r06] reel-06 (YouTube Shorts music swap of a finished reel, 2026-11-06), [r07] reel-07 (meme template caption swap, 2026-11-11), [lemo] the Lemo-Opuscar setup (2026-11-13), [r08] reel-08 (Comeback Day 1, a test intro as a Lemo Urban Sketch animation, 2026-11-13), [r09] reel-09 (bicep curl "Current vs Correct" form explainer, 2026-11-14), [voxel] the voxel reels setup (2026-11-14), [reanimate] the reanimate skill setup (2026-11-15), [r10] reel-10 (home pull-up and ring dip reel, 2026-11-16), [r11] reel-11 (sarcastic reply to an "inspiring" English-speaking clip, 2026-11-18), [r12] reel-12 ("Ghar ka khaana" sarcastic reply reel, 2026-11-19), [r14] reel-14 ("Successful people are not normal" reaction reel, 2026-11-23).
+[codex] the Codex CLI setup session (2026-11-01), [r04] reel-04 (cinematic work-session edit, 2026-11-01), [r05] reel-05 (Automance logo intro, 2026-11-04), [openverse] the Openverse sound library setup (2026-11-06), [r06] reel-06 (YouTube Shorts music swap of a finished reel, 2026-11-06), [r07] reel-07 (meme template caption swap, 2026-11-11), [lemo] the Lemo-Opuscar setup (2026-11-13), [r08] reel-08 (Comeback Day 1, a test intro as a Lemo Urban Sketch animation, 2026-11-13), [r09] reel-09 (bicep curl "Current vs Correct" form explainer, 2026-11-14), [voxel] the voxel reels setup (2026-11-14), [reanimate] the reanimate skill setup (2026-11-15), [r10] reel-10 (home pull-up and ring dip reel, 2026-11-16), [r11] reel-11 (sarcastic reply to an "inspiring" English-speaking clip, 2026-11-18), [r12] reel-12 ("Ghar ka khaana" sarcastic reply reel, 2026-11-19), [r14] reel-14 ("Successful people are not normal" reaction reel, 2026-11-23), [parallax] the Vox photo parallax lesson (2026-11-24).
 
 How this file grows: see "Learning loop" in CLAUDE.md. Add to it during every video, not only at the end.
 Other docs and when to read them: `docs/README.md`.
@@ -507,6 +507,17 @@ All in `projects/reel-03/work/build/fx.py` (helpers) and `edit.py` (beats). Dete
   landing on frame 0. Sound: Openverse CC0 paper flips on every landing, a swoosh on each paper wipe, a soft thud under
   the big word, a marker for the circle and highlighter, peaks placed on their frames (`example/mix.py`). Render with
   `tools/seek_render.mjs`: 14 s at 24 fps in 47 s, 24.7 MB at crf 14. [mg-pack]
+
+- **Vox photo parallax (stills that feel like video), skill `photo-parallax`, tool `tools/parallax.py`:** learned from
+  the reel "How Vox makes images look like videos". Split a deep photo (clear foreground / midground / background)
+  into layers, patch what each layer hid, space them in depth, move the camera slowly. Here: Depth Anything V2 small
+  (ONNX, CPU, from GitHub releases since Hugging Face is blocked) splits by depth; `--subject` (rembg isnet) gives the
+  main subject its own crisp layer, ranked by its feet so it stands in front of its ground (the depth model alone
+  lumped the cable car in with the rocks). Patch = Telea rim + push-pull inside + texture mirrored from the hole edge,
+  faded to grain deep inside (mirrors of mirrors make streaks); ignore a 2 % border strip (old prints have dark edges
+  that turned the fill black). Each layer reaches 10 % of the image size under the nearer one, or a dark seam shows
+  above the bench at the end of a dolly. 6 s dolly-in 0.22: front +28 %, back +5 %, reads well on a phone. Layers
+  in 3 to 8 s, a 6 s 1080x1920 render in about 33 s. Tested example: `.claude/skills/photo-parallax/example/`. [parallax]
 
 ## 6. Text and captions
 - Captions sit on a handheld mic at about 1440 px; ask about caption height at the stills step when he holds a mic. [r01][r02]

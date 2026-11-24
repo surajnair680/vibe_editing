@@ -32,6 +32,8 @@ one line below. Don't nest deeper than these three folders.
   (film, spec, rebuild in HTML, film again, compare frame by frame). From github.com/NiazMorshed2007/reanimate (MIT).
 - `.claude/skills/vox-explainer/`, `motion-effects/`, `animated-chart/` and 12 more: the motion graphics pack from
   github.com/charlie947/motion-graphics-skills (MIT), with house rules on top. Rendered with `tools/seek_render.mjs`.
+- `.claude/skills/photo-parallax/`: Vox-style 2.5D parallax that makes a still photo feel like video (depth layers,
+  patched holes, slow camera), with `tools/parallax.py`. Learned from the reel "How Vox makes images look like videos".
 - `.claude/skills/vibe-wrap-up/`: run at the end of every session (`/vibe-wrap-up`): reviews the session, explains what was
   learned and writes it into `playbook/lessons-learned.md` and `CLAUDE.md` for all future sessions.
 - `projects/<reel>/`: each video's brief, RENDER.md and code. The lessons file points to reusable recipes there.
