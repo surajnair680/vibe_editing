@@ -23,8 +23,10 @@ Breakdown and transcript: `reference/`. The tool: `tools/parallax.py` (shared, t
 
 ## How we do it here (all code, no After Effects)
 ```bash
-# 1. layers: depth map -> N layers, crisp subject, hidden areas patched (about 3 to 8 s per photo)
-python3 tools/parallax.py layers projects/<name>/assets/photo.jpg -o projects/<name>/work/parallax/photo --n 4 --subject
+# 1. layers: depth map -> N layers, crisp subject, hidden areas painted by Codex (about 1 minute per photo)
+python3 tools/parallax.py layers projects/<name>/assets/photo.jpg -o projects/<name>/work/parallax/photo --n 4 --subject \
+    --plate codex --remove "the bodybuilder and the wooden bench"
+#    no Codex sign-in, or a quick draft: leave out --plate and --remove (code patch, 3 to 8 s)
 #    look at work/parallax/photo/split.png (layers tinted + each layer on a checkerboard) before rendering
 # 2. stills for the stills-first rule (frame times in seconds)
 python3 tools/parallax.py stills projects/<name>/work/parallax/photo -o projects/<name>/out/photo_stills.png --move dolly-in --dur 6 --times 0,3,6
@@ -43,6 +45,20 @@ python3 tools/parallax.py render projects/<name>/work/parallax/photo -o projects
 - `--spread 1.5` exaggerates depth spacing, `0.7` flattens it. `--band` (default 0.10) is how far each layer's
   patched texture reaches under the nearer one; raise it for big moves if a seam shows.
 
+## Codex paints the hidden areas (default, user rule 2026-11-24: "You have codex image generation don't forget")
+- `--plate codex --remove "<everything in front of the far background>"` sends the photo to Codex (`codex exec ... -i`,
+  the user's ChatGPT sign-in) with a prompt to remove those things and their shadows and fill in what was behind them,
+  same framing and size. The plate fills every layer's hidden area, so name all the near things (subject + foreground
+  objects), not only the subject. Files: `plate.png` (Codex), `plate_aligned.jpg`, `codex_plate.log`.
+- Tested on the beach example: Codex kept the framing pixel for pixel (ECC alignment found a 0.1 px shift), removed
+  the bodybuilder, the bench and the man's shadow, and painted real sand and crowd. A pan 60 % stronger than the default
+  showed no seams. Example: `example/codex_plate.jpg`, `example/split_codex_plate.jpg`.
+- The tool still aligns (ECC affine) and colour-matches the plate on the shared area, in case Codex shifts or re-tones it.
+  Check `plate_aligned.jpg` against the photo: if Codex moved or redrew things that should stay, run it again or drop
+  back to the code patch. Your own retouched plate also works: `--plate my_plate.jpg`.
+- Codex in the photo editing itself is also how to get photos with depth for parallax: ask for "clear foreground,
+  middle ground and background" (see `example/README.md`).
+
 ## Numbers that worked (tested on example/beach.jpg and the reel's cable car frame)
 - Depth model: Depth Anything V2 small, ONNX, CPU, 518x518 input. File `~/.cache/vibe/depth/depth_anything_v2_vits.onnx`
   (99 MB) from GitHub releases (fabio-sim/Depth-Anything-ONNX v2.0.0). Hugging Face is blocked here (403), GitHub works.
@@ -51,7 +67,7 @@ python3 tools/parallax.py render projects/<name>/work/parallax/photo -o projects
   rocks). Use `--subject` whenever there is one clear subject.
 - Default moves over 6 s: dolly-in 0.22 (front layer grows about 28 %, back about 5 %), pans 0.05 of the frame width.
   That reads clearly on a phone and stays calm. Halve it (`--strength 0.5`) for 3 s shots or busy edits.
-- Patch fill: smooth colour (Telea at the rim, push-pull inside) plus real texture mirrored from the hole's edge
+- Code patch fill (no Codex): smooth colour (Telea at the rim, push-pull inside) plus real texture mirrored from the hole's edge
   (the clone-stamp stand-in), faded to matched grain deep inside. Only the edge band ever shows during a slow move,
   so deep-inside blur behind a person is fine. Old prints have dark borders: the fill ignores a 2 % edge strip.
 

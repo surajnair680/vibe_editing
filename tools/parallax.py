@@ -189,6 +189,61 @@ def fill_hidden(rgb, hole, grain=True):
     return np.clip(out, 0, 255).astype(np.uint8)
 
 
+def codex_plate(src_path, remove, out_path):
+    """Ask Codex (signed in with the user's ChatGPT account) to paint the clean plate: the photo with
+    the named things removed and what was behind them filled in. Best fill there is: real sand,
+    crowd and shadows instead of a patch. Takes about a minute."""
+    import shutil
+    d = os.path.dirname(os.path.abspath(out_path))
+    os.makedirs(d, exist_ok=True)
+    src = os.path.join(d, "plate_src" + os.path.splitext(src_path)[1])
+    shutil.copy(src_path, src)
+    name = os.path.basename(out_path)
+    prompt = (f"Generate an image: edit the attached photo. Remove {remove} completely and fill where they were "
+              "with what would be behind them, matching the photo's grain, lighting, colour and perspective. Remove "
+              "their shadows too. Keep everything else exactly the same: same framing, same size and aspect ratio, "
+              f"every other object in the same place. Save it here as {name}")
+    log = open(os.path.join(d, "codex_plate.log"), "w")
+    r = subprocess.run(["codex", "exec", "--skip-git-repo-check", "--sandbox", "workspace-write", prompt,
+                        "-i", os.path.basename(src)], cwd=d, stdout=log, stderr=subprocess.STDOUT,
+                       stdin=subprocess.DEVNULL)
+    if r.returncode or not os.path.exists(out_path):
+        sys.exit(f"Codex plate failed (is Codex signed in? `codex login status`), see {d}/codex_plate.log")
+    return out_path
+
+
+def align_plate(rgb, plate, known):
+    """Fit a plate (Codex or hand-made) onto the photo: resize, ECC affine alignment on the parts both
+    share, then match each channel's mean and spread there so the patch blends in."""
+    h, w = rgb.shape[:2]
+    plate = cv2.resize(plate, (w, h), interpolation=cv2.INTER_AREA)
+    s = min(1.0, 800 / max(h, w))
+    g1 = cv2.resize(cv2.cvtColor(rgb, cv2.COLOR_RGB2GRAY), None, fx=s, fy=s).astype(np.float32) / 255
+    g2 = cv2.resize(cv2.cvtColor(plate, cv2.COLOR_RGB2GRAY), None, fx=s, fy=s).astype(np.float32) / 255
+    km = cv2.resize(known.astype(np.uint8), g1.shape[::-1], interpolation=cv2.INTER_NEAREST)
+    M = np.eye(2, 3, dtype=np.float32)
+    try:
+        _, M = cv2.findTransformECC(g1, g2, M, cv2.MOTION_AFFINE,
+                                    (cv2.TERM_CRITERIA_EPS | cv2.TERM_CRITERIA_COUNT, 100, 1e-5), km, 5)
+        M[:, 2] /= s
+        plate = cv2.warpAffine(plate, M, (w, h), flags=cv2.INTER_LINEAR | cv2.WARP_INVERSE_MAP,
+                               borderMode=cv2.BORDER_REPLICATE)
+    except cv2.error:
+        print("plate alignment did not converge, using it as is", file=sys.stderr)
+    k = known.astype(bool)
+    out = plate.astype(np.float32)
+    for c in range(3):
+        a, b = rgb[..., c][k].astype(np.float32), out[..., c][k]
+        out[..., c] = (out[..., c] - b.mean()) * (a.std() / (b.std() + 1e-6)) + a.mean()
+    print(f"plate aligned: shift {M[0, 2]:.1f},{M[1, 2]:.1f} px", file=sys.stderr)
+    return np.clip(out, 0, 255).astype(np.uint8)
+
+
+def plate_fill(rgb, hole, plate):
+    m = cv2.GaussianBlur((hole > 0.5).astype(np.float32), (0, 0), 1.5)[..., None]
+    return np.clip(rgb * (1 - m) + plate.astype(np.float32) * m, 0, 255).astype(np.uint8)
+
+
 # ---------------------------------------------------------------- layers
 def cmd_layers(a):
     bgr = cv2.imread(a.image, cv2.IMREAD_COLOR)
@@ -268,10 +323,20 @@ def cmd_layers(a):
     margin = int(max(h, w) * a.band)
     grow = np.ones((max(5, max(h, w) // 150),) * 2, np.uint8)  # hole margin so no outline ghosts stay
     layers = []
-    back = fill_hidden(rgb, cv2.dilate((alphas[0] > 0.02).astype(np.uint8), grow))
-    if a.plate:
-        pb = cv2.cvtColor(cv2.imread(a.plate), cv2.COLOR_BGR2RGB)
-        back = cv2.resize(pb, (w, h), interpolation=cv2.INTER_AREA)
+    plate = None
+    if a.plate:  # a clean plate fills every layer's hidden area (Codex paints one with --plate codex)
+        if a.plate == "codex":
+            if not a.remove:
+                sys.exit('--plate codex needs --remove "what to remove", e.g. "the bodybuilder and the wooden bench"')
+            ppath = codex_plate(a.image, a.remove, os.path.join(os.path.abspath(a.out), "plate.png"))
+        else:
+            ppath = a.plate
+        pr = cv2.cvtColor(cv2.imread(ppath), cv2.COLOR_BGR2RGB)
+        known = cv2.dilate((alphas[0] > 0.02).astype(np.uint8), grow) == 0
+        plate = align_plate(rgb, pr, known)
+        cv2.imwrite(os.path.join(a.out, "plate_aligned.jpg"), cv2.cvtColor(plate, cv2.COLOR_RGB2BGR))
+    fill = (lambda img, hole: plate_fill(img, hole, plate)) if plate is not None else fill_hidden
+    back = fill(rgb, cv2.dilate((alphas[0] > 0.02).astype(np.uint8), grow))
     layers.append(np.dstack([back, np.full((h, w), 255, np.uint8)]))
     for k in range(len(alphas)):
         own = alphas[k]
@@ -280,7 +345,7 @@ def cmd_layers(a):
             rgbk, ak = rgb, own
         else:
             hole = cv2.dilate((nxt > 0.02).astype(np.uint8), grow)
-            rgbk = fill_hidden(rgb, hole)
+            rgbk = fill(rgb, hole)
             own_only = np.clip(own - nxt, 0, 1)
             # grow this layer under the nearer one by `margin` px
             k_ = max(3, margin | 1)
@@ -465,7 +530,8 @@ def main():
     l.add_argument("--cuts", help="nearness cut points 0..1, back to front, e.g. 0.35,0.7")
     l.add_argument("--subject", action="store_true", help="cut the main subject cleanly with rembg isnet")
     l.add_argument("--masks", help="your own masks, front first, comma separated (white = layer)")
-    l.add_argument("--plate", help="your own clean background plate (replaces the auto fill)")
+    l.add_argument("--plate", help='clean plate for the hidden areas: "codex" (Codex paints it, needs --remove) or an image path')
+    l.add_argument("--remove", help='with --plate codex: what Codex removes, e.g. "the bodybuilder and the wooden bench"')
     l.add_argument("--band", type=float, default=0.10, help="how far each layer reaches under the next (fraction of size)")
     l.add_argument("--spread", type=float, default=1.0, help="exaggerate (>1) or flatten (<1) the depth spacing")
     l.add_argument("--max", type=int, default=2600, help="longest side to work at")
