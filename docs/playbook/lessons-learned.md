@@ -23,6 +23,11 @@ Other docs and when to read them: `docs/README.md`.
   vertical cut on the deadlift outline. Check every cut-out at full size, especially head, hands and edges. [r03]
 - Long static holds bore him: a 4 s hold of one shot "becomes monotonous". Something must happen in its second half
   (in reel-03: a rim light builds, then the body fills with glowing grain on the key word). [r03]
+- **The child test (reel-14, 2026-11-24).** He asked: would a child understand every frame? Fixes that made abstract
+  visuals readable: a word label on every symbol (NORMAL PEOPLE, BALANCE, MIND / BODY, COMFORT, JUDGING), name strips
+  under celebrity photos, people instead of charts (a crowd labelled MOST PEOPLE inside a bell curve with you as a lone
+  red YOU dot; grey figures stopping at a MOST PEOPLE STOP HERE line while one red figure carries on), a drawn arm that
+  cracks then grows instead of abstract muscle fibres, and no text under about 40 px. Check this before sending stills. [r14]
 - **Text is not a visual (reel-14, 2026-11-24).** He called the v2 look "awful... just a bunch of text, no visual
   element at all. For pizza you just wrote it on the screen". Every spoken line needs something to look at that shows
   it (a pizza for pizza), made in code or with Codex image generation; titles only support it. He wants Vox style

@@ -71,15 +71,15 @@ def phone():
     def ink(pil, ox, oy):
         d = ImageDraw.Draw(pil)
         d.rounded_rectangle((ox + 20, oy + 20, ox + 520, oy + 600), radius=46, outline=INK, width=8)
-        d.text((ox + 270, oy + 70), "group chat", font=font(vox.F_CAP, 30), fill=(90, 80, 76), anchor="mm")
+        d.text((ox + 270, oy + 70), "group chat", font=font(vox.F_CAP, 40), fill=(90, 80, 76), anchor="mm")
     return card(540, 620, 31, ink, color=(232, 225, 212))
 
 
 @functools.lru_cache(maxsize=8)
 def bubble(text, red=False, seed=0):
-    f = font(vox.F_CAP, 40)
+    f = font(vox.F_CAP, 50)
     bb = f.getbbox(text)
-    w, h = bb[2] - bb[0] + 52, 76
+    w, h = bb[2] - bb[0] + 56, 90
     pil = Image.new("RGBA", (w, h), (0, 0, 0, 0))
     d = ImageDraw.Draw(pil)
     d.rounded_rectangle((0, 0, w - 1, h - 1), radius=34, fill=MARK + (255,) if red else (60, 54, 54, 255))
@@ -91,15 +91,13 @@ def bubble(text, red=False, seed=0):
 def diagnosis():
     def ink(pil, ox, oy):
         d = ImageDraw.Draw(pil)
-        d.text((ox + 40, oy + 34), "DIAGNOSIS", font=font(vox.F_MONO, 44), fill=INK)
-        d.line((ox + 40, oy + 100, ox + 560, oy + 100), fill=INK, width=4)
-        d.text((ox + 40, oy + 130), "Is something wrong", font=font(vox.F_CAP, 44), fill=INK)
-        d.text((ox + 40, oy + 186), "with you?", font=font(vox.F_CAP, 44), fill=INK)
+        d.text((ox + 40, oy + 30), "SOMETHING WRONG", font=font(vox.F_TITLE, 96), fill=INK)
+        d.text((ox + 40, oy + 128), "WITH YOU?", font=font(vox.F_TITLE, 96), fill=INK)
         for i, lab in enumerate(("YES", "NO")):
-            x = ox + 60 + i * 260
-            d.rectangle((x, oy + 270, x + 64, oy + 334), outline=INK, width=6)
-            d.text((x + 90, oy + 274), lab, font=font(vox.F_TITLE, 66), fill=INK)
-    return card(600, 380, 41, ink)
+            x = ox + 60 + i * 300
+            d.rectangle((x, oy + 262, x + 90, oy + 352), outline=INK, width=8)
+            d.text((x + 116, oy + 262), lab, font=font(vox.F_TITLE, 96), fill=INK)
+    return card(640, 400, 41, ink)
 
 
 def curve_card(t, t_draw, dot_t, show_avg=None, labels=True):
@@ -117,22 +115,21 @@ def curve_card(t, t_draw, dot_t, show_avg=None, labels=True):
             pts.append((ox + 50 + (x + 3.2) / 6.4 * (w - 100), base - 330 * math.exp(-x * x / 2)))
         if len(pts) > 1:
             d.line(pts, fill=INK, width=8, joint="curve")
-        if show_avg is not None and show_avg > 0:
-            d.text((ox + w / 2, base + 34), "THE AVERAGE", font=font(vox.F_TITLE, 52), fill=(70, 60, 58), anchor="mm")
     sheet = card(w, h, 51, ink)
     return sheet
 
 
 def curve(img, t, t_draw, dot_t, cy=690, avg_t=None):
-    sheet = curve_card(t, t_draw, dot_t, show_avg=(None if avg_t is None else span(t, avg_t, avg_t + .1)))
+    """bell curve with a crowd of grey figures in the middle (MOST PEOPLE) and you alone far out (YOU)."""
+    sheet = curve_card(t, t_draw, dot_t)
     img = paste(img, sheet, W / 2, cy, rot=-1.5)
-    if avg_t is not None and t >= avg_t:          # grey figures crowd the middle
-        for i in range(7):
-            ti = avg_t + i * 0.06
-            img = drop(img, figure((150, 146, 140), 120, 2), W / 2 - 20 + (i - 3) * 62, cy + 120, t, ti, dy=-120, shadow=.3)
+    tc = t_draw + .45
+    for i in range(7):
+        img = drop(img, figure((150, 146, 140), 110, 2), W / 2 + (i - 3) * 56, cy + 128, t, tc + i * .04, dy=-120, shadow=.3)
+    img = label(img, "MOST PEOPLE", W / 2, cy + 20, t, tc + .3, size=58, bg=INK, fg=BONE, rot=-2)   # inside the bell, over the crowd
     if dot_t is not None and t >= dot_t - 0.2:
         q = land(t, dot_t, .2)
-        x, y = W / 2 - 20 + 355, cy + 180
+        x, y = W / 2 + 370, cy + 180
         cv2.circle(img, (int(x), int(y)), int(26 * q), MARK, -1, cv2.LINE_AA)
         if q >= 1:
             img = paste(img, vox.strip("YOU", 70, bg=MARK, fg=BONE, seed=61), x - 10, y - 90, rot=4, shadow=.3)
@@ -160,20 +157,20 @@ def highlight(img, x0, y0, x1, y1, p):
 
 
 def receipt(t, lines):
-    w = 520
+    w = 640
     shown = [ln for ln in lines if t >= ln[0]]
-    h = 140 + 70 * len(shown)
+    h = 150 + 80 * len(shown)
     pil = Image.new("RGBA", (w, h + 30), (0, 0, 0, 0))
     d = ImageDraw.Draw(pil)
     zig = [(x, h + (14 if (x // 20) % 2 else 0)) for x in range(0, w + 1, 20)]
     d.polygon([(0, 0), (w, 0)] + zig[::-1], fill=(246, 243, 236, 255))
-    d.text((w / 2, 50), "RECEIPT", font=font(vox.F_MONO, 44), fill=INK, anchor="mm")
+    d.text((w / 2, 54), "RECEIPT", font=font(vox.F_MONO, 54), fill=INK, anchor="mm")
     d.line((30, 90, w - 30, 90), fill=INK, width=3)
     for i, (t0, left, right, red) in enumerate(shown):
-        y = 120 + i * 70
+        y = 124 + i * 80
         col = MARK if red else INK
-        d.text((30, y), left, font=font(vox.F_MONO, 36), fill=col)
-        d.text((w - 30, y), right, font=font(vox.F_MONO, 36), fill=col, anchor="ra")
+        d.text((30, y), left, font=font(vox.F_MONO, 44), fill=col)
+        d.text((w - 30, y), right, font=font(vox.F_MONO, 44), fill=col, anchor="ra")
     return np.asarray(pil)
 
 
@@ -198,7 +195,7 @@ def gauge(t, t0, t_pass, t_end):
 def report(seed):
     def ink(pil, ox, oy):
         d = ImageDraw.Draw(pil)
-        d.text((ox + 30, oy + 26), "REPORT CARD", font=font(vox.F_MONO, 34), fill=INK)
+        d.text((ox + 30, oy + 22), "REPORT CARD", font=font(vox.F_MONO, 40), fill=INK)
         for i in range(4):
             d.line((ox + 30, oy + 100 + i * 46, ox + 200, oy + 100 + i * 46), fill=(150, 140, 130), width=4)
         d.text((ox + 300, oy + 150), "A", font=font(vox.F_TITLE, 210), fill=MARK, anchor="mm")
@@ -214,7 +211,9 @@ def progress(t, t0, t_red, t_end):
         x0, x1, y0, y1 = ox + 40, ox + w - 40, oy + 110, oy + 190
         xr = x0 + (x1 - x0) * 0.55
         d.rectangle((xr, y0, x1, y1), fill=(222, 196, 190))
-        d.rectangle((x0, y0, x0 + (x1 - x0) * p, y1), fill=INK)
+        xf = x0 + (x1 - x0) * p
+        d.rectangle((x0, y0, min(xf, xr), y1), fill=INK)
+        if xf > xr: d.rectangle((xr, y0, xf, y1), fill=MARK)
         d.rectangle((x0, y0, x1, y1), outline=INK, width=5)
         d.text((x0, oy + 40), "COMFORT", font=font(vox.F_TITLE, 54), fill=INK)
         d.text((xr + 10, oy + 40), "UNCOMFORTABLE", font=font(vox.F_TITLE, 54), fill=MARK)
@@ -287,6 +286,70 @@ def torn_half(rgba, side, seed=9):
     return out
 
 
+def label(img, text, x, y, t, t0, size=72, bg=None, fg=None, rot=-2, seed=None):
+    """a torn paper word strip that pops in at t0."""
+    if twos(t) < t0: return img
+    q = ease(span(twos(t), t0, t0 + .17))
+    st = vox.strip(text, size, bg=bg or BONE, fg=fg or INK, seed=seed if seed is not None else hash(text) % 97)
+    return paste(img, st, x, y, rot=rot, scale=1.25 - .25 * q, shadow=.35)
+
+
+def celeb(img, path, width, x, y, t, t0, rot, name, seed):
+    """a celebrity photo as a torn print with a name strip under it, dropping in together."""
+    pf = vox.print_frame(_photo(path), width, seed=seed)
+    img = drop(img, pf, x, y, t, t0, rot=rot, dy=-500)
+    p = land(t, t0)
+    if p > 0:
+        st = vox.strip(name, 40, bg=INK, fg=BONE, seed=seed + 50, padx=18, pady=8)
+        img = paste(img, st, x, y + pf.shape[0] / 2 - 10 - 500 * (1 - p), rot=rot * .5, shadow=.3)
+    return img
+
+
+@functools.lru_cache(maxsize=2)
+def scale_labelled():
+    """the balance scale cut-out with a BALANCE strip under it (one piece, so it tears together)."""
+    sc = vox.cutout(C + "scale.png", 440, seed=14)
+    lb = vox.strip("BALANCE", 84, bg=BONE, fg=INK, seed=201)
+    w = max(sc.shape[1], lb.shape[1]); h = sc.shape[0] + lb.shape[0] - 40
+    out = np.zeros((h, w, 4), np.uint8)
+    x0 = (w - sc.shape[1]) // 2; out[:sc.shape[0], x0:x0 + sc.shape[1]] = sc
+    x1 = (w - lb.shape[1]) // 2; y1 = sc.shape[0] - 40
+    reg = out[y1:y1 + lb.shape[0], x1:x1 + lb.shape[1]].astype(np.float32); a = lb[..., 3:4].astype(np.float32) / 255
+    reg[..., :3] = reg[..., :3] * (1 - a) + lb[..., :3] * a; reg[..., 3:] = np.maximum(reg[..., 3:], lb[..., 3:])
+    out[y1:y1 + lb.shape[0], x1:x1 + lb.shape[1]] = reg.astype(np.uint8)
+    return out
+
+
+def stopline(img, t, t0, t_pass, t_end):
+    """MOST PEOPLE STOP HERE: grey figures stop at a dashed line, one red figure (YOU) keeps going."""
+    tt = twos(t)
+    img = img.copy()
+    for y in range(470, 930, 34):
+        cv2.line(img, (640, y), (640, y + 18), BONE, 6, cv2.LINE_AA)
+    img = label(img, "MOST PEOPLE STOP HERE", 600, 430, t, t0, size=58, rot=-1)
+    walk = ease(span(tt, t0, t0 + .8))
+    for i, xs in enumerate((420, 500, 580)):
+        img = paste(img, figure((150, 146, 140), 170, 2), -120 + (xs + 120) * walk, 800, shadow=.3)
+    xr = -120 + (560 + 120) * walk + 360 * ease(span(tt, t_pass - .3, t_end))
+    img = paste(img, figure(MARK, 170, 4), xr, 800, shadow=.3)
+    if tt >= t_pass:
+        img = paste(img, vox.strip("YOU", 60, bg=MARK, fg=BONE, seed=62), xr, 670, rot=3, shadow=.3)
+    return img
+
+
+def cracks(img, cx, cy, p, seed=3):
+    """tiny tears drawn on the muscle."""
+    if p <= 0: return img
+    img = img.copy(); r = np.random.default_rng(seed)
+    for k, (dx, dy) in enumerate([(-80, -40), (20, 10), (110, -70)]):
+        pts = [(cx + dx, cy + dy)]
+        for i in range(int(6 * p)):
+            pts.append((pts[-1][0] + r.integers(8, 20), pts[-1][1] + r.integers(-18, 18)))
+        if len(pts) > 1:
+            cv2.polylines(img, [np.array(pts, np.int32)], False, MARK, 7, cv2.LINE_AA)
+    return img
+
+
 # ------------------------------------------------------------------ the beats
 SEC_CREAM = (s("Balance", 60.32) - 0.05, s("Screw", 68.83))
 
@@ -305,8 +368,8 @@ def behind(img, t):
         t0 = s("Normal", 27.4)
         for i in range(10):
             r_, c_ = divmod(i, 5)
-            img = drop(img, figure(), 220 + c_ * 150, 520 + r_ * 210, t, t0 + 0.05 + i * 0.05, dy=-200, shadow=.35)
-        if i == 0: pass
+            img = drop(img, figure(), 240 + c_ * 150, 640 + r_ * 210, t, t0 + 0.05 + i * 0.05, dy=-200, shadow=.35)
+        img = label(img, "NORMAL PEOPLE", 540, 470, t, t0 + .1, size=96)
     # 2. drinks, pizza
     if s("You", 30.07) <= t < s("and", 33.63):
         td, tp = s("drinks", 30.63), s("pizza", 32.17)
@@ -330,9 +393,9 @@ def behind(img, t):
     if s("So", 36.91) <= t < s("You", 40.25):
         img = drop(img, diagnosis(), 520, 620, t, s("Is", 37.27), rot=-2, dy=-350)
         if t >= s("wrong", 38.25) - .3 and os.path.exists(C + "magnifier.png"):
-            img = drop(img, vox.cutout(C + "magnifier.png", 380, seed=13), 760, 560, t, s("wrong", 38.25), rot=-20, dy=0)
+            img = drop(img, vox.cutout(C + "magnifier.png", 300, seed=13), 880, 470, t, s("wrong", 38.25), rot=-20, dy=0)
         ty = s("yes", 39.64)
-        img = tick(img, 520 - 300 + 60 + 32 + 4, 620 - 190 + 302 - 6, span(twos(t), ty, ty + .25))
+        img = tick(img, 200 + 60 + 40, 420 + 262 + 50, span(twos(t), ty, ty + .25))
     # 6. bell curve with YOU
     if s("You", 40.25) <= t < s("Success", 42.62):
         img = curve(img, t, s("You", 40.25), s("normal", 40.73) + .3)
@@ -341,12 +404,13 @@ def behind(img, t):
         img = drop(img, clipping("ab·nor·mal", "adjective", "not normal; unusual."), 500, 560, t, s("Success", 42.62) + .1, rot=-2, dy=-300)
         hp = span(twos(t), s("abnormal", 43.34), s("abnormal", 43.34) + .45)
         img = highlight(img, 130, 700, 600, 760, hp)
-        img = drop(img, vox.print_frame(_photo("assets/photos/celebrity_jobs.jpg"), 330, seed=21), 820, 700, t, s("by", 43.98), rot=5, dy=-500)
+        img = celeb(img, "assets/photos/celebrity_jobs.jpg", 300, 800, 730, t, s("by", 43.98), 5, "STEVE JOBS", 21)
     # 8. outliers on the curve, the average
     if s("Successful", 44.89) <= t < s("Which", 48.95):
-        img = curve(img, t, s("Successful", 44.89) - .5, None, avg_t=s("average", 48.27) - .4)
-        img = drop(img, vox.print_frame(_photo("assets/photos/celebrity_arnold.jpg"), 320, seed=22), 805, 560, t, s("outliers", 46.03), rot=6, dy=-500)
-        img = drop(img, vox.print_frame(_photo("assets/photos/celebrity_musk.jpg"), 190, seed=23), 230, 560, t, s("belong", 47.61), rot=-6, dy=-500)
+        img = curve(img, t, s("Successful", 44.89) - .5, None)
+        img = celeb(img, "assets/photos/celebrity_arnold.jpg", 230, 880, 640, t, s("outliers", 46.03), 6, "ARNOLD", 22)
+        img = celeb(img, "assets/photos/celebrity_musk.jpg", 150, 190, 640, t, s("outliers", 46.03) + .25, -6, "ELON MUSK", 23)
+        img = label(img, "OUTLIERS", W / 2, 470, t, s("outliers", 46.03) + .4, size=84, bg=MARK, fg=BONE, rot=-2)
     # 9. receipt
     if s("Which", 48.95) <= t < s("Pain", 52.76):
         lines = [(s("except", 50.01), "DRINKS", "SKIPPED", False), (s("comes", 50.63), "PIZZA", "SKIPPED", False),
@@ -355,25 +419,24 @@ def behind(img, t):
         img = drop(img, rc, 540, 470 + rc.shape[0] / 2, t, s("Which", 48.95) + .25, rot=-1.5, dy=-300)
     # 10b. gauge
     if s("going", 54.27) <= t < s("That's", 56.82):
-        img = drop(img, gauge(t, s("going", 54.27), s("people", 55.35), s("tolerate", 56.15)), 540, 640, t, s("going", 54.27), rot=-1.5, dy=-300)
+        img = stopline(img, t, s("going", 54.27), s("people", 55.35), s("tolerate", 56.15))
     # 11. balance scale wobbles
     if s("That's", 56.82) <= t < SEC_CREAM[0] and os.path.exists(C + "scale.png"):
         tt = twos(t)
         rot = 7 * math.sin((tt - 56.8) * 5) * (1 + span(tt, 57.4, 58.4)) + 14 * ease(span(tt, s("hold", 58.16), s("hold", 58.16) + .5))
-        img = drop(img, vox.cutout(C + "scale.png", 560, seed=14), 540, 640, t, s("balance", 57.42) - .1, rot=rot, dy=-400)
+        img = drop(img, scale_labelled(), 540, 680, t, s("balance", 57.42) - .1, rot=rot, dy=-400)
     # 12. everybody can do it: grid of figures with little scales, NO VALUE
     if SEC_CREAM[0] <= t < s("It's", 65.25):
         t0 = s("everybody", 61.36)
         for i in range(12):
             r_, c_ = divmod(i, 6)
-            x, y = 130 + c_ * 165, 470 + r_ * 260
+            x, y = 130 + c_ * 165, 620 + r_ * 240
             img = drop(img, figure(INK, 170, 3), x, y, t, t0 + i * .05, dy=-160, shadow=.3)
-            if os.path.exists(C + "scale.png") and t >= t0 + i * .05:
-                img = paste(img, vox.cutout(C + "scale.png", 80, margin=6, seed=15), x, y - 10, shadow=0.2)
+        img = label(img, "EVERYBODY CAN DO IT", 540, 450, t, t0, size=84)
         tn = s("no", 64.28)
         if twos(t) >= tn:
             q = ease(span(twos(t), tn, tn + .17))
-            img = paste(img, vox.stamp("NO VALUE", 170, seed=6), 540, 600, rot=-8, scale=1.5 - .5 * q, shadow=0)
+            img = paste(img, vox.stamp("NO VALUE", 170, seed=6), 540, 740, rot=-8, scale=1.5 - .5 * q, shadow=0)
     # 13. report cards, the A crossed out
     if s("It's", 65.25) <= t < SEC_CREAM[1]:
         for k, (word, near, x, rot) in enumerate([("class", 65.71, 260, -8), ("everybody", 66.49, 540, 3), ("A", 67.33, 820, 9)]):
@@ -384,10 +447,10 @@ def behind(img, t):
                 img = vox.marker_x(img, x + 60, 590, 190, span(t, tn + k * .08, tn + .3 + k * .08), seed=7 + k, width=14)
     # 14. scale torn in half
     if s("Screw", 68.83) <= t < s("need", 69.91) + .06 and os.path.exists(C + "scale.png"):
-        sc = vox.cutout(C + "scale.png", 560, seed=14)
+        sc = scale_labelled()
         q = ease(span(twos(t), s("balance", 69.15), s("balance", 69.15) + .4))
-        img = paste(img, torn_half(sc, "L"), 540 - 220 * q, 640 + 60 * q, rot=-18 * q)
-        img = paste(img, torn_half(sc, "R"), 540 + 220 * q, 640 + 80 * q, rot=22 * q)
+        img = paste(img, torn_half(sc, "L"), 540 - 150 * q, 520 + 30 * q, rot=-12 * q)
+        img = paste(img, torn_half(sc, "R"), 540 + 150 * q, 520 + 40 * q, rot=14 * q)
     # 15. warning tape: THE PROBLEM
     if s("But", 71.01) <= t < s("The", 72.65):
         tp = s("problem", 71.99)
@@ -401,26 +464,31 @@ def behind(img, t):
         img = drop(img, progress(t, s("moment", 72.81), s("uncomfortable", 73.61), s("is", 74.59)), 540, 640, t, s("moment", 72.81), rot=-1.5, dy=-300)
     # 17a. muscle fibres tear
     if s("That", 76.87) <= t < s("is", 77.75):
-        img = drop(img, fibres(t, s("discomfort", 77.07), 99), 540, 640, t, s("That", 76.87) + .1, rot=-2, dy=-300, scale=1.4)
+        img = drop(img, vox.cutout(C + "muscle.png", 440, seed=17), 540, 660, t, s("That", 76.87) + .1, rot=-2, dy=-300)
+        img = cracks(img, 540, 640, span(twos(t), s("discomfort", 77.07), s("discomfort", 77.07) + .35))
+        img = label(img, "TINY TEARS", 540, 920, t, s("discomfort", 77.07) + .2, size=66, bg=MARK, fg=BONE)
     # 18a. brain -> muscle
     if s("It", 78.99) <= t < s("adapt", 82.21):
         if os.path.exists(C + "brain.png"):
             img = drop(img, vox.cutout(C + "brain.png", 330, seed=16), 280, 560, t, s("mind", 80.17), rot=-6, dy=-400)
         if os.path.exists(C + "muscle.png"):
             img = drop(img, vox.cutout(C + "muscle.png", 360, seed=17), 800, 600, t, s("body", 79.57), rot=6, dy=-400)
+        img = label(img, "MIND", 280, 760, t, s("mind", 80.17) + .1, size=70)
+        img = label(img, "BODY", 800, 820, t, s("body", 79.57) + .1, size=70)
         img = arrow(img, 400, 470, 660, 520, span(twos(t), s("there's", 80.75), s("there's", 80.75) + .45))
         tn = s("no", 81.01)
         if twos(t) >= tn:
             q = ease(span(twos(t), tn, tn + .17))
-            img = paste(img, vox.stamp("NO OPTION", 130, seed=8), 540, 820, rot=-6, scale=1.5 - .5 * q, shadow=0)
+            img = paste(img, vox.stamp("NO OPTION", 130, seed=8), 540, 960, rot=-6, scale=1.5 - .5 * q, shadow=0)
     # 19. sofa, figures crawl to it
     if s("And", 83.66) <= t < s("Outliers", 87.89):
         if os.path.exists(C + "sofa.png"):
             img = drop(img, vox.cutout(C + "sofa.png", 420, seed=18), 720, 640, t, s("comfort", 87.28) - 2.2, rot=-2, dy=-400)
         tc = s("crawl", 86.40)
         for i in range(3):
-            x = 110 + i * 110 + 170 * ease(span(twos(t), tc, tc + 1.0))
-            img = drop(img, figure((150, 146, 140), 130, 2), x, 760, t, s("people", 85.12) + i * .08, dy=-160, rot=-20, shadow=.3)
+            x = 90 + i * 120 + 150 * ease(span(twos(t), tc, tc + 1.0))
+            img = drop(img, figure((150, 146, 140), 190, 2), x, 800, t, s("people", 85.12) + i * .08, dy=-160, rot=-20, shadow=.3)
+        img = label(img, "COMFORT", 720, 900, t, s("comfort", 87.28) - 2.0, size=80, bg=BONE, fg=INK)
     # 21. judging eyes
     if s("and", 89.29) <= t < s("Normal", 91.37) and os.path.exists(C + "eyes.png"):
         tj = s("that", 89.55)                       # eyes start on "that" so the frame is never empty, one every 0.22 s
@@ -429,10 +497,13 @@ def behind(img, t):
             if twos(t) >= ti:
                 q = ease(span(twos(t), ti, ti + .17))
                 img = paste(img, vox.cutout(C + "eyes.png", sc_, margin=10, seed=30 + k), x, y, rot=rot, scale=.5 + .5 * q, shadow=.35)
+        img = label(img, "JUDGING", 540, 690, t, s("judging", 90.45) + .05, size=100, bg=MARK, fg=BONE)
     # 22. mirror turned away, pointing hands
     if s("Normal", 91.37) <= t < s("Crazy", 94.24):
-        if os.path.exists(C + "mirror.png"):
-            img = drop(img, vox.cutout(C + "mirror.png", 560, seed=19), 230, 700, t, s("people", 91.73), rot=-4, dy=-500)
+        mp = C + ("mirror_front.png" if os.path.exists(C + "mirror_front.png") else "mirror.png")
+        img = drop(img, vox.cutout(mp, 520, seed=19), 300, 680, t, s("people", 91.73), rot=-4, dy=-500)
+        if t >= s("don't", 92.11) + .1:
+            img = vox.marker_x(img, 300, 680, 380, span(t, s("don't", 92.11) + .1, s("don't", 92.11) + .6), seed=9)
         if os.path.exists(C + "hand.png"):
             th = s("They", 93.41)
             hand = vox.cutout(C + "hand.png", 170, margin=10, seed=40)
@@ -498,7 +569,7 @@ def caption(img, t):
     b = scene2.block_at(t)
     if not b: return img
     text = " ".join(w["w"] for w in b)
-    f = font(vox.F_CAP, 46)
+    f = font(vox.F_CAP, 54)
     lines, cur = [], ""
     for w in text.split():
         if f.getlength((cur + " " + w).strip()) > 860 and cur:
@@ -508,8 +579,8 @@ def caption(img, t):
     lines.append(cur)
     p = ease(span(twos(t), b[0]["s"] - .05, b[0]["s"] + .17))
     for i, ln in enumerate(lines):
-        st = vox.strip(ln, 46, bg=(20, 16, 16), fg=BONE, seed=hash(ln) % 997, font_path=vox.F_CAP, padx=22, pady=11)
-        img = paste(img, st, W / 2 - 40, 270 + i * 70 - (1 - p) * 30, rot=-0.8 + 0.6 * i, shadow=.3)
+        st = vox.strip(ln, 54, bg=(20, 16, 16), fg=BONE, seed=hash(ln) % 997, font_path=vox.F_CAP, padx=22, pady=11)
+        img = paste(img, st, W / 2 - 40, 262 + i * 80 - (1 - p) * 30, rot=-0.8 + 0.6 * i, shadow=.3)
     return img
 
 
@@ -601,7 +672,7 @@ def compose(f, base):
     g = motion_kit.grain(np.ascontiguousarray(g), GRAIN, seed=f)
     pr = print_scene(t)
     if pr:
-        t0, t1, kind, path, src, z, cx, cy, width, label, lt = pr
+        t0, t1, kind, path, src, z, cx, cy, width, lab, lt = pr
         pic = _photo(path) if kind == "photo" else fx1.clip_frame(path, src + (t - t0), z, cx, cy)
         img = behind(g, t)
         pf = vox.print_frame(np.ascontiguousarray(pic), width, seed=hash(path) % 50)
@@ -610,11 +681,13 @@ def compose(f, base):
         img = paste(img, pf, x, 1010 + (1 - q) * 300, rot=-1.5 if width >= 600 else 3, shadow=.5)
         if path.endswith("mirror.jpg"):
             img = vox.marker_circle(img, int(W / 2), 1010, 430, 640, span(twos(t), t0 + .5, t0 + 1.0), seed=3)
-        if label and t >= lt:
+        if lab and t >= lt:
             ql = ease(span(twos(t), lt, lt + .17))
-            img = paste(img, vox.strip(label, 96, bg=MARK, fg=BONE, seed=hash(label) % 99), 300, 470 + (1 - ql) * -60, rot=-4, shadow=.4)
+            img = paste(img, vox.strip(lab, 96, bg=MARK, fg=BONE, seed=hash(lab) % 99), 300, 470 + (1 - ql) * -60, rot=-4, shadow=.4)
         if width < 600:                                 # side-by-side: fibres grow back next to the print
-            img = drop(img, fibres(t, 0, s("makes", 78.27)), 280, 700, t, t0, rot=-3, dy=0, scale=1.0)
+            g = ease(span(twos(t), s("makes", 78.27), s("makes", 78.27) + .35))
+            img = paste(img, vox.cutout(C + "muscle.png", 300, seed=17), 270, 700, rot=-3, scale=0.8 + 0.4 * g)
+            img = label(img, "GROW", 270, 940, t, s("grow", 78.63), size=84, bg=MARK, fg=BONE)
         img = caption(img, t)
         return wipe(img, t)
     st, zoom = state_at(t)
