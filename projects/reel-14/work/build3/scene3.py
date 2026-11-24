@@ -104,7 +104,7 @@ def diagnosis():
 
 def curve_card(t, t_draw, dot_t, show_avg=None, labels=True):
     """bell curve inked on cream; red YOU dot on the far right tail."""
-    w, h = 960, 520
+    w, h = 860, 500
     p = span(twos(t), t_draw, t_draw + 0.7)
     def ink(pil, ox, oy):
         d = ImageDraw.Draw(pil)
@@ -125,14 +125,14 @@ def curve_card(t, t_draw, dot_t, show_avg=None, labels=True):
 
 def curve(img, t, t_draw, dot_t, cy=690, avg_t=None):
     sheet = curve_card(t, t_draw, dot_t, show_avg=(None if avg_t is None else span(t, avg_t, avg_t + .1)))
-    img = paste(img, sheet, W / 2 - 20, cy, rot=-1.5)
+    img = paste(img, sheet, W / 2, cy, rot=-1.5)
     if avg_t is not None and t >= avg_t:          # grey figures crowd the middle
         for i in range(7):
             ti = avg_t + i * 0.06
             img = drop(img, figure((150, 146, 140), 120, 2), W / 2 - 20 + (i - 3) * 62, cy + 120, t, ti, dy=-120, shadow=.3)
     if dot_t is not None and t >= dot_t - 0.2:
         q = land(t, dot_t, .2)
-        x, y = W / 2 - 20 + 400, cy + 190
+        x, y = W / 2 - 20 + 355, cy + 180
         cv2.circle(img, (int(x), int(y)), int(26 * q), MARK, -1, cv2.LINE_AA)
         if q >= 1:
             img = paste(img, vox.strip("YOU", 70, bg=MARK, fg=BONE, seed=61), x - 10, y - 90, rot=4, shadow=.3)
@@ -310,8 +310,8 @@ def behind(img, t):
     # 2. drinks, pizza
     if s("You", 30.07) <= t < s("and", 33.63):
         td, tp = s("drinks", 30.63), s("pizza", 32.17)
-        img = drop(img, vox.cutout(C + "drinks.png", 430, seed=11), 300, 640, t, td, rot=3, dy=-500)
-        if t >= td + .27: img = vox.marker_x(img, 300, 640, 360, span(t, td + .27, td + .77), seed=4)
+        img = drop(img, vox.cutout(C + "drinks.png", 400, seed=11), 350, 640, t, td, rot=3, dy=-500)
+        if t >= td + .27: img = vox.marker_x(img, 350, 640, 340, span(t, td + .27, td + .77), seed=4)
         img = drop(img, vox.cutout(C + "pizza.png", 540, seed=12), 750, 620, t, tp, rot=-5, dy=-560)
         if t >= tp + .28:
             q = ease(span(twos(t), tp + .28, tp + .45))
@@ -345,8 +345,8 @@ def behind(img, t):
     # 8. outliers on the curve, the average
     if s("Successful", 44.89) <= t < s("Which", 48.95):
         img = curve(img, t, s("Successful", 44.89) - .5, None, avg_t=s("average", 48.27) - .4)
-        img = drop(img, vox.print_frame(_photo("assets/photos/celebrity_arnold.jpg"), 340, seed=22), 860, 560, t, s("outliers", 46.03), rot=6, dy=-500)
-        img = drop(img, vox.print_frame(_photo("assets/photos/celebrity_musk.jpg"), 200, seed=23), 170, 560, t, s("belong", 47.61), rot=-6, dy=-500)
+        img = drop(img, vox.print_frame(_photo("assets/photos/celebrity_arnold.jpg"), 320, seed=22), 805, 560, t, s("outliers", 46.03), rot=6, dy=-500)
+        img = drop(img, vox.print_frame(_photo("assets/photos/celebrity_musk.jpg"), 190, seed=23), 230, 560, t, s("belong", 47.61), rot=-6, dy=-500)
     # 9. receipt
     if s("Which", 48.95) <= t < s("Pain", 52.76):
         lines = [(s("except", 50.01), "DRINKS", "SKIPPED", False), (s("comes", 50.63), "PIZZA", "SKIPPED", False),
@@ -436,7 +436,7 @@ def behind(img, t):
         if os.path.exists(C + "hand.png"):
             th = s("They", 93.41)
             hand = vox.cutout(C + "hand.png", 170, margin=10, seed=40)
-            for k, (x, y, flip, rot) in enumerate([(-60, 1180, False, -6), (1140, 1180, True, 6), (-60, 1420, False, 8), (1140, 1420, True, -8)]):
+            for k, (x, y, flip, rot) in enumerate([(-60, 960, False, -6), (1140, 960, True, 6), (-60, 1200, False, 8), (1140, 1200, True, -8)]):
                 q = ease(span(twos(t), th + k * .08, th + .25 + k * .08))
                 if q > 0:
                     hh = hand[:, ::-1] if flip else hand
@@ -455,10 +455,12 @@ def behind(img, t):
     return img
 
 
-def front(img, t):
-    """in front of him: name tags on his chest."""
+def front(img, t, st):
+    """in front of him: name tags on the paper circle around him."""
     if s("Crazy", 94.24) <= t < s("whatever", 96.09):
-        for k, (word, near, x, y, rot) in enumerate([("Crazy", 94.24, 300, 1560, -10), ("boring", 95.02, 560, 1600, 4), ("obsessed", 95.50, 810, 1560, 11)]):
+        cx, cy, r = st["cx"], st["cy"], st["r"]
+        for k, (word, near, x, y, rot) in enumerate([("Crazy", 94.24, cx - r * .95, cy + r * .05, -12), ("boring", 95.02, cx, cy + r * .55, 4),
+                                                      ("obsessed", 95.50, cx + r * .95, cy + r * .05, 12)]):
             ti = s(word, near) + .05
             if twos(t) >= ti:
                 q = ease(span(twos(t), ti, ti + .17))
@@ -529,6 +531,64 @@ def _wipe_sheet(k):
     return vox.paper_sheet(int(W * 1.1), int(H * 1.25), (226, 216, 196) if k % 2 == 0 else (58, 6, 10), 300 + k, rough=22)
 
 
+import circle as circ
+# where he sits (time, state): BIG for punchy lines, small left / right when the visual does the work
+_K = [("Normal", 27.40, "BIG"), ("You", 30.07, "SR"), ("and", 33.63, "SL"), ("So", 36.91, "SR"), ("Actually", 38.96, "BIG"),
+      ("Success", 42.62, "SL"), ("Successful", 44.89, "SR"), ("Which", 48.95, "SL"), ("going", 54.27, "SR"),
+      ("That's", 56.82, "SL"), ("Balance", 60.32, "SR"), ("It's", 65.25, "SL"), ("Screw", 68.83, "BIG"),
+      ("The", 72.65, "SR"), ("That", 76.87, "SL"), ("It", 78.99, "SR"), ("And", 83.66, "SL"), ("and", 89.29, "BIG"),
+      ("whatever", 96.09, "SR"), ("You", 99.05, "BIG")]
+STATES = [(HIS if i == 0 else s(w, n) - 0.12, n_) for i, (w, n, n_) in enumerate(_K)]
+ZOOM = {"BIG": (1.0, 0.0), "SR": (1.1, 150.0), "SL": (1.1, 150.0)}     # visual layer zoom about (540, 380), push down
+MOVE = 0.25                                                             # jump time, stepped on twos
+
+
+def state_at(t):
+    """circle state and visual zoom; jumps between states in MOVE seconds on twos."""
+    tt = twos(t)
+    cur, prev, t0 = STATES[0][1], STATES[0][1], STATES[0][0]
+    for ts, name in STATES:
+        if tt >= ts:
+            prev, cur, t0 = cur, name, ts
+    u = ease(span(tt, t0, t0 + MOVE)) if prev != cur else 1.0
+    A, B = getattr(circ, prev), getattr(circ, cur)
+    st = {k: A[k] + (B[k] - A[k]) * u for k in A}
+    za, zb = ZOOM[prev], ZOOM[cur]
+    return st, (za[0] + (zb[0] - za[0]) * u, za[1] + (zb[1] - za[1]) * u)
+
+
+for ts, _ in STATES[1:]:
+    sfx(ts + MOVE * .6, "paper-02", -14)
+
+
+def visual_layer(t):
+    """behind() drawn on black and on white -> colour + alpha, so the whole layer can be zoomed."""
+    kb = behind(np.zeros((H, W, 3), np.uint8), t).astype(np.float32)
+    kw = behind(np.full((H, W, 3), 255, np.uint8), t).astype(np.float32)
+    a = np.clip(1 - (kw - kb).mean(2) / 255, 0, 1)
+    rgb = np.where(a[..., None] > 1e-3, kb / np.maximum(a[..., None], 1e-3), 0)
+    return np.clip(rgb, 0, 255), a
+
+
+def place_layer(g, t, zoom):
+    z, dy = zoom
+    rgb, a = visual_layer(t)
+    if abs(z - 1) > 1e-3 or dy:
+        M = np.float32([[z, 0, 540 - 540 * z], [0, z, 380 - 380 * z + dy]])
+        rgb = cv2.warpAffine(rgb.astype(np.float32), M, (W, H), flags=cv2.INTER_LINEAR)
+        a = cv2.warpAffine(a.astype(np.float32), M, (W, H), flags=cv2.INTER_LINEAR)
+    out = g.astype(np.float32) * (1 - a[..., None]) + rgb * a[..., None]
+    return np.clip(out, 0, 255).astype(np.uint8)
+
+
+def him(img, base, f, t, st):
+    m = scene2.matte(f)
+    b2, m2 = scene2.edge_fix(base, m)
+    cream = SEC_CREAM[0] <= t < SEC_CREAM[1]
+    return circ.draw(img, b2, m2, st, inside=(74, 0, 5) if cream else (226, 216, 196),
+                     ring=BONE if cream else (158, 26, 43), seed=7)
+
+
 def compose(f, base):
     t = f / 30
     if t < HIS:
@@ -557,9 +617,10 @@ def compose(f, base):
             img = drop(img, fibres(t, 0, s("makes", 78.27)), 280, 700, t, t0, rot=-3, dy=0, scale=1.0)
         img = caption(img, t)
         return wipe(img, t)
-    img = behind(g, t)
-    img = scene2.his_layer(img, base, f, t)
-    img = front(img, t)
+    st, zoom = state_at(t)
+    img = place_layer(g, t, zoom)
+    img = him(img, base, f, t, st)
+    img = front(img, t, st)
     img = caption(img, t)
     return wipe(img, t)
 
