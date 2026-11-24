@@ -13,7 +13,7 @@ folder and add one line to `docs/README.md`. The two guides are the source of tr
 The skills in `.claude/skills/` are the playbooks per video type (`vibe-editing-system` picks the type; `vibe-talking-head`
 for talking-head footage; `vibe-mini-vlog` for mini vlogs / day in my life with the camcorder overlay pack, vertical by
 default; `lemo-opuscar` for animated explainers and short films in one of 99 code-made film styles or the user's own;
-`voxel-reels` for blocky 3D cartoon dialogue reels, him as a voxel character plus a sidekick; `reanimate` to copy an animation from a reference reel, clip or site and measure the copy against it; `session-handoff` to write a full handoff of the chat into the repo so a new session continues with nothing lost; the 15-skill motion graphics pack, led by `vox-explainer` for Vox-style torn-paper explainers and `motion-effects` for premium UI, data and type effects). Follow the workflow below for the order of work, and the matching skill for the techniques.
+`voxel-reels` for blocky 3D cartoon dialogue reels, him as a voxel character plus a sidekick; `reanimate` to copy an animation from a reference reel, clip or site and measure the copy against it; `session-handoff` to write a full handoff of the chat into the repo so a new session continues with nothing lost; `photo-parallax` for Vox-style 2.5D camera moves that make a still photo feel like video; the 15-skill motion graphics pack, led by `vox-explainer` for Vox-style torn-paper explainers and `motion-effects` for premium UI, data and type effects). Follow the workflow below for the order of work, and the matching skill for the techniques.
 
 ## The workflow (every video)
 1. **Workspace:** one project folder per video under `projects/<name>/` (`new_project.py`). Check tools and do a short test render.
@@ -166,6 +166,12 @@ named `<project>-final.mp4`.
   says the chat is getting long, load the `session-handoff` skill. Its house rules: save the summary to
   `projects/<name>/HANDOFF.md` (setup sessions: `docs/playbook/handoffs/`), commit and push it, paste it in the reply
   too, list secret names only (never values), and list the raw files the next session must ask for again.
+- **Photo parallax (user rule, 2026-11-24):** to make a still photo move like video (the Vox trick: foreground,
+  midground and background layers, hidden areas patched, a slow dolly or pan through them), load the `photo-parallax`
+  skill and use `tools/parallax.py` (`layers` -> check `split.png` -> `stills` -> `render`). Use it whenever an edit
+  needs motion from a photo (archive pics, Codex stills, his physique photos) instead of a flat zoom. The start-up hook
+  downloads the depth model from GitHub (`~/.cache/vibe/parallax.ok`, log `/tmp/parallax-setup.log`); Hugging Face is
+  blocked here, so never fetch models from it. Use `--subject` when there is one clear subject.
 - **Motion graphics skills pack (user rule, 2026-11-24):** 15 skills from github.com/charlie947/motion-graphics-skills
   (MIT): `vox-explainer`, `motion-effects`, `animated-chart`, `milestone-reveal`, `launch-video`, `apple-launch-film`,
   `title-sequence-3d`, `newsletter-promo`, `loop-cover`, `reel-export`, `model-showdown`, `brand-intake`,
@@ -355,6 +361,10 @@ Learned on the motion graphics pack import (2026-11-24):
 - **A skills.sh link = a GitHub repo:** skills.sh doesn't resolve here, so clone the repo it names and read the real
   SKILL.md. Import packs the reanimate way (house-rules block per skill, our renderer, one tested example).
 - **`window.seek(t)` pages render with `tools/seek_render.mjs`** (stills, contact sheet, drafts, ranges, audio).
+
+Learned on the Vox photo parallax lesson (2026-11-24):
+- **Stills move with parallax, not a flat zoom** (a flat zoom "feels like an iMovie slideshow"). `photo-parallax`
+  skill, `tools/parallax.py`; pick photos with clear near / middle / far planes and keep the move slow.
 
 Learned on reel-07 (2026-11-11), a meme template caption swap:
 - **Post captions: explain, don't preach.** Approved after two rejected tries ("sounds AI", then "not rant"): two short
