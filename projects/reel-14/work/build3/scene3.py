@@ -553,8 +553,8 @@ def _photo(path):
 # full-scene prints of his photos and clips: (t0, t1, kind, path, src, zoom, cx, cy, width, label, label_t)
 PRINTS = [
     (s("a", 28.75), s("You", 30.07), "photo", "assets/photos/me_physique_mirror.jpg", 0, 1, .5, .5, 720, None, None),
-    (s("Pain", 52.76), s("discomfort", 53.44), "clip", "raw/vid_1111c.mp4", 4.3, 1.2, 0.0, 1.0, 700, "PAIN", s("Pain", 52.76)),
-    (s("discomfort", 53.44), s("going", 54.27), "clip", "raw/pullups.mp4", 7.7, 1.0, .5, .5, 700, "DISCOMFORT", s("discomfort", 53.44)),
+    (s("Pain", 52.76), s("discomfort", 53.44), "clip", "raw/vid_1111c.mp4", 4.3, 1.2, 0.0, 1.0, 700, None, None),
+    (s("discomfort", 53.44), s("going", 54.27), "clip", "raw/pullups.mp4", 7.7, 1.0, .5, .5, 700, None, None),
     (s("exact", 74.93), s("That", 76.87), "clip", "raw/vid_1111.mp4", 5.0, 1.15, .62, .55, 720, "KEEP GOING", s("keep", 76.19)),
     (s("is", 77.75), s("It", 78.99), "clip", "raw/flex_p1.mp4", 7.2, 1.06, .5, .3, 560, None, None),
     (s("adapt", 82.21), s("And", 83.66), "photo", "assets/photos/me_gym_dumbbell.jpg", 0, 1, .5, .5, 720, None, None),
