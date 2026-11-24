@@ -361,6 +361,12 @@ Other docs and when to read them: `docs/README.md`.
   > 82, then darken what remains of the soft edge toward the hair tone (despill). A first version without the edge
   limit punched a hole in his forehead. `face_circle()` in `projects/reel-12/work/mg/manga.py`. [r12]
 
+- **Cut-out of his room footage onto a new background (reel-14 v2):** the reel-12 hair-edge fix (drop pixels with
+  luma > 95 within 40 px of the matte edge) must be limited to the hair band (matte top row + 300 px): run over the
+  whole head it ate his ears and cheeks. Scaling him to 0.82 (bottom anchored) leaves room for titles above his head
+  but cuts the shoulders in a hard vertical line at the old frame edge: fade the matte over the outer 170 px.
+  `edge_fix()` and `his_layer()` in `projects/reel-14/work/build2/scene2.py`; mattes `work/matte_frames.py`. [r14]
+
 ## 5. Effects that worked (copy the code from the project, never import across projects)
 All in `projects/reel-03/work/build/fx.py` (helpers) and `edit.py` (beats). Deterministic (seeded) so re-renders match.
 - Light-snap silhouette from one photo: normal for a beat, flash to blown-out white with rays, body to black, one
@@ -458,6 +464,16 @@ All in `projects/reel-03/work/build/fx.py` (helpers) and `edit.py` (beats). Dete
   stay full colour inside ink panels. Benefit illustrations in `benefits.py` (gauge, age chart, flame + kcal counter,
   sugar line smoothing, X-ray bone, shield, hourglass, cloud to sun, moon + Zzz); clip drawings to their panel
   (`Pen.done(clip=...)`) or sliding elements spill onto the page. [r12]
+
+- **Vox-style torn-paper explainer (motion graphics pack, 2026-11-24), copy `.claude/skills/vox-explainer/example/`:**
+  red #B8312A, cream #F1E6D0, paper #FBF7EE, navy #14213D, yellow #F2C230, Anton for headlines, JetBrains Mono for
+  labels. Torn sheets = a jagged path cached per seed (same paper every frame) with a 10 px white fibre fringe under it
+  and a soft shadow; halftone = a 16 px dot pattern at 6 to 12 % inside big colour sheets; grain changes on twos.
+  All motion goes through `twos(t) = floor(t*12)/12` at 24 fps (checked: consecutive frames differ only every second
+  frame). Photo cards keep the photo unfiltered inside a torn white margin. The question's first line must already be
+  landing on frame 0. Sound: Openverse CC0 paper flips on every landing, a swoosh on each paper wipe, a soft thud under
+  the big word, a marker for the circle and highlighter, peaks placed on their frames (`example/mix.py`). Render with
+  `tools/seek_render.mjs`: 14 s at 24 fps in 47 s, 24.7 MB at crf 14. [mg-pack]
 
 ## 6. Text and captions
 - Captions sit on a handheld mic at about 1440 px; ask about caption height at the stills step when he holds a mic. [r01][r02]
@@ -585,6 +601,11 @@ All in `projects/reel-03/work/build/fx.py` (helpers) and `edit.py` (beats). Dete
   frame starts moving before the out-point, end at the later of the -35 dB decay + 1 frame and the first moving
   frame. Merge pieces whose gap is under 0.1 s so the out rule never leaves a 2-frame jump cut mid-sentence.
   `projects/reel-14/work/plan_cut.py` (`LEAD`, `first_motion`). [r14]
+
+- **Freesound from the container, 2026-11-23 (reel-14):** some downloads worked (metal hit, boom, shield bash, shutter,
+  riser) and others answered 403 from cdn.freesound.org on the same run; retrying with waits got 3 more. Try `get` a
+  few times before asking him to download by hand. The project `.gitignore` ignores `*.wav`: add
+  `!assets/sfx/openverse/*.wav` so the trimmed sounds are committed. [r14]
 
 ## 8. Workflow and process
 - Stills first, every time (contact sheet every 2.5 s + full-size changed frames), plus a short low-res draft clip when
@@ -729,6 +750,13 @@ All in `projects/reel-03/work/build/fx.py` (helpers) and `edit.py` (beats). Dete
   `-f segment -segment_frames`, concat copy, and prove the rest unchanged with framemd5 per frame. [r12]
 - **Guard "current item" lookups for the gap before the first item (reel-12):** a list branch that starts 0.05 s
   before item 1 crashed two render parts (`[...][-1]` on an empty list). Fall back to the first item. [r12]
+
+- **Imported skills packs follow the reanimate recipe (2026-11-24):** he asked to import charlie947's whole
+  motion graphics pack. Copy each skill with its LICENSE, put a marked "Vibe editing house rules" block at the top of
+  every SKILL.md plus one long house-rules file (`docs/library/motion-graphics-skills/HOUSE-RULES.md`), replace their
+  installs and renderers with ours (`tools/seek_render.mjs` for `window.seek` pages), build and render one tested
+  example, and only then write the numbers into the rules. skills.sh pages don't resolve from this container; the
+  GitHub repo behind them clones fine. [mg-pack]
 
 ## 9. Delivery and quality
 - File sizes with per-frame grain (1080x1920): reel-03, 22.2 s: crf 14 = 65 MB, crf 20 = 33 MB, crf 22 = 25 MB.
