@@ -23,6 +23,10 @@ Other docs and when to read them: `docs/README.md`.
   vertical cut on the deadlift outline. Check every cut-out at full size, especially head, hands and edges. [r03]
 - Long static holds bore him: a 4 s hold of one shot "becomes monotonous". Something must happen in its second half
   (in reel-03: a rim light builds, then the body fills with glowing grain on the key word). [r03]
+- **Text is not a visual (reel-14, 2026-11-24).** He called the v2 look "awful... just a bunch of text, no visual
+  element at all. For pizza you just wrote it on the screen". Every spoken line needs something to look at that shows
+  it (a pizza for pizza), made in code or with Codex image generation; titles only support it. He wants Vox style
+  (torn paper collage) for this kind of eye-opening talk reel. Plan the visual per line in the beat sheet. [r14]
 - **His look: darker and grainier = "important" (brand intake, 2026-11-24).** He couldn't answer brand questions in
   the abstract; fill them from what you know and ask him to correct. Master look in `docs/playbook/brand/MOTION.md`:
   black and deep red (#4A0005 to #1C0202), heavy grain (about 2x the house default), bone titles, ash captions. [brand]
