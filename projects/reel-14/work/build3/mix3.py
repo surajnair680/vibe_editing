@@ -129,17 +129,29 @@ MUSIC = MUSIC * gcurve[:, None]
 fi = int(0.4 * SR); MUSIC[:fi] *= np.linspace(0, 1, fi)[:, None]
 a0 = int(s("normal", 101.01) * SR); MUSIC[a0:] *= np.linspace(1, 0, N - a0)[:, None] ** 2   # fade out under the final YOU.
 sfx *= db(-3)                                        # one more step down: soft under the voice
-mix = np.stack([voice, voice], 1) + sfx + MUSIC
+# v7 (his note: "make my voice louder", music and effects stay where they are): the master gain stays keyed to the
+# unboosted voice, the music ducking was keyed from it above, then the voice alone gets a gentle compressor and +4 dB.
+G_FIXED = db(-14.5) / speech_rms_(voice)
+VOICE_GAIN_DB = 4.0
+_hh = SR // 100
+_r = np.sqrt(np.convolve(voice ** 2, np.ones(2 * _hh) / (2 * _hh), "same")) + 1e-9
+_thr = speech_rms_(voice) * db(3)
+_gr = np.where(_r > _thr, (_r / _thr) ** (1 / 3 - 1), 1.0)            # 3:1 above the threshold
+_sm = np.empty_like(_gr); g_ = 1.0
+for i in range(0, len(_gr), _hh):                                       # 10 ms steps: fast attack, 120 ms release
+    t_ = _gr[i:i + _hh].min(); g_ = t_ if t_ < g_ else g_ + (t_ - g_) * 0.08; _sm[i:i + _hh] = g_
+voice_out = voice * _sm * db(VOICE_GAIN_DB)
+mix = np.stack([voice_out, voice_out], 1) + sfx + MUSIC
 def speech_rms(x):
     hh = SR // 20; f = np.sqrt((x[:len(x) // hh * hh].reshape(-1, hh) ** 2).mean(1)); return np.sqrt(np.mean(f[f > np.percentile(f, 50)] ** 2))
-G = db(-14.5) / speech_rms(voice)
+G = G_FIXED                                            # same master gain as v6, so music and effects keep their level
 mix *= G
 lim = db(-1.5); w = int(0.005 * SR)
 gr = np.minimum(1.0, lim / (np.abs(mix).max(1) + 1e-12))
 gr = uniform_filter1d(minimum_filter1d(gr, 2 * w + 1), w)
 mix = np.clip(mix * gr[:, None], -lim, lim)
 os.makedirs("work/audio", exist_ok=True)
-sf.write("work/audio/mix_v6.wav", mix, SR, subtype="PCM_24")
+sf.write("work/audio/mix_v7.wav", mix, SR, subtype="PCM_24")
 sf.write("work/audio/_stem3_music.wav", MUSIC * G, SR, subtype="PCM_16")
 sf.write("work/audio/_stem3_sfx.wav", sfx * G, SR, subtype="PCM_16")
 # report: loudest effect vs the voice, and brightness of the effects
