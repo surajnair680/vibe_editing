@@ -13,7 +13,7 @@ folder and add one line to `docs/README.md`. The two guides are the source of tr
 The skills in `.claude/skills/` are the playbooks per video type (`vibe-editing-system` picks the type; `vibe-talking-head`
 for talking-head footage; `vibe-mini-vlog` for mini vlogs / day in my life with the camcorder overlay pack, vertical by
 default; `lemo-opuscar` for animated explainers and short films in one of 99 code-made film styles or the user's own;
-`voxel-reels` for blocky 3D cartoon dialogue reels, him as a voxel character plus a sidekick; `reanimate` to copy an animation from a reference reel, clip or site and measure the copy against it; `session-handoff` to write a full handoff of the chat into the repo so a new session continues with nothing lost). Follow the workflow below for the order of work, and the matching skill for the techniques.
+`voxel-reels` for blocky 3D cartoon dialogue reels, him as a voxel character plus a sidekick; `reanimate` to copy an animation from a reference reel, clip or site and measure the copy against it; `session-handoff` to write a full handoff of the chat into the repo so a new session continues with nothing lost; the 15-skill motion graphics pack, led by `vox-explainer` for Vox-style torn-paper explainers and `motion-effects` for premium UI, data and type effects). Follow the workflow below for the order of work, and the matching skill for the techniques.
 
 ## The workflow (every video)
 1. **Workspace:** one project folder per video under `projects/<name>/` (`new_project.py`). Check tools and do a short test render.
@@ -166,6 +166,15 @@ named `<project>-final.mp4`.
   says the chat is getting long, load the `session-handoff` skill. Its house rules: save the summary to
   `projects/<name>/HANDOFF.md` (setup sessions: `docs/playbook/handoffs/`), commit and push it, paste it in the reply
   too, list secret names only (never values), and list the raw files the next session must ask for again.
+- **Motion graphics skills pack (user rule, 2026-11-24):** 15 skills from github.com/charlie947/motion-graphics-skills
+  (MIT): `vox-explainer`, `motion-effects`, `animated-chart`, `milestone-reveal`, `launch-video`, `apple-launch-film`,
+  `title-sequence-3d`, `newsletter-promo`, `loop-cover`, `reel-export`, `model-showdown`, `brand-intake`,
+  `motion-brief-writer`, `motion-prompt-writer`, `reference-to-motion`. Load the matching one for a Vox-style explainer,
+  a UI / data / kinetic type effect, an animated chart or number, a launch or promo, a 3D title or a cover GIF. Read
+  `docs/library/motion-graphics-skills/HOUSE-RULES.md` first: it overrides the upstream text (projects folder,
+  1080x1920, brand in `docs/playbook/brand/`, stills first, Openverse sound, no installs). Their pages define
+  `window.seek(t)`: render stills and video with `node tools/seek_render.mjs` (preinstalled Chromium, ~7 fps at
+  1080x1920). Tested Vox kit: `.claude/skills/vox-explainer/example/`.
 - **Rendering with HyperFrames:** `HYPERFRAMES_BROWSER_PATH` is set by the session start hook
   (the newest `/opt/pw-browsers/chromium_headless_shell-*` headless shell; `-1243` on 2026-11-13). CLI: `npx hyperframes@0.8.150`.
 - **Web/shader renders (`templates/web/render.mjs`):** never run `npx playwright install`. Chromium is preinstalled
@@ -341,6 +350,11 @@ Learned on reel-12 (2026-11-19), a sarcastic "ghar ka khaana" reply reel in a ma
   inside manga panels; Codex manga people look like "AI slop" to him, so no drawn faces.
 - **Music level: measure stems, not the mix.** About 18 dB under the voice while he talks. Manga kit to reuse:
   `projects/reel-12/work/mg/` (manga.py, scene.py, benefits.py).
+
+Learned on the motion graphics pack import (2026-11-24):
+- **A skills.sh link = a GitHub repo:** skills.sh doesn't resolve here, so clone the repo it names and read the real
+  SKILL.md. Import packs the reanimate way (house-rules block per skill, our renderer, one tested example).
+- **`window.seek(t)` pages render with `tools/seek_render.mjs`** (stills, contact sheet, drafts, ranges, audio).
 
 Learned on reel-07 (2026-11-11), a meme template caption swap:
 - **Post captions: explain, don't preach.** Approved after two rejected tries ("sounds AI", then "not rant"): two short

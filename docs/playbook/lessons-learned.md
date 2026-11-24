@@ -465,6 +465,16 @@ All in `projects/reel-03/work/build/fx.py` (helpers) and `edit.py` (beats). Dete
   sugar line smoothing, X-ray bone, shield, hourglass, cloud to sun, moon + Zzz); clip drawings to their panel
   (`Pen.done(clip=...)`) or sliding elements spill onto the page. [r12]
 
+- **Vox-style torn-paper explainer (motion graphics pack, 2026-11-24), copy `.claude/skills/vox-explainer/example/`:**
+  red #B8312A, cream #F1E6D0, paper #FBF7EE, navy #14213D, yellow #F2C230, Anton for headlines, JetBrains Mono for
+  labels. Torn sheets = a jagged path cached per seed (same paper every frame) with a 10 px white fibre fringe under it
+  and a soft shadow; halftone = a 16 px dot pattern at 6 to 12 % inside big colour sheets; grain changes on twos.
+  All motion goes through `twos(t) = floor(t*12)/12` at 24 fps (checked: consecutive frames differ only every second
+  frame). Photo cards keep the photo unfiltered inside a torn white margin. The question's first line must already be
+  landing on frame 0. Sound: Openverse CC0 paper flips on every landing, a swoosh on each paper wipe, a soft thud under
+  the big word, a marker for the circle and highlighter, peaks placed on their frames (`example/mix.py`). Render with
+  `tools/seek_render.mjs`: 14 s at 24 fps in 47 s, 24.7 MB at crf 14. [mg-pack]
+
 ## 6. Text and captions
 - Captions sit on a handheld mic at about 1440 px; ask about caption height at the stills step when he holds a mic. [r01][r02]
 - Keep text off his face and beard: move the picture (crop) rather than the text when a centred word lands on the face. [r03]
@@ -740,6 +750,13 @@ All in `projects/reel-03/work/build/fx.py` (helpers) and `edit.py` (beats). Dete
   `-f segment -segment_frames`, concat copy, and prove the rest unchanged with framemd5 per frame. [r12]
 - **Guard "current item" lookups for the gap before the first item (reel-12):** a list branch that starts 0.05 s
   before item 1 crashed two render parts (`[...][-1]` on an empty list). Fall back to the first item. [r12]
+
+- **Imported skills packs follow the reanimate recipe (2026-11-24):** he asked to import charlie947's whole
+  motion graphics pack. Copy each skill with its LICENSE, put a marked "Vibe editing house rules" block at the top of
+  every SKILL.md plus one long house-rules file (`docs/library/motion-graphics-skills/HOUSE-RULES.md`), replace their
+  installs and renderers with ours (`tools/seek_render.mjs` for `window.seek` pages), build and render one tested
+  example, and only then write the numbers into the rules. skills.sh pages don't resolve from this container; the
+  GitHub repo behind them clones fine. [mg-pack]
 
 ## 9. Delivery and quality
 - File sizes with per-frame grain (1080x1920): reel-03, 22.2 s: crf 14 = 65 MB, crf 20 = 33 MB, crf 22 = 25 MB.
