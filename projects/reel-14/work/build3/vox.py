@@ -103,6 +103,7 @@ def paper_sheet(w, h, color, seed, rough=8, tone=True, draw=None):
     return out
 
 
+@functools.lru_cache(maxsize=128)
 def strip(text, size, bg=BONE, fg=INK, seed=1, font_path=F_TITLE, padx=34, pady=14):
     f = font(font_path, size)
     bb = f.getbbox(text)
@@ -149,11 +150,16 @@ def cutout(path, height, margin=16, seed=3):
     return np.dstack([out, m])
 
 
+@functools.lru_cache(maxsize=16)
+def _blank_print(w, h, seed):
+    return paper_sheet(w, h, (250, 247, 240), seed, rough=6, tone=False)
+
+
 def print_frame(rgb, width, seed=5, border=18):
     """his photo / clip frame as a torn print: the picture untouched inside a white torn border."""
     h = int(rgb.shape[0] * width / rgb.shape[1])
     pic = cv2.resize(rgb, (width, h), interpolation=cv2.INTER_AREA)
-    sheet = paper_sheet(width + border * 2, h + border * 2, (250, 247, 240), seed, rough=6, tone=False)
+    sheet = _blank_print(width + border * 2, h + border * 2, seed).copy()
     pad = 30
     sheet[pad + border:pad + border + h, pad + border:pad + border + width, :3] = pic
     return sheet
@@ -191,6 +197,7 @@ def marker_circle(img, cx, cy, rx, ry, p, seed=1, width=12):
     return out
 
 
+@functools.lru_cache(maxsize=32)
 def stamp(text, size, color=MARK, seed=2, rot=-8):
     """rubber stamp: rough-edged red letters in a box, slightly worn."""
     f = font(F_TITLE, size)
