@@ -465,22 +465,21 @@ def behind(img, t):
         img = drop(img, progress(t, s("moment", 72.81), s("uncomfortable", 73.61), s("is", 74.59)), 540, 640, t, s("moment", 72.81), rot=-1.5, dy=-300)
     # 17a. muscle fibres tear
     if s("That", 76.87) <= t < s("is", 77.75):
-        img = drop(img, vox.cutout(C + "muscle.png", 440, seed=17), 540, 660, t, s("That", 76.87) + .1, rot=-2, dy=-300)
-        img = cracks(img, 540, 640, span(twos(t), s("discomfort", 77.07), s("discomfort", 77.07) + .35))
-        img = label(img, "TINY TEARS", 540, 920, t, s("discomfort", 77.07) + .2, size=66, bg=MARK, fg=BONE)
+        # Sisyphus pushing the boulder: the struggle you push through (his photo, unfiltered)
+        img = drop(img, vox.print_frame(_photo("assets/photos/statue_sisyphus.jpg"), 440, seed=27), 560, 700, t, s("That", 76.87) + .1, rot=-2, dy=-400)
+        img = label(img, "DISCOMFORT", 740, 1000, t, s("discomfort", 77.07) + .1, size=80, bg=MARK, fg=BONE, rot=-5)
     # 18a. brain -> muscle
     if s("It", 78.99) <= t < s("adapt", 82.21):
-        if os.path.exists(C + "brain.png"):
-            img = drop(img, vox.cutout(C + "brain.png", 330, seed=16), 280, 560, t, s("mind", 80.17), rot=-6, dy=-400)
-        if os.path.exists(C + "muscle.png"):
-            img = drop(img, vox.cutout(C + "muscle.png", 360, seed=17), 800, 600, t, s("body", 79.57), rot=6, dy=-400)
-        img = label(img, "MIND", 280, 760, t, s("mind", 80.17) + .1, size=70)
-        img = label(img, "BODY", 800, 820, t, s("body", 79.57) + .1, size=70)
-        img = arrow(img, 400, 470, 660, 520, span(twos(t), s("there's", 80.75), s("there's", 80.75) + .45))
+        # the self-made man carving himself out of stone: you build yourself (photo, unfiltered, slow push-in)
+        pin = 1 + 0.06 * span(t, s("It", 78.99), s("adapt", 82.21))
+        p = land(t, s("It", 78.99) + .15)
+        if p > 0:
+            img = paste(img, vox.print_frame(_photo("assets/photos/statue_selfmade_crop.jpg"), 440, seed=28), 500, 700 - 400 * (1 - p),
+                        rot=2, scale=pin, shadow=.5)
         tn = s("no", 81.01)
         if twos(t) >= tn:
             q = ease(span(twos(t), tn, tn + .17))
-            img = paste(img, vox.stamp("NO OPTION", 130, seed=8), 540, 960, rot=-6, scale=1.5 - .5 * q, shadow=0)
+            img = paste(img, vox.stamp("NO OPTION", 130, seed=8), 470, 1010, rot=-6, scale=1.5 - .5 * q, shadow=0)
     # 19. sofa, figures crawl to it
     if s("And", 83.66) <= t < s("Outliers", 87.89):
         if os.path.exists(C + "sofa.png"):
@@ -697,9 +696,8 @@ def compose(f, base):
             ql = ease(span(twos(t), lt, lt + .17))
             img = paste(img, vox.strip(lab, 96, bg=MARK, fg=BONE, seed=hash(lab) % 99), 300, 470 + (1 - ql) * -60, rot=-4, shadow=.4)
         if width < 600:                                 # side-by-side: fibres grow back next to the print
-            g = ease(span(twos(t), s("makes", 78.27), s("makes", 78.27) + .35))
-            img = paste(img, vox.cutout(C + "muscle.png", 300, seed=17), 270, 700, rot=-3, scale=0.8 + 0.4 * g)
-            img = label(img, "GROW", 270, 940, t, s("grow", 78.63), size=84, bg=MARK, fg=BONE)
+            img = paste(img, vox.print_frame(_photo("assets/photos/statue_sisyphus.jpg"), 300, seed=27), 270, 760, rot=-3, shadow=.45)
+            img = label(img, "GROW", 270, 1060, t, s("grow", 78.63), size=84, bg=MARK, fg=BONE)
         img = caption(img, t)
         return wipe(img, t)
     st, zoom = state_at(t)

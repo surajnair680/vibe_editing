@@ -23,6 +23,10 @@ Other docs and when to read them: `docs/README.md`.
   vertical cut on the deadlift outline. Check every cut-out at full size, especially head, hands and edges. [r03]
 - Long static holds bore him: a 4 s hold of one shot "becomes monotonous". Something must happen in its second half
   (in reel-03: a rim light builds, then the body fills with glowing grain on the key word). [r03]
+- **Emotion beats diagrams (reel-14).** He called the brain and bicep drawings "so boring" and sent two dark B&W
+  statue photos instead: Sisyphus pushing the boulder (discomfort you push through) and the self-made man carving
+  himself (building yourself). For feeling lines (struggle, growth, becoming stronger) use dramatic, symbolic real
+  images like these as torn prints; keep diagrams for facts. Assets: `projects/reel-14/assets/photos/statue_*.jpg`. [r14]
 - **Charts carry meaning by position (reel-14).** He caught Elon Musk placed on the LEFT end of the bell curve, which
   reads as below average. Outliers and "you" always sit on the right (high) end; check where each element sits on a
   chart, not just that it is visible. Also keep recognisable people big (Jobs about 520 px, not 300). [r14]
