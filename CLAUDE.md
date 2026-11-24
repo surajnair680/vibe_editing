@@ -171,7 +171,8 @@ named `<project>-final.mp4`.
   skill and use `tools/parallax.py` (`layers` -> check `split.png` -> `stills` -> `render`). Use it whenever an edit
   needs motion from a photo (archive pics, Codex stills, his physique photos) instead of a flat zoom. The start-up hook
   downloads the depth model from GitHub (`~/.cache/vibe/parallax.ok`, log `/tmp/parallax-setup.log`); Hugging Face is
-  blocked here, so never fetch models from it. Use `--subject` when there is one clear subject.
+  blocked here, so never fetch models from it. Use `--subject` when there is one clear subject, and let Codex paint the
+  hidden areas (`--plate codex --remove "..."`); the code patch is only for drafts or when Codex is not signed in.
 - **Motion graphics skills pack (user rule, 2026-11-24):** 15 skills from github.com/charlie947/motion-graphics-skills
   (MIT): `vox-explainer`, `motion-effects`, `animated-chart`, `milestone-reveal`, `launch-video`, `apple-launch-film`,
   `title-sequence-3d`, `newsletter-promo`, `loop-cover`, `reel-export`, `model-showdown`, `brand-intake`,
@@ -365,6 +366,8 @@ Learned on the motion graphics pack import (2026-11-24):
 Learned on the Vox photo parallax lesson (2026-11-24):
 - **Stills move with parallax, not a flat zoom** (a flat zoom "feels like an iMovie slideshow"). `photo-parallax`
   skill, `tools/parallax.py`; pick photos with clear near / middle / far planes and keep the move slow.
+- **Codex image generation is part of the toolkit; reach for it first** whenever an image has to be painted, filled
+  or made (clean plates, missing B-roll, stills). He had to remind: "You have codex image generation don't forget".
 
 Learned on reel-07 (2026-11-11), a meme template caption swap:
 - **Post captions: explain, don't preach.** Approved after two rejected tries ("sounds AI", then "not rant"): two short
