@@ -10,6 +10,8 @@ from PIL import Image
 sys.path.insert(0, "work/build2"); sys.path.insert(0, "work/build")
 import fx2
 from fx2 import W, H, FPS
+sys.path.insert(0, "/home/user/vibe_editing/projects/reel-14/vibe")
+import motion_kit                     # brand grain (cached noise bank)
 import fx as fx1                     # v1 clip loader (Clip.frame)
 
 WORDS = json.load(open("work/words_edit.json"))
@@ -204,7 +206,7 @@ def compose(f, base):
             z = p.get("zoom", 1.0) + (p.get("zoom1", p.get("zoom", 1.0)) - p.get("zoom", 1.0)) * u
             img = fx1.clip_frame(p["path"], p["src"] + (t - t0), z, p.get("cx", 0.5), p.get("cy", 0.5))
         else:
-            img = fx2.vignette(fx2.bg_red(t), 0.25)
+            img = fx2.vignette(fx2.bg_red(t), 0.40)
             if kind == "cutout":
                 img = fx2.place_cutout(img, p["path"], u, p["height"])
             else:
@@ -227,7 +229,7 @@ def compose(f, base):
         return img
     # his cut-out scene
     grey = GREY[0] <= t < GREY[1]
-    bg = fx2.bg_grey(t) if grey else fx2.vignette(fx2.bg_red(t), 0.25)
+    bg = fx2.bg_grey(t) if grey else fx2.vignette(fx2.bg_red(t), 0.40)
     if f > LAST_F:
         base = base  # frozen last frame passed in
     bg = draw_titles(bg, t)
@@ -237,6 +239,21 @@ def compose(f, base):
     if b:
         img = fx2.caption(img, b, t, y0=300, color=(40, 36, 34) if grey else fx2.CAPGREY)
     return img
+
+
+GRAIN = 0.08   # brand: heavy grain, about 2x the house default (0.04), new field every frame
+
+
+def final(f, base):
+    """compose + the brand's film grain on our graphic frames (texture only, no colour change)."""
+    img = np.ascontiguousarray(compose(f, base))
+    t = f / FPS
+    if t < HIS:
+        return img                                   # her clip stays untouched
+    cur = [x for x in INS if x[0] <= t < x[1]]
+    if cur and cur[-1][2] in ("photo", "clip"):
+        return img                                   # his physique photos and B-roll: no filter
+    return motion_kit.grain(img, GRAIN, seed=f)
 
 
 def base_frames(f0, n):
@@ -254,7 +271,7 @@ def base_frames(f0, n):
 def still(t, out):
     f = fr(t)
     b = next(base_frames(f, 1))
-    Image.fromarray(compose(f, b)).save(out)
+    Image.fromarray(final(f, b)).save(out)
 
 
 def render(a, b, out, crf=14):
@@ -263,7 +280,7 @@ def render(a, b, out, crf=14):
                             str(FPS), "-i", "-", "-c:v", "libx264", "-crf", str(crf), "-preset", "veryfast", "-g", "30",
                             "-pix_fmt", "yuv420p", out], stdin=subprocess.PIPE)
     for i, bf in enumerate(base_frames(f0, f1 - f0)):
-        enc.stdin.write(np.ascontiguousarray(compose(f0 + i, bf)).tobytes())
+        enc.stdin.write(np.ascontiguousarray(final(f0 + i, bf)).tobytes())
     enc.stdin.close(); enc.wait()
 
 

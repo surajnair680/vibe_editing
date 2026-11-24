@@ -32,7 +32,8 @@ def _red_static():
     y, x = np.mgrid[0:H, 0:W].astype(np.float32)
     r = np.sqrt(((x - W * 0.5) / W) ** 2 + ((y - H * 0.42) / H * 1.1) ** 2)
     k = np.clip(r / 0.75, 0, 1) ** 1.3
-    c0, c1 = np.array([120, 9, 10], np.float32), np.array([22, 2, 3], np.float32)
+    # brand (docs/playbook/brand/MOTION.md): darker than the reference, #4A0005 centre to near black edges
+    c0, c1 = np.array([74, 0, 5], np.float32), np.array([16, 1, 1], np.float32)
     img = c0[None, None] * (1 - k[..., None]) + c1[None, None] * k[..., None]
     return img
 
