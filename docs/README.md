@@ -18,6 +18,7 @@ one line below. Don't nest deeper than these three folders.
 | File | Read it when |
 |---|---|
 | `library/cinematic-gym-shotlist.md` | Gym or physique video: asking for B-roll, planning a shoot, tagging gym clips. |
+| `library/motion-graphics-skills/HOUSE-RULES.md` | Any of the 15 motion graphics pack skills (vox-explainer, motion-effects...): how they run here. Upstream README, prompts and validator sit next to it. |
 
 ## Elsewhere
 - `CLAUDE.md` (repo root): the rules. Always loaded.
@@ -29,6 +30,8 @@ one line below. Don't nest deeper than these three folders.
   timings, captions, cards, CTA), adapted from @heyalok.ai's guide; renders through the lemo-opuscar tools.
 - `.claude/skills/reanimate/`: copy an animation from a reference reel, clip, gif or website and prove the copy matches
   (film, spec, rebuild in HTML, film again, compare frame by frame). From github.com/NiazMorshed2007/reanimate (MIT).
+- `.claude/skills/vox-explainer/`, `motion-effects/`, `animated-chart/` and 12 more: the motion graphics pack from
+  github.com/charlie947/motion-graphics-skills (MIT), with house rules on top. Rendered with `tools/seek_render.mjs`.
 - `.claude/skills/vibe-wrap-up/`: run at the end of every session (`/vibe-wrap-up`): reviews the session, explains what was
   learned and writes it into `playbook/lessons-learned.md` and `CLAUDE.md` for all future sessions.
 - `projects/<reel>/`: each video's brief, RENDER.md and code. The lessons file points to reusable recipes there.

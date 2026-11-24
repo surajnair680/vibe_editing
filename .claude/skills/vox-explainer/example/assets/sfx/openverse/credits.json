@@ -1,0 +1,242 @@
+{
+ "paper-01": {
+  "openverse_id": "43e2d82b-6473-4769-9dab-577bcf934d7b",
+  "title": "paper flip 2.wav",
+  "creator": "gynation",
+  "license": "cc0",
+  "license_version": "1.0",
+  "license_url": "https://creativecommons.org/publicdomain/zero/1.0/",
+  "source": "freesound",
+  "page": "https://freesound.org/people/gynation/sounds/82378",
+  "attribution": "\"paper flip 2.wav\" by gynation is marked with CC0 1.0. To view the terms, visit https://creativecommons.org/publicdomain/zero/1.0/.",
+  "needs_credit": false,
+  "files": {
+   "original": ".claude/skills/vox-explainer/example/assets/sfx/openverse/orig/paper-01.mp3",
+   "wav": ".claude/skills/vox-explainer/example/assets/sfx/openverse/paper-01.wav"
+  },
+  "measure": {
+   "length_s": 0.465,
+   "sound_s": 0.35,
+   "peak_dbfs": -3.5,
+   "loudness_db": -30.2,
+   "attack_ms": 190,
+   "peak_at_s": 0.25,
+   "tail_ms": 150,
+   "brightness_hz": 5235,
+   "tone": "bright",
+   "low_end": 0.0,
+   "hits": 2,
+   "shape": "swoosh"
+  }
+ },
+ "paper-02": {
+  "openverse_id": "9f6c8594-c8a1-4366-9ee4-7cf1ea801467",
+  "title": "paper flip 1.wav",
+  "creator": "gynation",
+  "license": "cc0",
+  "license_version": "1.0",
+  "license_url": "https://creativecommons.org/publicdomain/zero/1.0/",
+  "source": "freesound",
+  "page": "https://freesound.org/people/gynation/sounds/82377",
+  "attribution": "\"paper flip 1.wav\" by gynation is marked with CC0 1.0. To view the terms, visit https://creativecommons.org/publicdomain/zero/1.0/.",
+  "needs_credit": false,
+  "files": {
+   "original": ".claude/skills/vox-explainer/example/assets/sfx/openverse/orig/paper-02.mp3",
+   "wav": ".claude/skills/vox-explainer/example/assets/sfx/openverse/paper-02.wav"
+  },
+  "measure": {
+   "length_s": 0.438,
+   "sound_s": 0.39,
+   "peak_dbfs": -4.8,
+   "loudness_db": -29.6,
+   "attack_ms": 240,
+   "peak_at_s": 0.24,
+   "tail_ms": 140,
+   "brightness_hz": 5032,
+   "tone": "bright",
+   "low_end": 0.0,
+   "hits": 1,
+   "shape": "swoosh"
+  }
+ },
+ "paper-03": {
+  "openverse_id": "bbca2d79-dd67-476e-9df2-45190cff3876",
+  "title": "paper flip 3.wav",
+  "creator": "gynation",
+  "license": "cc0",
+  "license_version": "1.0",
+  "license_url": "https://creativecommons.org/publicdomain/zero/1.0/",
+  "source": "freesound",
+  "page": "https://freesound.org/people/gynation/sounds/82379",
+  "attribution": "\"paper flip 3.wav\" by gynation is marked with CC0 1.0. To view the terms, visit https://creativecommons.org/publicdomain/zero/1.0/.",
+  "needs_credit": false,
+  "files": {
+   "original": ".claude/skills/vox-explainer/example/assets/sfx/openverse/orig/paper-03.mp3",
+   "wav": ".claude/skills/vox-explainer/example/assets/sfx/openverse/paper-03.wav"
+  },
+  "measure": {
+   "length_s": 0.5,
+   "sound_s": 0.28,
+   "peak_dbfs": -5.4,
+   "loudness_db": -33.5,
+   "attack_ms": 80,
+   "peak_at_s": 0.08,
+   "tail_ms": 190,
+   "brightness_hz": 6888,
+   "tone": "bright",
+   "low_end": 0.0,
+   "hits": 1,
+   "shape": "swoosh"
+  }
+ },
+ "swoosh-01": {
+  "openverse_id": "7941e04f-2922-460b-845c-260ffe1d6778",
+  "title": "Space Swoosh - brighter",
+  "creator": "GameAudio",
+  "license": "cc0",
+  "license_version": "1.0",
+  "license_url": "https://creativecommons.org/publicdomain/zero/1.0/",
+  "source": "freesound",
+  "page": "https://freesound.org/people/GameAudio/sounds/220191",
+  "attribution": "\"Space Swoosh - brighter\" by GameAudio is marked with CC0 1.0. To view the terms, visit https://creativecommons.org/publicdomain/zero/1.0/.",
+  "needs_credit": false,
+  "files": {
+   "original": ".claude/skills/vox-explainer/example/assets/sfx/openverse/orig/swoosh-01.mp3",
+   "wav": ".claude/skills/vox-explainer/example/assets/sfx/openverse/swoosh-01.wav"
+  },
+  "measure": {
+   "length_s": 0.909,
+   "sound_s": 0.69,
+   "peak_dbfs": -9.3,
+   "loudness_db": -25.9,
+   "attack_ms": 320,
+   "peak_at_s": 0.33,
+   "tail_ms": 360,
+   "brightness_hz": 2355,
+   "tone": "mid",
+   "low_end": 0.0,
+   "hits": 1,
+   "shape": "swoosh"
+  }
+ },
+ "swoosh-02": {
+  "openverse_id": "f1dc6045-7965-41de-87f8-4731d2583fd2",
+  "title": "Swosh swoosh whoosh air sound, free, high quality",
+  "creator": "qubodup",
+  "license": "cc0",
+  "license_version": "1.0",
+  "license_url": "https://creativecommons.org/publicdomain/zero/1.0/",
+  "source": "freesound",
+  "page": "https://freesound.org/people/qubodup/sounds/60026",
+  "attribution": "\"Swosh swoosh whoosh air sound, free, high quality\" by qubodup is marked with CC0 1.0. To view the terms, visit https://creativecommons.org/publicdomain/zero/1.0/.",
+  "needs_credit": false,
+  "files": {
+   "original": ".claude/skills/vox-explainer/example/assets/sfx/openverse/orig/swoosh-02.mp3",
+   "wav": ".claude/skills/vox-explainer/example/assets/sfx/openverse/swoosh-02.wav"
+  },
+  "measure": {
+   "length_s": 0.49,
+   "sound_s": 0.48,
+   "peak_dbfs": -7.3,
+   "loudness_db": -22.4,
+   "attack_ms": 70,
+   "peak_at_s": 0.07,
+   "tail_ms": 400,
+   "brightness_hz": 2071,
+   "tone": "mid",
+   "low_end": 0.05,
+   "hits": 1,
+   "shape": "swoosh"
+  }
+ },
+ "thud-01": {
+  "openverse_id": "b0268d44-39b2-42b7-ad52-2572b3a66c54",
+  "title": "thud bassy slam.aiff",
+  "creator": "kyles",
+  "license": "cc0",
+  "license_version": "1.0",
+  "license_url": "https://creativecommons.org/publicdomain/zero/1.0/",
+  "source": "freesound",
+  "page": "https://freesound.org/people/kyles/sounds/51817",
+  "attribution": "\"thud bassy slam.aiff\" by kyles is marked with CC0 1.0. To view the terms, visit https://creativecommons.org/publicdomain/zero/1.0/.",
+  "needs_credit": false,
+  "files": {
+   "original": ".claude/skills/vox-explainer/example/assets/sfx/openverse/orig/thud-01.mp3",
+   "wav": ".claude/skills/vox-explainer/example/assets/sfx/openverse/thud-01.wav"
+  },
+  "measure": {
+   "length_s": 2.035,
+   "sound_s": 1.56,
+   "peak_dbfs": 0.1,
+   "loudness_db": -17.6,
+   "attack_ms": 770,
+   "peak_at_s": 0.82,
+   "tail_ms": 780,
+   "brightness_hz": 1512,
+   "tone": "mid",
+   "low_end": 0.5,
+   "hits": 3,
+   "shape": "swell"
+  }
+ },
+ "thud-03": {
+  "openverse_id": "83d8d8a1-3c30-44b2-817a-2120898c7c51",
+  "title": "thud bassy bump2.aiff",
+  "creator": "kyles",
+  "license": "cc0",
+  "license_version": "1.0",
+  "license_url": "https://creativecommons.org/publicdomain/zero/1.0/",
+  "source": "freesound",
+  "page": "https://freesound.org/people/kyles/sounds/51816",
+  "attribution": "\"thud bassy bump2.aiff\" by kyles is marked with CC0 1.0. To view the terms, visit https://creativecommons.org/publicdomain/zero/1.0/.",
+  "needs_credit": false,
+  "files": {
+   "original": ".claude/skills/vox-explainer/example/assets/sfx/openverse/orig/thud-03.mp3",
+   "wav": ".claude/skills/vox-explainer/example/assets/sfx/openverse/thud-03.wav"
+  },
+  "measure": {
+   "length_s": 1.335,
+   "sound_s": 0.82,
+   "peak_dbfs": 0.1,
+   "loudness_db": -11.0,
+   "attack_ms": 630,
+   "peak_at_s": 0.64,
+   "tail_ms": 180,
+   "brightness_hz": 1362,
+   "tone": "mid",
+   "low_end": 0.47,
+   "hits": 2,
+   "shape": "swell"
+  }
+ },
+ "marker-01": {
+  "openverse_id": "48169ecd-3e45-4844-b575-fd6bdfb7a89a",
+  "title": "Sharpie marker drawing circle 01.wav",
+  "creator": "elliott.klein",
+  "license": "cc0",
+  "license_version": "1.0",
+  "license_url": "https://creativecommons.org/publicdomain/zero/1.0/",
+  "source": "freesound",
+  "page": "https://freesound.org/people/elliott.klein/sounds/321137",
+  "attribution": "\"Sharpie marker drawing circle 01.wav\" by elliott.klein is marked with CC0 1.0. To view the terms, visit https://creativecommons.org/publicdomain/zero/1.0/.",
+  "needs_credit": false,
+  "files": {
+   "original": ".claude/skills/vox-explainer/example/assets/sfx/openverse/orig/marker-01.mp3",
+   "wav": ".claude/skills/vox-explainer/example/assets/sfx/openverse/marker-01.wav"
+  },
+  "measure": {
+   "length_s": 0.774,
+   "sound_s": 0.51,
+   "peak_dbfs": -25.4,
+   "loudness_db": -40.9,
+   "attack_ms": 210,
+   "peak_at_s": 0.21,
+   "tail_ms": 290,
+   "brightness_hz": 9144,
+   "tone": "bright",
+   "low_end": 0.0,
+   "hits": 1,
+   "shape": "swoosh"
+  }
+ }
+}
