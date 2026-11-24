@@ -103,8 +103,33 @@ ev(P.P_FRONT[0] + .17, "paper"); ev(s("normal", 101.01), "boom", 0)             
 for t, name, g in scene3.SFX: ev(t, "paper-02", -8)                                         # circle jumps
 for t, name, g in E: put(t, name, g)
 
+# ---------------------------------------------------------------- music (his pick, 2026-11-24): Jake Chudnow, "Turquoise",
+# from 0:00 (even under her clip), ducked under every voice, about 18 dB under the voice while someone talks.
+# The track's own build lands near 41 s, right after the wipe into "You are not normal" (40.25).
+MUSIC = load("assets/music/turquoise.mp3")[:N]
+MUSIC = np.pad(MUSIC, ((0, N - len(MUSIC)), (0, 0)))
+_sos = butter(4, [200, 4000], "bandpass", fs=SR, output="sos")
+_e = np.abs(sosfiltfilt(_sos, voice))
+hop = SR // 100
+_env = np.array([_e[i:i + hop].mean() for i in range(0, len(_e), hop)])
+_thr = np.percentile(_env[_env > 0], 40)
+talk = (_env > _thr * 0.6).astype(float)
+from scipy.ndimage import maximum_filter1d
+talk = maximum_filter1d(talk, 25)                      # hold 250 ms so the music doesn't pump between words
+duck = np.zeros_like(talk); g = 0.0
+for i, v in enumerate(talk):                           # attack 60 ms, release 400 ms
+    k = 1 - np.exp(-1 / (6 if v > g else 40)); g += (v - g) * k; duck[i] = g
+def speech_rms_(x):
+    hh = SR // 20; f = np.sqrt((x[:len(x) // hh * hh].reshape(-1, hh) ** 2).mean(1)); return np.sqrt(np.mean(f[f > np.percentile(f, 50)] ** 2))
+m_rms = np.sqrt(np.mean(MUSIC[int(30 * SR):int(100 * SR)] ** 2))
+under = speech_rms_(voice) * db(-18) / m_rms           # level while talking
+gaps = under * db(6)                                   # level in pauses
+gcurve = gaps + (under - gaps) * np.interp(np.arange(N) / SR, np.arange(len(duck)) / 100, duck)
+MUSIC = MUSIC * gcurve[:, None]
+fi = int(0.4 * SR); MUSIC[:fi] *= np.linspace(0, 1, fi)[:, None]
+a0 = int(s("normal", 101.01) * SR); MUSIC[a0:] *= np.linspace(1, 0, N - a0)[:, None] ** 2   # fade out under the final YOU.
 sfx *= db(-3)                                        # one more step down: soft under the voice
-mix = np.stack([voice, voice], 1) + sfx
+mix = np.stack([voice, voice], 1) + sfx + MUSIC
 def speech_rms(x):
     hh = SR // 20; f = np.sqrt((x[:len(x) // hh * hh].reshape(-1, hh) ** 2).mean(1)); return np.sqrt(np.mean(f[f > np.percentile(f, 50)] ** 2))
 G = db(-14.5) / speech_rms(voice)
@@ -114,11 +139,14 @@ gr = np.minimum(1.0, lim / (np.abs(mix).max(1) + 1e-12))
 gr = uniform_filter1d(minimum_filter1d(gr, 2 * w + 1), w)
 mix = np.clip(mix * gr[:, None], -lim, lim)
 os.makedirs("work/audio", exist_ok=True)
-sf.write("work/audio/mix_v3.wav", mix, SR, subtype="PCM_24")
+sf.write("work/audio/mix_v5.wav", mix, SR, subtype="PCM_24")
+sf.write("work/audio/_stem3_music.wav", MUSIC * G, SR, subtype="PCM_16")
 sf.write("work/audio/_stem3_sfx.wav", sfx * G, SR, subtype="PCM_16")
 # report: loudest effect vs the voice, and brightness of the effects
 def pk(x): return 20 * np.log10(np.abs(x).max() + 1e-12)
 spec = np.abs(np.fft.rfft(sfx[:, 0] * G)); fr = np.fft.rfftfreq(len(sfx), 1 / SR)
 hi = 10 * np.log10(spec[fr > 4000].__pow__(2).sum() / spec.__pow__(2).sum())
+m_under = MUSIC[(np.interp(np.arange(N) / SR, np.arange(len(talk)) / 100, talk) > .5)]
+print("music under speech vs voice speech rms (dB):", round(20 * np.log10(np.sqrt(np.mean(m_under ** 2)) / speech_rms(voice)), 1))
 print(f"{len(E)} effects | voice peak {pk(voice * G):.1f} dBFS | sfx peak {pk(sfx * G):.1f} dBFS | "
       f"energy above 4 kHz {hi:.1f} dB | mix peak {pk(mix):.1f} dBFS")
