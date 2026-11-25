@@ -583,6 +583,11 @@ All in `projects/reel-03/work/build/fx.py` (helpers) and `edit.py` (beats). Dete
   movements. `projects/reel-02/work/plan_cut.py`. [r02]
 - Music: find tempo, grid phase and phrase length before looping; repeat whole phrases; check where the generated track
   really ends. `projects/reel-02/work/mix.py`. [r02]
+- **Soundtrack for a finished edit that wasn't cut to music (reel-16, ZAZI editorial).** The cuts sit on no grid, so
+  anchor the music on the one moment that matters (the cut to the end logo): a 30 s ElevenLabs request gave only 8 bars
+  (18.4 s) of groove, so it was rebuilt as bars 2-3 + bars 0-3 + bars 4-7 + ending (splices 12 ms before downbeats,
+  10 ms crossfade) and sped up 2.4 % with atempo so the ending chord hits the logo cut exactly. Subtle CC0 paper flips
+  on the type cards, cloth on coat shots, soft chime on the logo; -14 LUFS. `projects/reel-16/work/mix.py`. [r16]
 - "Voice louder, music the same": key ducking from the voice before the boost, fix master gain to the approved preview. [r02]
 - SFX: place each so its peak lands on its frame (`work/sfx_cues.json`). Music ducked about 10.5 dB under voice;
   final about -14 LUFS, peak about -1.4 dB. [r01]
