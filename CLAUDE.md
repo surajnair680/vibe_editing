@@ -384,6 +384,13 @@ Learned on the toolkit menu (2026-11-24):
   you specifically"). Every video starts with the toolkit pass: read `docs/playbook/toolkit.md`, offer the best 3 to 5
   ideas tied to times in the first summary, and fill the beat sheet's tool column. New tools go on the menu the same day.
 
+Learned on reel-15 (2026-11-25), a 16:9 promo for a client brand (ZAZI) from its website photos:
+- **Client work takes the client's look, not his:** read the site's computed fonts, colours and lines with Playwright,
+  keep product photos ungraded, slow dissolves, no prices. Ask whose brand it is before styling.
+- **Tall photos in 16:9: Codex outpaints the sides, then the original is pasted back** (`projects/reel-15/work/make_wide.py`).
+  Parallax only where the cut-out is perfect at full size; patterned clothes and carpets gave halos, so those got a
+  plain slow push (`render_flat` in `projects/reel-15/scene.py`). Studio product shots key cleanly off their backdrop.
+
 Learned on reel-07 (2026-11-11), a meme template caption swap:
 - **Post captions: explain, don't preach.** Approved after two rejected tries ("sounds AI", then "not rant"): two short
   plain paragraphs, what the clip shows, then the fitness point. No emoji, hashtags, CTA or rhetorical lists.
