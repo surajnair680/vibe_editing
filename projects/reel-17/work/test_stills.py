@@ -17,8 +17,8 @@ OUT = os.path.join(ROOT, "work", "test")
 os.makedirs(OUT, exist_ok=True)
 PANEL = os.path.join(ROOT, "assets", "berserk_panel.jpg")
 W, H = 1080, 1920
-# Mockup placement (his screenshot, video area scaled 0.828): square 540 px wide at x 270, y 196.
-PX, PY, PS = 270, 196, 540
+# Placement from his 2nd mockup (refs/mockup2_position.jpg, video scaled 0.828, top at y 200): 540 px square, top-left.
+PX, PY, PS = 53, 42, 540
 
 SHOTS = [("bottom", "part1", 1.0), ("rising", "part1", 4.6), ("top", "part1", 5.3), ("top2", "part2", 2.0),
          ("lowering", "part1", 7.0), ("top3", "part3", 4.0)]
