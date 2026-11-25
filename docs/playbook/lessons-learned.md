@@ -375,6 +375,16 @@ Other docs and when to read them: `docs/README.md`.
   start_time, padded to its picture length): `projects/reel-12/work/join.py`. Meme inserts can be odd sizes
   (1080x1316): framed full width on black, never stretched. [r12]
 
+- **Client promos use the client's brand, not his (reel-15, ZAZI).** He said "take care of the vibe of the brand":
+  pull the client site's own fonts (computed styles with Playwright: ZAZI = Tenor Sans uppercase 2px tracking +
+  Outfit 300), colours and lines, keep product photos ungraded, no prices, slow dissolves. His dark grainy look
+  (`docs/playbook/brand/`) is only for his own reels. [r15]
+- **Tall photos in a 16:9 edit: Codex outpaint, then paste the original back (reel-15).** Pad the photo to 3:2 with
+  grey bars, ask Codex to extend only the bars, then `projects/reel-15/work/make_wide.py`: ECC-align the original,
+  blur Codex's sides to the original's softness, carry the low-frequency tone difference across the seam, feather
+  110 px. People and products stay the real pixels. Trim the original's 4 px border first: Codex copies a thin white
+  border line into its output as a visible stripe. Shopify sites block `/products.json` (403); scrape the home page. [r15]
+
 ## 4. Cut-outs (mattes)
 - **No single model does it all.** Compare on the actual image before committing: [r03]
   - MediaPipe selfie_multiclass: good person region, rough edges, lumpy heads. Class 1 = hair (useful), 0 = background.
@@ -405,6 +415,11 @@ Other docs and when to read them: `docs/README.md`.
   whole head it ate his ears and cheeks. Scaling him to 0.82 (bottom anchored) leaves room for titles above his head
   but cuts the shoulders in a hard vertical line at the old frame edge: fade the matte over the outer 170 px.
   `edge_fix()` and `his_layer()` in `projects/reel-14/work/build2/scene2.py`; mattes `work/matte_frames.py`. [r14]
+
+- **rembg subject cut-outs fail on patterned clothes and backgrounds (reel-15).** A hanging embroidered coat came out
+  with holes and a halo; an artisan on a patterned carpet and a woman with a boy left fringes. Only the hero (dark coat
+  on a plain street) was clean. Check every parallax subject at full size; fall back to a slow push on the whole photo
+  (`render_flat` in `projects/reel-15/scene.py`) when the edge isn't perfect. [r15]
 
 ## 5. Effects that worked (copy the code from the project, never import across projects)
 All in `projects/reel-03/work/build/fx.py` (helpers) and `edit.py` (beats). Deterministic (seeded) so re-renders match.
