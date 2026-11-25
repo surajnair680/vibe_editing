@@ -28,6 +28,10 @@ Other docs and when to read them: `docs/README.md`.
   noise into gritty skin; the version that worked boosts a denoised layer: bilateral on lightness, CLAHE 2.0 (8x8),
   clarity 0.40 at sigma 18, detail 0.35 at sigma 2, add back half the noise, saturation x1.12. About 90 ms a frame.
   `hdr()` in `projects/reel-14/work/build3/scene3.py`. Always check a full-size crop of skin before sending. [r14]
+  On reel-17 (dim gym light, pull-ups from behind) he approved a stronger variant instead: L + 0.9 (L - blur 25)
+  + 0.7 (L - blur 6) + 0.35 (L - blur 1.2), saturation x1.08, on his body only via the matte. Next to reel-14's
+  recipe it gives deeper lat and spine separation; reel-14's is brighter and flatter. Offer both on a skin crop.
+  `hdr()` in `projects/reel-17/work/render.py`. [r17]
 - **Grainy Vox reels are huge at real quality (reel-14).** 1:42 at 1080x1920 with heavy grain: master crf 14 = 1.2 GB,
   crf 22 = about 8 MB a second (about 600 MB, 21 parts), 8 Mbps = about 120 MB (5 parts), 2-pass 2150k = 28 MB in one
   file (grain softened, face fine). Audio-only revisions remux the last review video with the new mix in a minute. [r14]
@@ -420,6 +424,14 @@ Other docs and when to read them: `docs/README.md`.
   with holes and a halo; an artisan on a patterned carpet and a woman with a boy left fringes. Only the hero (dark coat
   on a plain street) was clean. Check every parallax subject at full size; fall back to a slow push on the whole photo
   (`render_flat` in `projects/reel-15/scene.py`) when the edge isn't perfect. [r15]
+
+- **Gym footage (pull-ups from behind, rings and straps on the rack behind him), reel-17:** rembg `u2net_human_seg`
+  alone grabs the gymnastic rings and bar pieces near his hands and head. MediaPipe multiclass class 5 ("others")
+  is what catches the rings, so build the person mask from classes 1-4 only (hair, body skin, face skin, clothes),
+  threshold 0.5, dilate 9 px, then multiply with rembg. Fill holes inside the body (the neck gap at the top of a rep)
+  by flooding the background from the frame border, erode 1 px, and push body colour into the 8 px edge band so the
+  blurred hair loses its wall-coloured fringe. The bar knob inside his fist stays in the matte (a fist around nothing
+  looks wrong). About 0.7 s a frame at 1080x1920. `matte()` and `decontam()` in `projects/reel-17/work/render.py`. [r17]
 
 ## 5. Effects that worked (copy the code from the project, never import across projects)
 All in `projects/reel-03/work/build/fx.py` (helpers) and `edit.py` (beats). Deterministic (seeded) so re-renders match.
