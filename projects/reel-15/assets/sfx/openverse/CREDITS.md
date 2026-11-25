@@ -2,6 +2,10 @@
 
 Put the lines marked 'credit needed' in the post caption or video description.
 
+- **chime-01** (no credit needed): "Chime Notification" by Jofae is marked with CC0 1.0. To view the terms, visit https://creativecommons.org/publicdomain/zero/1.0/.  https://freesound.org/people/Jofae/sounds/380482
+- **chime-02** (credit needed): "Complete Chime" by FoolBoyMedia is licensed under CC BY 4.0. To view a copy of this license, visit https://creativecommons.org/licenses/by/4.0/.  https://freesound.org/people/FoolBoyMedia/sounds/352661
+- **chime-03** (no credit needed): "Wind Chime (G-003) +.wav" by GnoteSoundz is marked with CC0 1.0. To view the terms, visit https://creativecommons.org/publicdomain/zero/1.0/.  https://freesound.org/people/GnoteSoundz/sounds/169855
+- **chime-04** (credit needed): "Chime Glissando" by bone666138 is licensed under CC BY 4.0. To view a copy of this license, visit https://creativecommons.org/licenses/by/4.0/.  https://freesound.org/people/bone666138/sounds/198850
 - **cloth-01** (no credit needed): "foley cloth rustle.wav" by martian is marked with CC0 1.0. To view the terms, visit https://creativecommons.org/publicdomain/zero/1.0/.  https://freesound.org/people/martian/sounds/19291
 - **cloth-02** (no credit needed): "Pat cloth" by annstory4520 is marked with CC0 1.0. To view the terms, visit https://creativecommons.org/publicdomain/zero/1.0/.  https://freesound.org/people/annstory4520/sounds/513428
 - **cloth-03** (no credit needed): "heavy cloth rustle.wav" by jacobzeier is marked with CC0 1.0. To view the terms, visit https://creativecommons.org/publicdomain/zero/1.0/.  https://freesound.org/people/jacobzeier/sounds/163164

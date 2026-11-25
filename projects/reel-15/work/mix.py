@@ -16,10 +16,21 @@ mix[:len(m)] += m * db(-3)
 CUES = [
     ('assets/sfx/openverse/cloth-01.wav', 0.60, 0.9, -14),   # soft coat rustle under the hero
     ('assets/sfx/openverse/fabric-03.wav', 0.18, 4.0, -12),  # fabric flap on the cut to the hanging coat
+    ('assets/sfx/openverse/cloth-03.wav', 0.09, 10.0, -20),  # coat run: a soft cloth move on each glide,
+    ('assets/sfx/openverse/fabric-03.wav', 0.18, 12.0, -15), # alternating two sounds so nothing repeats back to back
+    ('assets/sfx/openverse/cloth-03.wav', 0.09, 14.0, -20),
+    ('assets/sfx/openverse/fabric-03.wav', 0.18, 16.0, -15),
+    ('assets/sfx/openverse/chime-03.wav', 0.49, 22.4, -13),  # soft wind chime as the light crosses the logo
 ]
+LOWPASS = {'chime-03': 6000}  # soften the bright chime (lessons: generated/bright swells pierce)
 for f, pk, t, g in CUES:
     try:
         s = load(f)
+        for key, hz in LOWPASS.items():
+            if key in f:
+                raw = subprocess.run(['ffmpeg', '-v', 'error', '-i', f, '-af', f'lowpass=f={hz}', '-ac', '2', '-ar', str(SR),
+                                      '-f', 'f32le', '-'], capture_output=True, check=True).stdout
+                s = np.frombuffer(raw, np.float32).reshape(-1, 2).copy()
     except Exception:
         s = load(f.replace('.wav', '.mp3'))
     i0 = int(round((t - pk - a) * SR))
@@ -27,10 +38,15 @@ for f, pk, t, g in CUES:
         continue
     s0 = max(0, -i0); i0 = max(0, i0); s = s[s0:s0 + N - i0]
     mix[i0:i0 + len(s)] += s * db(g)
-# fade the music out at the end of a partial preview, 1.2 s
-if b < 25:
-    k = int(1.2 * SR); mix[-k:] *= np.linspace(1, 0, k)[:, None] ** 2
-peak = np.abs(mix).max(); mix *= min(1.0, db(-1.5) / peak)
+# fade out at the end: 1.2 s for a partial preview, 0.8 s at the real end (25 s)
+k = int((1.2 if b < 25 else 0.8) * SR); mix[-k:] *= np.linspace(1, 0, k)[:, None] ** 2
+GAIN = float(sys.argv[5]) if len(sys.argv) > 5 else 0.0  # master gain dB (fixed, never normalised per version)
+mix *= db(GAIN)
+peak = np.abs(mix).max()
+if peak > db(-1.0):  # gentle safety: soft clip only the few samples over -1 dBFS
+    lim = db(-1.0); over = np.abs(mix) > lim
+    mix[over] = np.sign(mix[over]) * (lim + (1 - lim) * np.tanh((np.abs(mix[over]) - lim) / (1 - lim)))
+    mix = np.clip(mix, -db(-0.5), db(-0.5))
 subprocess.run(['ffmpeg', '-v', 'error', '-y', '-f', 'f32le', '-ar', str(SR), '-ac', '2', '-i', '-', out],
                input=mix.astype(np.float32).tobytes(), check=True)
 print(out, 'peak before limit %.1f dB' % (20 * np.log10(peak)))

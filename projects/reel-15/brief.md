@@ -1,6 +1,6 @@
 # reel-15 brief: ZAZI coat season promo
 
-Status: beat sheet waiting for approval (2026-11-25). Nothing built yet.
+Status: v1 draft (half size) sent for approval, 2026-11-25. Music: option 1 (m1, 60 BPM) chosen.
 
 ## The job
 - Client: ZAZI (theworldofzazi.com), artisanal luxury fashion, Amsterdam boutique at Herengracht 394.
@@ -59,3 +59,11 @@ Portrait photos in a wide frame: either sit them in a frame on cream, or extend 
 ## Still needed
 - Client video (optional): model walking or turning in a coat, hands embroidering, the boutique rail, embroidery
   close-ups. Horizontal.
+
+## v1 as built (times on m1's beat grid)
+0-4 hero (parallax) / 4-6 hanging coat / 6-8 artisan spinning / 8-10 two artisans (slow pushes, Codex-widened) /
+10-18 coat run: 4 pairs (front + back keyed off the studio backdrop), glide on 10, 12, 14, 16, 18 with lines
+THE ZEBAY COAT, THE MADINA COAT, EMBROIDERED BY HAND, PIECES FOR A LIFETIME / 18-21.3 boutique, VISIT US +
+address / 21.3-25 boutique blurs and darkens, gold logo with a light sweep, LIMITED DROPS EVERY MONTH,
+theworldofzazi.com. Sound: cloth rustle 0.9, flap 4.0, alternating cloth sounds on the glides, wind chime 22.4
+(all CC0, no credits needed). Mix -14.8 LUFS, peak -1.3 dBFS (`work/mix.py m1 0 25 work/mix_v1.wav 3`).

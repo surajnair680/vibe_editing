@@ -1,242 +1,362 @@
 {
-  "fabric-01": {
-    "openverse_id": "09e102ec-a05e-4120-aed1-bfd99b3eda7f",
-    "title": "Tearing fabric 3",
-    "creator": "JakLocke",
-    "license": "by",
-    "license_version": "4.0",
-    "license_url": "https://creativecommons.org/licenses/by/4.0/",
-    "source": "freesound",
-    "page": "https://freesound.org/people/JakLocke/sounds/261397",
-    "attribution": "\"Tearing fabric 3\" by JakLocke is licensed under CC BY 4.0. To view a copy of this license, visit https://creativecommons.org/licenses/by/4.0/.",
-    "needs_credit": true,
-    "files": {
-      "original": "projects/reel-15/assets/sfx/openverse/orig/fabric-01.mp3",
-      "wav": "projects/reel-15/assets/sfx/openverse/fabric-01.wav"
-    },
-    "measure": {
-      "length_s": 1.694,
-      "sound_s": 1.57,
-      "peak_dbfs": -8.2,
-      "loudness_db": -39.8,
-      "attack_ms": 480,
-      "peak_at_s": 0.53,
-      "tail_ms": 1080,
-      "brightness_hz": 8492,
-      "tone": "bright",
-      "low_end": 0.01,
-      "hits": 3,
-      "shape": "swell"
-    }
+ "fabric-01": {
+  "openverse_id": "09e102ec-a05e-4120-aed1-bfd99b3eda7f",
+  "title": "Tearing fabric 3",
+  "creator": "JakLocke",
+  "license": "by",
+  "license_version": "4.0",
+  "license_url": "https://creativecommons.org/licenses/by/4.0/",
+  "source": "freesound",
+  "page": "https://freesound.org/people/JakLocke/sounds/261397",
+  "attribution": "\"Tearing fabric 3\" by JakLocke is licensed under CC BY 4.0. To view a copy of this license, visit https://creativecommons.org/licenses/by/4.0/.",
+  "needs_credit": true,
+  "files": {
+   "original": "projects/reel-15/assets/sfx/openverse/orig/fabric-01.mp3",
+   "wav": "projects/reel-15/assets/sfx/openverse/fabric-01.wav"
   },
-  "fabric-02": {
-    "openverse_id": "c896fc1d-a804-4f8d-8abd-014918d33322",
-    "title": "Tearing fabric 2",
-    "creator": "JakLocke",
-    "license": "by",
-    "license_version": "4.0",
-    "license_url": "https://creativecommons.org/licenses/by/4.0/",
-    "source": "freesound",
-    "page": "https://freesound.org/people/JakLocke/sounds/261393",
-    "attribution": "\"Tearing fabric 2\" by JakLocke is licensed under CC BY 4.0. To view a copy of this license, visit https://creativecommons.org/licenses/by/4.0/.",
-    "needs_credit": true,
-    "files": {
-      "original": "projects/reel-15/assets/sfx/openverse/orig/fabric-02.mp3",
-      "wav": "projects/reel-15/assets/sfx/openverse/fabric-02.wav"
-    },
-    "measure": {
-      "length_s": 2.128,
-      "sound_s": 1.72,
-      "peak_dbfs": -7.2,
-      "loudness_db": -40.6,
-      "attack_ms": 770,
-      "peak_at_s": 1.11,
-      "tail_ms": 940,
-      "brightness_hz": 9541,
-      "tone": "bright",
-      "low_end": 0.01,
-      "hits": 6,
-      "shape": "swell"
-    }
-  },
-  "fabric-03": {
-    "openverse_id": "696f0ea0-020d-4c83-88dd-65ed93c6814f",
-    "title": "Fabric Flap.wav",
-    "creator": "akennedybrewer",
-    "license": "cc0",
-    "license_version": "1.0",
-    "license_url": "https://creativecommons.org/publicdomain/zero/1.0/",
-    "source": "freesound",
-    "page": "https://freesound.org/people/akennedybrewer/sounds/389170",
-    "attribution": "\"Fabric Flap.wav\" by akennedybrewer is marked with CC0 1.0. To view the terms, visit https://creativecommons.org/publicdomain/zero/1.0/.",
-    "needs_credit": false,
-    "files": {
-      "original": "projects/reel-15/assets/sfx/openverse/orig/fabric-03.mp3",
-      "wav": "projects/reel-15/assets/sfx/openverse/fabric-03.wav"
-    },
-    "measure": {
-      "length_s": 0.6,
-      "sound_s": 0.42,
-      "peak_dbfs": -13.0,
-      "loudness_db": -32.9,
-      "attack_ms": 170,
-      "peak_at_s": 0.18,
-      "tail_ms": 240,
-      "brightness_hz": 1705,
-      "tone": "mid",
-      "low_end": 0.12,
-      "hits": 2,
-      "shape": "swoosh"
-    }
-  },
-  "fabric-04": {
-    "openverse_id": "cb8bae64-d5bf-4794-b073-ecbcfa021a87",
-    "title": "Tearing fabric",
-    "creator": "melle_teich",
-    "license": "cc0",
-    "license_version": "1.0",
-    "license_url": "https://creativecommons.org/publicdomain/zero/1.0/",
-    "source": "freesound",
-    "page": "https://freesound.org/people/melle_teich/sounds/565970",
-    "attribution": "\"Tearing fabric\" by melle_teich is marked with CC0 1.0. To view the terms, visit https://creativecommons.org/publicdomain/zero/1.0/.",
-    "needs_credit": false,
-    "files": {
-      "original": "projects/reel-15/assets/sfx/openverse/orig/fabric-04.mp3",
-      "wav": "projects/reel-15/assets/sfx/openverse/fabric-04.wav"
-    },
-    "measure": {
-      "length_s": 0.757,
-      "sound_s": 0.65,
-      "peak_dbfs": -21.2,
-      "loudness_db": -41.6,
-      "attack_ms": 150,
-      "peak_at_s": 0.15,
-      "tail_ms": 490,
-      "brightness_hz": 9110,
-      "tone": "bright",
-      "low_end": 0.01,
-      "hits": 1,
-      "shape": "swoosh"
-    }
-  },
-  "cloth-01": {
-    "openverse_id": "be804fb1-35e2-4aff-a65e-95a41925b6e3",
-    "title": "foley cloth rustle.wav",
-    "creator": "martian",
-    "license": "cc0",
-    "license_version": "1.0",
-    "license_url": "https://creativecommons.org/publicdomain/zero/1.0/",
-    "source": "freesound",
-    "page": "https://freesound.org/people/martian/sounds/19291",
-    "attribution": "\"foley cloth rustle.wav\" by martian is marked with CC0 1.0. To view the terms, visit https://creativecommons.org/publicdomain/zero/1.0/.",
-    "needs_credit": false,
-    "files": {
-      "original": "projects/reel-15/assets/sfx/openverse/orig/cloth-01.mp3",
-      "wav": "projects/reel-15/assets/sfx/openverse/cloth-01.wav"
-    },
-    "measure": {
-      "length_s": 2.638,
-      "sound_s": 2.57,
-      "peak_dbfs": -16.5,
-      "loudness_db": -37.2,
-      "attack_ms": 590,
-      "peak_at_s": 0.6,
-      "tail_ms": 1970,
-      "brightness_hz": 2300,
-      "tone": "mid",
-      "low_end": 0.22,
-      "hits": 7,
-      "shape": "swell"
-    }
-  },
-  "cloth-02": {
-    "openverse_id": "60dfc425-7eac-491e-b190-910017940c87",
-    "title": "Pat cloth",
-    "creator": "annstory4520",
-    "license": "cc0",
-    "license_version": "1.0",
-    "license_url": "https://creativecommons.org/publicdomain/zero/1.0/",
-    "source": "freesound",
-    "page": "https://freesound.org/people/annstory4520/sounds/513428",
-    "attribution": "\"Pat cloth\" by annstory4520 is marked with CC0 1.0. To view the terms, visit https://creativecommons.org/publicdomain/zero/1.0/.",
-    "needs_credit": false,
-    "files": {
-      "original": "projects/reel-15/assets/sfx/openverse/orig/cloth-02.mp3",
-      "wav": "projects/reel-15/assets/sfx/openverse/cloth-02.wav"
-    },
-    "measure": {
-      "length_s": 1.672,
-      "sound_s": 1.23,
-      "peak_dbfs": -6.6,
-      "loudness_db": -26.9,
-      "attack_ms": 380,
-      "peak_at_s": 0.54,
-      "tail_ms": 840,
-      "brightness_hz": 1902,
-      "tone": "mid",
-      "low_end": 0.52,
-      "hits": 3,
-      "shape": "swoosh"
-    }
-  },
-  "cloth-03": {
-    "openverse_id": "bac8be74-4443-4bfe-8bd5-57ee577629ea",
-    "title": "heavy cloth rustle.wav",
-    "creator": "jacobzeier",
-    "license": "cc0",
-    "license_version": "1.0",
-    "license_url": "https://creativecommons.org/publicdomain/zero/1.0/",
-    "source": "freesound",
-    "page": "https://freesound.org/people/jacobzeier/sounds/163164",
-    "attribution": "\"heavy cloth rustle.wav\" by jacobzeier is marked with CC0 1.0. To view the terms, visit https://creativecommons.org/publicdomain/zero/1.0/.",
-    "needs_credit": false,
-    "files": {
-      "original": "projects/reel-15/assets/sfx/openverse/orig/cloth-03.mp3",
-      "wav": "projects/reel-15/assets/sfx/openverse/cloth-03.wav"
-    },
-    "measure": {
-      "length_s": 1.654,
-      "sound_s": 1.61,
-      "peak_dbfs": -3.2,
-      "loudness_db": -22.7,
-      "attack_ms": 90,
-      "peak_at_s": 0.09,
-      "tail_ms": 1510,
-      "brightness_hz": 2182,
-      "tone": "mid",
-      "low_end": 0.2,
-      "hits": 5,
-      "shape": "swoosh"
-    }
-  },
-  "cloth-04": {
-    "openverse_id": "b9bc72e9-0f8a-41c3-aa7d-f1b69577966b",
-    "title": "Light Body thud (on clothing)",
-    "creator": "JonasTisell",
-    "license": "cc0",
-    "license_version": "1.0",
-    "license_url": "https://creativecommons.org/publicdomain/zero/1.0/",
-    "source": "freesound",
-    "page": "https://freesound.org/people/JonasTisell/sounds/496187",
-    "attribution": "\"Light Body thud (on clothing)\" by JonasTisell is marked with CC0 1.0. To view the terms, visit https://creativecommons.org/publicdomain/zero/1.0/.",
-    "needs_credit": false,
-    "files": {
-      "original": "projects/reel-15/assets/sfx/openverse/orig/cloth-04.mp3",
-      "wav": "projects/reel-15/assets/sfx/openverse/cloth-04.wav"
-    },
-    "measure": {
-      "length_s": 0.325,
-      "sound_s": 0.21,
-      "peak_dbfs": -7.4,
-      "loudness_db": -27.4,
-      "attack_ms": 60,
-      "peak_at_s": 0.07,
-      "tail_ms": 140,
-      "brightness_hz": 2231,
-      "tone": "mid",
-      "low_end": 0.25,
-      "hits": 1,
-      "shape": "swoosh"
-    }
+  "measure": {
+   "length_s": 1.694,
+   "sound_s": 1.57,
+   "peak_dbfs": -8.2,
+   "loudness_db": -39.8,
+   "attack_ms": 480,
+   "peak_at_s": 0.53,
+   "tail_ms": 1080,
+   "brightness_hz": 8492,
+   "tone": "bright",
+   "low_end": 0.01,
+   "hits": 3,
+   "shape": "swell"
   }
+ },
+ "fabric-02": {
+  "openverse_id": "c896fc1d-a804-4f8d-8abd-014918d33322",
+  "title": "Tearing fabric 2",
+  "creator": "JakLocke",
+  "license": "by",
+  "license_version": "4.0",
+  "license_url": "https://creativecommons.org/licenses/by/4.0/",
+  "source": "freesound",
+  "page": "https://freesound.org/people/JakLocke/sounds/261393",
+  "attribution": "\"Tearing fabric 2\" by JakLocke is licensed under CC BY 4.0. To view a copy of this license, visit https://creativecommons.org/licenses/by/4.0/.",
+  "needs_credit": true,
+  "files": {
+   "original": "projects/reel-15/assets/sfx/openverse/orig/fabric-02.mp3",
+   "wav": "projects/reel-15/assets/sfx/openverse/fabric-02.wav"
+  },
+  "measure": {
+   "length_s": 2.128,
+   "sound_s": 1.72,
+   "peak_dbfs": -7.2,
+   "loudness_db": -40.6,
+   "attack_ms": 770,
+   "peak_at_s": 1.11,
+   "tail_ms": 940,
+   "brightness_hz": 9541,
+   "tone": "bright",
+   "low_end": 0.01,
+   "hits": 6,
+   "shape": "swell"
+  }
+ },
+ "fabric-03": {
+  "openverse_id": "696f0ea0-020d-4c83-88dd-65ed93c6814f",
+  "title": "Fabric Flap.wav",
+  "creator": "akennedybrewer",
+  "license": "cc0",
+  "license_version": "1.0",
+  "license_url": "https://creativecommons.org/publicdomain/zero/1.0/",
+  "source": "freesound",
+  "page": "https://freesound.org/people/akennedybrewer/sounds/389170",
+  "attribution": "\"Fabric Flap.wav\" by akennedybrewer is marked with CC0 1.0. To view the terms, visit https://creativecommons.org/publicdomain/zero/1.0/.",
+  "needs_credit": false,
+  "files": {
+   "original": "projects/reel-15/assets/sfx/openverse/orig/fabric-03.mp3",
+   "wav": "projects/reel-15/assets/sfx/openverse/fabric-03.wav"
+  },
+  "measure": {
+   "length_s": 0.6,
+   "sound_s": 0.42,
+   "peak_dbfs": -13.0,
+   "loudness_db": -32.9,
+   "attack_ms": 170,
+   "peak_at_s": 0.18,
+   "tail_ms": 240,
+   "brightness_hz": 1705,
+   "tone": "mid",
+   "low_end": 0.12,
+   "hits": 2,
+   "shape": "swoosh"
+  }
+ },
+ "fabric-04": {
+  "openverse_id": "cb8bae64-d5bf-4794-b073-ecbcfa021a87",
+  "title": "Tearing fabric",
+  "creator": "melle_teich",
+  "license": "cc0",
+  "license_version": "1.0",
+  "license_url": "https://creativecommons.org/publicdomain/zero/1.0/",
+  "source": "freesound",
+  "page": "https://freesound.org/people/melle_teich/sounds/565970",
+  "attribution": "\"Tearing fabric\" by melle_teich is marked with CC0 1.0. To view the terms, visit https://creativecommons.org/publicdomain/zero/1.0/.",
+  "needs_credit": false,
+  "files": {
+   "original": "projects/reel-15/assets/sfx/openverse/orig/fabric-04.mp3",
+   "wav": "projects/reel-15/assets/sfx/openverse/fabric-04.wav"
+  },
+  "measure": {
+   "length_s": 0.757,
+   "sound_s": 0.65,
+   "peak_dbfs": -21.2,
+   "loudness_db": -41.6,
+   "attack_ms": 150,
+   "peak_at_s": 0.15,
+   "tail_ms": 490,
+   "brightness_hz": 9110,
+   "tone": "bright",
+   "low_end": 0.01,
+   "hits": 1,
+   "shape": "swoosh"
+  }
+ },
+ "cloth-01": {
+  "openverse_id": "be804fb1-35e2-4aff-a65e-95a41925b6e3",
+  "title": "foley cloth rustle.wav",
+  "creator": "martian",
+  "license": "cc0",
+  "license_version": "1.0",
+  "license_url": "https://creativecommons.org/publicdomain/zero/1.0/",
+  "source": "freesound",
+  "page": "https://freesound.org/people/martian/sounds/19291",
+  "attribution": "\"foley cloth rustle.wav\" by martian is marked with CC0 1.0. To view the terms, visit https://creativecommons.org/publicdomain/zero/1.0/.",
+  "needs_credit": false,
+  "files": {
+   "original": "projects/reel-15/assets/sfx/openverse/orig/cloth-01.mp3",
+   "wav": "projects/reel-15/assets/sfx/openverse/cloth-01.wav"
+  },
+  "measure": {
+   "length_s": 2.638,
+   "sound_s": 2.57,
+   "peak_dbfs": -16.5,
+   "loudness_db": -37.2,
+   "attack_ms": 590,
+   "peak_at_s": 0.6,
+   "tail_ms": 1970,
+   "brightness_hz": 2300,
+   "tone": "mid",
+   "low_end": 0.22,
+   "hits": 7,
+   "shape": "swell"
+  }
+ },
+ "cloth-02": {
+  "openverse_id": "60dfc425-7eac-491e-b190-910017940c87",
+  "title": "Pat cloth",
+  "creator": "annstory4520",
+  "license": "cc0",
+  "license_version": "1.0",
+  "license_url": "https://creativecommons.org/publicdomain/zero/1.0/",
+  "source": "freesound",
+  "page": "https://freesound.org/people/annstory4520/sounds/513428",
+  "attribution": "\"Pat cloth\" by annstory4520 is marked with CC0 1.0. To view the terms, visit https://creativecommons.org/publicdomain/zero/1.0/.",
+  "needs_credit": false,
+  "files": {
+   "original": "projects/reel-15/assets/sfx/openverse/orig/cloth-02.mp3",
+   "wav": "projects/reel-15/assets/sfx/openverse/cloth-02.wav"
+  },
+  "measure": {
+   "length_s": 1.672,
+   "sound_s": 1.23,
+   "peak_dbfs": -6.6,
+   "loudness_db": -26.9,
+   "attack_ms": 380,
+   "peak_at_s": 0.54,
+   "tail_ms": 840,
+   "brightness_hz": 1902,
+   "tone": "mid",
+   "low_end": 0.52,
+   "hits": 3,
+   "shape": "swoosh"
+  }
+ },
+ "cloth-03": {
+  "openverse_id": "bac8be74-4443-4bfe-8bd5-57ee577629ea",
+  "title": "heavy cloth rustle.wav",
+  "creator": "jacobzeier",
+  "license": "cc0",
+  "license_version": "1.0",
+  "license_url": "https://creativecommons.org/publicdomain/zero/1.0/",
+  "source": "freesound",
+  "page": "https://freesound.org/people/jacobzeier/sounds/163164",
+  "attribution": "\"heavy cloth rustle.wav\" by jacobzeier is marked with CC0 1.0. To view the terms, visit https://creativecommons.org/publicdomain/zero/1.0/.",
+  "needs_credit": false,
+  "files": {
+   "original": "projects/reel-15/assets/sfx/openverse/orig/cloth-03.mp3",
+   "wav": "projects/reel-15/assets/sfx/openverse/cloth-03.wav"
+  },
+  "measure": {
+   "length_s": 1.654,
+   "sound_s": 1.61,
+   "peak_dbfs": -3.2,
+   "loudness_db": -22.7,
+   "attack_ms": 90,
+   "peak_at_s": 0.09,
+   "tail_ms": 1510,
+   "brightness_hz": 2182,
+   "tone": "mid",
+   "low_end": 0.2,
+   "hits": 5,
+   "shape": "swoosh"
+  }
+ },
+ "cloth-04": {
+  "openverse_id": "b9bc72e9-0f8a-41c3-aa7d-f1b69577966b",
+  "title": "Light Body thud (on clothing)",
+  "creator": "JonasTisell",
+  "license": "cc0",
+  "license_version": "1.0",
+  "license_url": "https://creativecommons.org/publicdomain/zero/1.0/",
+  "source": "freesound",
+  "page": "https://freesound.org/people/JonasTisell/sounds/496187",
+  "attribution": "\"Light Body thud (on clothing)\" by JonasTisell is marked with CC0 1.0. To view the terms, visit https://creativecommons.org/publicdomain/zero/1.0/.",
+  "needs_credit": false,
+  "files": {
+   "original": "projects/reel-15/assets/sfx/openverse/orig/cloth-04.mp3",
+   "wav": "projects/reel-15/assets/sfx/openverse/cloth-04.wav"
+  },
+  "measure": {
+   "length_s": 0.325,
+   "sound_s": 0.21,
+   "peak_dbfs": -7.4,
+   "loudness_db": -27.4,
+   "attack_ms": 60,
+   "peak_at_s": 0.07,
+   "tail_ms": 140,
+   "brightness_hz": 2231,
+   "tone": "mid",
+   "low_end": 0.25,
+   "hits": 1,
+   "shape": "swoosh"
+  }
+ },
+ "chime-01": {
+  "openverse_id": "adb6e260-e493-43fd-a56e-8ceb4f477fe2",
+  "title": "Chime Notification",
+  "creator": "Jofae",
+  "license": "cc0",
+  "license_version": "1.0",
+  "license_url": "https://creativecommons.org/publicdomain/zero/1.0/",
+  "source": "freesound",
+  "page": "https://freesound.org/people/Jofae/sounds/380482",
+  "attribution": "\"Chime Notification\" by Jofae is marked with CC0 1.0. To view the terms, visit https://creativecommons.org/publicdomain/zero/1.0/.",
+  "needs_credit": false,
+  "files": {
+   "original": "projects/reel-15/assets/sfx/openverse/orig/chime-01.mp3",
+   "wav": "projects/reel-15/assets/sfx/openverse/chime-01.wav"
+  },
+  "measure": {
+   "length_s": 0.324,
+   "sound_s": 0.29,
+   "peak_dbfs": -4.5,
+   "loudness_db": -17.6,
+   "attack_ms": 20,
+   "peak_at_s": 0.02,
+   "tail_ms": 260,
+   "brightness_hz": 4468,
+   "tone": "bright",
+   "low_end": 0.0,
+   "hits": 1,
+   "shape": "hit"
+  }
+ },
+ "chime-02": {
+  "openverse_id": "766116d1-ba70-4fdb-a4f1-5112acb16fd2",
+  "title": "Complete Chime",
+  "creator": "FoolBoyMedia",
+  "license": "by",
+  "license_version": "4.0",
+  "license_url": "https://creativecommons.org/licenses/by/4.0/",
+  "source": "freesound",
+  "page": "https://freesound.org/people/FoolBoyMedia/sounds/352661",
+  "attribution": "\"Complete Chime\" by FoolBoyMedia is licensed under CC BY 4.0. To view a copy of this license, visit https://creativecommons.org/licenses/by/4.0/.",
+  "needs_credit": true,
+  "files": {
+   "original": "projects/reel-15/assets/sfx/openverse/orig/chime-02.mp3",
+   "wav": "projects/reel-15/assets/sfx/openverse/chime-02.wav"
+  },
+  "measure": {
+   "length_s": 1.166,
+   "sound_s": 0.94,
+   "peak_dbfs": -2.8,
+   "loudness_db": -21.4,
+   "attack_ms": 100,
+   "peak_at_s": 0.1,
+   "tail_ms": 830,
+   "brightness_hz": 662,
+   "tone": "dark",
+   "low_end": 0.0,
+   "hits": 1,
+   "shape": "swoosh"
+  }
+ },
+ "chime-03": {
+  "openverse_id": "435c172f-ff16-4320-987e-48273c402500",
+  "title": "Wind Chime (G-003) +.wav",
+  "creator": "GnoteSoundz",
+  "license": "cc0",
+  "license_version": "1.0",
+  "license_url": "https://creativecommons.org/publicdomain/zero/1.0/",
+  "source": "freesound",
+  "page": "https://freesound.org/people/GnoteSoundz/sounds/169855",
+  "attribution": "\"Wind Chime (G-003) +.wav\" by GnoteSoundz is marked with CC0 1.0. To view the terms, visit https://creativecommons.org/publicdomain/zero/1.0/.",
+  "needs_credit": false,
+  "files": {
+   "original": "projects/reel-15/assets/sfx/openverse/orig/chime-03.mp3",
+   "wav": "projects/reel-15/assets/sfx/openverse/chime-03.wav"
+  },
+  "measure": {
+   "length_s": 2.925,
+   "sound_s": 2.08,
+   "peak_dbfs": -12.7,
+   "loudness_db": -34.2,
+   "attack_ms": 490,
+   "peak_at_s": 0.49,
+   "tail_ms": 1580,
+   "brightness_hz": 10676,
+   "tone": "bright",
+   "low_end": 0.0,
+   "hits": 2,
+   "shape": "swell"
+  }
+ },
+ "chime-04": {
+  "openverse_id": "979dc700-f668-4047-990c-33444bd1da66",
+  "title": "Chime Glissando",
+  "creator": "bone666138",
+  "license": "by",
+  "license_version": "4.0",
+  "license_url": "https://creativecommons.org/licenses/by/4.0/",
+  "source": "freesound",
+  "page": "https://freesound.org/people/bone666138/sounds/198850",
+  "attribution": "\"Chime Glissando\" by bone666138 is licensed under CC BY 4.0. To view a copy of this license, visit https://creativecommons.org/licenses/by/4.0/.",
+  "needs_credit": true,
+  "files": {
+   "original": "projects/reel-15/assets/sfx/openverse/orig/chime-04.mp3",
+   "wav": "projects/reel-15/assets/sfx/openverse/chime-04.wav"
+  },
+  "measure": {
+   "length_s": 2.277,
+   "sound_s": 1.67,
+   "peak_dbfs": -1.9,
+   "loudness_db": -19.9,
+   "attack_ms": 200,
+   "peak_at_s": 0.23,
+   "tail_ms": 1460,
+   "brightness_hz": 4183,
+   "tone": "bright",
+   "low_end": 0.01,
+   "hits": 1,
+   "shape": "swoosh"
+  }
+ }
 }
