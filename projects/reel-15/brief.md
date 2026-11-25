@@ -1,6 +1,6 @@
 # reel-15 brief: ZAZI coat season promo
 
-Status: v1 draft (half size) sent for approval, 2026-11-25. Music: option 1 (m1, 60 BPM) chosen.
+Status: final v1 rendered and delivered (2026-11-25).
 
 ## The job
 - Client: ZAZI (theworldofzazi.com), artisanal luxury fashion, Amsterdam boutique at Herengracht 394.
