@@ -1,0 +1,32 @@
+plate aligned: shift -1.1,-1.7 px
+{
+  "source": "/home/user/vibe_editing/projects/reel-15/assets/wide/pair.jpg",
+  "size": [
+    1920,
+    1080
+  ],
+  "layers": [
+    "layer_0.png",
+    "layer_1.png",
+    "layer_2.png",
+    "layer_3.png"
+  ],
+  "layers_web": [],
+  "z": [
+    4.1052,
+    2.9517,
+    2.2752,
+    1.0
+  ],
+  "nearness": [
+    0.034,
+    0.1449,
+    0.2624,
+    0.9158
+  ],
+  "cuts": [
+    0.09349646419286728,
+    0.5176637768745422
+  ],
+  "subject": true
+}

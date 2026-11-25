@@ -3,3 +3,7 @@ out/*.mp4
 out/*.mov
 work/cache/
 refs/site/shot-*-full.png
+out/
+work/*.wav
+work/outpaint/*_in.png
+work/parallax/*/plate_src.jpg

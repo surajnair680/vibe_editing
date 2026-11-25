@@ -1,0 +1,27 @@
+{
+  "source": "/home/user/vibe_editing/projects/reel-15/assets/wide/spin.jpg",
+  "size": [
+    1920,
+    1080
+  ],
+  "layers": [
+    "layer_0.png",
+    "layer_1.png",
+    "layer_2.png"
+  ],
+  "layers_web": [],
+  "z": [
+    3.6462,
+    2.7311,
+    1.0
+  ],
+  "nearness": [
+    0.0682,
+    0.1748,
+    0.9101
+  ],
+  "cuts": [
+    0.1242329478263855
+  ],
+  "subject": true
+}
