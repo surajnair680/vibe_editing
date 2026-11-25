@@ -7,3 +7,8 @@ out/
 work/*.wav
 work/outpaint/*_in.png
 work/parallax/*/plate_src.jpg
+work/**/*.log
+work/*.log
+work/parallax/hang/
+work/parallax/spin/
+work/parallax/pair/
