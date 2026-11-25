@@ -1,0 +1,122 @@
+{
+  "paper-01": {
+    "openverse_id": "43e2d82b-6473-4769-9dab-577bcf934d7b",
+    "title": "paper flip 2.wav",
+    "creator": "gynation",
+    "license": "cc0",
+    "license_version": "1.0",
+    "license_url": "https://creativecommons.org/publicdomain/zero/1.0/",
+    "source": "freesound",
+    "page": "https://freesound.org/people/gynation/sounds/82378",
+    "attribution": "\"paper flip 2.wav\" by gynation is marked with CC0 1.0. To view the terms, visit https://creativecommons.org/publicdomain/zero/1.0/.",
+    "needs_credit": false,
+    "files": {
+      "original": "projects/reel-16/assets/sfx/openverse/orig/paper-01.mp3",
+      "wav": "projects/reel-16/assets/sfx/openverse/paper-01.wav"
+    },
+    "measure": {
+      "length_s": 0.465,
+      "sound_s": 0.35,
+      "peak_dbfs": -3.5,
+      "loudness_db": -30.2,
+      "attack_ms": 190,
+      "peak_at_s": 0.25,
+      "tail_ms": 150,
+      "brightness_hz": 5235,
+      "tone": "bright",
+      "low_end": 0.0,
+      "hits": 2,
+      "shape": "swoosh"
+    }
+  },
+  "paper-02": {
+    "openverse_id": "9f6c8594-c8a1-4366-9ee4-7cf1ea801467",
+    "title": "paper flip 1.wav",
+    "creator": "gynation",
+    "license": "cc0",
+    "license_version": "1.0",
+    "license_url": "https://creativecommons.org/publicdomain/zero/1.0/",
+    "source": "freesound",
+    "page": "https://freesound.org/people/gynation/sounds/82377",
+    "attribution": "\"paper flip 1.wav\" by gynation is marked with CC0 1.0. To view the terms, visit https://creativecommons.org/publicdomain/zero/1.0/.",
+    "needs_credit": false,
+    "files": {
+      "original": "projects/reel-16/assets/sfx/openverse/orig/paper-02.mp3",
+      "wav": "projects/reel-16/assets/sfx/openverse/paper-02.wav"
+    },
+    "measure": {
+      "length_s": 0.438,
+      "sound_s": 0.39,
+      "peak_dbfs": -4.8,
+      "loudness_db": -29.6,
+      "attack_ms": 240,
+      "peak_at_s": 0.24,
+      "tail_ms": 140,
+      "brightness_hz": 5032,
+      "tone": "bright",
+      "low_end": 0.0,
+      "hits": 1,
+      "shape": "swoosh"
+    }
+  },
+  "paper-03": {
+    "openverse_id": "bbca2d79-dd67-476e-9df2-45190cff3876",
+    "title": "paper flip 3.wav",
+    "creator": "gynation",
+    "license": "cc0",
+    "license_version": "1.0",
+    "license_url": "https://creativecommons.org/publicdomain/zero/1.0/",
+    "source": "freesound",
+    "page": "https://freesound.org/people/gynation/sounds/82379",
+    "attribution": "\"paper flip 3.wav\" by gynation is marked with CC0 1.0. To view the terms, visit https://creativecommons.org/publicdomain/zero/1.0/.",
+    "needs_credit": false,
+    "files": {
+      "original": "projects/reel-16/assets/sfx/openverse/orig/paper-03.mp3",
+      "wav": "projects/reel-16/assets/sfx/openverse/paper-03.wav"
+    },
+    "measure": {
+      "length_s": 0.5,
+      "sound_s": 0.28,
+      "peak_dbfs": -5.4,
+      "loudness_db": -33.5,
+      "attack_ms": 80,
+      "peak_at_s": 0.08,
+      "tail_ms": 190,
+      "brightness_hz": 6888,
+      "tone": "bright",
+      "low_end": 0.0,
+      "hits": 1,
+      "shape": "swoosh"
+    }
+  },
+  "paper-04": {
+    "openverse_id": "9f96d0d6-36b1-4f00-a931-a21c8ef39093",
+    "title": "Ripping Paper",
+    "creator": "aldenroth2",
+    "license": "cc0",
+    "license_version": "1.0",
+    "license_url": "https://creativecommons.org/publicdomain/zero/1.0/",
+    "source": "freesound",
+    "page": "https://freesound.org/people/aldenroth2/sounds/272028",
+    "attribution": "\"Ripping Paper\" by aldenroth2 is marked with CC0 1.0. To view the terms, visit https://creativecommons.org/publicdomain/zero/1.0/.",
+    "needs_credit": false,
+    "files": {
+      "original": "projects/reel-16/assets/sfx/openverse/orig/paper-04.mp3",
+      "wav": "projects/reel-16/assets/sfx/openverse/paper-04.wav"
+    },
+    "measure": {
+      "length_s": 1.926,
+      "sound_s": 1.84,
+      "peak_dbfs": -12.0,
+      "loudness_db": -35.5,
+      "attack_ms": 1630,
+      "peak_at_s": 1.64,
+      "tail_ms": 200,
+      "brightness_hz": 9136,
+      "tone": "bright",
+      "low_end": 0.0,
+      "hits": 1,
+      "shape": "swell"
+    }
+  }
+}
