@@ -2,3 +2,4 @@ raw/
 out/*.mp4
 out/*.mov
 work/cache/
+refs/site/shot-*-full.png
