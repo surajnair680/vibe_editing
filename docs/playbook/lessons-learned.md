@@ -314,6 +314,15 @@ Other docs and when to read them: `docs/README.md`.
   with a blur-in, a light grey section with red circles) and asked for the reanimate skill to copy it. Build of that
   look: `projects/reel-14/work/build2/` (fx2.py, scene2.py), spec `projects/reel-14/reanimate/spec.md`. [r14]
 
+- **He wants to see the whole edit, not just input and output (2026-11-27, on reel-13).** "Can you make a video editor
+  where I can see the complete timeline of everything." He asked "first tell me if you understand" and then "tell me
+  your thoughts before building": restate, list the limits honestly (nothing renders in the page, the page cannot
+  wake a session, footage is stored with the private artifact), propose an order, wait. He said yes to all three
+  asks (see, edit, notes) as a web page for phone and laptop. Built: `timeline-editor` skill + `tools/timeline/`.
+  Tested numbers: page 56 KB, proxy of 85 s of raw = 3.8 MiB (crf 30, keyframe every 0.5 s), live playback swaps
+  between two video elements at each out-point; a timecode with frames after the dot ("0:53.17") reads as seconds,
+  so the page shows hundredths. [r13]
+
 ## 2. Remaking a reference edit shot for shot [r03]
 - **Measure the reference frame by frame.** `select='gt(scene,0.12)'` gives a first cut list; busy parts need sheets of
   every frame (`-ss a -t b`, `drawtext=%{pts}`), because shots can be 1 to 2 frames long (reel-03's reference: about

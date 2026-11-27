@@ -60,6 +60,11 @@ When a new skill, tool, kit or proven recipe is added to the repo, add a line he
 | Transcript with word timings | `tools/transcribe_elevenlabs.py` (never Whisper) |
 | Original chiptune / code-made music | reel-11 `work/music.py` |
 
+## Seeing and reviewing the edit
+| Need | Tool |
+|---|---|
+| He wants to see every track, trim cuts himself, hear trims at once, pin notes at exact moments | `timeline-editor` skill, `tools/timeline/` (one private page per video, made at the rough cut, republished every version) |
+
 ## Session tools
 `session-handoff` (move to a new chat), `vibe-wrap-up` (end of session lessons), `brand-intake` (his brand files for
 the motion pack), `tools/seek_render.mjs` (render any `window.seek` page), `tools/lemo.sh` (Lemo commands).
