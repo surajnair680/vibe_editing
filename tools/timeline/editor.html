@@ -1,0 +1,523 @@
+<title>__TITLE__</title>
+<meta name="claude:viewport-fit-sides" content="cover">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@500;700&display=swap">
+<style>
+/* Layout: editing-suite. Player + inspector on top (side by side when wide), transport bar, full-width multitrack
+   timeline below with sticky track labels. Deliberately dark only, like every edit suite. */
+:root {
+  --bg: #121418; --panel: #1a1d23; --panel2: #20242b; --line: #2b3039; --fg: #e9ebef; --muted: #959cab;
+  --cut: #2f6f7d; --cut-hi: #58b6c8; --voice: #7d93c4; --word: #3a4150; --gfx: #4f8a5b; --sfx: #b98a4c;
+  --music: #8070ad; --note: #e0b84f; --head: #ff5a52; --changed: #e09a3e; --ok: #5bb37a;
+  --ui: "Inter", system-ui, -apple-system, "Segoe UI", sans-serif;
+  --mono: "JetBrains Mono", ui-monospace, "SF Mono", Menlo, monospace;
+  --labw: 76px;
+  color-scheme: dark;
+}
+html, body { background: var(--bg); color: var(--fg); }
+body { font-family: var(--ui); font-size: 14px; padding-left: max(16px, env(safe-area-inset-left, 0px));
+  padding-right: max(16px, env(safe-area-inset-right, 0px)); padding-block: 12px 28px; }
+button { font: inherit; color: inherit; background: var(--panel2); border: 1px solid var(--line); border-radius: 8px;
+  padding: 7px 11px; cursor: pointer; touch-action: manipulation; }
+button:hover { border-color: #3d4452; }
+button:focus-visible, textarea:focus-visible { outline: 2px solid var(--cut-hi); outline-offset: 1px; }
+button.primary { background: var(--cut); border-color: var(--cut); color: #fff; font-weight: 600; }
+button.warn { color: #ffb1ac; }
+button:disabled { opacity: .45; cursor: default; }
+.top { display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 10px; margin-bottom: 12px; }
+.title { display: flex; align-items: baseline; gap: 10px; min-width: 0; }
+.title h1 { font-size: 18px; margin: 0; font-weight: 700; letter-spacing: .01em; }
+.chip { font-family: var(--mono); font-size: 12px; color: var(--muted); border: 1px solid var(--line); border-radius: 99px; padding: 2px 9px; }
+.modes { display: flex; background: var(--panel); border: 1px solid var(--line); border-radius: 10px; padding: 3px; gap: 3px; }
+.modes button { border: 0; background: transparent; padding: 6px 12px; border-radius: 7px; color: var(--muted); }
+.modes button[aria-selected="true"] { background: var(--panel2); color: var(--fg); font-weight: 600; box-shadow: inset 0 0 0 1px var(--line); }
+.stage { display: grid; grid-template-columns: auto minmax(0, 1fr); gap: 16px; align-items: start; }
+.frame { position: relative; height: min(58vh, 620px); aspect-ratio: 9 / 16; max-width: 100%; background: #000; border-radius: 10px; overflow: hidden; border: 1px solid var(--line); }
+.frame video { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: contain; visibility: hidden; }
+.frame video.on { visibility: visible; }
+.frame .empty { position: absolute; inset: 0; display: grid; place-items: center; text-align: center; color: var(--muted); padding: 20px; font-size: 13px; }
+.side { display: flex; flex-direction: column; gap: 12px; min-width: 0; }
+.card { background: var(--panel); border: 1px solid var(--line); border-radius: 12px; padding: 14px; }
+.card h2 { font-size: 12px; text-transform: uppercase; letter-spacing: .08em; color: var(--muted); margin: 0 0 10px; font-weight: 600; }
+.banner { border-color: #5a4320; background: #241d12; color: #f0d2a2; font-size: 13px; line-height: 1.45; }
+.quote { font-size: 15px; line-height: 1.45; margin: 0 0 10px; }
+.kv { display: grid; grid-template-columns: auto 1fr; gap: 4px 12px; font-size: 13px; margin-bottom: 12px; }
+.kv dt { color: var(--muted); } .kv dd { margin: 0; font-family: var(--mono); font-size: 12.5px; }
+.nudge { display: grid; grid-template-columns: 64px repeat(4, minmax(0, 1fr)); gap: 6px; align-items: center; margin-bottom: 6px; }
+.nudge span { color: var(--muted); font-size: 12px; }
+.nudge button { padding: 7px 0; font-family: var(--mono); font-size: 12px; }
+.row-btns { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 10px; }
+.hint { color: var(--muted); font-size: 12.5px; line-height: 1.5; margin: 0; }
+.changed { color: var(--changed); font-weight: 600; }
+.chlist { list-style: none; margin: 0 0 10px; padding: 0; display: flex; flex-direction: column; gap: 6px; font-size: 13px; }
+.chlist li { display: flex; justify-content: space-between; gap: 8px; align-items: center; }
+.chlist li span { min-width: 0; }
+.chlist button { padding: 3px 8px; font-size: 12px; }
+textarea { width: 100%; min-height: 70px; resize: vertical; background: var(--panel2); color: var(--fg); border: 1px solid var(--line); border-radius: 8px; padding: 8px; font: inherit; box-sizing: border-box; }
+.transport { display: flex; flex-wrap: wrap; align-items: center; gap: 8px; margin: 14px 0 8px; }
+.transport .tc { font-family: var(--mono); font-size: 15px; font-weight: 700; font-variant-numeric: tabular-nums; min-width: 9.5ch; }
+.transport .len { font-family: var(--mono); color: var(--muted); font-size: 12.5px; }
+.transport .grow { flex: 1; }
+#play { min-width: 74px; font-weight: 600; }
+.tl { background: var(--panel); border: 1px solid var(--line); border-radius: 12px; overflow: hidden; }
+#scroller { overflow-x: auto; overflow-y: hidden; position: relative; -webkit-overflow-scrolling: touch; }
+#inner { position: relative; }
+.trow { position: relative; border-bottom: 1px solid var(--line); }
+.trow:last-child { border-bottom: 0; }
+.tlabel { position: sticky; left: 0; z-index: 4; width: var(--labw); height: 100%; box-sizing: border-box; background: var(--panel);
+  border-right: 1px solid var(--line); font-size: 11px; font-weight: 600; color: var(--muted); padding: 0 8px;
+  display: flex; align-items: center; text-transform: uppercase; letter-spacing: .06em; }
+.lane { position: absolute; top: 0; bottom: 0; left: var(--labw); right: 0; }
+.ruler .tick { position: absolute; top: 0; bottom: 0; border-left: 1px solid #333945; }
+.ruler .tick b { position: absolute; top: 4px; left: 4px; font: 500 10.5px var(--mono); color: var(--muted); white-space: nowrap; }
+.ruler .tick.minor { top: 60%; border-color: #2a2f38; }
+.blk { position: absolute; top: 5px; bottom: 5px; border-radius: 6px; overflow: hidden; box-sizing: border-box; cursor: pointer;
+  font-size: 11.5px; line-height: 1.25; padding: 4px 6px; white-space: nowrap; text-overflow: ellipsis; color: #f2f5f8; }
+.cut { background: var(--cut); border: 1px solid #3b8797; }
+.cut.alt { background: #296270; }
+.cut.mod { box-shadow: inset 0 -3px 0 var(--changed); }
+.cut.sel { background: #3a8a9b; border-color: var(--cut-hi); box-shadow: 0 0 0 2px var(--cut-hi); z-index: 2; padding-left: 18px; padding-right: 18px; }
+.cut .n { font: 700 10px var(--mono); opacity: .75; margin-right: 5px; }
+.hdl { position: absolute; top: 0; bottom: 0; width: 18px; z-index: 3; touch-action: none; cursor: ew-resize; display: grid; place-items: center; }
+.hdl::after { content: ""; width: 5px; height: 70%; border-radius: 3px; background: #fff; }
+.hdl.l { left: 0; } .hdl.r { right: 0; }
+.word { position: absolute; top: 4px; bottom: 4px; background: var(--word); border-radius: 4px; font-size: 10.5px; color: #cdd3dd; padding: 2px 3px; overflow: hidden; white-space: nowrap; box-sizing: border-box; }
+.item { background: var(--sfx); }
+.item.gfx { background: var(--gfx); } .item.music { background: var(--music); }
+.pin { position: absolute; top: 3px; bottom: 3px; width: 18px; margin-left: -9px; border-radius: 5px; background: var(--note); color: #241a00; font: 700 11px var(--ui); display: grid; place-items: center; cursor: pointer; }
+.pin.done { opacity: .45; }
+.none { position: absolute; left: 10px; top: 50%; transform: translateY(-50%); color: #5d6472; font-size: 11.5px; white-space: nowrap; }
+canvas.wave { position: absolute; top: 0; left: 0; pointer-events: none; }
+#playhead { position: absolute; top: 0; bottom: 0; width: 2px; margin-left: -1px; background: var(--head); z-index: 5; pointer-events: none; }
+#playhead::before { content: ""; position: absolute; top: 0; left: -5px; border: 6px solid transparent; border-top-color: var(--head); }
+.status { font-size: 12.5px; color: var(--muted); }
+.status.ok { color: var(--ok); }
+@media (max-width: 760px) {
+  body { display: flex; flex-direction: column; }
+  .stage { display: contents; }
+  .top { order: 0; } .viewer { order: 1; } .transport { order: 2; } .tl { order: 3; } .side { order: 4; margin-top: 14px; }
+  .viewer { display: flex; justify-content: center; }
+  .frame { height: min(46vh, 520px); }
+  :root { --labw: 62px; }
+  .tlabel { font-size: 9.5px; letter-spacing: .03em; padding: 0 6px; overflow: hidden; }
+  .transport .grow { display: none; }
+}
+@media (prefers-reduced-motion: reduce) { * { scroll-behavior: auto !important; } }
+</style>
+
+<header class="top">
+  <div class="title"><h1 id="pname">Timeline</h1><span class="chip" id="pver"></span></div>
+  <div class="modes" role="tablist" aria-label="What plays">
+    <button id="mRender" role="tab" aria-selected="true">Last render</button>
+    <button id="mLive" role="tab" aria-selected="false">Live cut</button>
+  </div>
+</header>
+
+<main class="stage">
+  <div class="viewer">
+    <div class="frame" id="frame">
+      <video id="vr" playsinline preload="auto"></video>
+      <video id="va" playsinline preload="auto"></video>
+      <video id="vb" playsinline preload="auto"></video>
+      <div class="empty" id="nomedia" hidden></div>
+    </div>
+  </div>
+  <aside class="side">
+    <div class="card banner" id="banner" hidden></div>
+    <div class="card" id="inspector"></div>
+    <div class="card" id="changes"></div>
+  </aside>
+</main>
+
+<div class="transport">
+  <button id="play" aria-label="Play">Play</button>
+  <button id="back" aria-label="Back one frame">-1f</button>
+  <button id="fwd" aria-label="Forward one frame">+1f</button>
+  <span class="tc" id="tc">0:00.00</span><span class="len" id="len"></span>
+  <span class="grow"></span>
+  <button id="zout" aria-label="Zoom out">-</button>
+  <button id="zin" aria-label="Zoom in">+</button>
+  <button id="addnote">Add note here</button>
+</div>
+
+<section class="tl" aria-label="Timeline">
+  <div id="scroller"><div id="inner"><div id="playhead"></div></div></div>
+</section>
+
+<script type="application/json" id="tl-data">__TIMELINE_JSON__</script>
+<script>
+(() => {
+"use strict";
+const T = JSON.parse(document.getElementById("tl-data").textContent);
+const FPS = T.fps || 30, FR = 1 / FPS;
+const $ = (id) => document.getElementById(id);
+const esc = (s) => String(s).replace(/[&<>"']/g, (c) => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;", "'": "&#39;" }[c]));
+const snap = (t) => Math.round(t * FPS) / FPS;
+const tc = (t) => { const c = Math.round(Math.max(0, t) * 100), s = Math.floor(c / 100);   // m:ss.hh (hundredths, not frames)
+  return Math.floor(s / 60) + ":" + String(s % 60).padStart(2, "0") + "." + String(c % 100).padStart(2, "0"); };
+const sec = (t) => t.toFixed(2) + " s";
+const labw = () => parseFloat(getComputedStyle(document.documentElement).getPropertyValue("--labw")) || 76;
+
+/* ---------- state ---------- */
+const S = { mode: "render", t: 0, playing: false, pps: 46, sel: null, edits: { cuts: {}, shifts: {} },
+  status: "draft", notes: [], db: null, saveMsg: "", draftNote: null, confirmReset: false };
+const baseSegs = T.segments.map((g) => ({ ...g }));
+const segIndex = Object.fromEntries(baseSegs.map((g, i) => [g.id, i]));
+const parts = T.sources.parts;
+const partOf = (s) => parts.find((p) => s >= p.start - 1e-6 && s < p.end + 1e-6) || parts[0];
+const peaks = T.peaks ? Uint8Array.from(atob(T.peaks.data), (c) => c.charCodeAt(0)) : null;
+
+function build(useEdits) {
+  let t = 0; const out = [];
+  baseSegs.forEach((g, i) => {
+    const o = useEdits ? S.edits.cuts[g.id] : null;
+    if (o && o.deleted) return;
+    const a = o && o.src_in != null ? o.src_in : g.src_in, b = o && o.src_out != null ? o.src_out : g.src_out;
+    const sp = g.speed || 1, len = Math.round((b - a) / sp * FPS) / FPS;
+    out.push({ ...g, n: i + 1, src_in: a, src_out: b, speed: sp, edit_in: t, len, mod: !!o });
+    t += len;
+  });
+  return out;
+}
+let SEG = build(false), LEN = 0;
+const recompute = () => { SEG = build(S.mode === "live"); LEN = SEG.length ? SEG[SEG.length - 1].edit_in + SEG[SEG.length - 1].len : 0; };
+const nEdits = () => Object.keys(S.edits.cuts).length + Object.keys(S.edits.shifts).length;
+function segAt(t, segs = SEG) { let lo = 0, hi = segs.length - 1; while (lo < hi) { const m = (lo + hi + 1) >> 1; if (segs[m].edit_in <= t + 1e-9) lo = m; else hi = m - 1; } return lo; }
+function editToSrc(t, segs = SEG) { const g = segs[segAt(t, segs)]; return g ? g.src_in + (t - g.edit_in) * g.speed : 0; }
+function srcToEdit(s, segs = SEG) {   // null when that moment of the take is cut out
+  for (const g of segs) if (s >= g.src_in - 1e-6 && s <= g.src_out + 1e-6) return g.edit_in + (s - g.src_in) / g.speed;
+  return null; }
+function srcToEditNear(s, segs = SEG) { const e = srcToEdit(s, segs); if (e != null) return e;
+  const g = segs.find((x) => x.src_in >= s); return g ? g.edit_in : LEN; }
+
+/* ---------- media ---------- */
+const vr = $("vr"), va = $("va"), vb = $("vb");
+const hasPreview = !!(T.media && T.media.preview), hasProxy = !!(T.media && T.media.proxy);
+if (hasPreview) vr.src = T.media.preview;
+if (hasProxy) { va.src = T.media.proxy; vb.src = T.media.proxy; }
+const E = { k: 0, act: va, nxt: vb, unlocked: false };
+function show(v) { [vr, va, vb].forEach((x) => x.classList.toggle("on", x === v)); }
+function noMedia(msg) { const n = $("nomedia"); n.hidden = !msg; n.textContent = msg || ""; }
+function syncMedia() {
+  if (S.mode === "render") {
+    if (!hasPreview) { noMedia("No render uploaded for this version yet."); show(null); return; }
+    noMedia(""); show(vr); try { vr.currentTime = Math.min(S.t, LEN); } catch (e) {}
+  } else {
+    if (!hasProxy) { noMedia("Live cut needs the low-res copy of the raw takes. Ask Claude to add it."); show(null); return; }
+    noMedia(""); liveLoad(S.t);
+  }
+}
+function liveLoad(t) {
+  if (!SEG.length) return; E.k = segAt(t); const g = SEG[E.k];
+  E.act.playbackRate = g.speed; try { E.act.currentTime = g.src_in + (t - g.edit_in) * g.speed; } catch (e) {}
+  show(E.act); prepNext();
+}
+function prepNext() { const g = SEG[E.k + 1]; if (!g) return; E.nxt.playbackRate = g.speed; try { E.nxt.currentTime = g.src_in; } catch (e) {} }
+function contiguous(a, b) { return b && Math.abs(b.src_in - a.src_out) < FR * 0.6 && b.speed === a.speed; }
+
+async function play() {
+  if (S.mode === "render" ? !hasPreview : !hasProxy) return;
+  if (S.t >= LEN - FR) { S.t = 0; syncMedia(); }
+  S.playing = true; $("play").textContent = "Pause";
+  try {
+    if (S.mode === "render") await vr.play();
+    else {
+      if (!E.unlocked) { E.unlocked = true; E.nxt.muted = true; E.nxt.play().then(() => { E.nxt.pause(); E.nxt.muted = false; prepNext(); }).catch(() => { E.nxt.muted = false; }); }
+      await E.act.play();
+    }
+  } catch (e) { pause(); }
+}
+function pause() { S.playing = false; $("play").textContent = "Play"; [vr, va, vb].forEach((v) => { try { v.pause(); } catch (e) {} }); }
+vr.addEventListener("ended", () => { pause(); });
+
+function tick() {
+  if (S.playing) {
+    if (S.mode === "render") { S.t = vr.currentTime; if (S.t >= LEN) pause(); }
+    else {
+      let g = SEG[E.k];
+      if (g && E.act.currentTime >= g.src_out - 0.012) {
+        const nx = SEG[E.k + 1];
+        if (!nx) { S.t = LEN; pause(); }
+        else if (contiguous(g, nx)) { E.k++; prepNext(); }
+        else { E.k++; const old = E.act; E.act = E.nxt; E.nxt = old; E.act.play().catch(() => {}); old.pause(); show(E.act); prepNext(); }
+        g = SEG[E.k];
+      }
+      if (S.playing && g) S.t = g.edit_in + (E.act.currentTime - g.src_in) / g.speed;
+    }
+    follow();
+  }
+  drawHead();
+  requestAnimationFrame(tick);
+}
+
+/* ---------- timeline ---------- */
+const sc = $("scroller"), inner = $("inner");
+const TRACKS = (() => {
+  const extra = T.tracks || [];
+  const def = [{ id: "gfx", label: "Graphics" }, { id: "sfx", label: "SFX" }, { id: "music", label: "Music" }];
+  const tr = [{ id: "ruler", label: "", h: 24 }, { id: "cuts", label: "Cuts", h: 48 }, { id: "voice", label: "Voice", h: 40 }, { id: "words", label: "Words", h: 26 }];
+  const seen = new Set();
+  extra.forEach((x) => { seen.add(x.id); tr.push({ id: x.id, label: x.label || x.id, h: 30, items: x.items || [], kind: x.kind || x.id }); });
+  def.forEach((d) => { if (!seen.has(d.id)) tr.push({ ...d, h: 30, items: [], kind: d.id }); });
+  tr.push({ id: "notes", label: "Notes", h: 28 });
+  return tr;
+})();
+TRACKS.forEach((tr) => {
+  const row = document.createElement("div"); row.className = "trow" + (tr.id === "ruler" ? " ruler" : ""); row.style.height = tr.h + "px";
+  row.innerHTML = '<div class="tlabel">' + esc(tr.label) + '</div><div class="lane" id="lane-' + tr.id + '"></div>';
+  inner.insertBefore(row, $("playhead")); tr.lane = row.querySelector(".lane");
+});
+const wave = document.createElement("canvas"); wave.className = "wave"; TRACKS.find((t) => t.id === "voice").lane.appendChild(wave);
+const X = (t) => t * S.pps;
+
+function render() {
+  recompute();
+  const W = Math.max(X(LEN) + 60, sc.clientWidth - labw());
+  inner.style.width = (W + labw()) + "px";
+  const L = (id) => TRACKS.find((t) => t.id === id).lane;
+  // ruler
+  const step = S.pps > 120 ? 0.5 : S.pps > 50 ? 1 : S.pps > 22 ? 2 : 5; let h = "";
+  for (let t = 0; t <= LEN + step; t += step) {
+    const major = Math.abs(t / (step * 2) - Math.round(t / (step * 2))) < 1e-6 || step >= 2;
+    h += '<div class="tick' + (major ? "" : " minor") + '" style="left:' + X(t) + 'px">' + (major ? "<b>" + tc(t).replace(/\.00$/, "") + "</b>" : "") + "</div>";
+  }
+  L("ruler").innerHTML = h;
+  // cuts
+  h = "";
+  SEG.forEach((g, i) => {
+    const sel = S.sel && S.sel.type === "cut" && S.sel.id === g.id;
+    h += '<div class="blk cut' + (i % 2 ? " alt" : "") + (g.mod ? " mod" : "") + (sel ? " sel" : "") + '" data-cut="' + g.id + '" style="left:' + X(g.edit_in) + "px;width:" + Math.max(2, X(g.len) - 1) + 'px">' +
+      '<span class="n">' + g.n + "</span>" + esc(g.text) + (sel && S.mode === "live" ? '<div class="hdl l" data-h="in"></div><div class="hdl r" data-h="out"></div>' : "") + "</div>";
+  });
+  L("cuts").innerHTML = h;
+  // words
+  h = "";
+  if (S.pps >= 30) T.words.forEach((w) => {
+    const a = srcToEdit(w.s), b = srcToEdit(w.e); if (a == null) return;
+    const e = b == null ? a + (w.e - w.s) : b; const wd = X(e - a);
+    h += '<div class="word" style="left:' + X(a) + "px;width:" + Math.max(2, wd - 1) + 'px">' + (wd > 20 ? esc(w.w) : "") + "</div>";
+  });
+  else h = '<span class="none">Zoom in to see words</span>';
+  L("words").innerHTML = h;
+  // extra tracks
+  TRACKS.filter((t) => t.items).forEach((tr) => {
+    if (!tr.items.length) { tr.lane.innerHTML = '<span class="none">Nothing yet</span>'; return; }
+    tr.lane.innerHTML = tr.items.map((it) => {
+      const sh = (S.mode === "live" && S.edits.shifts[it.id]) || 0;
+      let a = it.anchor === "src" ? srcToEditNear(it.start) : (S.mode === "live" ? srcToEditNear(editToSrc(it.start, build(false))) : it.start);
+      const d = (it.end || it.start + 0.3) - it.start; a += sh;
+      const sel = S.sel && S.sel.type === "item" && S.sel.id === it.id;
+      return '<div class="blk item ' + esc(tr.kind) + '" data-item="' + esc(it.id) + '" data-track="' + esc(tr.id) + '" style="left:' + X(a) + "px;width:" + Math.max(6, X(d)) + "px" + (sel ? ";outline:2px solid #fff" : "") + '">' + esc(it.label || "") + "</div>";
+    }).join("");
+  });
+  // notes
+  const open = S.notes.filter((n) => !n.done);
+  L("notes").innerHTML = S.notes.length ? S.notes.map((n, i) => '<div class="pin' + (n.done ? " done" : "") + '" data-note="' + esc(n.id) + '" style="left:' + X(srcToEditNear(n.src_t)) + 'px" title="' + esc(n.text) + '">' + (i + 1) + "</div>").join("")
+    : '<span class="none">Tap "Add note here" to pin a note at the playhead</span>';
+  $("len").textContent = "/ " + tc(LEN);
+  drawWave(); drawHead(); pinHints(); renderSide();
+}
+function drawWave() {
+  const lane = TRACKS.find((t) => t.id === "voice").lane;
+  const vw = Math.max(1, sc.clientWidth - labw()), hgt = lane.clientHeight, dpr = window.devicePixelRatio || 1;
+  const x0 = Math.max(0, sc.scrollLeft);
+  wave.style.left = x0 + "px"; wave.style.width = vw + "px"; wave.style.height = hgt + "px";
+  wave.width = Math.round(vw * dpr); wave.height = Math.round(hgt * dpr);
+  const c = wave.getContext("2d"); c.setTransform(dpr, 0, 0, dpr, 0, 0); c.clearRect(0, 0, vw, hgt);
+  if (!peaks) return; c.fillStyle = getComputedStyle(document.documentElement).getPropertyValue("--voice");
+  const rate = T.peaks.rate, mid = hgt / 2;
+  for (let x = 0; x < vw; x++) {
+    const t0 = (x0 + x) / S.pps, t1 = (x0 + x + 1) / S.pps; if (t0 > LEN) break;
+    const g = SEG[segAt(t0)]; if (!g) continue;
+    const s0 = g.src_in + (t0 - g.edit_in) * g.speed, s1 = g.src_in + (Math.min(t1, g.edit_in + g.len) - g.edit_in) * g.speed;
+    let m = 0; for (let i = Math.floor(s0 * rate); i <= Math.ceil(s1 * rate) && i < peaks.length; i++) m = Math.max(m, peaks[i]);
+    const a = (m / 255) * (hgt / 2 - 3); if (a > 0.5) c.fillRect(x, mid - a, 1, a * 2);
+  }
+}
+function drawHead() { $("playhead").style.left = (labw() + X(S.t)) + "px"; $("tc").textContent = tc(S.t); }
+function follow() { const x = X(S.t), vw = sc.clientWidth - labw(); if (x < sc.scrollLeft || x > sc.scrollLeft + vw - 30) sc.scrollLeft = Math.max(0, x - vw * 0.3); }
+function pinHints() { inner.querySelectorAll(".none").forEach((n) => { n.style.left = (sc.scrollLeft + 10) + "px"; }); }
+sc.addEventListener("scroll", () => { drawWave(); pinHints(); }, { passive: true });
+
+function seek(t) { S.t = Math.max(0, Math.min(snap(t), Math.max(0, LEN - FR))); if (S.playing) pause(); syncMedia(); drawHead(); }
+inner.addEventListener("click", (e) => {
+  if (e.target.closest(".hdl")) return;
+  const cut = e.target.closest("[data-cut]"), note = e.target.closest("[data-note]"), item = e.target.closest("[data-item]");
+  const t = (e.clientX - inner.getBoundingClientRect().left - labw()) / S.pps;
+  if (note) { S.sel = { type: "note", id: note.dataset.note }; S.draftNote = null; render(); return; }
+  if (item) { S.sel = { type: "item", id: item.dataset.item, track: item.dataset.track }; render(); return; }
+  if (cut) { S.sel = { type: "cut", id: cut.dataset.cut }; S.draftNote = null; seek(t); render(); return; }
+  if (t >= 0) seek(t);
+});
+
+/* ---------- trims ---------- */
+function curOf(id) { const g = baseSegs[segIndex[id]], o = S.edits.cuts[id] || {}; return { a: o.src_in != null ? o.src_in : g.src_in, b: o.src_out != null ? o.src_out : g.src_out, del: !!o.deleted }; }
+function limits(id) {   // stay inside the take, never overlap the neighbouring pieces of the same take
+  const i = segIndex[id], g = baseSegs[i], p = partOf(g.src_in);
+  let lo = p.start, hi = p.end - FR;
+  for (let j = i - 1; j >= 0; j--) { const c = curOf(baseSegs[j].id); if (c.del) continue; if (partOf(baseSegs[j].src_in) === p) lo = Math.max(lo, c.b); break; }
+  for (let j = i + 1; j < baseSegs.length; j++) { const c = curOf(baseSegs[j].id); if (c.del) continue; if (partOf(baseSegs[j].src_in) === p) hi = Math.min(hi, c.a); break; }
+  return { lo, hi };
+}
+function setCut(id, a, b) {
+  const g = baseSegs[segIndex[id]], lim = limits(id);
+  a = snap(Math.max(lim.lo, Math.min(a, b - 2 * FR))); b = snap(Math.min(lim.hi, Math.max(b, a + 2 * FR)));
+  const o = { ...(S.edits.cuts[id] || {}) }; o.src_in = a; o.src_out = b;
+  if (Math.abs(a - g.src_in) < FR / 2) delete o.src_in; if (Math.abs(b - g.src_out) < FR / 2) delete o.src_out;
+  if (!Object.keys(o).length) delete S.edits.cuts[id]; else S.edits.cuts[id] = o;
+}
+function changed() { if (S.playing) pause(); S.status = "draft"; S.confirmReset = false; render(); if (S.mode === "live") syncMedia(); queueSave(); }
+function nudge(id, which, d) { const c = curOf(id); if (which === "in") setCut(id, c.a + d, c.b); else setCut(id, c.a, c.b + d); changed(); }
+function setMode(m) {
+  if (m === "live" && !hasProxy) return;
+  const src = editToSrc(S.t); pause(); S.mode = m; recompute(); S.t = Math.min(srcToEditNear(src), Math.max(0, LEN - FR));
+  $("mRender").setAttribute("aria-selected", m === "render"); $("mLive").setAttribute("aria-selected", m === "live");
+  render(); syncMedia();
+}
+$("mRender").onclick = () => setMode("render");
+$("mLive").onclick = () => setMode("live");
+let drag = null;
+inner.addEventListener("pointerdown", (e) => {
+  const hd = e.target.closest(".hdl"); if (!hd) return;
+  const id = hd.closest("[data-cut]").dataset.cut, c = curOf(id);
+  drag = { id, which: hd.dataset.h, x0: e.clientX, a: c.a, b: c.b, sp: baseSegs[segIndex[id]].speed || 1 };
+  hd.setPointerCapture(e.pointerId); e.preventDefault(); if (S.playing) pause();
+});
+inner.addEventListener("pointermove", (e) => {
+  if (!drag) return; const d = (e.clientX - drag.x0) / S.pps * drag.sp;
+  if (drag.which === "in") setCut(drag.id, drag.a + d, drag.b); else setCut(drag.id, drag.a, drag.b + d);
+  render();
+});
+const endDrag = () => { if (!drag) return; const d = drag; drag = null; recompute();
+  const g = SEG.find((x) => x.id === d.id); if (g) S.t = d.which === "in" ? g.edit_in : Math.max(g.edit_in, g.edit_in + g.len - 1); changed(); };
+inner.addEventListener("pointerup", endDrag); inner.addEventListener("pointercancel", endDrag);
+
+/* ---------- side panels ---------- */
+function renderSide() {
+  const b = $("banner"), n = nEdits();
+  if (S.mode === "render" && n) { b.hidden = false; b.innerHTML = "You are watching the last render (" + esc(T.version) + "). Your " + n + " change" + (n > 1 ? "s" : "") + " play in <b>Live cut</b>."; }
+  else if (S.mode === "live") { b.hidden = false; b.innerHTML = "Live cut plays your trims straight away from a low-res copy of the raw takes. Graphics and effects show up after Claude renders them."; }
+  else b.hidden = true;
+  const I = $("inspector"); const sel = S.sel;
+  if (S.draftNote) {
+    I.innerHTML = "<h2>New note at " + tc(S.draftNote.t) + "</h2>" + '<label class="hint" for="notetext">What should change here?</label><textarea id="notetext" placeholder="e.g. move this whoosh earlier"></textarea>' +
+      '<div class="row-btns"><button class="primary" id="savenote">Save note</button><button id="cancelnote">Cancel</button></div>';
+    $("notetext").focus(); $("savenote").onclick = saveNote; $("cancelnote").onclick = () => { S.draftNote = null; renderSide(); };
+  } else if (sel && sel.type === "cut") {
+    const i = segIndex[sel.id], g = baseSegs[i], c = curOf(sel.id), p = partOf(g.src_in), live = S.mode === "live";
+    I.innerHTML = "<h2>Cut " + (i + 1) + " of " + baseSegs.length + " · " + esc(p.label) + "</h2>" + '<p class="quote">"' + esc(g.text) + '"</p>' +
+      '<dl class="kv"><dt>From the take</dt><dd>' + sec(c.a) + " to " + sec(c.b) + "</dd><dt>Length</dt><dd>" + sec(c.b - c.a) + "</dd>" +
+      (S.edits.cuts[sel.id] ? '<dt>Rendered as</dt><dd class="changed">' + sec(g.src_in) + " to " + sec(g.src_out) + "</dd>" : "") + "</dl>" +
+      (c.del ? '<p class="hint">This cut is deleted from the edit.</p>' :
+        live ? '<div class="nudge"><span>Start</span><button data-n="in,-0.1">-0.1s</button><button data-n="in,-' + FR + '">-1f</button><button data-n="in,' + FR + '">+1f</button><button data-n="in,0.1">+0.1s</button></div>' +
+          '<div class="nudge"><span>End</span><button data-n="out,-0.1">-0.1s</button><button data-n="out,-' + FR + '">-1f</button><button data-n="out,' + FR + '">+1f</button><button data-n="out,0.1">+0.1s</button></div>' +
+          '<p class="hint">Minus moves the point earlier in the take, plus later. You can also drag the handles on the block.</p>'
+          : '<p class="hint">Switch to <b>Live cut</b> to trim this cut and hear it straight away.</p>') +
+      '<div class="row-btns">' + (live && !c.del ? '<button id="playcut">Play this cut</button>' : "") +
+      (live ? (c.del ? '<button id="restore">Restore cut</button>' : '<button class="warn" id="delcut">Delete cut</button>') : "") +
+      (S.edits.cuts[sel.id] ? '<button id="resetcut">Undo changes</button>' : "") + "</div>";
+    I.querySelectorAll("[data-n]").forEach((bt) => { const [w, d] = bt.dataset.n.split(","); bt.onclick = () => nudge(sel.id, w, parseFloat(d)); });
+    const pc = $("playcut"); if (pc) pc.onclick = () => { const s = SEG.find((x) => x.id === sel.id); if (s) { seek(s.edit_in); play(); } };
+    const dc = $("delcut"); if (dc) dc.onclick = () => { S.edits.cuts[sel.id] = { ...(S.edits.cuts[sel.id] || {}), deleted: true }; changed(); };
+    const rs = $("restore"); if (rs) rs.onclick = () => { const o = { ...S.edits.cuts[sel.id] }; delete o.deleted; if (Object.keys(o).length) S.edits.cuts[sel.id] = o; else delete S.edits.cuts[sel.id]; changed(); };
+    const rc = $("resetcut"); if (rc) rc.onclick = () => { delete S.edits.cuts[sel.id]; changed(); };
+  } else if (sel && sel.type === "note") {
+    const nt = S.notes.find((x) => x.id === sel.id);
+    if (!nt) { S.sel = null; return renderSide(); }
+    I.innerHTML = "<h2>Note at " + tc(srcToEditNear(nt.src_t)) + (nt.done ? " · done" : "") + '</h2><p class="quote"></p><div class="row-btns"><button id="gonote">Go there</button><button class="warn" id="delnote">Delete note</button></div>';
+    I.querySelector(".quote").textContent = nt.text;
+    $("gonote").onclick = () => seek(srcToEditNear(nt.src_t));
+    $("delnote").onclick = () => delNote(nt.id);
+  } else if (sel && sel.type === "item") {
+    const tr = TRACKS.find((x) => x.id === sel.track), it = tr && tr.items.find((x) => x.id === sel.id);
+    I.innerHTML = it ? "<h2>" + esc(tr.label) + '</h2><p class="quote"></p><dl class="kv"><dt>Starts</dt><dd>' + sec(it.start) + (it.anchor === "src" ? " (take time)" : "") + "</dd></dl>" : "<h2>Item</h2>";
+    if (it) I.querySelector(".quote").textContent = (it.label || "") + (it.detail ? " · " + it.detail : "");
+  } else {
+    I.innerHTML = "<h2>How to use</h2><p class=\"hint\">Tap a cut to see where it comes from. Switch to <b>Live cut</b> to trim it with the buttons or the handles and hear the change at once. " +
+      "Tap anywhere on the timeline to jump there, then <b>Add note here</b> to pin a note for Claude. Pinch or use - and + to zoom. When you are happy, tap <b>Send to Claude</b> and say done in the chat.</p>";
+  }
+  // changes
+  const C = $("changes"), ids = Object.keys(S.edits.cuts), open = S.notes.filter((x) => !x.done);
+  let h = "<h2>Your changes</h2>";
+  if (!ids.length && !open.length) h += '<p class="hint">No changes or notes yet.</p>';
+  else {
+    h += '<ul class="chlist">' + ids.map((id) => { const i = segIndex[id], g = baseSegs[i], o = S.edits.cuts[id];
+      let d = o.deleted ? "deleted" : [o.src_in != null ? "start " + fmtD(o.src_in - g.src_in) : "", o.src_out != null ? "end " + fmtD(o.src_out - g.src_out) : ""].filter(Boolean).join(", ");
+      return '<li><span>Cut ' + (i + 1) + ' "' + esc(short(g.text)) + '": ' + d + '</span><button data-undo="' + id + '">Undo</button></li>'; }).join("") +
+      open.map((nt) => '<li><span>Note at ' + tc(srcToEditNear(nt.src_t)) + ': "' + esc(short(nt.text)) + '"</span></li>').join("") + "</ul>";
+    h += '<div class="row-btns"><button class="primary" id="send"' + (S.status === "ready" ? " disabled" : "") + ">" + (S.status === "ready" ? "Sent to Claude" : "Send to Claude") + "</button>" +
+      (ids.length ? (S.confirmReset ? '<button class="warn" id="resetyes">Yes, undo all trims</button><button id="resetno">Keep them</button>' : '<button id="resetall">Undo all trims</button>') : "") + "</div>";
+  }
+  h += '<p class="status' + (S.saveMsg === "Saved" ? " ok" : "") + '" id="savemsg">' + esc(S.status === "ready" ? "Sent. Now say done in the chat and Claude will apply it." : S.saveMsg) + "</p>";
+  C.innerHTML = h;
+  C.querySelectorAll("[data-undo]").forEach((bt) => bt.onclick = () => { delete S.edits.cuts[bt.dataset.undo]; changed(); });
+  const se = $("send"); if (se) se.onclick = () => { S.status = "ready"; renderSide(); queueSave(true); };
+  const ra = $("resetall"); if (ra) ra.onclick = () => { S.confirmReset = true; renderSide(); };
+  const ry = $("resetyes"); if (ry) ry.onclick = () => { S.edits.cuts = {}; S.edits.shifts = {}; changed(); };
+  const rn = $("resetno"); if (rn) rn.onclick = () => { S.confirmReset = false; renderSide(); };
+}
+const fmtD = (d) => (d > 0 ? "+" : "") + d.toFixed(2) + " s";
+const short = (s) => s.length > 34 ? s.slice(0, 32) + "..." : s;
+
+/* ---------- storage (page database) ---------- */
+let saving = Promise.resolve(), saveTimer = null;
+function queueSave(now) {
+  if (!S.db) { S.saveMsg = "Saving is not available in this view, so changes stay on this screen only."; renderSide(); return; }
+  S.saveMsg = "Saving..."; clearTimeout(saveTimer);
+  saveTimer = setTimeout(() => { saving = saving.then(() => S.db.doc("edits/current").set({ base: T.version, cuts: S.edits.cuts, shifts: S.edits.shifts, status: S.status, updated: new Date().toISOString() }))
+    .then(() => { S.saveMsg = "Saved"; renderSide(); }).catch((e) => { S.saveMsg = "Could not save (" + (e && e.code || "error") + "). Try again in a moment."; renderSide(); }); }, now ? 0 : 600);
+}
+function saveNote() {
+  const txt = ($("notetext").value || "").trim(); if (!txt) return;
+  const t = S.draftNote.t, src = editToSrc(t);
+  const note = { src_t: Math.round(src * 1000) / 1000, edit_t: Math.round(t * 1000) / 1000, mode: S.mode, version: T.version, text: txt, done: false, created: new Date().toISOString() };
+  S.draftNote = null;
+  if (!S.db) { S.notes.push({ id: "local" + Date.now(), ...note }); S.saveMsg = "Saving is not available in this view."; render(); return; }
+  S.db.collection("notes").add(note).then(() => { S.status = "draft"; queueSave(true); }).catch((e) => { S.saveMsg = "Could not save the note (" + (e && e.code || "error") + ")."; renderSide(); });
+}
+function delNote(id) { S.sel = null; if (!S.db || id.startsWith("local")) { S.notes = S.notes.filter((n) => n.id !== id); render(); return; }
+  S.db.doc("notes/" + id).delete().catch(() => {}); }
+$("addnote").onclick = () => { if (S.playing) pause(); S.sel = null; S.draftNote = { t: S.t }; renderSide(); $("inspector").scrollIntoView({ block: "nearest", behavior: "smooth" }); };
+
+async function connect() {
+  try { if (!window.claude || !window.claude.use) return; const db = await window.claude.use("db"); if (!db) return; S.db = db; } catch (e) { return; }
+  const timer = setTimeout(() => { if (!S.loaded) { S.saveMsg = "Your saved changes can't be reached yet."; renderSide(); } }, 10000);
+  S.db.doc("edits/current").onSnapshot((d) => {
+    if (!d.metadata.fromCache) { clearTimeout(timer); S.loaded = true; }
+    if (d.metadata.hasPendingWrites) return;
+    const v = d.exists ? d.data() : null;
+    if (v && v.base === T.version) { S.edits = { cuts: JSON.parse(JSON.stringify(v.cuts || {})), shifts: JSON.parse(JSON.stringify(v.shifts || {})) }; S.status = v.status || "draft"; }
+    else if (!v) { S.edits = { cuts: {}, shifts: {} }; S.status = "draft"; }
+    if (nEdits() && S.mode === "render" && !S.autoLive && hasProxy) { S.autoLive = true; setMode("live"); } else render();
+  }, (e) => { clearTimeout(timer); S.saveMsg = "Saved changes are unavailable (" + e.code + ")."; renderSide(); });
+  S.db.collection("notes").orderBy("src_t").onSnapshot((q) => {
+    S.notes = q.docs.map((d) => ({ id: d.id, ...d.data() })); render();
+  }, () => {});
+}
+
+/* ---------- controls ---------- */
+$("play").onclick = () => (S.playing ? pause() : play());
+$("back").onclick = () => seek(S.t - FR);
+$("fwd").onclick = () => seek(S.t + FR);
+function zoom(f, cx) { const vw = sc.clientWidth - labw(); cx = cx == null ? vw / 2 : cx; const tAt = (sc.scrollLeft + cx) / S.pps;
+  S.pps = Math.max(8, Math.min(600, S.pps * f)); render(); sc.scrollLeft = Math.max(0, tAt * S.pps - cx); drawWave(); }
+$("zin").onclick = () => zoom(1.5); $("zout").onclick = () => zoom(1 / 1.5);
+sc.addEventListener("wheel", (e) => { if (!e.ctrlKey && !e.metaKey) return; e.preventDefault(); zoom(e.deltaY < 0 ? 1.15 : 1 / 1.15, e.clientX - sc.getBoundingClientRect().left - labw()); }, { passive: false });
+let pinch = null;
+sc.addEventListener("touchstart", (e) => { if (e.touches.length === 2) { const [a, b] = e.touches; pinch = { d: Math.hypot(a.clientX - b.clientX, a.clientY - b.clientY), pps: S.pps, cx: (a.clientX + b.clientX) / 2 - sc.getBoundingClientRect().left - labw(), sl: sc.scrollLeft }; } }, { passive: true });
+sc.addEventListener("touchmove", (e) => { if (!pinch || e.touches.length !== 2) return; e.preventDefault(); const [a, b] = e.touches;
+  const d = Math.hypot(a.clientX - b.clientX, a.clientY - b.clientY); const tAt = (pinch.sl + pinch.cx) / pinch.pps;
+  S.pps = Math.max(8, Math.min(600, pinch.pps * d / pinch.d)); render(); sc.scrollLeft = Math.max(0, tAt * S.pps - pinch.cx); drawWave(); }, { passive: false });
+sc.addEventListener("touchend", () => { pinch = null; });
+document.addEventListener("keydown", (e) => { if (e.target.tagName === "TEXTAREA") return;
+  if (e.code === "Space") { e.preventDefault(); S.playing ? pause() : play(); }
+  else if (e.key === "ArrowLeft") seek(S.t - (e.shiftKey ? 1 : FR)); else if (e.key === "ArrowRight") seek(S.t + (e.shiftKey ? 1 : FR)); });
+window.addEventListener("resize", () => render());
+
+/* ---------- start ---------- */
+$("pname").textContent = T.project; $("pver").textContent = T.version;
+if (!hasProxy) { $("mLive").disabled = true; $("mLive").title = "No low-res copy of the raw takes yet"; }
+S.pps = Math.max(18, Math.min(60, (sc.clientWidth - labw()) / 12));
+render(); syncMedia(); requestAnimationFrame(tick); connect();
+})();
+</script>

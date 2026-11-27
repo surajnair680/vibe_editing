@@ -13,7 +13,7 @@ folder and add one line to `docs/README.md`. The two guides are the source of tr
 The skills in `.claude/skills/` are the playbooks per video type (`vibe-editing-system` picks the type; `vibe-talking-head`
 for talking-head footage; `vibe-mini-vlog` for mini vlogs / day in my life with the camcorder overlay pack, vertical by
 default; `lemo-opuscar` for animated explainers and short films in one of 99 code-made film styles or the user's own;
-`voxel-reels` for blocky 3D cartoon dialogue reels, him as a voxel character plus a sidekick; `reanimate` to copy an animation from a reference reel, clip or site and measure the copy against it; `session-handoff` to write a full handoff of the chat into the repo so a new session continues with nothing lost; `photo-parallax` for Vox-style 2.5D camera moves that make a still photo feel like video; the 15-skill motion graphics pack, led by `vox-explainer` for Vox-style torn-paper explainers and `motion-effects` for premium UI, data and type effects). Follow the workflow below for the order of work, and the matching skill for the techniques.
+`voxel-reels` for blocky 3D cartoon dialogue reels, him as a voxel character plus a sidekick; `reanimate` to copy an animation from a reference reel, clip or site and measure the copy against it; `session-handoff` to write a full handoff of the chat into the repo so a new session continues with nothing lost; `photo-parallax` for Vox-style 2.5D camera moves that make a still photo feel like video; `timeline-editor` for the web timeline of every video, where he sees every track, trims cuts himself and pins notes; the 15-skill motion graphics pack, led by `vox-explainer` for Vox-style torn-paper explainers and `motion-effects` for premium UI, data and type effects). Follow the workflow below for the order of work, and the matching skill for the techniques.
 
 ## The workflow (every video)
 1. **Workspace:** one project folder per video under `projects/<name>/` (`new_project.py`). Check tools and do a short test render.
@@ -187,6 +187,12 @@ named `<project>-final.mp4`.
   1080x1920, brand in `docs/playbook/brand/`, stills first, Openverse sound, no installs). Their pages define
   `window.seek(t)`: render stills and video with `node tools/seek_render.mjs` (preinstalled Chromium, ~7 fps at
   1080x1920). Tested Vox kit: `.claude/skills/vox-explainer/example/`.
+- **Timeline editor (user rule, 2026-11-27):** every video gets a private web timeline he opens on phone or laptop
+  (load the `timeline-editor` skill): all tracks (cuts, voice, words, graphics, SFX, music, notes), "Last render"
+  plays the current preview, "Live cut" plays his trims at once from a low-res proxy of the raw takes, and his trims
+  and time-pinned notes save to the page database. Make it once the rough cut exists, republish it with every
+  version, and when he says "done" read `edits/current` and `notes` with ArtifactData, restate, apply, then clear
+  them. Code: `tools/timeline/`. First use: reel-13 (https://claude.ai/artifact/A7KL71kEmBsgwF6a57nTiF).
 - **Rendering with HyperFrames:** `HYPERFRAMES_BROWSER_PATH` is set by the session start hook
   (the newest `/opt/pw-browsers/chromium_headless_shell-*` headless shell; `-1243` on 2026-11-13). CLI: `npx hyperframes@0.8.150`.
 - **Web/shader renders (`templates/web/render.mjs`):** never run `npx playwright install`. Chromium is preinstalled
@@ -390,6 +396,10 @@ Learned on reel-15 (2026-11-25), a 16:9 promo for a client brand (ZAZI) from its
 - **Tall photos in 16:9: Codex outpaints the sides, then the original is pasted back** (`projects/reel-15/work/make_wide.py`).
   Parallax only where the cut-out is perfect at full size; patterned clothes and carpets gave halos, so those got a
   plain slow push (`render_flat` in `projects/reel-15/scene.py`). Studio product shots key cleanly off their backdrop.
+
+Learned on the timeline editor (2026-11-27):
+- **He wants to see inside the edit, not just the output:** every video gets the timeline page (`timeline-editor`)
+  once the rough cut exists, updated with every version; his trims and notes there are review notes like any other.
 
 Learned on reel-07 (2026-11-11), a meme template caption swap:
 - **Post captions: explain, don't preach.** Approved after two rejected tries ("sounds AI", then "not rant"): two short
