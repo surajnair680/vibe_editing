@@ -28,6 +28,10 @@ Other docs and when to read them: `docs/README.md`.
   noise into gritty skin; the version that worked boosts a denoised layer: bilateral on lightness, CLAHE 2.0 (8x8),
   clarity 0.40 at sigma 18, detail 0.35 at sigma 2, add back half the noise, saturation x1.12. About 90 ms a frame.
   `hdr()` in `projects/reel-14/work/build3/scene3.py`. Always check a full-size crop of skin before sending. [r14]
+  On reel-17 (dim gym light, pull-ups from behind) he approved a stronger variant instead: L + 0.9 (L - blur 25)
+  + 0.7 (L - blur 6) + 0.35 (L - blur 1.2), saturation x1.08, on his body only via the matte. Next to reel-14's
+  recipe it gives deeper lat and spine separation; reel-14's is brighter and flatter. Offer both on a skin crop.
+  `hdr()` in `projects/reel-17/work/render.py`. [r17]
 - **Grainy Vox reels are huge at real quality (reel-14).** 1:42 at 1080x1920 with heavy grain: master crf 14 = 1.2 GB,
   crf 22 = about 8 MB a second (about 600 MB, 21 parts), 8 Mbps = about 120 MB (5 parts), 2-pass 2150k = 28 MB in one
   file (grain softened, face fine). Audio-only revisions remux the last review video with the new mix in a minute. [r14]
@@ -310,6 +314,15 @@ Other docs and when to read them: `docs/README.md`.
   with a blur-in, a light grey section with red circles) and asked for the reanimate skill to copy it. Build of that
   look: `projects/reel-14/work/build2/` (fx2.py, scene2.py), spec `projects/reel-14/reanimate/spec.md`. [r14]
 
+- **He wants to see the whole edit, not just input and output (2026-11-27, on reel-13).** "Can you make a video editor
+  where I can see the complete timeline of everything." He asked "first tell me if you understand" and then "tell me
+  your thoughts before building": restate, list the limits honestly (nothing renders in the page, the page cannot
+  wake a session, footage is stored with the private artifact), propose an order, wait. He said yes to all three
+  asks (see, edit, notes) as a web page for phone and laptop. Built: `timeline-editor` skill + `tools/timeline/`.
+  Tested numbers: page 56 KB, proxy of 85 s of raw = 3.8 MiB (crf 30, keyframe every 0.5 s), live playback swaps
+  between two video elements at each out-point; a timecode with frames after the dot ("0:53.17") reads as seconds,
+  so the page shows hundredths. [r13]
+
 ## 2. Remaking a reference edit shot for shot [r03]
 - **Measure the reference frame by frame.** `select='gt(scene,0.12)'` gives a first cut list; busy parts need sheets of
   every frame (`-ss a -t b`, `drawtext=%{pts}`), because shots can be 1 to 2 frames long (reel-03's reference: about
@@ -420,6 +433,14 @@ Other docs and when to read them: `docs/README.md`.
   with holes and a halo; an artisan on a patterned carpet and a woman with a boy left fringes. Only the hero (dark coat
   on a plain street) was clean. Check every parallax subject at full size; fall back to a slow push on the whole photo
   (`render_flat` in `projects/reel-15/scene.py`) when the edge isn't perfect. [r15]
+
+- **Gym footage (pull-ups from behind, rings and straps on the rack behind him), reel-17:** rembg `u2net_human_seg`
+  alone grabs the gymnastic rings and bar pieces near his hands and head. MediaPipe multiclass class 5 ("others")
+  is what catches the rings, so build the person mask from classes 1-4 only (hair, body skin, face skin, clothes),
+  threshold 0.5, dilate 9 px, then multiply with rembg. Fill holes inside the body (the neck gap at the top of a rep)
+  by flooding the background from the frame border, erode 1 px, and push body colour into the 8 px edge band so the
+  blurred hair loses its wall-coloured fringe. The bar knob inside his fist stays in the matte (a fist around nothing
+  looks wrong). About 0.7 s a frame at 1080x1920. `matte()` and `decontam()` in `projects/reel-17/work/render.py`. [r17]
 
 ## 5. Effects that worked (copy the code from the project, never import across projects)
 All in `projects/reel-03/work/build/fx.py` (helpers) and `edit.py` (beats). Deterministic (seeded) so re-renders match.
