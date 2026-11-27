@@ -1,0 +1,523 @@
+<title>reel-13 Timeline</title>
+<meta name="claude:viewport-fit-sides" content="cover">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@500;700&display=swap">
+<style>
+/* Layout: editing-suite. Player + inspector on top (side by side when wide), transport bar, full-width multitrack
+   timeline below with sticky track labels. Deliberately dark only, like every edit suite. */
+:root {
+  --bg: #121418; --panel: #1a1d23; --panel2: #20242b; --line: #2b3039; --fg: #e9ebef; --muted: #959cab;
+  --cut: #2f6f7d; --cut-hi: #58b6c8; --voice: #7d93c4; --word: #3a4150; --gfx: #4f8a5b; --sfx: #b98a4c;
+  --music: #8070ad; --note: #e0b84f; --head: #ff5a52; --changed: #e09a3e; --ok: #5bb37a;
+  --ui: "Inter", system-ui, -apple-system, "Segoe UI", sans-serif;
+  --mono: "JetBrains Mono", ui-monospace, "SF Mono", Menlo, monospace;
+  --labw: 76px;
+  color-scheme: dark;
+}
+html, body { background: var(--bg); color: var(--fg); }
+body { font-family: var(--ui); font-size: 14px; padding-left: max(16px, env(safe-area-inset-left, 0px));
+  padding-right: max(16px, env(safe-area-inset-right, 0px)); padding-block: 12px 28px; }
+button { font: inherit; color: inherit; background: var(--panel2); border: 1px solid var(--line); border-radius: 8px;
+  padding: 7px 11px; cursor: pointer; touch-action: manipulation; }
+button:hover { border-color: #3d4452; }
+button:focus-visible, textarea:focus-visible { outline: 2px solid var(--cut-hi); outline-offset: 1px; }
+button.primary { background: var(--cut); border-color: var(--cut); color: #fff; font-weight: 600; }
+button.warn { color: #ffb1ac; }
+button:disabled { opacity: .45; cursor: default; }
+.top { display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 10px; margin-bottom: 12px; }
+.title { display: flex; align-items: baseline; gap: 10px; min-width: 0; }
+.title h1 { font-size: 18px; margin: 0; font-weight: 700; letter-spacing: .01em; }
+.chip { font-family: var(--mono); font-size: 12px; color: var(--muted); border: 1px solid var(--line); border-radius: 99px; padding: 2px 9px; }
+.modes { display: flex; background: var(--panel); border: 1px solid var(--line); border-radius: 10px; padding: 3px; gap: 3px; }
+.modes button { border: 0; background: transparent; padding: 6px 12px; border-radius: 7px; color: var(--muted); }
+.modes button[aria-selected="true"] { background: var(--panel2); color: var(--fg); font-weight: 600; box-shadow: inset 0 0 0 1px var(--line); }
+.stage { display: grid; grid-template-columns: auto minmax(0, 1fr); gap: 16px; align-items: start; }
+.frame { position: relative; height: min(58vh, 620px); aspect-ratio: 9 / 16; max-width: 100%; background: #000; border-radius: 10px; overflow: hidden; border: 1px solid var(--line); }
+.frame video { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: contain; visibility: hidden; }
+.frame video.on { visibility: visible; }
+.frame .empty { position: absolute; inset: 0; display: grid; place-items: center; text-align: center; color: var(--muted); padding: 20px; font-size: 13px; }
+.side { display: flex; flex-direction: column; gap: 12px; min-width: 0; }
+.card { background: var(--panel); border: 1px solid var(--line); border-radius: 12px; padding: 14px; }
+.card h2 { font-size: 12px; text-transform: uppercase; letter-spacing: .08em; color: var(--muted); margin: 0 0 10px; font-weight: 600; }
+.banner { border-color: #5a4320; background: #241d12; color: #f0d2a2; font-size: 13px; line-height: 1.45; }
+.quote { font-size: 15px; line-height: 1.45; margin: 0 0 10px; }
+.kv { display: grid; grid-template-columns: auto 1fr; gap: 4px 12px; font-size: 13px; margin-bottom: 12px; }
+.kv dt { color: var(--muted); } .kv dd { margin: 0; font-family: var(--mono); font-size: 12.5px; }
+.nudge { display: grid; grid-template-columns: 64px repeat(4, minmax(0, 1fr)); gap: 6px; align-items: center; margin-bottom: 6px; }
+.nudge span { color: var(--muted); font-size: 12px; }
+.nudge button { padding: 7px 0; font-family: var(--mono); font-size: 12px; }
+.row-btns { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 10px; }
+.hint { color: var(--muted); font-size: 12.5px; line-height: 1.5; margin: 0; }
+.changed { color: var(--changed); font-weight: 600; }
+.chlist { list-style: none; margin: 0 0 10px; padding: 0; display: flex; flex-direction: column; gap: 6px; font-size: 13px; }
+.chlist li { display: flex; justify-content: space-between; gap: 8px; align-items: center; }
+.chlist li span { min-width: 0; }
+.chlist button { padding: 3px 8px; font-size: 12px; }
+textarea { width: 100%; min-height: 70px; resize: vertical; background: var(--panel2); color: var(--fg); border: 1px solid var(--line); border-radius: 8px; padding: 8px; font: inherit; box-sizing: border-box; }
+.transport { display: flex; flex-wrap: wrap; align-items: center; gap: 8px; margin: 14px 0 8px; }
+.transport .tc { font-family: var(--mono); font-size: 15px; font-weight: 700; font-variant-numeric: tabular-nums; min-width: 9.5ch; }
+.transport .len { font-family: var(--mono); color: var(--muted); font-size: 12.5px; }
+.transport .grow { flex: 1; }
+#play { min-width: 74px; font-weight: 600; }
+.tl { background: var(--panel); border: 1px solid var(--line); border-radius: 12px; overflow: hidden; }
+#scroller { overflow-x: auto; overflow-y: hidden; position: relative; -webkit-overflow-scrolling: touch; }
+#inner { position: relative; }
+.trow { position: relative; border-bottom: 1px solid var(--line); }
+.trow:last-child { border-bottom: 0; }
+.tlabel { position: sticky; left: 0; z-index: 4; width: var(--labw); height: 100%; box-sizing: border-box; background: var(--panel);
+  border-right: 1px solid var(--line); font-size: 11px; font-weight: 600; color: var(--muted); padding: 0 8px;
+  display: flex; align-items: center; text-transform: uppercase; letter-spacing: .06em; }
+.lane { position: absolute; top: 0; bottom: 0; left: var(--labw); right: 0; }
+.ruler .tick { position: absolute; top: 0; bottom: 0; border-left: 1px solid #333945; }
+.ruler .tick b { position: absolute; top: 4px; left: 4px; font: 500 10.5px var(--mono); color: var(--muted); white-space: nowrap; }
+.ruler .tick.minor { top: 60%; border-color: #2a2f38; }
+.blk { position: absolute; top: 5px; bottom: 5px; border-radius: 6px; overflow: hidden; box-sizing: border-box; cursor: pointer;
+  font-size: 11.5px; line-height: 1.25; padding: 4px 6px; white-space: nowrap; text-overflow: ellipsis; color: #f2f5f8; }
+.cut { background: var(--cut); border: 1px solid #3b8797; }
+.cut.alt { background: #296270; }
+.cut.mod { box-shadow: inset 0 -3px 0 var(--changed); }
+.cut.sel { background: #3a8a9b; border-color: var(--cut-hi); box-shadow: 0 0 0 2px var(--cut-hi); z-index: 2; padding-left: 18px; padding-right: 18px; }
+.cut .n { font: 700 10px var(--mono); opacity: .75; margin-right: 5px; }
+.hdl { position: absolute; top: 0; bottom: 0; width: 18px; z-index: 3; touch-action: none; cursor: ew-resize; display: grid; place-items: center; }
+.hdl::after { content: ""; width: 5px; height: 70%; border-radius: 3px; background: #fff; }
+.hdl.l { left: 0; } .hdl.r { right: 0; }
+.word { position: absolute; top: 4px; bottom: 4px; background: var(--word); border-radius: 4px; font-size: 10.5px; color: #cdd3dd; padding: 2px 3px; overflow: hidden; white-space: nowrap; box-sizing: border-box; }
+.item { background: var(--sfx); }
+.item.gfx { background: var(--gfx); } .item.music { background: var(--music); }
+.pin { position: absolute; top: 3px; bottom: 3px; width: 18px; margin-left: -9px; border-radius: 5px; background: var(--note); color: #241a00; font: 700 11px var(--ui); display: grid; place-items: center; cursor: pointer; }
+.pin.done { opacity: .45; }
+.none { position: absolute; left: 10px; top: 50%; transform: translateY(-50%); color: #5d6472; font-size: 11.5px; white-space: nowrap; }
+canvas.wave { position: absolute; top: 0; left: 0; pointer-events: none; }
+#playhead { position: absolute; top: 0; bottom: 0; width: 2px; margin-left: -1px; background: var(--head); z-index: 5; pointer-events: none; }
+#playhead::before { content: ""; position: absolute; top: 0; left: -5px; border: 6px solid transparent; border-top-color: var(--head); }
+.status { font-size: 12.5px; color: var(--muted); }
+.status.ok { color: var(--ok); }
+@media (max-width: 760px) {
+  body { display: flex; flex-direction: column; }
+  .stage { display: contents; }
+  .top { order: 0; } .viewer { order: 1; } .transport { order: 2; } .tl { order: 3; } .side { order: 4; margin-top: 14px; }
+  .viewer { display: flex; justify-content: center; }
+  .frame { height: min(46vh, 520px); }
+  :root { --labw: 62px; }
+  .tlabel { font-size: 9.5px; letter-spacing: .03em; padding: 0 6px; overflow: hidden; }
+  .transport .grow { display: none; }
+}
+@media (prefers-reduced-motion: reduce) { * { scroll-behavior: auto !important; } }
+</style>
+
+<header class="top">
+  <div class="title"><h1 id="pname">Timeline</h1><span class="chip" id="pver"></span></div>
+  <div class="modes" role="tablist" aria-label="What plays">
+    <button id="mRender" role="tab" aria-selected="true">Last render</button>
+    <button id="mLive" role="tab" aria-selected="false">Live cut</button>
+  </div>
+</header>
+
+<main class="stage">
+  <div class="viewer">
+    <div class="frame" id="frame">
+      <video id="vr" playsinline preload="auto"></video>
+      <video id="va" playsinline preload="auto"></video>
+      <video id="vb" playsinline preload="auto"></video>
+      <div class="empty" id="nomedia" hidden></div>
+    </div>
+  </div>
+  <aside class="side">
+    <div class="card banner" id="banner" hidden></div>
+    <div class="card" id="inspector"></div>
+    <div class="card" id="changes"></div>
+  </aside>
+</main>
+
+<div class="transport">
+  <button id="play" aria-label="Play">Play</button>
+  <button id="back" aria-label="Back one frame">-1f</button>
+  <button id="fwd" aria-label="Forward one frame">+1f</button>
+  <span class="tc" id="tc">0:00.00</span><span class="len" id="len"></span>
+  <span class="grow"></span>
+  <button id="zout" aria-label="Zoom out">-</button>
+  <button id="zin" aria-label="Zoom in">+</button>
+  <button id="addnote">Add note here</button>
+</div>
+
+<section class="tl" aria-label="Timeline">
+  <div id="scroller"><div id="inner"><div id="playhead"></div></div></div>
+</section>
+
+<script type="application/json" id="tl-data">{"project":"reel-13","version":"rough-v2","fps":30,"size":[1080,1920],"sources":{"length":85.1,"parts":[{"label":"Part 1","file":"ep0_part1.mp4","start":0.0,"end":36.0},{"label":"Part 2","file":"ep0_part2.mp4","start":36.0,"end":72.0},{"label":"Part 3","file":"ep0_part3.mp4","start":72.0,"end":85.1}]},"segments":[{"id":"c01","src_in":0.8667,"src_out":3.7667,"speed":1.0,"text":"I am going to bulk until I look like an anime villain."},{"id":"c02","src_in":5.6667,"src_out":7.4667,"speed":1.0,"text":"This is Toji Fushiguro."},{"id":"c03","src_in":10.1,"src_out":10.9333,"speed":1.0,"text":"Wide back,"},{"id":"c04","src_in":11.2,"src_out":15.2333,"speed":1.0,"text":"arms like carved stone, and a V-taper so sharp it looks fake."},{"id":"c05","src_in":16.6333,"src_out":20.0667,"speed":1.0,"text":"But whenever I tell people they can build a body like this,"},{"id":"c06","src_in":21.4667,"src_out":23.8,"speed":1.0,"text":"I hear the same three excuses."},{"id":"c07","src_in":25.2667,"src_out":28.1,"speed":1.0,"text":"I don't have the genetics. / I don't have the time."},{"id":"c08","src_in":28.4333,"src_out":30.0667,"speed":1.0,"text":"It's not possible naturally."},{"id":"c09","src_in":32.0,"src_out":34.6333,"speed":1.0,"text":"So I am going to show you what is possible"},{"id":"c10","src_in":36.7667,"src_out":39.3,"speed":1.0,"text":"This is me after seven years of training."},{"id":"c11","src_in":40.9667,"src_out":43.6667,"speed":1.0,"text":"Decent, / but I'm not a genetic freak."},{"id":"c12","src_in":45.3333,"src_out":50.1667,"speed":1.0,"text":"I am twenty-seven. / I work full time in tech, and I'm also a fitness coach."},{"id":"c13","src_in":51.4667,"src_out":55.1667,"speed":1.0,"text":"And I have been a type one diabetic since I was twelve."},{"id":"c14","src_in":56.3,"src_out":57.8333,"speed":1.0,"text":"If I can build this body,"},{"id":"c15","src_in":58.0667,"src_out":58.8333,"speed":1.0,"text":"so can you."},{"id":"c16","src_in":60.6667,"src_out":62.9333,"speed":1.0,"text":"I'm already two months into this bulk,"},{"id":"c17","src_in":64.6,"src_out":65.7,"speed":1.0,"text":"but from today,"},{"id":"c18","src_in":65.8667,"src_out":67.2667,"speed":1.0,"text":"I'm filming all of it."},{"id":"c19","src_in":69.1,"src_out":69.9,"speed":1.0,"text":"Training,"},{"id":"c20","src_in":70.0333,"src_out":70.6667,"speed":1.0,"text":"food,"},{"id":"c21","src_in":70.8667,"src_out":71.7,"speed":1.0,"text":"supplements"},{"id":"c22","src_in":73.1333,"src_out":75.4,"speed":1.0,"text":"The wins and the days it goes wrong."},{"id":"c23","src_in":77.0,"src_out":78.1333,"speed":1.0,"text":"How long will it take?"},{"id":"c24","src_in":78.2,"src_out":79.8667,"speed":1.0,"text":"Six months? A year?"},{"id":"c25","src_in":80.3333,"src_out":81.0333,"speed":1.0,"text":"I don't know,"},{"id":"c26","src_in":81.3,"src_out":83.6667,"speed":1.0,"text":"but I'm not stopping until I look like him"}],"words":[{"w":"I","s":1.02,"e":1.06},{"w":"am","s":1.08,"e":1.18},{"w":"going","s":1.22,"e":1.38},{"w":"to","s":1.44,"e":1.52},{"w":"bulk","s":1.64,"e":1.92},{"w":"until","s":2.08,"e":2.32},{"w":"I","s":2.36,"e":2.44},{"w":"look","s":2.48,"e":2.64},{"w":"like","s":2.74,"e":2.88},{"w":"an","s":2.92,"e":2.98},{"w":"anime","s":3.02,"e":3.36},{"w":"villain.","s":3.38,"e":3.7},{"w":"This","s":5.82,"e":6.02},{"w":"is","s":6.16,"e":6.28},{"w":"Toji","s":6.38,"e":6.68},{"w":"Fushiguro.","s":6.8,"e":7.34},{"w":"Wide","s":10.24,"e":10.46},{"w":"back,","s":10.54,"e":10.82},{"w":"arms","s":11.26,"e":11.54},{"w":"like","s":11.58,"e":11.78},{"w":"carved","s":11.82,"e":12.08},{"w":"stone,","s":12.18,"e":12.44},{"w":"and","s":12.74,"e":12.84},{"w":"a","s":12.88,"e":12.94},{"w":"V-taper","s":13.0,"e":13.48},{"w":"so","s":13.58,"e":13.72},{"w":"sharp","s":13.82,"e":14.18},{"w":"it","s":14.4,"e":14.48},{"w":"looks","s":14.52,"e":14.72},{"w":"fake.","s":14.82,"e":15.14},{"w":"But","s":16.84,"e":17.02},{"w":"whenever","s":17.06,"e":17.36},{"w":"I","s":17.42,"e":17.48},{"w":"tell","s":17.6,"e":17.76},{"w":"people","s":17.86,"e":18.2},{"w":"they","s":18.46,"e":18.58},{"w":"can","s":18.62,"e":18.78},{"w":"build","s":18.82,"e":19.0},{"w":"a","s":19.04,"e":19.1},{"w":"body","s":19.12,"e":19.38},{"w":"like","s":19.42,"e":19.62},{"w":"this,","s":19.66,"e":19.94},{"w":"I","s":21.64,"e":21.72},{"w":"hear","s":21.78,"e":21.98},{"w":"the","s":22.04,"e":22.16},{"w":"same","s":22.24,"e":22.52},{"w":"three","s":22.54,"e":22.76},{"w":"excuses.","s":22.82,"e":23.5},{"w":"I","s":25.5,"e":25.54},{"w":"don't","s":25.58,"e":25.78},{"w":"have","s":25.82,"e":25.96},{"w":"the","s":26.0,"e":26.06},{"w":"genetics.","s":26.12,"e":26.76},{"w":"I","s":27.18,"e":27.22},{"w":"don't","s":27.26,"e":27.38},{"w":"have","s":27.42,"e":27.54},{"w":"the","s":27.58,"e":27.68},{"w":"time.","s":27.72,"e":28.02},{"w":"It's","s":28.5,"e":28.66},{"w":"not","s":28.7,"e":28.92},{"w":"possible","s":28.96,"e":29.38},{"w":"naturally.","s":29.5,"e":30.0},{"w":"So","s":32.119,"e":32.28},{"w":"I","s":32.38,"e":32.4},{"w":"am","s":32.42,"e":32.479},{"w":"going","s":32.52,"e":32.7},{"w":"to","s":32.74,"e":32.84},{"w":"show","s":32.88,"e":33.04},{"w":"you","s":33.1,"e":33.22},{"w":"what","s":33.44,"e":33.66},{"w":"is","s":33.84,"e":34.04},{"w":"possible","s":34.08,"e":34.54},{"w":"This","s":37.02,"e":37.12},{"w":"is","s":37.18,"e":37.3},{"w":"me","s":37.36,"e":37.74},{"w":"after","s":37.84,"e":38.08},{"w":"seven","s":38.14,"e":38.42},{"w":"years","s":38.46,"e":38.66},{"w":"of","s":38.7,"e":38.8},{"w":"training.","s":38.86,"e":39.2},{"w":"Decent,","s":41.18,"e":41.6},{"w":"but","s":42.04,"e":42.22},{"w":"I'm","s":42.3,"e":42.44},{"w":"not","s":42.48,"e":42.62},{"w":"a","s":42.66,"e":42.72},{"w":"genetic","s":42.76,"e":43.06},{"w":"freak.","s":43.16,"e":43.46},{"w":"I","s":45.58,"e":45.62},{"w":"am","s":45.64,"e":45.74},{"w":"twenty-seven.","s":45.78,"e":46.36},{"w":"I","s":46.96,"e":47.04},{"w":"work","s":47.08,"e":47.32},{"w":"full","s":47.38,"e":47.54},{"w":"time","s":47.64,"e":47.8},{"w":"in","s":47.84,"e":47.92},{"w":"tech,","s":48.02,"e":48.24},{"w":"and","s":48.58,"e":48.68},{"w":"I'm","s":48.76,"e":48.86},{"w":"also","s":48.94,"e":49.2},{"w":"a","s":49.24,"e":49.3},{"w":"fitness","s":49.34,"e":49.64},{"w":"coach.","s":49.72,"e":49.96},{"w":"And","s":51.6,"e":51.86},{"w":"I","s":51.92,"e":51.96},{"w":"have","s":51.98,"e":52.12},{"w":"been","s":52.16,"e":52.26},{"w":"a","s":52.32,"e":52.379},{"w":"type","s":52.42,"e":52.64},{"w":"one","s":52.7,"e":52.8},{"w":"diabetic","s":52.84,"e":53.34},{"w":"since","s":53.58,"e":53.92},{"w":"I","s":54.02,"e":54.06},{"w":"was","s":54.1,"e":54.3},{"w":"twelve.","s":54.34,"e":54.74},{"w":"If","s":56.5,"e":56.64},{"w":"I","s":56.74,"e":56.8},{"w":"can","s":56.84,"e":56.98},{"w":"build","s":57.04,"e":57.22},{"w":"this","s":57.28,"e":57.44},{"w":"body,","s":57.48,"e":57.72},{"w":"so","s":58.22,"e":58.34},{"w":"can","s":58.42,"e":58.58},{"w":"you.","s":58.62,"e":58.72},{"w":"I'm","s":60.78,"e":60.98},{"w":"already","s":61.06,"e":61.42},{"w":"two","s":61.54,"e":61.66},{"w":"months","s":61.76,"e":62.08},{"w":"into","s":62.14,"e":62.34},{"w":"this","s":62.38,"e":62.52},{"w":"bulk,","s":62.58,"e":62.84},{"w":"but","s":64.84,"e":65.0},{"w":"from","s":65.06,"e":65.24},{"w":"today,","s":65.28,"e":65.54},{"w":"I'm","s":65.96,"e":66.12},{"w":"filming","s":66.18,"e":66.64},{"w":"all","s":66.72,"e":66.82},{"w":"of","s":66.88,"e":66.98},{"w":"it.","s":67.02,"e":67.18},{"w":"Training,","s":69.32,"e":69.66},{"w":"food,","s":70.24,"e":70.5},{"w":"supplements","s":70.98,"e":71.58},{"w":"The","s":73.26,"e":73.38},{"w":"wins","s":73.46,"e":73.82},{"w":"and","s":74.04,"e":74.18},{"w":"the","s":74.22,"e":74.3},{"w":"days","s":74.38,"e":74.58},{"w":"it","s":74.62,"e":74.7},{"w":"goes","s":74.8,"e":74.98},{"w":"wrong.","s":75.04,"e":75.32},{"w":"How","s":77.1,"e":77.28},{"w":"long","s":77.34,"e":77.52},{"w":"will","s":77.54,"e":77.64},{"w":"it","s":77.68,"e":77.78},{"w":"take?","s":77.84,"e":78.04},{"w":"Six","s":78.52,"e":78.74},{"w":"months?","s":78.82,"e":79.12},{"w":"A","s":79.38,"e":79.44},{"w":"year?","s":79.48,"e":79.7},{"w":"I","s":80.5,"e":80.56},{"w":"don't","s":80.58,"e":80.74},{"w":"know,","s":80.78,"e":80.94},{"w":"but","s":81.38,"e":81.52},{"w":"I'm","s":81.6,"e":81.7},{"w":"not","s":81.72,"e":81.86},{"w":"stopping","s":81.92,"e":82.32},{"w":"until","s":82.36,"e":82.56},{"w":"I","s":82.64,"e":82.68},{"w":"look","s":82.8,"e":83.04},{"w":"like","s":83.1,"e":83.3},{"w":"him","s":83.36,"e":83.58}],"peaks":{"rate":100,"data":"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"},"tracks":[],"media":{"preview":"/_blob/ec4320af96a75b1efa2a2f1feb21b0da","proxy":"/_blob/a388c6b4212f5dde1f1c0249635fad90"}}</script>
+<script>
+(() => {
+"use strict";
+const T = JSON.parse(document.getElementById("tl-data").textContent);
+const FPS = T.fps || 30, FR = 1 / FPS;
+const $ = (id) => document.getElementById(id);
+const esc = (s) => String(s).replace(/[&<>"']/g, (c) => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;", "'": "&#39;" }[c]));
+const snap = (t) => Math.round(t * FPS) / FPS;
+const tc = (t) => { const c = Math.round(Math.max(0, t) * 100), s = Math.floor(c / 100);   // m:ss.hh (hundredths, not frames)
+  return Math.floor(s / 60) + ":" + String(s % 60).padStart(2, "0") + "." + String(c % 100).padStart(2, "0"); };
+const sec = (t) => t.toFixed(2) + " s";
+const labw = () => parseFloat(getComputedStyle(document.documentElement).getPropertyValue("--labw")) || 76;
+
+/* ---------- state ---------- */
+const S = { mode: "render", t: 0, playing: false, pps: 46, sel: null, edits: { cuts: {}, shifts: {} },
+  status: "draft", notes: [], db: null, saveMsg: "", draftNote: null, confirmReset: false };
+const baseSegs = T.segments.map((g) => ({ ...g }));
+const segIndex = Object.fromEntries(baseSegs.map((g, i) => [g.id, i]));
+const parts = T.sources.parts;
+const partOf = (s) => parts.find((p) => s >= p.start - 1e-6 && s < p.end + 1e-6) || parts[0];
+const peaks = T.peaks ? Uint8Array.from(atob(T.peaks.data), (c) => c.charCodeAt(0)) : null;
+
+function build(useEdits) {
+  let t = 0; const out = [];
+  baseSegs.forEach((g, i) => {
+    const o = useEdits ? S.edits.cuts[g.id] : null;
+    if (o && o.deleted) return;
+    const a = o && o.src_in != null ? o.src_in : g.src_in, b = o && o.src_out != null ? o.src_out : g.src_out;
+    const sp = g.speed || 1, len = Math.round((b - a) / sp * FPS) / FPS;
+    out.push({ ...g, n: i + 1, src_in: a, src_out: b, speed: sp, edit_in: t, len, mod: !!o });
+    t += len;
+  });
+  return out;
+}
+let SEG = build(false), LEN = 0;
+const recompute = () => { SEG = build(S.mode === "live"); LEN = SEG.length ? SEG[SEG.length - 1].edit_in + SEG[SEG.length - 1].len : 0; };
+const nEdits = () => Object.keys(S.edits.cuts).length + Object.keys(S.edits.shifts).length;
+function segAt(t, segs = SEG) { let lo = 0, hi = segs.length - 1; while (lo < hi) { const m = (lo + hi + 1) >> 1; if (segs[m].edit_in <= t + 1e-9) lo = m; else hi = m - 1; } return lo; }
+function editToSrc(t, segs = SEG) { const g = segs[segAt(t, segs)]; return g ? g.src_in + (t - g.edit_in) * g.speed : 0; }
+function srcToEdit(s, segs = SEG) {   // null when that moment of the take is cut out
+  for (const g of segs) if (s >= g.src_in - 1e-6 && s <= g.src_out + 1e-6) return g.edit_in + (s - g.src_in) / g.speed;
+  return null; }
+function srcToEditNear(s, segs = SEG) { const e = srcToEdit(s, segs); if (e != null) return e;
+  const g = segs.find((x) => x.src_in >= s); return g ? g.edit_in : LEN; }
+
+/* ---------- media ---------- */
+const vr = $("vr"), va = $("va"), vb = $("vb");
+const hasPreview = !!(T.media && T.media.preview), hasProxy = !!(T.media && T.media.proxy);
+if (hasPreview) vr.src = T.media.preview;
+if (hasProxy) { va.src = T.media.proxy; vb.src = T.media.proxy; }
+const E = { k: 0, act: va, nxt: vb, unlocked: false };
+function show(v) { [vr, va, vb].forEach((x) => x.classList.toggle("on", x === v)); }
+function noMedia(msg) { const n = $("nomedia"); n.hidden = !msg; n.textContent = msg || ""; }
+function syncMedia() {
+  if (S.mode === "render") {
+    if (!hasPreview) { noMedia("No render uploaded for this version yet."); show(null); return; }
+    noMedia(""); show(vr); try { vr.currentTime = Math.min(S.t, LEN); } catch (e) {}
+  } else {
+    if (!hasProxy) { noMedia("Live cut needs the low-res copy of the raw takes. Ask Claude to add it."); show(null); return; }
+    noMedia(""); liveLoad(S.t);
+  }
+}
+function liveLoad(t) {
+  if (!SEG.length) return; E.k = segAt(t); const g = SEG[E.k];
+  E.act.playbackRate = g.speed; try { E.act.currentTime = g.src_in + (t - g.edit_in) * g.speed; } catch (e) {}
+  show(E.act); prepNext();
+}
+function prepNext() { const g = SEG[E.k + 1]; if (!g) return; E.nxt.playbackRate = g.speed; try { E.nxt.currentTime = g.src_in; } catch (e) {} }
+function contiguous(a, b) { return b && Math.abs(b.src_in - a.src_out) < FR * 0.6 && b.speed === a.speed; }
+
+async function play() {
+  if (S.mode === "render" ? !hasPreview : !hasProxy) return;
+  if (S.t >= LEN - FR) { S.t = 0; syncMedia(); }
+  S.playing = true; $("play").textContent = "Pause";
+  try {
+    if (S.mode === "render") await vr.play();
+    else {
+      if (!E.unlocked) { E.unlocked = true; E.nxt.muted = true; E.nxt.play().then(() => { E.nxt.pause(); E.nxt.muted = false; prepNext(); }).catch(() => { E.nxt.muted = false; }); }
+      await E.act.play();
+    }
+  } catch (e) { pause(); }
+}
+function pause() { S.playing = false; $("play").textContent = "Play"; [vr, va, vb].forEach((v) => { try { v.pause(); } catch (e) {} }); }
+vr.addEventListener("ended", () => { pause(); });
+
+function tick() {
+  if (S.playing) {
+    if (S.mode === "render") { S.t = vr.currentTime; if (S.t >= LEN) pause(); }
+    else {
+      let g = SEG[E.k];
+      if (g && E.act.currentTime >= g.src_out - 0.012) {
+        const nx = SEG[E.k + 1];
+        if (!nx) { S.t = LEN; pause(); }
+        else if (contiguous(g, nx)) { E.k++; prepNext(); }
+        else { E.k++; const old = E.act; E.act = E.nxt; E.nxt = old; E.act.play().catch(() => {}); old.pause(); show(E.act); prepNext(); }
+        g = SEG[E.k];
+      }
+      if (S.playing && g) S.t = g.edit_in + (E.act.currentTime - g.src_in) / g.speed;
+    }
+    follow();
+  }
+  drawHead();
+  requestAnimationFrame(tick);
+}
+
+/* ---------- timeline ---------- */
+const sc = $("scroller"), inner = $("inner");
+const TRACKS = (() => {
+  const extra = T.tracks || [];
+  const def = [{ id: "gfx", label: "Graphics" }, { id: "sfx", label: "SFX" }, { id: "music", label: "Music" }];
+  const tr = [{ id: "ruler", label: "", h: 24 }, { id: "cuts", label: "Cuts", h: 48 }, { id: "voice", label: "Voice", h: 40 }, { id: "words", label: "Words", h: 26 }];
+  const seen = new Set();
+  extra.forEach((x) => { seen.add(x.id); tr.push({ id: x.id, label: x.label || x.id, h: 30, items: x.items || [], kind: x.kind || x.id }); });
+  def.forEach((d) => { if (!seen.has(d.id)) tr.push({ ...d, h: 30, items: [], kind: d.id }); });
+  tr.push({ id: "notes", label: "Notes", h: 28 });
+  return tr;
+})();
+TRACKS.forEach((tr) => {
+  const row = document.createElement("div"); row.className = "trow" + (tr.id === "ruler" ? " ruler" : ""); row.style.height = tr.h + "px";
+  row.innerHTML = '<div class="tlabel">' + esc(tr.label) + '</div><div class="lane" id="lane-' + tr.id + '"></div>';
+  inner.insertBefore(row, $("playhead")); tr.lane = row.querySelector(".lane");
+});
+const wave = document.createElement("canvas"); wave.className = "wave"; TRACKS.find((t) => t.id === "voice").lane.appendChild(wave);
+const X = (t) => t * S.pps;
+
+function render() {
+  recompute();
+  const W = Math.max(X(LEN) + 60, sc.clientWidth - labw());
+  inner.style.width = (W + labw()) + "px";
+  const L = (id) => TRACKS.find((t) => t.id === id).lane;
+  // ruler
+  const step = S.pps > 120 ? 0.5 : S.pps > 50 ? 1 : S.pps > 22 ? 2 : 5; let h = "";
+  for (let t = 0; t <= LEN + step; t += step) {
+    const major = Math.abs(t / (step * 2) - Math.round(t / (step * 2))) < 1e-6 || step >= 2;
+    h += '<div class="tick' + (major ? "" : " minor") + '" style="left:' + X(t) + 'px">' + (major ? "<b>" + tc(t).replace(/\.00$/, "") + "</b>" : "") + "</div>";
+  }
+  L("ruler").innerHTML = h;
+  // cuts
+  h = "";
+  SEG.forEach((g, i) => {
+    const sel = S.sel && S.sel.type === "cut" && S.sel.id === g.id;
+    h += '<div class="blk cut' + (i % 2 ? " alt" : "") + (g.mod ? " mod" : "") + (sel ? " sel" : "") + '" data-cut="' + g.id + '" style="left:' + X(g.edit_in) + "px;width:" + Math.max(2, X(g.len) - 1) + 'px">' +
+      '<span class="n">' + g.n + "</span>" + esc(g.text) + (sel && S.mode === "live" ? '<div class="hdl l" data-h="in"></div><div class="hdl r" data-h="out"></div>' : "") + "</div>";
+  });
+  L("cuts").innerHTML = h;
+  // words
+  h = "";
+  if (S.pps >= 30) T.words.forEach((w) => {
+    const a = srcToEdit(w.s), b = srcToEdit(w.e); if (a == null) return;
+    const e = b == null ? a + (w.e - w.s) : b; const wd = X(e - a);
+    h += '<div class="word" style="left:' + X(a) + "px;width:" + Math.max(2, wd - 1) + 'px">' + (wd > 20 ? esc(w.w) : "") + "</div>";
+  });
+  else h = '<span class="none">Zoom in to see words</span>';
+  L("words").innerHTML = h;
+  // extra tracks
+  TRACKS.filter((t) => t.items).forEach((tr) => {
+    if (!tr.items.length) { tr.lane.innerHTML = '<span class="none">Nothing yet</span>'; return; }
+    tr.lane.innerHTML = tr.items.map((it) => {
+      const sh = (S.mode === "live" && S.edits.shifts[it.id]) || 0;
+      let a = it.anchor === "src" ? srcToEditNear(it.start) : (S.mode === "live" ? srcToEditNear(editToSrc(it.start, build(false))) : it.start);
+      const d = (it.end || it.start + 0.3) - it.start; a += sh;
+      const sel = S.sel && S.sel.type === "item" && S.sel.id === it.id;
+      return '<div class="blk item ' + esc(tr.kind) + '" data-item="' + esc(it.id) + '" data-track="' + esc(tr.id) + '" style="left:' + X(a) + "px;width:" + Math.max(6, X(d)) + "px" + (sel ? ";outline:2px solid #fff" : "") + '">' + esc(it.label || "") + "</div>";
+    }).join("");
+  });
+  // notes
+  const open = S.notes.filter((n) => !n.done);
+  L("notes").innerHTML = S.notes.length ? S.notes.map((n, i) => '<div class="pin' + (n.done ? " done" : "") + '" data-note="' + esc(n.id) + '" style="left:' + X(srcToEditNear(n.src_t)) + 'px" title="' + esc(n.text) + '">' + (i + 1) + "</div>").join("")
+    : '<span class="none">Tap "Add note here" to pin a note at the playhead</span>';
+  $("len").textContent = "/ " + tc(LEN);
+  drawWave(); drawHead(); pinHints(); renderSide();
+}
+function drawWave() {
+  const lane = TRACKS.find((t) => t.id === "voice").lane;
+  const vw = Math.max(1, sc.clientWidth - labw()), hgt = lane.clientHeight, dpr = window.devicePixelRatio || 1;
+  const x0 = Math.max(0, sc.scrollLeft);
+  wave.style.left = x0 + "px"; wave.style.width = vw + "px"; wave.style.height = hgt + "px";
+  wave.width = Math.round(vw * dpr); wave.height = Math.round(hgt * dpr);
+  const c = wave.getContext("2d"); c.setTransform(dpr, 0, 0, dpr, 0, 0); c.clearRect(0, 0, vw, hgt);
+  if (!peaks) return; c.fillStyle = getComputedStyle(document.documentElement).getPropertyValue("--voice");
+  const rate = T.peaks.rate, mid = hgt / 2;
+  for (let x = 0; x < vw; x++) {
+    const t0 = (x0 + x) / S.pps, t1 = (x0 + x + 1) / S.pps; if (t0 > LEN) break;
+    const g = SEG[segAt(t0)]; if (!g) continue;
+    const s0 = g.src_in + (t0 - g.edit_in) * g.speed, s1 = g.src_in + (Math.min(t1, g.edit_in + g.len) - g.edit_in) * g.speed;
+    let m = 0; for (let i = Math.floor(s0 * rate); i <= Math.ceil(s1 * rate) && i < peaks.length; i++) m = Math.max(m, peaks[i]);
+    const a = (m / 255) * (hgt / 2 - 3); if (a > 0.5) c.fillRect(x, mid - a, 1, a * 2);
+  }
+}
+function drawHead() { $("playhead").style.left = (labw() + X(S.t)) + "px"; $("tc").textContent = tc(S.t); }
+function follow() { const x = X(S.t), vw = sc.clientWidth - labw(); if (x < sc.scrollLeft || x > sc.scrollLeft + vw - 30) sc.scrollLeft = Math.max(0, x - vw * 0.3); }
+function pinHints() { inner.querySelectorAll(".none").forEach((n) => { n.style.left = (sc.scrollLeft + 10) + "px"; }); }
+sc.addEventListener("scroll", () => { drawWave(); pinHints(); }, { passive: true });
+
+function seek(t) { S.t = Math.max(0, Math.min(snap(t), Math.max(0, LEN - FR))); if (S.playing) pause(); syncMedia(); drawHead(); }
+inner.addEventListener("click", (e) => {
+  if (e.target.closest(".hdl")) return;
+  const cut = e.target.closest("[data-cut]"), note = e.target.closest("[data-note]"), item = e.target.closest("[data-item]");
+  const t = (e.clientX - inner.getBoundingClientRect().left - labw()) / S.pps;
+  if (note) { S.sel = { type: "note", id: note.dataset.note }; S.draftNote = null; render(); return; }
+  if (item) { S.sel = { type: "item", id: item.dataset.item, track: item.dataset.track }; render(); return; }
+  if (cut) { S.sel = { type: "cut", id: cut.dataset.cut }; S.draftNote = null; seek(t); render(); return; }
+  if (t >= 0) seek(t);
+});
+
+/* ---------- trims ---------- */
+function curOf(id) { const g = baseSegs[segIndex[id]], o = S.edits.cuts[id] || {}; return { a: o.src_in != null ? o.src_in : g.src_in, b: o.src_out != null ? o.src_out : g.src_out, del: !!o.deleted }; }
+function limits(id) {   // stay inside the take, never overlap the neighbouring pieces of the same take
+  const i = segIndex[id], g = baseSegs[i], p = partOf(g.src_in);
+  let lo = p.start, hi = p.end - FR;
+  for (let j = i - 1; j >= 0; j--) { const c = curOf(baseSegs[j].id); if (c.del) continue; if (partOf(baseSegs[j].src_in) === p) lo = Math.max(lo, c.b); break; }
+  for (let j = i + 1; j < baseSegs.length; j++) { const c = curOf(baseSegs[j].id); if (c.del) continue; if (partOf(baseSegs[j].src_in) === p) hi = Math.min(hi, c.a); break; }
+  return { lo, hi };
+}
+function setCut(id, a, b) {
+  const g = baseSegs[segIndex[id]], lim = limits(id);
+  a = snap(Math.max(lim.lo, Math.min(a, b - 2 * FR))); b = snap(Math.min(lim.hi, Math.max(b, a + 2 * FR)));
+  const o = { ...(S.edits.cuts[id] || {}) }; o.src_in = a; o.src_out = b;
+  if (Math.abs(a - g.src_in) < FR / 2) delete o.src_in; if (Math.abs(b - g.src_out) < FR / 2) delete o.src_out;
+  if (!Object.keys(o).length) delete S.edits.cuts[id]; else S.edits.cuts[id] = o;
+}
+function changed() { if (S.playing) pause(); S.status = "draft"; S.confirmReset = false; render(); if (S.mode === "live") syncMedia(); queueSave(); }
+function nudge(id, which, d) { const c = curOf(id); if (which === "in") setCut(id, c.a + d, c.b); else setCut(id, c.a, c.b + d); changed(); }
+function setMode(m) {
+  if (m === "live" && !hasProxy) return;
+  const src = editToSrc(S.t); pause(); S.mode = m; recompute(); S.t = Math.min(srcToEditNear(src), Math.max(0, LEN - FR));
+  $("mRender").setAttribute("aria-selected", m === "render"); $("mLive").setAttribute("aria-selected", m === "live");
+  render(); syncMedia();
+}
+$("mRender").onclick = () => setMode("render");
+$("mLive").onclick = () => setMode("live");
+let drag = null;
+inner.addEventListener("pointerdown", (e) => {
+  const hd = e.target.closest(".hdl"); if (!hd) return;
+  const id = hd.closest("[data-cut]").dataset.cut, c = curOf(id);
+  drag = { id, which: hd.dataset.h, x0: e.clientX, a: c.a, b: c.b, sp: baseSegs[segIndex[id]].speed || 1 };
+  hd.setPointerCapture(e.pointerId); e.preventDefault(); if (S.playing) pause();
+});
+inner.addEventListener("pointermove", (e) => {
+  if (!drag) return; const d = (e.clientX - drag.x0) / S.pps * drag.sp;
+  if (drag.which === "in") setCut(drag.id, drag.a + d, drag.b); else setCut(drag.id, drag.a, drag.b + d);
+  render();
+});
+const endDrag = () => { if (!drag) return; const d = drag; drag = null; recompute();
+  const g = SEG.find((x) => x.id === d.id); if (g) S.t = d.which === "in" ? g.edit_in : Math.max(g.edit_in, g.edit_in + g.len - 1); changed(); };
+inner.addEventListener("pointerup", endDrag); inner.addEventListener("pointercancel", endDrag);
+
+/* ---------- side panels ---------- */
+function renderSide() {
+  const b = $("banner"), n = nEdits();
+  if (S.mode === "render" && n) { b.hidden = false; b.innerHTML = "You are watching the last render (" + esc(T.version) + "). Your " + n + " change" + (n > 1 ? "s" : "") + " play in <b>Live cut</b>."; }
+  else if (S.mode === "live") { b.hidden = false; b.innerHTML = "Live cut plays your trims straight away from a low-res copy of the raw takes. Graphics and effects show up after Claude renders them."; }
+  else b.hidden = true;
+  const I = $("inspector"); const sel = S.sel;
+  if (S.draftNote) {
+    I.innerHTML = "<h2>New note at " + tc(S.draftNote.t) + "</h2>" + '<label class="hint" for="notetext">What should change here?</label><textarea id="notetext" placeholder="e.g. move this whoosh earlier"></textarea>' +
+      '<div class="row-btns"><button class="primary" id="savenote">Save note</button><button id="cancelnote">Cancel</button></div>';
+    $("notetext").focus(); $("savenote").onclick = saveNote; $("cancelnote").onclick = () => { S.draftNote = null; renderSide(); };
+  } else if (sel && sel.type === "cut") {
+    const i = segIndex[sel.id], g = baseSegs[i], c = curOf(sel.id), p = partOf(g.src_in), live = S.mode === "live";
+    I.innerHTML = "<h2>Cut " + (i + 1) + " of " + baseSegs.length + " · " + esc(p.label) + "</h2>" + '<p class="quote">"' + esc(g.text) + '"</p>' +
+      '<dl class="kv"><dt>From the take</dt><dd>' + sec(c.a) + " to " + sec(c.b) + "</dd><dt>Length</dt><dd>" + sec(c.b - c.a) + "</dd>" +
+      (S.edits.cuts[sel.id] ? '<dt>Rendered as</dt><dd class="changed">' + sec(g.src_in) + " to " + sec(g.src_out) + "</dd>" : "") + "</dl>" +
+      (c.del ? '<p class="hint">This cut is deleted from the edit.</p>' :
+        live ? '<div class="nudge"><span>Start</span><button data-n="in,-0.1">-0.1s</button><button data-n="in,-' + FR + '">-1f</button><button data-n="in,' + FR + '">+1f</button><button data-n="in,0.1">+0.1s</button></div>' +
+          '<div class="nudge"><span>End</span><button data-n="out,-0.1">-0.1s</button><button data-n="out,-' + FR + '">-1f</button><button data-n="out,' + FR + '">+1f</button><button data-n="out,0.1">+0.1s</button></div>' +
+          '<p class="hint">Minus moves the point earlier in the take, plus later. You can also drag the handles on the block.</p>'
+          : '<p class="hint">Switch to <b>Live cut</b> to trim this cut and hear it straight away.</p>') +
+      '<div class="row-btns">' + (live && !c.del ? '<button id="playcut">Play this cut</button>' : "") +
+      (live ? (c.del ? '<button id="restore">Restore cut</button>' : '<button class="warn" id="delcut">Delete cut</button>') : "") +
+      (S.edits.cuts[sel.id] ? '<button id="resetcut">Undo changes</button>' : "") + "</div>";
+    I.querySelectorAll("[data-n]").forEach((bt) => { const [w, d] = bt.dataset.n.split(","); bt.onclick = () => nudge(sel.id, w, parseFloat(d)); });
+    const pc = $("playcut"); if (pc) pc.onclick = () => { const s = SEG.find((x) => x.id === sel.id); if (s) { seek(s.edit_in); play(); } };
+    const dc = $("delcut"); if (dc) dc.onclick = () => { S.edits.cuts[sel.id] = { ...(S.edits.cuts[sel.id] || {}), deleted: true }; changed(); };
+    const rs = $("restore"); if (rs) rs.onclick = () => { const o = { ...S.edits.cuts[sel.id] }; delete o.deleted; if (Object.keys(o).length) S.edits.cuts[sel.id] = o; else delete S.edits.cuts[sel.id]; changed(); };
+    const rc = $("resetcut"); if (rc) rc.onclick = () => { delete S.edits.cuts[sel.id]; changed(); };
+  } else if (sel && sel.type === "note") {
+    const nt = S.notes.find((x) => x.id === sel.id);
+    if (!nt) { S.sel = null; return renderSide(); }
+    I.innerHTML = "<h2>Note at " + tc(srcToEditNear(nt.src_t)) + (nt.done ? " · done" : "") + '</h2><p class="quote"></p><div class="row-btns"><button id="gonote">Go there</button><button class="warn" id="delnote">Delete note</button></div>';
+    I.querySelector(".quote").textContent = nt.text;
+    $("gonote").onclick = () => seek(srcToEditNear(nt.src_t));
+    $("delnote").onclick = () => delNote(nt.id);
+  } else if (sel && sel.type === "item") {
+    const tr = TRACKS.find((x) => x.id === sel.track), it = tr && tr.items.find((x) => x.id === sel.id);
+    I.innerHTML = it ? "<h2>" + esc(tr.label) + '</h2><p class="quote"></p><dl class="kv"><dt>Starts</dt><dd>' + sec(it.start) + (it.anchor === "src" ? " (take time)" : "") + "</dd></dl>" : "<h2>Item</h2>";
+    if (it) I.querySelector(".quote").textContent = (it.label || "") + (it.detail ? " · " + it.detail : "");
+  } else {
+    I.innerHTML = "<h2>How to use</h2><p class=\"hint\">Tap a cut to see where it comes from. Switch to <b>Live cut</b> to trim it with the buttons or the handles and hear the change at once. " +
+      "Tap anywhere on the timeline to jump there, then <b>Add note here</b> to pin a note for Claude. Pinch or use - and + to zoom. When you are happy, tap <b>Send to Claude</b> and say done in the chat.</p>";
+  }
+  // changes
+  const C = $("changes"), ids = Object.keys(S.edits.cuts), open = S.notes.filter((x) => !x.done);
+  let h = "<h2>Your changes</h2>";
+  if (!ids.length && !open.length) h += '<p class="hint">No changes or notes yet.</p>';
+  else {
+    h += '<ul class="chlist">' + ids.map((id) => { const i = segIndex[id], g = baseSegs[i], o = S.edits.cuts[id];
+      let d = o.deleted ? "deleted" : [o.src_in != null ? "start " + fmtD(o.src_in - g.src_in) : "", o.src_out != null ? "end " + fmtD(o.src_out - g.src_out) : ""].filter(Boolean).join(", ");
+      return '<li><span>Cut ' + (i + 1) + ' "' + esc(short(g.text)) + '": ' + d + '</span><button data-undo="' + id + '">Undo</button></li>'; }).join("") +
+      open.map((nt) => '<li><span>Note at ' + tc(srcToEditNear(nt.src_t)) + ': "' + esc(short(nt.text)) + '"</span></li>').join("") + "</ul>";
+    h += '<div class="row-btns"><button class="primary" id="send"' + (S.status === "ready" ? " disabled" : "") + ">" + (S.status === "ready" ? "Sent to Claude" : "Send to Claude") + "</button>" +
+      (ids.length ? (S.confirmReset ? '<button class="warn" id="resetyes">Yes, undo all trims</button><button id="resetno">Keep them</button>' : '<button id="resetall">Undo all trims</button>') : "") + "</div>";
+  }
+  h += '<p class="status' + (S.saveMsg === "Saved" ? " ok" : "") + '" id="savemsg">' + esc(S.status === "ready" ? "Sent. Now say done in the chat and Claude will apply it." : S.saveMsg) + "</p>";
+  C.innerHTML = h;
+  C.querySelectorAll("[data-undo]").forEach((bt) => bt.onclick = () => { delete S.edits.cuts[bt.dataset.undo]; changed(); });
+  const se = $("send"); if (se) se.onclick = () => { S.status = "ready"; renderSide(); queueSave(true); };
+  const ra = $("resetall"); if (ra) ra.onclick = () => { S.confirmReset = true; renderSide(); };
+  const ry = $("resetyes"); if (ry) ry.onclick = () => { S.edits.cuts = {}; S.edits.shifts = {}; changed(); };
+  const rn = $("resetno"); if (rn) rn.onclick = () => { S.confirmReset = false; renderSide(); };
+}
+const fmtD = (d) => (d > 0 ? "+" : "") + d.toFixed(2) + " s";
+const short = (s) => s.length > 34 ? s.slice(0, 32) + "..." : s;
+
+/* ---------- storage (page database) ---------- */
+let saving = Promise.resolve(), saveTimer = null;
+function queueSave(now) {
+  if (!S.db) { S.saveMsg = "Saving is not available in this view, so changes stay on this screen only."; renderSide(); return; }
+  S.saveMsg = "Saving..."; clearTimeout(saveTimer);
+  saveTimer = setTimeout(() => { saving = saving.then(() => S.db.doc("edits/current").set({ base: T.version, cuts: S.edits.cuts, shifts: S.edits.shifts, status: S.status, updated: new Date().toISOString() }))
+    .then(() => { S.saveMsg = "Saved"; renderSide(); }).catch((e) => { S.saveMsg = "Could not save (" + (e && e.code || "error") + "). Try again in a moment."; renderSide(); }); }, now ? 0 : 600);
+}
+function saveNote() {
+  const txt = ($("notetext").value || "").trim(); if (!txt) return;
+  const t = S.draftNote.t, src = editToSrc(t);
+  const note = { src_t: Math.round(src * 1000) / 1000, edit_t: Math.round(t * 1000) / 1000, mode: S.mode, version: T.version, text: txt, done: false, created: new Date().toISOString() };
+  S.draftNote = null;
+  if (!S.db) { S.notes.push({ id: "local" + Date.now(), ...note }); S.saveMsg = "Saving is not available in this view."; render(); return; }
+  S.db.collection("notes").add(note).then(() => { S.status = "draft"; queueSave(true); }).catch((e) => { S.saveMsg = "Could not save the note (" + (e && e.code || "error") + ")."; renderSide(); });
+}
+function delNote(id) { S.sel = null; if (!S.db || id.startsWith("local")) { S.notes = S.notes.filter((n) => n.id !== id); render(); return; }
+  S.db.doc("notes/" + id).delete().catch(() => {}); }
+$("addnote").onclick = () => { if (S.playing) pause(); S.sel = null; S.draftNote = { t: S.t }; renderSide(); $("inspector").scrollIntoView({ block: "nearest", behavior: "smooth" }); };
+
+async function connect() {
+  try { if (!window.claude || !window.claude.use) return; const db = await window.claude.use("db"); if (!db) return; S.db = db; } catch (e) { return; }
+  const timer = setTimeout(() => { if (!S.loaded) { S.saveMsg = "Your saved changes can't be reached yet."; renderSide(); } }, 10000);
+  S.db.doc("edits/current").onSnapshot((d) => {
+    if (!d.metadata.fromCache) { clearTimeout(timer); S.loaded = true; }
+    if (d.metadata.hasPendingWrites) return;
+    const v = d.exists ? d.data() : null;
+    if (v && v.base === T.version) { S.edits = { cuts: JSON.parse(JSON.stringify(v.cuts || {})), shifts: JSON.parse(JSON.stringify(v.shifts || {})) }; S.status = v.status || "draft"; }
+    else if (!v) { S.edits = { cuts: {}, shifts: {} }; S.status = "draft"; }
+    if (nEdits() && S.mode === "render" && !S.autoLive && hasProxy) { S.autoLive = true; setMode("live"); } else render();
+  }, (e) => { clearTimeout(timer); S.saveMsg = "Saved changes are unavailable (" + e.code + ")."; renderSide(); });
+  S.db.collection("notes").orderBy("src_t").onSnapshot((q) => {
+    S.notes = q.docs.map((d) => ({ id: d.id, ...d.data() })); render();
+  }, () => {});
+}
+
+/* ---------- controls ---------- */
+$("play").onclick = () => (S.playing ? pause() : play());
+$("back").onclick = () => seek(S.t - FR);
+$("fwd").onclick = () => seek(S.t + FR);
+function zoom(f, cx) { const vw = sc.clientWidth - labw(); cx = cx == null ? vw / 2 : cx; const tAt = (sc.scrollLeft + cx) / S.pps;
+  S.pps = Math.max(8, Math.min(600, S.pps * f)); render(); sc.scrollLeft = Math.max(0, tAt * S.pps - cx); drawWave(); }
+$("zin").onclick = () => zoom(1.5); $("zout").onclick = () => zoom(1 / 1.5);
+sc.addEventListener("wheel", (e) => { if (!e.ctrlKey && !e.metaKey) return; e.preventDefault(); zoom(e.deltaY < 0 ? 1.15 : 1 / 1.15, e.clientX - sc.getBoundingClientRect().left - labw()); }, { passive: false });
+let pinch = null;
+sc.addEventListener("touchstart", (e) => { if (e.touches.length === 2) { const [a, b] = e.touches; pinch = { d: Math.hypot(a.clientX - b.clientX, a.clientY - b.clientY), pps: S.pps, cx: (a.clientX + b.clientX) / 2 - sc.getBoundingClientRect().left - labw(), sl: sc.scrollLeft }; } }, { passive: true });
+sc.addEventListener("touchmove", (e) => { if (!pinch || e.touches.length !== 2) return; e.preventDefault(); const [a, b] = e.touches;
+  const d = Math.hypot(a.clientX - b.clientX, a.clientY - b.clientY); const tAt = (pinch.sl + pinch.cx) / pinch.pps;
+  S.pps = Math.max(8, Math.min(600, pinch.pps * d / pinch.d)); render(); sc.scrollLeft = Math.max(0, tAt * S.pps - pinch.cx); drawWave(); }, { passive: false });
+sc.addEventListener("touchend", () => { pinch = null; });
+document.addEventListener("keydown", (e) => { if (e.target.tagName === "TEXTAREA") return;
+  if (e.code === "Space") { e.preventDefault(); S.playing ? pause() : play(); }
+  else if (e.key === "ArrowLeft") seek(S.t - (e.shiftKey ? 1 : FR)); else if (e.key === "ArrowRight") seek(S.t + (e.shiftKey ? 1 : FR)); });
+window.addEventListener("resize", () => render());
+
+/* ---------- start ---------- */
+$("pname").textContent = T.project; $("pver").textContent = T.version;
+if (!hasProxy) { $("mLive").disabled = true; $("mLive").title = "No low-res copy of the raw takes yet"; }
+S.pps = Math.max(18, Math.min(60, (sc.clientWidth - labw()) / 12));
+render(); syncMedia(); requestAnimationFrame(tick); connect();
+})();
+</script>

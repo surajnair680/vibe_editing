@@ -60,6 +60,21 @@ for g in segs[1:]:
         out[-1] = {"src_in": out[-1]["src_in"], "src_out": g["src_out"], "text": out[-1]["text"] + " / " + g["text"]}
     else:
         out.append(g)
+# trims and deletions made in the timeline editor page (tools/timeline, ids c01.. in plan order), saved by
+# Claude from the page's edits/current document into work/timeline_edits.json; cleared once rendered
+import os
+TE = "work/timeline_edits.json"
+if os.path.exists(TE):
+    cuts = json.load(open(TE)).get("cuts", {})
+    kept = []
+    for k, g in enumerate(out):
+        o = cuts.get(f"c{k + 1:02d}", {})
+        if o.get("deleted"): print("timeline edit: delete", k + 1, g["text"][:30]); continue
+        if "src_in" in o: g["src_in"] = round(o["src_in"], 4)
+        if "src_out" in o: g["src_out"] = round(o["src_out"], 4)
+        if o: print("timeline edit: cut", k + 1, g["src_in"], g["src_out"])
+        kept.append(g)
+    out = kept
 t = 0.0
 for g in out:
     g["edit_in"] = round(t, 4); t += g["src_out"] - g["src_in"]

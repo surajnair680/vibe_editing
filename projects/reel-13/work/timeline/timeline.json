@@ -1,0 +1,1077 @@
+{
+"project": "reel-13",
+"version": "rough-v2",
+"fps": 30,
+"size": [
+1080,
+1920
+],
+"sources": {
+"length": 85.1,
+"parts": [
+{
+"label": "Part 1",
+"file": "ep0_part1.mp4",
+"start": 0.0,
+"end": 36.0
+},
+{
+"label": "Part 2",
+"file": "ep0_part2.mp4",
+"start": 36.0,
+"end": 72.0
+},
+{
+"label": "Part 3",
+"file": "ep0_part3.mp4",
+"start": 72.0,
+"end": 85.1
+}
+]
+},
+"segments": [
+{
+"id": "c01",
+"src_in": 0.8667,
+"src_out": 3.7667,
+"speed": 1.0,
+"text": "I am going to bulk until I look like an anime villain."
+},
+{
+"id": "c02",
+"src_in": 5.6667,
+"src_out": 7.4667,
+"speed": 1.0,
+"text": "This is Toji Fushiguro."
+},
+{
+"id": "c03",
+"src_in": 10.1,
+"src_out": 10.9333,
+"speed": 1.0,
+"text": "Wide back,"
+},
+{
+"id": "c04",
+"src_in": 11.2,
+"src_out": 15.2333,
+"speed": 1.0,
+"text": "arms like carved stone, and a V-taper so sharp it looks fake."
+},
+{
+"id": "c05",
+"src_in": 16.6333,
+"src_out": 20.0667,
+"speed": 1.0,
+"text": "But whenever I tell people they can build a body like this,"
+},
+{
+"id": "c06",
+"src_in": 21.4667,
+"src_out": 23.8,
+"speed": 1.0,
+"text": "I hear the same three excuses."
+},
+{
+"id": "c07",
+"src_in": 25.2667,
+"src_out": 28.1,
+"speed": 1.0,
+"text": "I don't have the genetics. / I don't have the time."
+},
+{
+"id": "c08",
+"src_in": 28.4333,
+"src_out": 30.0667,
+"speed": 1.0,
+"text": "It's not possible naturally."
+},
+{
+"id": "c09",
+"src_in": 32.0,
+"src_out": 34.6333,
+"speed": 1.0,
+"text": "So I am going to show you what is possible"
+},
+{
+"id": "c10",
+"src_in": 36.7667,
+"src_out": 39.3,
+"speed": 1.0,
+"text": "This is me after seven years of training."
+},
+{
+"id": "c11",
+"src_in": 40.9667,
+"src_out": 43.6667,
+"speed": 1.0,
+"text": "Decent, / but I'm not a genetic freak."
+},
+{
+"id": "c12",
+"src_in": 45.3333,
+"src_out": 50.1667,
+"speed": 1.0,
+"text": "I am twenty-seven. / I work full time in tech, and I'm also a fitness coach."
+},
+{
+"id": "c13",
+"src_in": 51.4667,
+"src_out": 55.1667,
+"speed": 1.0,
+"text": "And I have been a type one diabetic since I was twelve."
+},
+{
+"id": "c14",
+"src_in": 56.3,
+"src_out": 57.8333,
+"speed": 1.0,
+"text": "If I can build this body,"
+},
+{
+"id": "c15",
+"src_in": 58.0667,
+"src_out": 58.8333,
+"speed": 1.0,
+"text": "so can you."
+},
+{
+"id": "c16",
+"src_in": 60.6667,
+"src_out": 62.9333,
+"speed": 1.0,
+"text": "I'm already two months into this bulk,"
+},
+{
+"id": "c17",
+"src_in": 64.6,
+"src_out": 65.7,
+"speed": 1.0,
+"text": "but from today,"
+},
+{
+"id": "c18",
+"src_in": 65.8667,
+"src_out": 67.2667,
+"speed": 1.0,
+"text": "I'm filming all of it."
+},
+{
+"id": "c19",
+"src_in": 69.1,
+"src_out": 69.9,
+"speed": 1.0,
+"text": "Training,"
+},
+{
+"id": "c20",
+"src_in": 70.0333,
+"src_out": 70.6667,
+"speed": 1.0,
+"text": "food,"
+},
+{
+"id": "c21",
+"src_in": 70.8667,
+"src_out": 71.7,
+"speed": 1.0,
+"text": "supplements"
+},
+{
+"id": "c22",
+"src_in": 73.1333,
+"src_out": 75.4,
+"speed": 1.0,
+"text": "The wins and the days it goes wrong."
+},
+{
+"id": "c23",
+"src_in": 77.0,
+"src_out": 78.1333,
+"speed": 1.0,
+"text": "How long will it take?"
+},
+{
+"id": "c24",
+"src_in": 78.2,
+"src_out": 79.8667,
+"speed": 1.0,
+"text": "Six months? A year?"
+},
+{
+"id": "c25",
+"src_in": 80.3333,
+"src_out": 81.0333,
+"speed": 1.0,
+"text": "I don't know,"
+},
+{
+"id": "c26",
+"src_in": 81.3,
+"src_out": 83.6667,
+"speed": 1.0,
+"text": "but I'm not stopping until I look like him"
+}
+],
+"words": [
+{
+"w": "I",
+"s": 1.02,
+"e": 1.06
+},
+{
+"w": "am",
+"s": 1.08,
+"e": 1.18
+},
+{
+"w": "going",
+"s": 1.22,
+"e": 1.38
+},
+{
+"w": "to",
+"s": 1.44,
+"e": 1.52
+},
+{
+"w": "bulk",
+"s": 1.64,
+"e": 1.92
+},
+{
+"w": "until",
+"s": 2.08,
+"e": 2.32
+},
+{
+"w": "I",
+"s": 2.36,
+"e": 2.44
+},
+{
+"w": "look",
+"s": 2.48,
+"e": 2.64
+},
+{
+"w": "like",
+"s": 2.74,
+"e": 2.88
+},
+{
+"w": "an",
+"s": 2.92,
+"e": 2.98
+},
+{
+"w": "anime",
+"s": 3.02,
+"e": 3.36
+},
+{
+"w": "villain.",
+"s": 3.38,
+"e": 3.7
+},
+{
+"w": "This",
+"s": 5.82,
+"e": 6.02
+},
+{
+"w": "is",
+"s": 6.16,
+"e": 6.28
+},
+{
+"w": "Toji",
+"s": 6.38,
+"e": 6.68
+},
+{
+"w": "Fushiguro.",
+"s": 6.8,
+"e": 7.34
+},
+{
+"w": "Wide",
+"s": 10.24,
+"e": 10.46
+},
+{
+"w": "back,",
+"s": 10.54,
+"e": 10.82
+},
+{
+"w": "arms",
+"s": 11.26,
+"e": 11.54
+},
+{
+"w": "like",
+"s": 11.58,
+"e": 11.78
+},
+{
+"w": "carved",
+"s": 11.82,
+"e": 12.08
+},
+{
+"w": "stone,",
+"s": 12.18,
+"e": 12.44
+},
+{
+"w": "and",
+"s": 12.74,
+"e": 12.84
+},
+{
+"w": "a",
+"s": 12.88,
+"e": 12.94
+},
+{
+"w": "V-taper",
+"s": 13.0,
+"e": 13.48
+},
+{
+"w": "so",
+"s": 13.58,
+"e": 13.72
+},
+{
+"w": "sharp",
+"s": 13.82,
+"e": 14.18
+},
+{
+"w": "it",
+"s": 14.4,
+"e": 14.48
+},
+{
+"w": "looks",
+"s": 14.52,
+"e": 14.72
+},
+{
+"w": "fake.",
+"s": 14.82,
+"e": 15.14
+},
+{
+"w": "But",
+"s": 16.84,
+"e": 17.02
+},
+{
+"w": "whenever",
+"s": 17.06,
+"e": 17.36
+},
+{
+"w": "I",
+"s": 17.42,
+"e": 17.48
+},
+{
+"w": "tell",
+"s": 17.6,
+"e": 17.76
+},
+{
+"w": "people",
+"s": 17.86,
+"e": 18.2
+},
+{
+"w": "they",
+"s": 18.46,
+"e": 18.58
+},
+{
+"w": "can",
+"s": 18.62,
+"e": 18.78
+},
+{
+"w": "build",
+"s": 18.82,
+"e": 19.0
+},
+{
+"w": "a",
+"s": 19.04,
+"e": 19.1
+},
+{
+"w": "body",
+"s": 19.12,
+"e": 19.38
+},
+{
+"w": "like",
+"s": 19.42,
+"e": 19.62
+},
+{
+"w": "this,",
+"s": 19.66,
+"e": 19.94
+},
+{
+"w": "I",
+"s": 21.64,
+"e": 21.72
+},
+{
+"w": "hear",
+"s": 21.78,
+"e": 21.98
+},
+{
+"w": "the",
+"s": 22.04,
+"e": 22.16
+},
+{
+"w": "same",
+"s": 22.24,
+"e": 22.52
+},
+{
+"w": "three",
+"s": 22.54,
+"e": 22.76
+},
+{
+"w": "excuses.",
+"s": 22.82,
+"e": 23.5
+},
+{
+"w": "I",
+"s": 25.5,
+"e": 25.54
+},
+{
+"w": "don't",
+"s": 25.58,
+"e": 25.78
+},
+{
+"w": "have",
+"s": 25.82,
+"e": 25.96
+},
+{
+"w": "the",
+"s": 26.0,
+"e": 26.06
+},
+{
+"w": "genetics.",
+"s": 26.12,
+"e": 26.76
+},
+{
+"w": "I",
+"s": 27.18,
+"e": 27.22
+},
+{
+"w": "don't",
+"s": 27.26,
+"e": 27.38
+},
+{
+"w": "have",
+"s": 27.42,
+"e": 27.54
+},
+{
+"w": "the",
+"s": 27.58,
+"e": 27.68
+},
+{
+"w": "time.",
+"s": 27.72,
+"e": 28.02
+},
+{
+"w": "It's",
+"s": 28.5,
+"e": 28.66
+},
+{
+"w": "not",
+"s": 28.7,
+"e": 28.92
+},
+{
+"w": "possible",
+"s": 28.96,
+"e": 29.38
+},
+{
+"w": "naturally.",
+"s": 29.5,
+"e": 30.0
+},
+{
+"w": "So",
+"s": 32.119,
+"e": 32.28
+},
+{
+"w": "I",
+"s": 32.38,
+"e": 32.4
+},
+{
+"w": "am",
+"s": 32.42,
+"e": 32.479
+},
+{
+"w": "going",
+"s": 32.52,
+"e": 32.7
+},
+{
+"w": "to",
+"s": 32.74,
+"e": 32.84
+},
+{
+"w": "show",
+"s": 32.88,
+"e": 33.04
+},
+{
+"w": "you",
+"s": 33.1,
+"e": 33.22
+},
+{
+"w": "what",
+"s": 33.44,
+"e": 33.66
+},
+{
+"w": "is",
+"s": 33.84,
+"e": 34.04
+},
+{
+"w": "possible",
+"s": 34.08,
+"e": 34.54
+},
+{
+"w": "This",
+"s": 37.02,
+"e": 37.12
+},
+{
+"w": "is",
+"s": 37.18,
+"e": 37.3
+},
+{
+"w": "me",
+"s": 37.36,
+"e": 37.74
+},
+{
+"w": "after",
+"s": 37.84,
+"e": 38.08
+},
+{
+"w": "seven",
+"s": 38.14,
+"e": 38.42
+},
+{
+"w": "years",
+"s": 38.46,
+"e": 38.66
+},
+{
+"w": "of",
+"s": 38.7,
+"e": 38.8
+},
+{
+"w": "training.",
+"s": 38.86,
+"e": 39.2
+},
+{
+"w": "Decent,",
+"s": 41.18,
+"e": 41.6
+},
+{
+"w": "but",
+"s": 42.04,
+"e": 42.22
+},
+{
+"w": "I'm",
+"s": 42.3,
+"e": 42.44
+},
+{
+"w": "not",
+"s": 42.48,
+"e": 42.62
+},
+{
+"w": "a",
+"s": 42.66,
+"e": 42.72
+},
+{
+"w": "genetic",
+"s": 42.76,
+"e": 43.06
+},
+{
+"w": "freak.",
+"s": 43.16,
+"e": 43.46
+},
+{
+"w": "I",
+"s": 45.58,
+"e": 45.62
+},
+{
+"w": "am",
+"s": 45.64,
+"e": 45.74
+},
+{
+"w": "twenty-seven.",
+"s": 45.78,
+"e": 46.36
+},
+{
+"w": "I",
+"s": 46.96,
+"e": 47.04
+},
+{
+"w": "work",
+"s": 47.08,
+"e": 47.32
+},
+{
+"w": "full",
+"s": 47.38,
+"e": 47.54
+},
+{
+"w": "time",
+"s": 47.64,
+"e": 47.8
+},
+{
+"w": "in",
+"s": 47.84,
+"e": 47.92
+},
+{
+"w": "tech,",
+"s": 48.02,
+"e": 48.24
+},
+{
+"w": "and",
+"s": 48.58,
+"e": 48.68
+},
+{
+"w": "I'm",
+"s": 48.76,
+"e": 48.86
+},
+{
+"w": "also",
+"s": 48.94,
+"e": 49.2
+},
+{
+"w": "a",
+"s": 49.24,
+"e": 49.3
+},
+{
+"w": "fitness",
+"s": 49.34,
+"e": 49.64
+},
+{
+"w": "coach.",
+"s": 49.72,
+"e": 49.96
+},
+{
+"w": "And",
+"s": 51.6,
+"e": 51.86
+},
+{
+"w": "I",
+"s": 51.92,
+"e": 51.96
+},
+{
+"w": "have",
+"s": 51.98,
+"e": 52.12
+},
+{
+"w": "been",
+"s": 52.16,
+"e": 52.26
+},
+{
+"w": "a",
+"s": 52.32,
+"e": 52.379
+},
+{
+"w": "type",
+"s": 52.42,
+"e": 52.64
+},
+{
+"w": "one",
+"s": 52.7,
+"e": 52.8
+},
+{
+"w": "diabetic",
+"s": 52.84,
+"e": 53.34
+},
+{
+"w": "since",
+"s": 53.58,
+"e": 53.92
+},
+{
+"w": "I",
+"s": 54.02,
+"e": 54.06
+},
+{
+"w": "was",
+"s": 54.1,
+"e": 54.3
+},
+{
+"w": "twelve.",
+"s": 54.34,
+"e": 54.74
+},
+{
+"w": "If",
+"s": 56.5,
+"e": 56.64
+},
+{
+"w": "I",
+"s": 56.74,
+"e": 56.8
+},
+{
+"w": "can",
+"s": 56.84,
+"e": 56.98
+},
+{
+"w": "build",
+"s": 57.04,
+"e": 57.22
+},
+{
+"w": "this",
+"s": 57.28,
+"e": 57.44
+},
+{
+"w": "body,",
+"s": 57.48,
+"e": 57.72
+},
+{
+"w": "so",
+"s": 58.22,
+"e": 58.34
+},
+{
+"w": "can",
+"s": 58.42,
+"e": 58.58
+},
+{
+"w": "you.",
+"s": 58.62,
+"e": 58.72
+},
+{
+"w": "I'm",
+"s": 60.78,
+"e": 60.98
+},
+{
+"w": "already",
+"s": 61.06,
+"e": 61.42
+},
+{
+"w": "two",
+"s": 61.54,
+"e": 61.66
+},
+{
+"w": "months",
+"s": 61.76,
+"e": 62.08
+},
+{
+"w": "into",
+"s": 62.14,
+"e": 62.34
+},
+{
+"w": "this",
+"s": 62.38,
+"e": 62.52
+},
+{
+"w": "bulk,",
+"s": 62.58,
+"e": 62.84
+},
+{
+"w": "but",
+"s": 64.84,
+"e": 65.0
+},
+{
+"w": "from",
+"s": 65.06,
+"e": 65.24
+},
+{
+"w": "today,",
+"s": 65.28,
+"e": 65.54
+},
+{
+"w": "I'm",
+"s": 65.96,
+"e": 66.12
+},
+{
+"w": "filming",
+"s": 66.18,
+"e": 66.64
+},
+{
+"w": "all",
+"s": 66.72,
+"e": 66.82
+},
+{
+"w": "of",
+"s": 66.88,
+"e": 66.98
+},
+{
+"w": "it.",
+"s": 67.02,
+"e": 67.18
+},
+{
+"w": "Training,",
+"s": 69.32,
+"e": 69.66
+},
+{
+"w": "food,",
+"s": 70.24,
+"e": 70.5
+},
+{
+"w": "supplements",
+"s": 70.98,
+"e": 71.58
+},
+{
+"w": "The",
+"s": 73.26,
+"e": 73.38
+},
+{
+"w": "wins",
+"s": 73.46,
+"e": 73.82
+},
+{
+"w": "and",
+"s": 74.04,
+"e": 74.18
+},
+{
+"w": "the",
+"s": 74.22,
+"e": 74.3
+},
+{
+"w": "days",
+"s": 74.38,
+"e": 74.58
+},
+{
+"w": "it",
+"s": 74.62,
+"e": 74.7
+},
+{
+"w": "goes",
+"s": 74.8,
+"e": 74.98
+},
+{
+"w": "wrong.",
+"s": 75.04,
+"e": 75.32
+},
+{
+"w": "How",
+"s": 77.1,
+"e": 77.28
+},
+{
+"w": "long",
+"s": 77.34,
+"e": 77.52
+},
+{
+"w": "will",
+"s": 77.54,
+"e": 77.64
+},
+{
+"w": "it",
+"s": 77.68,
+"e": 77.78
+},
+{
+"w": "take?",
+"s": 77.84,
+"e": 78.04
+},
+{
+"w": "Six",
+"s": 78.52,
+"e": 78.74
+},
+{
+"w": "months?",
+"s": 78.82,
+"e": 79.12
+},
+{
+"w": "A",
+"s": 79.38,
+"e": 79.44
+},
+{
+"w": "year?",
+"s": 79.48,
+"e": 79.7
+},
+{
+"w": "I",
+"s": 80.5,
+"e": 80.56
+},
+{
+"w": "don't",
+"s": 80.58,
+"e": 80.74
+},
+{
+"w": "know,",
+"s": 80.78,
+"e": 80.94
+},
+{
+"w": "but",
+"s": 81.38,
+"e": 81.52
+},
+{
+"w": "I'm",
+"s": 81.6,
+"e": 81.7
+},
+{
+"w": "not",
+"s": 81.72,
+"e": 81.86
+},
+{
+"w": "stopping",
+"s": 81.92,
+"e": 82.32
+},
+{
+"w": "until",
+"s": 82.36,
+"e": 82.56
+},
+{
+"w": "I",
+"s": 82.64,
+"e": 82.68
+},
+{
+"w": "look",
+"s": 82.8,
+"e": 83.04
+},
+{
+"w": "like",
+"s": 83.1,
+"e": 83.3
+},
+{
+"w": "him",
+"s": 83.36,
+"e": 83.58
+}
+],
+"peaks": {
+"rate": 100,
+"data": "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"
+},
+"tracks": [],
+"media": {
+"preview": null,
+"proxy": null
+}
+}
