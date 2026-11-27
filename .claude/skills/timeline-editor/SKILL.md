@@ -22,7 +22,8 @@ exact moments. Every video gets one page, kept up to date with every version.
 - Tap a cut: where it comes from in the take, nudge start / end by 1 frame or 0.1 s, drag the white handles, delete,
   restore, undo. Trims stay inside the take and never overlap the neighbouring piece of the same take.
 - "Add note here" pins a note at the playhead (saved in source time too, so it survives later recuts).
-- "Send to Claude" marks the changes ready; he then says "done" in the chat (the page cannot wake a session).
+- Trims and notes save by themselves; he says "done" in the chat when finished (the page cannot wake a session).
+  There is no "Send to Claude" button: he asked what it did, it only set a flag, so it was removed (2026-11-27).
 
 ## Storage (page database, `db` capability, default rules: owner writes)
 - `edits/current`: `{base: <version>, cuts: {c05: {src_in?, src_out?, deleted?}}, shifts: {}, status: "draft"|"ready", updated}`
