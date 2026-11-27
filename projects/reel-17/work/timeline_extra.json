@@ -1,0 +1,6 @@
+{"tracks": [
+ {"id": "graphics", "label": "Graphics", "items": [
+  {"id": "g1", "label": "Berserk panel behind body", "start": 0.0, "end": 33.0667, "anchor": "edit", "detail": "540 px square fixed top left (53, 42); only his body goes over it"}]},
+ {"id": "grade", "label": "Look", "items": [
+  {"id": "h1", "label": "HDR 1.0 on body", "start": 0.0, "end": 33.0667, "anchor": "edit", "detail": "local contrast on his body only, via the matte"}]}
+]}
