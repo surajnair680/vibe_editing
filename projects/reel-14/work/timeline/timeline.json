@@ -1,0 +1,3532 @@
+{
+"project": "reel-14",
+"version": "v7-final",
+"fps": 30,
+"size": [
+1080,
+1920
+],
+"sources": {
+"length": 132.2833,
+"parts": [
+{
+"label": "Part 1",
+"file": "part1.mp4",
+"start": 0.0,
+"end": 42.0
+},
+{
+"label": "Part 2",
+"file": "part2.mp4",
+"start": 42.0,
+"end": 71.0
+},
+{
+"label": "Part 3",
+"file": "part3.mp4",
+"start": 71.0,
+"end": 99.0
+},
+{
+"label": "Part 4",
+"file": "part4.mp4",
+"start": 99.0,
+"end": 127.0
+},
+{
+"label": "Part 5",
+"file": "part5.mp4",
+"start": 127.0,
+"end": 132.2833
+}
+]
+},
+"segments": [
+{
+"id": "c01",
+"src_in": 0.0,
+"src_out": 27.3,
+"speed": 1.0,
+"text": "[her clip + reaction, original audio]"
+},
+{
+"id": "c02",
+"src_in": 28.0333,
+"src_out": 30.7,
+"speed": 1.0,
+"text": "Normal people can't build a physique like this."
+},
+{
+"id": "c03",
+"src_in": 32.4,
+"src_out": 35.9667,
+"speed": 1.0,
+"text": "You skip the drinks, you say no to the pizza your friends are eating,"
+},
+{
+"id": "c04",
+"src_in": 36.2667,
+"src_out": 39.5333,
+"speed": 1.0,
+"text": "and tonight everyone's calling you obsessed and abnormal."
+},
+{
+"id": "c05",
+"src_in": 41.5333,
+"src_out": 41.9,
+"speed": 1.0,
+"text": "So"
+},
+{
+"id": "c06",
+"src_in": 42.1,
+"src_out": 43.8,
+"speed": 1.0,
+"text": "Is something actually wrong with you?"
+},
+{
+"id": "c07",
+"src_in": 44.6667,
+"src_out": 45.9667,
+"speed": 1.0,
+"text": "Actually, yes."
+},
+{
+"id": "c08",
+"src_in": 46.3333,
+"src_out": 48.7,
+"speed": 1.0,
+"text": "You are not normal, / and that's the point."
+},
+{
+"id": "c09",
+"src_in": 49.3333,
+"src_out": 50.6667,
+"speed": 1.0,
+"text": "Success is abnormal"
+},
+{
+"id": "c10",
+"src_in": 51.0667,
+"src_out": 52.0,
+"speed": 1.0,
+"text": "by definition."
+},
+{
+"id": "c11",
+"src_in": 53.6667,
+"src_out": 57.7,
+"speed": 1.0,
+"text": "Successful people are outliers. / They do not belong to the average."
+},
+{
+"id": "c12",
+"src_in": 59.1667,
+"src_out": 60.2333,
+"speed": 1.0,
+"text": "Which sounds great,"
+},
+{
+"id": "c13",
+"src_in": 60.4667,
+"src_out": 63.2667,
+"speed": 1.0,
+"text": "except it comes with a price most people won't pay."
+},
+{
+"id": "c14",
+"src_in": 63.9,
+"src_out": 65.3667,
+"speed": 1.0,
+"text": "Pain, / discomfort,"
+},
+{
+"id": "c15",
+"src_in": 65.6333,
+"src_out": 68.2,
+"speed": 1.0,
+"text": "going further than most people could ever tolerate."
+},
+{
+"id": "c16",
+"src_in": 69.8333,
+"src_out": 73.3333,
+"speed": 1.0,
+"text": "That's why balance does not hold up while you are chasing a big goal."
+},
+{
+"id": "c17",
+"src_in": 75.0333,
+"src_out": 79.9667,
+"speed": 1.0,
+"text": "Balance is something everybody can do, and if everybody can do it, / there's no value in it."
+},
+{
+"id": "c18",
+"src_in": 81.4333,
+"src_out": 83.8,
+"speed": 1.0,
+"text": "It's like a class where everybody gets an A."
+},
+{
+"id": "c19",
+"src_in": 84.1333,
+"src_out": 85.3333,
+"speed": 1.0,
+"text": "The A means nothing."
+},
+{
+"id": "c20",
+"src_in": 85.9,
+"src_out": 88.0667,
+"speed": 1.0,
+"text": "Screw balance. You need to go all out."
+},
+{
+"id": "c21",
+"src_in": 89.4333,
+"src_out": 91.1,
+"speed": 1.0,
+"text": "But here's the problem."
+},
+{
+"id": "c22",
+"src_in": 91.4,
+"src_out": 95.6,
+"speed": 1.0,
+"text": "The moment it gets uncomfortable is the exact moment you have to keep going."
+},
+{
+"id": "c23",
+"src_in": 96.2,
+"src_out": 98.3333,
+"speed": 1.0,
+"text": "That discomfort is what makes you grow"
+},
+{
+"id": "c24",
+"src_in": 99.9667,
+"src_out": 104.6333,
+"speed": 1.0,
+"text": "It tells your body and mind there's no option but to adapt and become stronger."
+},
+{
+"id": "c25",
+"src_in": 106.4667,
+"src_out": 110.7,
+"speed": 1.0,
+"text": "And it's exactly where most people chicken out and crawl back into comfort."
+},
+{
+"id": "c26",
+"src_in": 111.2333,
+"src_out": 112.6333,
+"speed": 1.0,
+"text": "Outliers keep going,"
+},
+{
+"id": "c27",
+"src_in": 114.2333,
+"src_out": 116.3,
+"speed": 1.0,
+"text": "and that is when the judging starts."
+},
+{
+"id": "c28",
+"src_in": 116.9,
+"src_out": 118.9333,
+"speed": 1.0,
+"text": "Normal people don't look at themselves."
+},
+{
+"id": "c29",
+"src_in": 119.2333,
+"src_out": 120.1,
+"speed": 1.0,
+"text": "They look at you."
+},
+{
+"id": "c30",
+"src_in": 121.5667,
+"src_out": 123.4,
+"speed": 1.0,
+"text": "Crazy, boring, obsessed,"
+},
+{
+"id": "c31",
+"src_in": 123.9333,
+"src_out": 126.9,
+"speed": 1.0,
+"text": "whatever helps them feel better about their own mediocrity"
+},
+{
+"id": "c32",
+"src_in": 128.5333,
+"src_out": 131.0,
+"speed": 1.0,
+"text": "You, my friend, were never supposed to be normal"
+}
+],
+"words": [
+{
+"w": "I",
+"s": 0.24,
+"e": 0.28
+},
+{
+"w": "have",
+"s": 0.32,
+"e": 0.48
+},
+{
+"w": "this",
+"s": 0.52,
+"e": 0.68
+},
+{
+"w": "theory",
+"s": 0.74,
+"e": 1.1
+},
+{
+"w": "that",
+"s": 1.94,
+"e": 2.04
+},
+{
+"w": "the",
+"s": 2.08,
+"e": 2.16
+},
+{
+"w": "people",
+"s": 2.22,
+"e": 2.68
+},
+{
+"w": "with",
+"s": 3.3,
+"e": 3.38
+},
+{
+"w": "the",
+"s": 3.4,
+"e": 3.48
+},
+{
+"w": "best",
+"s": 3.52,
+"e": 3.74
+},
+{
+"w": "training",
+"s": 3.78,
+"e": 4.019
+},
+{
+"w": "mentalities",
+"s": 4.059,
+"e": 4.9
+},
+{
+"w": "are",
+"s": 4.96,
+"e": 5.06
+},
+{
+"w": "all",
+"s": 5.12,
+"e": 5.26
+},
+{
+"w": "a",
+"s": 5.3,
+"e": 5.34
+},
+{
+"w": "little",
+"s": 5.36,
+"e": 5.5
+},
+{
+"w": "bit",
+"s": 5.54,
+"e": 5.72
+},
+{
+"w": "fucking",
+"s": 6.02,
+"e": 6.26
+},
+{
+"w": "unhinged.",
+"s": 6.32,
+"e": 6.72
+},
+{
+"w": "Because",
+"s": 7.12,
+"e": 7.32
+},
+{
+"w": "when",
+"s": 7.34,
+"e": 7.44
+},
+{
+"w": "you",
+"s": 7.48,
+"e": 7.56
+},
+{
+"w": "think",
+"s": 7.58,
+"e": 7.74
+},
+{
+"w": "about",
+"s": 7.8,
+"e": 7.92
+},
+{
+"w": "it",
+"s": 7.96,
+"e": 8.02
+},
+{
+"w": "right,",
+"s": 8.08,
+"e": 8.22
+},
+{
+"w": "they",
+"s": 8.34,
+"e": 8.44
+},
+{
+"w": "are",
+"s": 8.48,
+"e": 8.56
+},
+{
+"w": "either",
+"s": 8.62,
+"e": 8.84
+},
+{
+"w": "control",
+"s": 9.2,
+"e": 9.52
+},
+{
+"w": "freaks,",
+"s": 9.6,
+"e": 9.92
+},
+{
+"w": "they",
+"s": 10.06,
+"e": 10.14
+},
+{
+"w": "have",
+"s": 10.16,
+"e": 10.24
+},
+{
+"w": "a",
+"s": 10.28,
+"e": 10.32
+},
+{
+"w": "fuck",
+"s": 10.38,
+"e": 10.56
+},
+{
+"w": "balance",
+"s": 10.6,
+"e": 10.92
+},
+{
+"w": "type",
+"s": 10.96,
+"e": 11.16
+},
+{
+"w": "work",
+"s": 11.2,
+"e": 11.38
+},
+{
+"w": "ethic,",
+"s": 11.44,
+"e": 11.7
+},
+{
+"w": "they've",
+"s": 12.08,
+"e": 12.2
+},
+{
+"w": "been",
+"s": 12.22,
+"e": 12.34
+},
+{
+"w": "through",
+"s": 12.36,
+"e": 12.52
+},
+{
+"w": "some",
+"s": 12.56,
+"e": 12.68
+},
+{
+"w": "shit",
+"s": 12.74,
+"e": 12.98
+},
+{
+"w": "or",
+"s": 13.54,
+"e": 13.62
+},
+{
+"w": "some",
+"s": 13.66,
+"e": 13.74
+},
+{
+"w": "trauma",
+"s": 13.8,
+"e": 14.08
+},
+{
+"w": "in",
+"s": 14.12,
+"e": 14.16
+},
+{
+"w": "their",
+"s": 14.2,
+"e": 14.28
+},
+{
+"w": "lives,",
+"s": 14.32,
+"e": 14.64
+},
+{
+"w": "and",
+"s": 15.1,
+"e": 15.18
+},
+{
+"w": "they're",
+"s": 15.18,
+"e": 15.28
+},
+{
+"w": "just",
+"s": 15.3,
+"e": 15.38
+},
+{
+"w": "a",
+"s": 15.42,
+"e": 15.44
+},
+{
+"w": "little",
+"s": 15.48,
+"e": 15.62
+},
+{
+"w": "bit",
+"s": 15.64,
+"e": 15.72
+},
+{
+"w": "fucking",
+"s": 15.76,
+"e": 15.94
+},
+{
+"w": "crazy.",
+"s": 15.98,
+"e": 16.28
+},
+{
+"w": "I",
+"s": 16.92,
+"e": 16.96
+},
+{
+"w": "don't",
+"s": 16.98,
+"e": 17.08
+},
+{
+"w": "think",
+"s": 17.1,
+"e": 17.22
+},
+{
+"w": "it's",
+"s": 17.26,
+"e": 17.36
+},
+{
+"w": "particularly",
+"s": 17.38,
+"e": 17.76
+},
+{
+"w": "normal",
+"s": 17.78,
+"e": 18.14
+},
+{
+"w": "to",
+"s": 18.2,
+"e": 18.26
+},
+{
+"w": "voluntarily",
+"s": 18.3,
+"e": 18.86
+},
+{
+"w": "walk",
+"s": 19.16,
+"e": 19.34
+},
+{
+"w": "into",
+"s": 19.38,
+"e": 19.54
+},
+{
+"w": "a",
+"s": 19.58,
+"e": 19.62
+},
+{
+"w": "gym,",
+"s": 19.68,
+"e": 19.88
+},
+{
+"w": "put",
+"s": 20.62,
+"e": 20.74
+},
+{
+"w": "yourself",
+"s": 20.78,
+"e": 21.08
+},
+{
+"w": "through",
+"s": 21.12,
+"e": 21.26
+},
+{
+"w": "multiple",
+"s": 21.32,
+"e": 21.76
+},
+{
+"w": "very",
+"s": 21.8,
+"e": 21.98
+},
+{
+"w": "fucking",
+"s": 22.06,
+"e": 22.28
+},
+{
+"w": "painful",
+"s": 22.34,
+"e": 22.6
+},
+{
+"w": "sets,",
+"s": 22.66,
+"e": 22.96
+},
+{
+"w": "feel",
+"s": 23.14,
+"e": 23.26
+},
+{
+"w": "like",
+"s": 23.28,
+"e": 23.4
+},
+{
+"w": "you've",
+"s": 23.44,
+"e": 23.54
+},
+{
+"w": "just",
+"s": 23.6,
+"e": 23.7
+},
+{
+"w": "gone",
+"s": 23.74,
+"e": 23.84
+},
+{
+"w": "and",
+"s": 23.86,
+"e": 23.94
+},
+{
+"w": "met",
+"s": 23.96,
+"e": 24.1
+},
+{
+"w": "God,",
+"s": 24.14,
+"e": 24.36
+},
+{
+"w": "and",
+"s": 24.94,
+"e": 24.98
+},
+{
+"w": "then",
+"s": 25.0,
+"e": 25.08
+},
+{
+"w": "you",
+"s": 25.1,
+"e": 25.16
+},
+{
+"w": "spend",
+"s": 25.2,
+"e": 25.32
+},
+{
+"w": "the",
+"s": 25.34,
+"e": 25.4
+},
+{
+"w": "next",
+"s": 25.44,
+"e": 25.58
+},
+{
+"w": "seven",
+"s": 25.6,
+"e": 25.8
+},
+{
+"w": "days",
+"s": 25.84,
+"e": 26.08
+},
+{
+"w": "looking",
+"s": 26.12,
+"e": 26.3
+},
+{
+"w": "forward",
+"s": 26.36,
+"e": 26.56
+},
+{
+"w": "to",
+"s": 26.6,
+"e": 26.66
+},
+{
+"w": "doing",
+"s": 26.7,
+"e": 26.84
+},
+{
+"w": "it",
+"s": 26.86,
+"e": 26.9
+},
+{
+"w": "all",
+"s": 26.94,
+"e": 27.02
+},
+{
+"w": "over",
+"s": 27.06,
+"e": 27.2
+},
+{
+"w": "again.",
+"s": 27.24,
+"e": 27.32
+},
+{
+"w": "Normal",
+"s": 28.14,
+"e": 28.46
+},
+{
+"w": "people",
+"s": 28.56,
+"e": 28.84
+},
+{
+"w": "can't",
+"s": 29.0,
+"e": 29.24
+},
+{
+"w": "build",
+"s": 29.28,
+"e": 29.44
+},
+{
+"w": "a",
+"s": 29.48,
+"e": 29.54
+},
+{
+"w": "physique",
+"s": 29.58,
+"e": 29.98
+},
+{
+"w": "like",
+"s": 30.02,
+"e": 30.22
+},
+{
+"w": "this.",
+"s": 30.28,
+"e": 30.6
+},
+{
+"w": "You",
+"s": 32.5,
+"e": 32.58
+},
+{
+"w": "skip",
+"s": 32.659,
+"e": 32.88
+},
+{
+"w": "the",
+"s": 32.94,
+"e": 33.0
+},
+{
+"w": "drinks,",
+"s": 33.06,
+"e": 33.4
+},
+{
+"w": "you",
+"s": 33.62,
+"e": 33.7
+},
+{
+"w": "say",
+"s": 33.84,
+"e": 34.06
+},
+{
+"w": "no",
+"s": 34.12,
+"e": 34.26
+},
+{
+"w": "to",
+"s": 34.32,
+"e": 34.4
+},
+{
+"w": "the",
+"s": 34.44,
+"e": 34.56
+},
+{
+"w": "pizza",
+"s": 34.6,
+"e": 34.98
+},
+{
+"w": "your",
+"s": 35.02,
+"e": 35.14
+},
+{
+"w": "friends",
+"s": 35.18,
+"e": 35.42
+},
+{
+"w": "are",
+"s": 35.44,
+"e": 35.54
+},
+{
+"w": "eating,",
+"s": 35.58,
+"e": 35.88
+},
+{
+"w": "and",
+"s": 36.36,
+"e": 36.48
+},
+{
+"w": "tonight",
+"s": 36.52,
+"e": 36.86
+},
+{
+"w": "everyone's",
+"s": 37.16,
+"e": 37.62
+},
+{
+"w": "calling",
+"s": 37.66,
+"e": 37.9
+},
+{
+"w": "you",
+"s": 37.94,
+"e": 38.04
+},
+{
+"w": "obsessed",
+"s": 38.1,
+"e": 38.54
+},
+{
+"w": "and",
+"s": 38.72,
+"e": 38.9
+},
+{
+"w": "abnormal.",
+"s": 38.96,
+"e": 39.48
+},
+{
+"w": "So",
+"s": 41.64,
+"e": 41.8
+},
+{
+"w": "Is",
+"s": 42.2,
+"e": 42.32
+},
+{
+"w": "something",
+"s": 42.36,
+"e": 42.72
+},
+{
+"w": "actually",
+"s": 42.86,
+"e": 43.16
+},
+{
+"w": "wrong",
+"s": 43.18,
+"e": 43.38
+},
+{
+"w": "with",
+"s": 43.42,
+"e": 43.54
+},
+{
+"w": "you?",
+"s": 43.6,
+"e": 43.7
+},
+{
+"w": "Actually,",
+"s": 44.76,
+"e": 45.12
+},
+{
+"w": "yes.",
+"s": 45.44,
+"e": 45.76
+},
+{
+"w": "You",
+"s": 46.42,
+"e": 46.48
+},
+{
+"w": "are",
+"s": 46.5,
+"e": 46.6
+},
+{
+"w": "not",
+"s": 46.64,
+"e": 46.84
+},
+{
+"w": "normal,",
+"s": 46.9,
+"e": 47.2
+},
+{
+"w": "and",
+"s": 47.8,
+"e": 47.9
+},
+{
+"w": "that's",
+"s": 47.96,
+"e": 48.16
+},
+{
+"w": "the",
+"s": 48.22,
+"e": 48.32
+},
+{
+"w": "point.",
+"s": 48.36,
+"e": 48.64
+},
+{
+"w": "Success",
+"s": 49.42,
+"e": 49.9
+},
+{
+"w": "is",
+"s": 49.98,
+"e": 50.08
+},
+{
+"w": "abnormal",
+"s": 50.14,
+"e": 50.58
+},
+{
+"w": "by",
+"s": 51.18,
+"e": 51.36
+},
+{
+"w": "definition.",
+"s": 51.4,
+"e": 51.98
+},
+{
+"w": "Successful",
+"s": 53.76,
+"e": 54.24
+},
+{
+"w": "people",
+"s": 54.34,
+"e": 54.7
+},
+{
+"w": "are",
+"s": 54.76,
+"e": 54.84
+},
+{
+"w": "outliers.",
+"s": 54.9,
+"e": 55.56
+},
+{
+"w": "They",
+"s": 55.96,
+"e": 56.08
+},
+{
+"w": "do",
+"s": 56.12,
+"e": 56.2
+},
+{
+"w": "not",
+"s": 56.24,
+"e": 56.44
+},
+{
+"w": "belong",
+"s": 56.48,
+"e": 56.8
+},
+{
+"w": "to",
+"s": 56.86,
+"e": 56.94
+},
+{
+"w": "the",
+"s": 56.98,
+"e": 57.06
+},
+{
+"w": "average.",
+"s": 57.14,
+"e": 57.64
+},
+{
+"w": "Which",
+"s": 59.28,
+"e": 59.48
+},
+{
+"w": "sounds",
+"s": 59.54,
+"e": 59.82
+},
+{
+"w": "great,",
+"s": 59.88,
+"e": 60.14
+},
+{
+"w": "except",
+"s": 60.58,
+"e": 60.98
+},
+{
+"w": "it",
+"s": 61.04,
+"e": 61.14
+},
+{
+"w": "comes",
+"s": 61.2,
+"e": 61.4
+},
+{
+"w": "with",
+"s": 61.44,
+"e": 61.52
+},
+{
+"w": "a",
+"s": 61.58,
+"e": 61.64
+},
+{
+"w": "price",
+"s": 61.68,
+"e": 62.04
+},
+{
+"w": "most",
+"s": 62.18,
+"e": 62.36
+},
+{
+"w": "people",
+"s": 62.42,
+"e": 62.72
+},
+{
+"w": "won't",
+"s": 62.76,
+"e": 62.98
+},
+{
+"w": "pay.",
+"s": 63.04,
+"e": 63.2
+},
+{
+"w": "Pain,",
+"s": 63.96,
+"e": 64.2
+},
+{
+"w": "discomfort,",
+"s": 64.64,
+"e": 65.24
+},
+{
+"w": "going",
+"s": 65.74,
+"e": 65.98
+},
+{
+"w": "further",
+"s": 66.06,
+"e": 66.32
+},
+{
+"w": "than",
+"s": 66.36,
+"e": 66.52
+},
+{
+"w": "most",
+"s": 66.58,
+"e": 66.76
+},
+{
+"w": "people",
+"s": 66.82,
+"e": 67.1
+},
+{
+"w": "could",
+"s": 67.16,
+"e": 67.3
+},
+{
+"w": "ever",
+"s": 67.36,
+"e": 67.56
+},
+{
+"w": "tolerate.",
+"s": 67.62,
+"e": 68.16
+},
+{
+"w": "That's",
+"s": 69.92,
+"e": 70.14
+},
+{
+"w": "why",
+"s": 70.2,
+"e": 70.36
+},
+{
+"w": "balance",
+"s": 70.52,
+"e": 70.86
+},
+{
+"w": "does",
+"s": 70.9,
+"e": 70.98
+},
+{
+"w": "not",
+"s": 71.08,
+"e": 71.22
+},
+{
+"w": "hold",
+"s": 71.26,
+"e": 71.48
+},
+{
+"w": "up",
+"s": 71.54,
+"e": 71.66
+},
+{
+"w": "while",
+"s": 71.92,
+"e": 72.08
+},
+{
+"w": "you",
+"s": 72.1,
+"e": 72.14
+},
+{
+"w": "are",
+"s": 72.18,
+"e": 72.26
+},
+{
+"w": "chasing",
+"s": 72.28,
+"e": 72.62
+},
+{
+"w": "a",
+"s": 72.66,
+"e": 72.7
+},
+{
+"w": "big",
+"s": 72.78,
+"e": 72.9
+},
+{
+"w": "goal.",
+"s": 73.0,
+"e": 73.24
+},
+{
+"w": "Balance",
+"s": 75.12,
+"e": 75.52
+},
+{
+"w": "is",
+"s": 75.58,
+"e": 75.68
+},
+{
+"w": "something",
+"s": 75.72,
+"e": 76.1
+},
+{
+"w": "everybody",
+"s": 76.16,
+"e": 76.52
+},
+{
+"w": "can",
+"s": 76.58,
+"e": 76.72
+},
+{
+"w": "do,",
+"s": 76.78,
+"e": 76.9
+},
+{
+"w": "and",
+"s": 77.26,
+"e": 77.38
+},
+{
+"w": "if",
+"s": 77.44,
+"e": 77.56
+},
+{
+"w": "everybody",
+"s": 77.62,
+"e": 77.96
+},
+{
+"w": "can",
+"s": 78.04,
+"e": 78.16
+},
+{
+"w": "do",
+"s": 78.2,
+"e": 78.3
+},
+{
+"w": "it,",
+"s": 78.34,
+"e": 78.46
+},
+{
+"w": "there's",
+"s": 78.84,
+"e": 79.039
+},
+{
+"w": "no",
+"s": 79.08,
+"e": 79.18
+},
+{
+"w": "value",
+"s": 79.22,
+"e": 79.5
+},
+{
+"w": "in",
+"s": 79.56,
+"e": 79.64
+},
+{
+"w": "it.",
+"s": 79.68,
+"e": 79.94
+},
+{
+"w": "It's",
+"s": 81.52,
+"e": 81.66
+},
+{
+"w": "like",
+"s": 81.7,
+"e": 81.82
+},
+{
+"w": "a",
+"s": 81.88,
+"e": 81.92
+},
+{
+"w": "class",
+"s": 81.98,
+"e": 82.46
+},
+{
+"w": "where",
+"s": 82.52,
+"e": 82.7
+},
+{
+"w": "everybody",
+"s": 82.76,
+"e": 83.14
+},
+{
+"w": "gets",
+"s": 83.22,
+"e": 83.42
+},
+{
+"w": "an",
+"s": 83.46,
+"e": 83.54
+},
+{
+"w": "A.",
+"s": 83.6,
+"e": 83.7
+},
+{
+"w": "The",
+"s": 84.24,
+"e": 84.34
+},
+{
+"w": "A",
+"s": 84.44,
+"e": 84.58
+},
+{
+"w": "means",
+"s": 84.64,
+"e": 84.9
+},
+{
+"w": "nothing.",
+"s": 84.94,
+"e": 85.26
+},
+{
+"w": "Screw",
+"s": 86.0,
+"e": 86.28
+},
+{
+"w": "balance.",
+"s": 86.32,
+"e": 86.76
+},
+{
+"w": "You",
+"s": 86.96,
+"e": 87.04
+},
+{
+"w": "need",
+"s": 87.079,
+"e": 87.2
+},
+{
+"w": "to",
+"s": 87.239,
+"e": 87.32
+},
+{
+"w": "go",
+"s": 87.379,
+"e": 87.54
+},
+{
+"w": "all",
+"s": 87.62,
+"e": 87.72
+},
+{
+"w": "out.",
+"s": 87.78,
+"e": 88.04
+},
+{
+"w": "But",
+"s": 89.54,
+"e": 89.72
+},
+{
+"w": "here's",
+"s": 90.06,
+"e": 90.36
+},
+{
+"w": "the",
+"s": 90.4,
+"e": 90.5
+},
+{
+"w": "problem.",
+"s": 90.52,
+"e": 90.88
+},
+{
+"w": "The",
+"s": 91.48,
+"e": 91.58
+},
+{
+"w": "moment",
+"s": 91.64,
+"e": 91.94
+},
+{
+"w": "it",
+"s": 92.04,
+"e": 92.16
+},
+{
+"w": "gets",
+"s": 92.18,
+"e": 92.38
+},
+{
+"w": "uncomfortable",
+"s": 92.44,
+"e": 93.12
+},
+{
+"w": "is",
+"s": 93.42,
+"e": 93.52
+},
+{
+"w": "the",
+"s": 93.56,
+"e": 93.68
+},
+{
+"w": "exact",
+"s": 93.76,
+"e": 94.12
+},
+{
+"w": "moment",
+"s": 94.16,
+"e": 94.5
+},
+{
+"w": "you",
+"s": 94.56,
+"e": 94.64
+},
+{
+"w": "have",
+"s": 94.68,
+"e": 94.86
+},
+{
+"w": "to",
+"s": 94.88,
+"e": 94.98
+},
+{
+"w": "keep",
+"s": 95.02,
+"e": 95.22
+},
+{
+"w": "going.",
+"s": 95.26,
+"e": 95.54
+},
+{
+"w": "That",
+"s": 96.3,
+"e": 96.46
+},
+{
+"w": "discomfort",
+"s": 96.5,
+"e": 97.12
+},
+{
+"w": "is",
+"s": 97.18,
+"e": 97.28
+},
+{
+"w": "what",
+"s": 97.34,
+"e": 97.54
+},
+{
+"w": "makes",
+"s": 97.7,
+"e": 97.9
+},
+{
+"w": "you",
+"s": 97.94,
+"e": 98.02
+},
+{
+"w": "grow",
+"s": 98.06,
+"e": 98.28
+},
+{
+"w": "It",
+"s": 100.06,
+"e": 100.16
+},
+{
+"w": "tells",
+"s": 100.22,
+"e": 100.42
+},
+{
+"w": "your",
+"s": 100.46,
+"e": 100.58
+},
+{
+"w": "body",
+"s": 100.64,
+"e": 100.98
+},
+{
+"w": "and",
+"s": 101.04,
+"e": 101.16
+},
+{
+"w": "mind",
+"s": 101.24,
+"e": 101.54
+},
+{
+"w": "there's",
+"s": 101.82,
+"e": 102.04
+},
+{
+"w": "no",
+"s": 102.08,
+"e": 102.22
+},
+{
+"w": "option",
+"s": 102.3,
+"e": 102.68
+},
+{
+"w": "but",
+"s": 102.96,
+"e": 103.059
+},
+{
+"w": "to",
+"s": 103.1,
+"e": 103.2
+},
+{
+"w": "adapt",
+"s": 103.28,
+"e": 103.6
+},
+{
+"w": "and",
+"s": 103.64,
+"e": 103.76
+},
+{
+"w": "become",
+"s": 103.8,
+"e": 104.02
+},
+{
+"w": "stronger.",
+"s": 104.16,
+"e": 104.58
+},
+{
+"w": "And",
+"s": 106.56,
+"e": 106.68
+},
+{
+"w": "it's",
+"s": 106.72,
+"e": 106.86
+},
+{
+"w": "exactly",
+"s": 106.94,
+"e": 107.44
+},
+{
+"w": "where",
+"s": 107.5,
+"e": 107.68
+},
+{
+"w": "most",
+"s": 107.76,
+"e": 107.98
+},
+{
+"w": "people",
+"s": 108.02,
+"e": 108.26
+},
+{
+"w": "chicken",
+"s": 108.34,
+"e": 108.62
+},
+{
+"w": "out",
+"s": 108.68,
+"e": 108.84
+},
+{
+"w": "and",
+"s": 109.02,
+"e": 109.12
+},
+{
+"w": "crawl",
+"s": 109.3,
+"e": 109.54
+},
+{
+"w": "back",
+"s": 109.62,
+"e": 109.86
+},
+{
+"w": "into",
+"s": 109.94,
+"e": 110.14
+},
+{
+"w": "comfort.",
+"s": 110.18,
+"e": 110.64
+},
+{
+"w": "Outliers",
+"s": 111.32,
+"e": 111.84
+},
+{
+"w": "keep",
+"s": 112.1,
+"e": 112.3
+},
+{
+"w": "going,",
+"s": 112.34,
+"e": 112.58
+},
+{
+"w": "and",
+"s": 114.32,
+"e": 114.52
+},
+{
+"w": "that",
+"s": 114.58,
+"e": 114.88
+},
+{
+"w": "is",
+"s": 114.94,
+"e": 115.079
+},
+{
+"w": "when",
+"s": 115.14,
+"e": 115.28
+},
+{
+"w": "the",
+"s": 115.34,
+"e": 115.42
+},
+{
+"w": "judging",
+"s": 115.48,
+"e": 115.74
+},
+{
+"w": "starts.",
+"s": 115.84,
+"e": 116.22
+},
+{
+"w": "Normal",
+"s": 117.0,
+"e": 117.26
+},
+{
+"w": "people",
+"s": 117.36,
+"e": 117.68
+},
+{
+"w": "don't",
+"s": 117.74,
+"e": 117.9
+},
+{
+"w": "look",
+"s": 117.94,
+"e": 118.08
+},
+{
+"w": "at",
+"s": 118.12,
+"e": 118.24
+},
+{
+"w": "themselves.",
+"s": 118.28,
+"e": 118.84
+},
+{
+"w": "They",
+"s": 119.34,
+"e": 119.44
+},
+{
+"w": "look",
+"s": 119.48,
+"e": 119.6
+},
+{
+"w": "at",
+"s": 119.66,
+"e": 119.78
+},
+{
+"w": "you.",
+"s": 119.86,
+"e": 120.08
+},
+{
+"w": "Crazy,",
+"s": 121.64,
+"e": 122.04
+},
+{
+"w": "boring,",
+"s": 122.42,
+"e": 122.72
+},
+{
+"w": "obsessed,",
+"s": 122.9,
+"e": 123.3
+},
+{
+"w": "whatever",
+"s": 124.02,
+"e": 124.3
+},
+{
+"w": "helps",
+"s": 124.36,
+"e": 124.6
+},
+{
+"w": "them",
+"s": 124.66,
+"e": 124.84
+},
+{
+"w": "feel",
+"s": 124.92,
+"e": 125.14
+},
+{
+"w": "better",
+"s": 125.2,
+"e": 125.56
+},
+{
+"w": "about",
+"s": 125.66,
+"e": 125.88
+},
+{
+"w": "their",
+"s": 125.92,
+"e": 126.06
+},
+{
+"w": "own",
+"s": 126.14,
+"e": 126.3
+},
+{
+"w": "mediocrity",
+"s": 126.34,
+"e": 126.86
+},
+{
+"w": "You,",
+"s": 128.62,
+"e": 128.7
+},
+{
+"w": "my",
+"s": 128.8,
+"e": 128.96
+},
+{
+"w": "friend,",
+"s": 129.0,
+"e": 129.24
+},
+{
+"w": "were",
+"s": 129.54,
+"e": 129.68
+},
+{
+"w": "never",
+"s": 129.72,
+"e": 129.9
+},
+{
+"w": "supposed",
+"s": 129.98,
+"e": 130.32
+},
+{
+"w": "to",
+"s": 130.34,
+"e": 130.4
+},
+{
+"w": "be",
+"s": 130.44,
+"e": 130.54
+},
+{
+"w": "normal",
+"s": 130.58,
+"e": 130.9
+}
+],
+"peaks": {
+"rate": 100,
+"data": "AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA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"
+},
+"tracks": [
+{
+"id": "graphics",
+"label": "Graphics",
+"items": [
+{
+"id": "g00",
+"label": "Her clip (untouched)",
+"start": 0,
+"end": 27.3,
+"anchor": "edit",
+"detail": ""
+},
+{
+"id": "g01",
+"label": "NORMAL PEOPLE figures",
+"start": 27.3,
+"end": 28.297,
+"anchor": "edit",
+"detail": ""
+},
+{
+"id": "g02",
+"label": "Drinks X, pizza NO stamp",
+"start": 30.617,
+"end": 33.627,
+"anchor": "edit",
+"detail": ""
+},
+{
+"id": "g03",
+"label": "Group chat bubbles",
+"start": 33.627,
+"end": 36.907,
+"anchor": "edit",
+"detail": ""
+},
+{
+"id": "g04",
+"label": "SOMETHING WRONG WITH YOU? form, YES ticked",
+"start": 36.907,
+"end": 40.253,
+"anchor": "edit",
+"detail": ""
+},
+{
+"id": "g05",
+"label": "Bell curve: MOST PEOPLE crowd, YOU dot",
+"start": 40.253,
+"end": 42.62,
+"anchor": "edit",
+"detail": ""
+},
+{
+"id": "g06",
+"label": "Dictionary 'abnormal' + Steve Jobs",
+"start": 42.62,
+"end": 44.893,
+"anchor": "edit",
+"detail": ""
+},
+{
+"id": "g07",
+"label": "Curve: OUTLIERS Musk + Arnold on the right",
+"start": 44.893,
+"end": 48.947,
+"anchor": "edit",
+"detail": ""
+},
+{
+"id": "g08",
+"label": "Receipt: the price",
+"start": 48.947,
+"end": 52.6,
+"anchor": "edit",
+"detail": ""
+},
+{
+"id": "g09",
+"label": "MOST PEOPLE STOP HERE line",
+"start": 55.6,
+"end": 56.82,
+"anchor": "edit",
+"detail": ""
+},
+{
+"id": "g10",
+"label": "BALANCE scale wobbles",
+"start": 56.82,
+"end": 60.27,
+"anchor": "edit",
+"detail": ""
+},
+{
+"id": "g11",
+"label": "Cream section: EVERYBODY CAN DO IT, NO VALUE",
+"start": 60.27,
+"end": 65.254,
+"anchor": "edit",
+"detail": ""
+},
+{
+"id": "g12",
+"label": "Report cards, the A crossed out",
+"start": 65.254,
+"end": 68.833,
+"anchor": "edit",
+"detail": ""
+},
+{
+"id": "g13",
+"label": "Scale tears in half",
+"start": 68.833,
+"end": 69.972,
+"anchor": "edit",
+"detail": ""
+},
+{
+"id": "g14",
+"label": "THE PROBLEM tape",
+"start": 71.887,
+"end": 73.15,
+"anchor": "edit",
+"detail": ""
+},
+{
+"id": "g15",
+"label": "Progress bar into UNCOMFORTABLE",
+"start": 73.15,
+"end": 74.4,
+"anchor": "edit",
+"detail": ""
+},
+{
+"id": "g16",
+"label": "Sisyphus statue",
+"start": 76.867,
+"end": 77.45,
+"anchor": "edit",
+"detail": ""
+},
+{
+"id": "g17",
+"label": "Self-made man statue",
+"start": 79.6,
+"end": 81.8,
+"anchor": "edit",
+"detail": ""
+},
+{
+"id": "g18",
+"label": "Sofa, COMFORT, crawling figures",
+"start": 84.4,
+"end": 87.7,
+"anchor": "edit",
+"detail": ""
+},
+{
+"id": "g19",
+"label": "Judging eyes, JUDGING",
+"start": 90.0,
+"end": 91.367,
+"anchor": "edit",
+"detail": ""
+},
+{
+"id": "g20",
+"label": "Mirror crossed out, pointing hands",
+"start": 91.367,
+"end": 94.24,
+"anchor": "edit",
+"detail": ""
+},
+{
+"id": "g21",
+"label": "Musk CRAZY, Jobs BORING, Arnold OBSESSED",
+"start": 94.24,
+"end": 96.087,
+"anchor": "edit",
+"detail": ""
+},
+{
+"id": "g22",
+"label": "Dictionary 'mediocrity', grey figures",
+"start": 96.087,
+"end": 99.054,
+"anchor": "edit",
+"detail": ""
+}
+]
+},
+{
+"id": "physique",
+"label": "Physique shots",
+"items": [
+{
+"id": "p00",
+"label": "Mirror physique photo",
+"start": 28.297,
+"end": 30.617,
+"anchor": "edit",
+"detail": "photo, unfiltered"
+},
+{
+"id": "p01",
+"label": "Press clip",
+"start": 52.6,
+"end": 53.9,
+"anchor": "edit",
+"detail": "HDR"
+},
+{
+"id": "p02",
+"label": "Pull-ups",
+"start": 53.9,
+"end": 55.6,
+"anchor": "edit",
+"detail": "HDR"
+},
+{
+"id": "p03",
+"label": "Close press, full frame",
+"start": 69.972,
+"end": 71.887,
+"anchor": "edit",
+"detail": "HDR"
+},
+{
+"id": "p04",
+"label": "Incline press, KEEP GOING",
+"start": 74.4,
+"end": 76.867,
+"anchor": "edit",
+"detail": "HDR"
+},
+{
+"id": "p05",
+"label": "Flex clip + Sisyphus",
+"start": 77.45,
+"end": 79.6,
+"anchor": "edit",
+"detail": "HDR"
+},
+{
+"id": "p06",
+"label": "Dumbbell photo",
+"start": 81.8,
+"end": 84.4,
+"anchor": "edit",
+"detail": "photo"
+},
+{
+"id": "p07",
+"label": "Flex clip, OUTLIERS",
+"start": 87.7,
+"end": 90.0,
+"anchor": "edit",
+"detail": "HDR"
+},
+{
+"id": "p08",
+"label": "Front physique photo, YOU.",
+"start": 99.054,
+"end": 102.334,
+"anchor": "edit",
+"detail": "photo"
+}
+]
+},
+{
+"id": "you",
+"label": "Your circle",
+"items": [
+{
+"id": "h00",
+"label": "You: big, centre",
+"start": 27.3,
+"end": 29.947,
+"anchor": "edit",
+"detail": ""
+},
+{
+"id": "h01",
+"label": "You: small, right",
+"start": 29.947,
+"end": 33.507,
+"anchor": "edit",
+"detail": ""
+},
+{
+"id": "h02",
+"label": "You: small, left",
+"start": 33.507,
+"end": 36.787,
+"anchor": "edit",
+"detail": ""
+},
+{
+"id": "h03",
+"label": "You: small, right",
+"start": 36.787,
+"end": 38.84,
+"anchor": "edit",
+"detail": ""
+},
+{
+"id": "h04",
+"label": "You: big, centre",
+"start": 38.84,
+"end": 42.5,
+"anchor": "edit",
+"detail": ""
+},
+{
+"id": "h05",
+"label": "You: small, left",
+"start": 42.5,
+"end": 44.773,
+"anchor": "edit",
+"detail": ""
+},
+{
+"id": "h06",
+"label": "You: small, left",
+"start": 44.773,
+"end": 48.827,
+"anchor": "edit",
+"detail": ""
+},
+{
+"id": "h07",
+"label": "You: small, left",
+"start": 48.827,
+"end": 54.153,
+"anchor": "edit",
+"detail": ""
+},
+{
+"id": "h08",
+"label": "You: small, right",
+"start": 54.153,
+"end": 56.7,
+"anchor": "edit",
+"detail": ""
+},
+{
+"id": "h09",
+"label": "You: small, left",
+"start": 56.7,
+"end": 60.2,
+"anchor": "edit",
+"detail": ""
+},
+{
+"id": "h10",
+"label": "You: small, right",
+"start": 60.2,
+"end": 65.134,
+"anchor": "edit",
+"detail": ""
+},
+{
+"id": "h11",
+"label": "You: small, left",
+"start": 65.134,
+"end": 68.713,
+"anchor": "edit",
+"detail": ""
+},
+{
+"id": "h12",
+"label": "You: big, centre",
+"start": 68.713,
+"end": 72.527,
+"anchor": "edit",
+"detail": ""
+},
+{
+"id": "h13",
+"label": "You: small, right",
+"start": 72.527,
+"end": 76.747,
+"anchor": "edit",
+"detail": ""
+},
+{
+"id": "h14",
+"label": "You: small, left",
+"start": 76.747,
+"end": 78.873,
+"anchor": "edit",
+"detail": ""
+},
+{
+"id": "h15",
+"label": "You: small, right",
+"start": 78.873,
+"end": 83.54,
+"anchor": "edit",
+"detail": ""
+},
+{
+"id": "h16",
+"label": "You: small, left",
+"start": 83.54,
+"end": 89.167,
+"anchor": "edit",
+"detail": ""
+},
+{
+"id": "h17",
+"label": "You: big, centre",
+"start": 89.167,
+"end": 94.12,
+"anchor": "edit",
+"detail": ""
+},
+{
+"id": "h18",
+"label": "You: small, right",
+"start": 94.12,
+"end": 95.967,
+"anchor": "edit",
+"detail": ""
+},
+{
+"id": "h19",
+"label": "You: small, right",
+"start": 95.967,
+"end": 98.934,
+"anchor": "edit",
+"detail": ""
+},
+{
+"id": "h20",
+"label": "You: big, centre",
+"start": 98.934,
+"end": 102.334,
+"anchor": "edit",
+"detail": ""
+}
+]
+},
+{
+"id": "sfx",
+"label": "Sound effects",
+"items": [
+{
+"id": "s000",
+"label": "swoosh 1",
+"start": 27.25,
+"end": 27.55,
+"anchor": "edit",
+"detail": "-2 dB"
+},
+{
+"id": "s001",
+"label": "paper",
+"start": 27.657,
+"end": 27.957,
+"anchor": "edit",
+"detail": "-4 dB"
+},
+{
+"id": "s002",
+"label": "paper",
+"start": 27.807,
+"end": 28.107,
+"anchor": "edit",
+"detail": "+0 dB"
+},
+{
+"id": "s003",
+"label": "paper",
+"start": 28.417,
+"end": 28.717,
+"anchor": "edit",
+"detail": "+0 dB"
+},
+{
+"id": "s004",
+"label": "marker 1",
+"start": 28.997,
+"end": 29.297,
+"anchor": "edit",
+"detail": "-4 dB"
+},
+{
+"id": "s005",
+"label": "paper 2",
+"start": 30.047,
+"end": 30.347,
+"anchor": "edit",
+"detail": "-8 dB"
+},
+{
+"id": "s006",
+"label": "paper",
+"start": 30.817,
+"end": 31.117,
+"anchor": "edit",
+"detail": "+0 dB"
+},
+{
+"id": "s007",
+"label": "marker 1",
+"start": 31.267,
+"end": 31.567,
+"anchor": "edit",
+"detail": "+0 dB"
+},
+{
+"id": "s008",
+"label": "paper",
+"start": 32.117,
+"end": 32.417,
+"anchor": "edit",
+"detail": "+0 dB"
+},
+{
+"id": "s009",
+"label": "thud",
+"start": 32.417,
+"end": 32.717,
+"anchor": "edit",
+"detail": "+0 dB"
+},
+{
+"id": "s010",
+"label": "paper 2",
+"start": 33.607,
+"end": 33.907,
+"anchor": "edit",
+"detail": "-8 dB"
+},
+{
+"id": "s011",
+"label": "paper",
+"start": 33.737,
+"end": 34.037,
+"anchor": "edit",
+"detail": "+0 dB"
+},
+{
+"id": "s012",
+"label": "paper 3",
+"start": 33.857,
+"end": 34.157,
+"anchor": "edit",
+"detail": "-6 dB"
+},
+{
+"id": "s013",
+"label": "paper 3",
+"start": 35.437,
+"end": 35.737,
+"anchor": "edit",
+"detail": "-6 dB"
+},
+{
+"id": "s014",
+"label": "paper 3",
+"start": 36.297,
+"end": 36.597,
+"anchor": "edit",
+"detail": "-6 dB"
+},
+{
+"id": "s015",
+"label": "paper 2",
+"start": 36.887,
+"end": 37.187,
+"anchor": "edit",
+"detail": "-8 dB"
+},
+{
+"id": "s016",
+"label": "paper",
+"start": 37.217,
+"end": 37.517,
+"anchor": "edit",
+"detail": "+0 dB"
+},
+{
+"id": "s017",
+"label": "paper",
+"start": 38.197,
+"end": 38.497,
+"anchor": "edit",
+"detail": "-6 dB"
+},
+{
+"id": "s018",
+"label": "paper 2",
+"start": 38.94,
+"end": 39.24,
+"anchor": "edit",
+"detail": "-8 dB"
+},
+{
+"id": "s019",
+"label": "marker 1",
+"start": 39.71,
+"end": 40.01,
+"anchor": "edit",
+"detail": "+0 dB"
+},
+{
+"id": "s020",
+"label": "swoosh 2",
+"start": 40.203,
+"end": 40.503,
+"anchor": "edit",
+"detail": "+0 dB"
+},
+{
+"id": "s021",
+"label": "marker 1",
+"start": 40.603,
+"end": 40.903,
+"anchor": "edit",
+"detail": "-6 dB"
+},
+{
+"id": "s022",
+"label": "paper",
+"start": 40.903,
+"end": 41.203,
+"anchor": "edit",
+"detail": "-4 dB"
+},
+{
+"id": "s023",
+"label": "thud",
+"start": 40.983,
+"end": 41.283,
+"anchor": "edit",
+"detail": "-4 dB"
+},
+{
+"id": "s024",
+"label": "paper 2",
+"start": 42.6,
+"end": 42.9,
+"anchor": "edit",
+"detail": "-8 dB"
+},
+{
+"id": "s025",
+"label": "paper",
+"start": 42.67,
+"end": 42.97,
+"anchor": "edit",
+"detail": "+0 dB"
+},
+{
+"id": "s026",
+"label": "marker 1",
+"start": 43.49,
+"end": 43.79,
+"anchor": "edit",
+"detail": "-4 dB"
+},
+{
+"id": "s027",
+"label": "paper",
+"start": 43.93,
+"end": 44.23,
+"anchor": "edit",
+"detail": "+0 dB"
+},
+{
+"id": "s028",
+"label": "marker 1",
+"start": 44.743,
+"end": 45.043,
+"anchor": "edit",
+"detail": "-6 dB"
+},
+{
+"id": "s029",
+"label": "paper 2",
+"start": 44.873,
+"end": 45.173,
+"anchor": "edit",
+"detail": "-8 dB"
+},
+{
+"id": "s030",
+"label": "paper",
+"start": 45.983,
+"end": 46.283,
+"anchor": "edit",
+"detail": "+0 dB"
+},
+{
+"id": "s031",
+"label": "paper",
+"start": 46.233,
+"end": 46.533,
+"anchor": "edit",
+"detail": "+0 dB"
+},
+{
+"id": "s032",
+"label": "thud",
+"start": 46.433,
+"end": 46.733,
+"anchor": "edit",
+"detail": "-3 dB"
+},
+{
+"id": "s033",
+"label": "paper 2",
+"start": 48.927,
+"end": 49.227,
+"anchor": "edit",
+"detail": "-8 dB"
+},
+{
+"id": "s034",
+"label": "paper",
+"start": 49.147,
+"end": 49.447,
+"anchor": "edit",
+"detail": "+0 dB"
+},
+{
+"id": "s035",
+"label": "paper 3",
+"start": 49.963,
+"end": 50.263,
+"anchor": "edit",
+"detail": "-6 dB"
+},
+{
+"id": "s036",
+"label": "paper 3",
+"start": 50.583,
+"end": 50.883,
+"anchor": "edit",
+"detail": "-6 dB"
+},
+{
+"id": "s037",
+"label": "paper 3",
+"start": 51.063,
+"end": 51.363,
+"anchor": "edit",
+"detail": "-6 dB"
+},
+{
+"id": "s038",
+"label": "thud",
+"start": 51.803,
+"end": 52.103,
+"anchor": "edit",
+"detail": "-4 dB"
+},
+{
+"id": "s039",
+"label": "paper",
+"start": 52.72,
+"end": 53.02,
+"anchor": "edit",
+"detail": "+0 dB"
+},
+{
+"id": "s040",
+"label": "paper",
+"start": 54.02,
+"end": 54.32,
+"anchor": "edit",
+"detail": "+0 dB"
+},
+{
+"id": "s041",
+"label": "paper 2",
+"start": 54.253,
+"end": 54.553,
+"anchor": "edit",
+"detail": "-8 dB"
+},
+{
+"id": "s042",
+"label": "paper",
+"start": 55.75,
+"end": 56.05,
+"anchor": "edit",
+"detail": "-4 dB"
+},
+{
+"id": "s043",
+"label": "thud",
+"start": 56.103,
+"end": 56.403,
+"anchor": "edit",
+"detail": "-6 dB"
+},
+{
+"id": "s044",
+"label": "swoosh 2",
+"start": 56.77,
+"end": 57.07,
+"anchor": "edit",
+"detail": "+0 dB"
+},
+{
+"id": "s045",
+"label": "paper 2",
+"start": 56.8,
+"end": 57.1,
+"anchor": "edit",
+"detail": "-8 dB"
+},
+{
+"id": "s046",
+"label": "paper",
+"start": 57.27,
+"end": 57.57,
+"anchor": "edit",
+"detail": "+0 dB"
+},
+{
+"id": "s047",
+"label": "swoosh 1",
+"start": 60.22,
+"end": 60.52,
+"anchor": "edit",
+"detail": "-4 dB"
+},
+{
+"id": "s048",
+"label": "paper 2",
+"start": 60.3,
+"end": 60.6,
+"anchor": "edit",
+"detail": "-8 dB"
+},
+{
+"id": "s049",
+"label": "paper",
+"start": 61.31,
+"end": 61.61,
+"anchor": "edit",
+"detail": "+0 dB"
+},
+{
+"id": "s050",
+"label": "thud",
+"start": 64.28,
+"end": 64.58,
+"anchor": "edit",
+"detail": "+0 dB"
+},
+{
+"id": "s051",
+"label": "paper 2",
+"start": 65.234,
+"end": 65.534,
+"anchor": "edit",
+"detail": "-8 dB"
+},
+{
+"id": "s052",
+"label": "paper",
+"start": 65.663,
+"end": 65.963,
+"anchor": "edit",
+"detail": "+0 dB"
+},
+{
+"id": "s053",
+"label": "paper",
+"start": 66.444,
+"end": 66.744,
+"anchor": "edit",
+"detail": "+0 dB"
+},
+{
+"id": "s054",
+"label": "paper",
+"start": 67.283,
+"end": 67.583,
+"anchor": "edit",
+"detail": "+0 dB"
+},
+{
+"id": "s055",
+"label": "marker 1",
+"start": 68.49,
+"end": 68.79,
+"anchor": "edit",
+"detail": "+0 dB"
+},
+{
+"id": "s056",
+"label": "paper 2",
+"start": 68.813,
+"end": 69.113,
+"anchor": "edit",
+"detail": "-8 dB"
+},
+{
+"id": "s057",
+"label": "swoosh 2",
+"start": 69.153,
+"end": 69.453,
+"anchor": "edit",
+"detail": "+2 dB"
+},
+{
+"id": "s058",
+"label": "boom",
+"start": 69.203,
+"end": 69.503,
+"anchor": "edit",
+"detail": "-2 dB"
+},
+{
+"id": "s059",
+"label": "thud",
+"start": 69.922,
+"end": 70.222,
+"anchor": "edit",
+"detail": "-6 dB"
+},
+{
+"id": "s060",
+"label": "swoosh 1",
+"start": 71.837,
+"end": 72.137,
+"anchor": "edit",
+"detail": "-4 dB"
+},
+{
+"id": "s061",
+"label": "swoosh 2",
+"start": 71.837,
+"end": 72.137,
+"anchor": "edit",
+"detail": "+0 dB"
+},
+{
+"id": "s062",
+"label": "paper 2",
+"start": 72.627,
+"end": 72.927,
+"anchor": "edit",
+"detail": "-8 dB"
+},
+{
+"id": "s063",
+"label": "paper",
+"start": 73.25,
+"end": 73.55,
+"anchor": "edit",
+"detail": "+0 dB"
+},
+{
+"id": "s064",
+"label": "paper",
+"start": 74.52,
+"end": 74.82,
+"anchor": "edit",
+"detail": "+0 dB"
+},
+{
+"id": "s065",
+"label": "paper",
+"start": 76.137,
+"end": 76.437,
+"anchor": "edit",
+"detail": "-4 dB"
+},
+{
+"id": "s066",
+"label": "paper 2",
+"start": 76.847,
+"end": 77.147,
+"anchor": "edit",
+"detail": "-8 dB"
+},
+{
+"id": "s067",
+"label": "paper",
+"start": 76.917,
+"end": 77.217,
+"anchor": "edit",
+"detail": "+0 dB"
+},
+{
+"id": "s068",
+"label": "paper",
+"start": 77.57,
+"end": 77.87,
+"anchor": "edit",
+"detail": "+0 dB"
+},
+{
+"id": "s069",
+"label": "paper 2",
+"start": 78.973,
+"end": 79.273,
+"anchor": "edit",
+"detail": "-8 dB"
+},
+{
+"id": "s070",
+"label": "paper",
+"start": 79.7,
+"end": 80.0,
+"anchor": "edit",
+"detail": "+0 dB"
+},
+{
+"id": "s071",
+"label": "paper",
+"start": 81.92,
+"end": 82.22,
+"anchor": "edit",
+"detail": "+0 dB"
+},
+{
+"id": "s072",
+"label": "paper 2",
+"start": 83.64,
+"end": 83.94,
+"anchor": "edit",
+"detail": "-8 dB"
+},
+{
+"id": "s073",
+"label": "paper",
+"start": 85.03,
+"end": 85.33,
+"anchor": "edit",
+"detail": "+0 dB"
+},
+{
+"id": "s074",
+"label": "paper",
+"start": 85.23,
+"end": 85.53,
+"anchor": "edit",
+"detail": "-4 dB"
+},
+{
+"id": "s075",
+"label": "paper",
+"start": 87.82,
+"end": 88.12,
+"anchor": "edit",
+"detail": "+0 dB"
+},
+{
+"id": "s076",
+"label": "paper 2",
+"start": 89.267,
+"end": 89.567,
+"anchor": "edit",
+"detail": "-8 dB"
+},
+{
+"id": "s077",
+"label": "paper 3",
+"start": 90.05,
+"end": 90.35,
+"anchor": "edit",
+"detail": "-7 dB"
+},
+{
+"id": "s078",
+"label": "paper 3",
+"start": 90.2,
+"end": 90.5,
+"anchor": "edit",
+"detail": "-7 dB"
+},
+{
+"id": "s079",
+"label": "paper 3",
+"start": 90.35,
+"end": 90.65,
+"anchor": "edit",
+"detail": "-7 dB"
+},
+{
+"id": "s080",
+"label": "paper 3",
+"start": 90.5,
+"end": 90.8,
+"anchor": "edit",
+"detail": "-7 dB"
+},
+{
+"id": "s081",
+"label": "paper 3",
+"start": 90.65,
+"end": 90.95,
+"anchor": "edit",
+"detail": "-7 dB"
+},
+{
+"id": "s082",
+"label": "thud",
+"start": 90.7,
+"end": 91.0,
+"anchor": "edit",
+"detail": "-4 dB"
+},
+{
+"id": "s083",
+"label": "paper",
+"start": 91.677,
+"end": 91.977,
+"anchor": "edit",
+"detail": "+0 dB"
+},
+{
+"id": "s084",
+"label": "marker 1",
+"start": 92.407,
+"end": 92.707,
+"anchor": "edit",
+"detail": "+0 dB"
+},
+{
+"id": "s085",
+"label": "swoosh 2",
+"start": 93.457,
+"end": 93.757,
+"anchor": "edit",
+"detail": "-6 dB"
+},
+{
+"id": "s086",
+"label": "paper",
+"start": 94.19,
+"end": 94.49,
+"anchor": "edit",
+"detail": "+0 dB"
+},
+{
+"id": "s087",
+"label": "paper 2",
+"start": 94.22,
+"end": 94.52,
+"anchor": "edit",
+"detail": "-8 dB"
+},
+{
+"id": "s088",
+"label": "thud",
+"start": 94.39,
+"end": 94.69,
+"anchor": "edit",
+"detail": "-8 dB"
+},
+{
+"id": "s089",
+"label": "paper",
+"start": 94.97,
+"end": 95.27,
+"anchor": "edit",
+"detail": "+0 dB"
+},
+{
+"id": "s090",
+"label": "thud",
+"start": 95.17,
+"end": 95.47,
+"anchor": "edit",
+"detail": "-8 dB"
+},
+{
+"id": "s091",
+"label": "paper",
+"start": 95.45,
+"end": 95.75,
+"anchor": "edit",
+"detail": "+0 dB"
+},
+{
+"id": "s092",
+"label": "thud",
+"start": 95.65,
+"end": 95.95,
+"anchor": "edit",
+"detail": "-8 dB"
+},
+{
+"id": "s093",
+"label": "paper 2",
+"start": 96.067,
+"end": 96.367,
+"anchor": "edit",
+"detail": "-8 dB"
+},
+{
+"id": "s094",
+"label": "paper",
+"start": 96.137,
+"end": 96.437,
+"anchor": "edit",
+"detail": "+0 dB"
+},
+{
+"id": "s095",
+"label": "marker 1",
+"start": 98.557,
+"end": 98.857,
+"anchor": "edit",
+"detail": "-4 dB"
+},
+{
+"id": "s096",
+"label": "swoosh 2",
+"start": 99.004,
+"end": 99.304,
+"anchor": "edit",
+"detail": "+0 dB"
+},
+{
+"id": "s097",
+"label": "paper 2",
+"start": 99.034,
+"end": 99.334,
+"anchor": "edit",
+"detail": "-8 dB"
+},
+{
+"id": "s098",
+"label": "paper",
+"start": 99.174,
+"end": 99.474,
+"anchor": "edit",
+"detail": "+0 dB"
+},
+{
+"id": "s099",
+"label": "boom",
+"start": 100.964,
+"end": 101.264,
+"anchor": "edit",
+"detail": "+0 dB"
+}
+]
+},
+{
+"id": "captions",
+"label": "Captions",
+"items": [
+{
+"id": "t000",
+"label": "Normal people can't build a physique like this.",
+"start": 27.407,
+"end": 29.867,
+"anchor": "edit",
+"detail": ""
+},
+{
+"id": "t001",
+"label": "You skip the drinks,",
+"start": 30.067,
+"end": 30.967,
+"anchor": "edit",
+"detail": ""
+},
+{
+"id": "t002",
+"label": "you say no to the pizza your friends are",
+"start": 31.187,
+"end": 33.107,
+"anchor": "edit",
+"detail": ""
+},
+{
+"id": "t003",
+"label": "eating, and tonight everyone's calling you obsessed and abnormal.",
+"start": 33.147,
+"end": 36.747,
+"anchor": "edit",
+"detail": ""
+},
+{
+"id": "t004",
+"label": "So is something actually wrong with you?",
+"start": 36.907,
+"end": 38.767,
+"anchor": "edit",
+"detail": ""
+},
+{
+"id": "t005",
+"label": "Actually, yes.",
+"start": 38.96,
+"end": 39.96,
+"anchor": "edit",
+"detail": ""
+},
+{
+"id": "t006",
+"label": "You are not normal,",
+"start": 40.253,
+"end": 41.033,
+"anchor": "edit",
+"detail": ""
+},
+{
+"id": "t007",
+"label": "and that's the point.",
+"start": 41.633,
+"end": 42.473,
+"anchor": "edit",
+"detail": ""
+},
+{
+"id": "t008",
+"label": "Success is abnormal by definition.",
+"start": 42.62,
+"end": 44.78,
+"anchor": "edit",
+"detail": ""
+},
+{
+"id": "t009",
+"label": "Successful people are outliers.",
+"start": 44.893,
+"end": 46.693,
+"anchor": "edit",
+"detail": ""
+},
+{
+"id": "t010",
+"label": "They do not belong to the average.",
+"start": 47.093,
+"end": 48.773,
+"anchor": "edit",
+"detail": ""
+},
+{
+"id": "t011",
+"label": "Which sounds great, except it comes with a price",
+"start": 48.947,
+"end": 51.473,
+"anchor": "edit",
+"detail": ""
+},
+{
+"id": "t012",
+"label": "most people won't pay.",
+"start": 51.613,
+"end": 52.633,
+"anchor": "edit",
+"detail": ""
+},
+{
+"id": "t013",
+"label": "Pain, discomfort, going further than most people could ever",
+"start": 52.76,
+"end": 56.093,
+"anchor": "edit",
+"detail": ""
+},
+{
+"id": "t014",
+"label": "tolerate.",
+"start": 56.153,
+"end": 56.693,
+"anchor": "edit",
+"detail": ""
+},
+{
+"id": "t015",
+"label": "That's why balance does not hold up while you",
+"start": 56.82,
+"end": 59.04,
+"anchor": "edit",
+"detail": ""
+},
+{
+"id": "t016",
+"label": "are chasing a big goal.",
+"start": 59.08,
+"end": 60.14,
+"anchor": "edit",
+"detail": ""
+},
+{
+"id": "t017",
+"label": "Balance is something everybody can do,",
+"start": 60.32,
+"end": 62.1,
+"anchor": "edit",
+"detail": ""
+},
+{
+"id": "t018",
+"label": "and if everybody can do it,",
+"start": 62.46,
+"end": 63.66,
+"anchor": "edit",
+"detail": ""
+},
+{
+"id": "t019",
+"label": "there's no value in it.",
+"start": 64.04,
+"end": 65.14,
+"anchor": "edit",
+"detail": ""
+},
+{
+"id": "t020",
+"label": "It's like a class where everybody gets an A.",
+"start": 65.254,
+"end": 67.434,
+"anchor": "edit",
+"detail": ""
+},
+{
+"id": "t021",
+"label": "The A means nothing.",
+"start": 67.64,
+"end": 68.66,
+"anchor": "edit",
+"detail": ""
+},
+{
+"id": "t022",
+"label": "Screw balance.",
+"start": 68.833,
+"end": 69.594,
+"anchor": "edit",
+"detail": ""
+},
+{
+"id": "t023",
+"label": "You need to go all out.",
+"start": 69.793,
+"end": 70.874,
+"anchor": "edit",
+"detail": ""
+},
+{
+"id": "t024",
+"label": "But here's the problem.",
+"start": 71.007,
+"end": 72.347,
+"anchor": "edit",
+"detail": ""
+},
+{
+"id": "t025",
+"label": "The moment it gets uncomfortable is the exact moment",
+"start": 72.647,
+"end": 75.667,
+"anchor": "edit",
+"detail": ""
+},
+{
+"id": "t026",
+"label": "you have to keep going.",
+"start": 75.727,
+"end": 76.707,
+"anchor": "edit",
+"detail": ""
+},
+{
+"id": "t027",
+"label": "That discomfort is what makes you grow It tells",
+"start": 76.867,
+"end": 79.353,
+"anchor": "edit",
+"detail": ""
+},
+{
+"id": "t028",
+"label": "your body and mind there's no option but to",
+"start": 79.393,
+"end": 82.133,
+"anchor": "edit",
+"detail": ""
+},
+{
+"id": "t029",
+"label": "adapt and become stronger.",
+"start": 82.214,
+"end": 83.513,
+"anchor": "edit",
+"detail": ""
+},
+{
+"id": "t030",
+"label": "And it's exactly where most people chicken out and",
+"start": 83.66,
+"end": 86.22,
+"anchor": "edit",
+"detail": ""
+},
+{
+"id": "t031",
+"label": "crawl back into comfort.",
+"start": 86.4,
+"end": 87.74,
+"anchor": "edit",
+"detail": ""
+},
+{
+"id": "t032",
+"label": "Outliers keep going, and that is when the judging",
+"start": 87.887,
+"end": 90.707,
+"anchor": "edit",
+"detail": ""
+},
+{
+"id": "t033",
+"label": "starts.",
+"start": 90.807,
+"end": 91.187,
+"anchor": "edit",
+"detail": ""
+},
+{
+"id": "t034",
+"label": "Normal people don't look at themselves.",
+"start": 91.367,
+"end": 93.207,
+"anchor": "edit",
+"detail": ""
+},
+{
+"id": "t035",
+"label": "They look at you.",
+"start": 93.407,
+"end": 94.147,
+"anchor": "edit",
+"detail": ""
+},
+{
+"id": "t036",
+"label": "Crazy, boring, obsessed, whatever helps them feel better about",
+"start": 94.24,
+"end": 97.947,
+"anchor": "edit",
+"detail": ""
+},
+{
+"id": "t037",
+"label": "their own mediocrity You,",
+"start": 97.987,
+"end": 99.133,
+"anchor": "edit",
+"detail": ""
+},
+{
+"id": "t038",
+"label": "my friend, were never supposed to be normal",
+"start": 99.234,
+"end": 101.334,
+"anchor": "edit",
+"detail": ""
+}
+]
+},
+{
+"id": "music",
+"label": "Music",
+"items": [
+{
+"id": "m1",
+"label": "Jake Chudnow, Turquoise",
+"start": 0,
+"end": 102.334,
+"anchor": "edit",
+"detail": "about 10 dB under the voice, fades on the last 'normal'"
+}
+]
+}
+],
+"media": {
+"preview": null,
+"proxy": null
+}
+}

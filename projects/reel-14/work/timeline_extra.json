@@ -1,0 +1,1584 @@
+{
+ "tracks": [
+  {
+   "id": "graphics",
+   "label": "Graphics",
+   "items": [
+    {
+     "id": "g00",
+     "label": "Her clip (untouched)",
+     "start": 0,
+     "end": 27.3,
+     "anchor": "edit",
+     "detail": ""
+    },
+    {
+     "id": "g01",
+     "label": "NORMAL PEOPLE figures",
+     "start": 27.3,
+     "end": 28.297,
+     "anchor": "edit",
+     "detail": ""
+    },
+    {
+     "id": "g02",
+     "label": "Drinks X, pizza NO stamp",
+     "start": 30.617,
+     "end": 33.627,
+     "anchor": "edit",
+     "detail": ""
+    },
+    {
+     "id": "g03",
+     "label": "Group chat bubbles",
+     "start": 33.627,
+     "end": 36.907,
+     "anchor": "edit",
+     "detail": ""
+    },
+    {
+     "id": "g04",
+     "label": "SOMETHING WRONG WITH YOU? form, YES ticked",
+     "start": 36.907,
+     "end": 40.253,
+     "anchor": "edit",
+     "detail": ""
+    },
+    {
+     "id": "g05",
+     "label": "Bell curve: MOST PEOPLE crowd, YOU dot",
+     "start": 40.253,
+     "end": 42.62,
+     "anchor": "edit",
+     "detail": ""
+    },
+    {
+     "id": "g06",
+     "label": "Dictionary 'abnormal' + Steve Jobs",
+     "start": 42.62,
+     "end": 44.893,
+     "anchor": "edit",
+     "detail": ""
+    },
+    {
+     "id": "g07",
+     "label": "Curve: OUTLIERS Musk + Arnold on the right",
+     "start": 44.893,
+     "end": 48.947,
+     "anchor": "edit",
+     "detail": ""
+    },
+    {
+     "id": "g08",
+     "label": "Receipt: the price",
+     "start": 48.947,
+     "end": 52.6,
+     "anchor": "edit",
+     "detail": ""
+    },
+    {
+     "id": "g09",
+     "label": "MOST PEOPLE STOP HERE line",
+     "start": 55.6,
+     "end": 56.82,
+     "anchor": "edit",
+     "detail": ""
+    },
+    {
+     "id": "g10",
+     "label": "BALANCE scale wobbles",
+     "start": 56.82,
+     "end": 60.27,
+     "anchor": "edit",
+     "detail": ""
+    },
+    {
+     "id": "g11",
+     "label": "Cream section: EVERYBODY CAN DO IT, NO VALUE",
+     "start": 60.27,
+     "end": 65.254,
+     "anchor": "edit",
+     "detail": ""
+    },
+    {
+     "id": "g12",
+     "label": "Report cards, the A crossed out",
+     "start": 65.254,
+     "end": 68.833,
+     "anchor": "edit",
+     "detail": ""
+    },
+    {
+     "id": "g13",
+     "label": "Scale tears in half",
+     "start": 68.833,
+     "end": 69.972,
+     "anchor": "edit",
+     "detail": ""
+    },
+    {
+     "id": "g14",
+     "label": "THE PROBLEM tape",
+     "start": 71.887,
+     "end": 73.15,
+     "anchor": "edit",
+     "detail": ""
+    },
+    {
+     "id": "g15",
+     "label": "Progress bar into UNCOMFORTABLE",
+     "start": 73.15,
+     "end": 74.4,
+     "anchor": "edit",
+     "detail": ""
+    },
+    {
+     "id": "g16",
+     "label": "Sisyphus statue",
+     "start": 76.867,
+     "end": 77.45,
+     "anchor": "edit",
+     "detail": ""
+    },
+    {
+     "id": "g17",
+     "label": "Self-made man statue",
+     "start": 79.6,
+     "end": 81.8,
+     "anchor": "edit",
+     "detail": ""
+    },
+    {
+     "id": "g18",
+     "label": "Sofa, COMFORT, crawling figures",
+     "start": 84.4,
+     "end": 87.7,
+     "anchor": "edit",
+     "detail": ""
+    },
+    {
+     "id": "g19",
+     "label": "Judging eyes, JUDGING",
+     "start": 90.0,
+     "end": 91.367,
+     "anchor": "edit",
+     "detail": ""
+    },
+    {
+     "id": "g20",
+     "label": "Mirror crossed out, pointing hands",
+     "start": 91.367,
+     "end": 94.24,
+     "anchor": "edit",
+     "detail": ""
+    },
+    {
+     "id": "g21",
+     "label": "Musk CRAZY, Jobs BORING, Arnold OBSESSED",
+     "start": 94.24,
+     "end": 96.087,
+     "anchor": "edit",
+     "detail": ""
+    },
+    {
+     "id": "g22",
+     "label": "Dictionary 'mediocrity', grey figures",
+     "start": 96.087,
+     "end": 99.054,
+     "anchor": "edit",
+     "detail": ""
+    }
+   ]
+  },
+  {
+   "id": "physique",
+   "label": "Physique shots",
+   "items": [
+    {
+     "id": "p00",
+     "label": "Mirror physique photo",
+     "start": 28.297,
+     "end": 30.617,
+     "anchor": "edit",
+     "detail": "photo, unfiltered"
+    },
+    {
+     "id": "p01",
+     "label": "Press clip",
+     "start": 52.6,
+     "end": 53.9,
+     "anchor": "edit",
+     "detail": "HDR"
+    },
+    {
+     "id": "p02",
+     "label": "Pull-ups",
+     "start": 53.9,
+     "end": 55.6,
+     "anchor": "edit",
+     "detail": "HDR"
+    },
+    {
+     "id": "p03",
+     "label": "Close press, full frame",
+     "start": 69.972,
+     "end": 71.887,
+     "anchor": "edit",
+     "detail": "HDR"
+    },
+    {
+     "id": "p04",
+     "label": "Incline press, KEEP GOING",
+     "start": 74.4,
+     "end": 76.867,
+     "anchor": "edit",
+     "detail": "HDR"
+    },
+    {
+     "id": "p05",
+     "label": "Flex clip + Sisyphus",
+     "start": 77.45,
+     "end": 79.6,
+     "anchor": "edit",
+     "detail": "HDR"
+    },
+    {
+     "id": "p06",
+     "label": "Dumbbell photo",
+     "start": 81.8,
+     "end": 84.4,
+     "anchor": "edit",
+     "detail": "photo"
+    },
+    {
+     "id": "p07",
+     "label": "Flex clip, OUTLIERS",
+     "start": 87.7,
+     "end": 90.0,
+     "anchor": "edit",
+     "detail": "HDR"
+    },
+    {
+     "id": "p08",
+     "label": "Front physique photo, YOU.",
+     "start": 99.054,
+     "end": 102.334,
+     "anchor": "edit",
+     "detail": "photo"
+    }
+   ]
+  },
+  {
+   "id": "you",
+   "label": "Your circle",
+   "items": [
+    {
+     "id": "h00",
+     "label": "You: big, centre",
+     "start": 27.3,
+     "end": 29.947,
+     "anchor": "edit",
+     "detail": ""
+    },
+    {
+     "id": "h01",
+     "label": "You: small, right",
+     "start": 29.947,
+     "end": 33.507,
+     "anchor": "edit",
+     "detail": ""
+    },
+    {
+     "id": "h02",
+     "label": "You: small, left",
+     "start": 33.507,
+     "end": 36.787,
+     "anchor": "edit",
+     "detail": ""
+    },
+    {
+     "id": "h03",
+     "label": "You: small, right",
+     "start": 36.787,
+     "end": 38.84,
+     "anchor": "edit",
+     "detail": ""
+    },
+    {
+     "id": "h04",
+     "label": "You: big, centre",
+     "start": 38.84,
+     "end": 42.5,
+     "anchor": "edit",
+     "detail": ""
+    },
+    {
+     "id": "h05",
+     "label": "You: small, left",
+     "start": 42.5,
+     "end": 44.773,
+     "anchor": "edit",
+     "detail": ""
+    },
+    {
+     "id": "h06",
+     "label": "You: small, left",
+     "start": 44.773,
+     "end": 48.827,
+     "anchor": "edit",
+     "detail": ""
+    },
+    {
+     "id": "h07",
+     "label": "You: small, left",
+     "start": 48.827,
+     "end": 54.153,
+     "anchor": "edit",
+     "detail": ""
+    },
+    {
+     "id": "h08",
+     "label": "You: small, right",
+     "start": 54.153,
+     "end": 56.7,
+     "anchor": "edit",
+     "detail": ""
+    },
+    {
+     "id": "h09",
+     "label": "You: small, left",
+     "start": 56.7,
+     "end": 60.2,
+     "anchor": "edit",
+     "detail": ""
+    },
+    {
+     "id": "h10",
+     "label": "You: small, right",
+     "start": 60.2,
+     "end": 65.134,
+     "anchor": "edit",
+     "detail": ""
+    },
+    {
+     "id": "h11",
+     "label": "You: small, left",
+     "start": 65.134,
+     "end": 68.713,
+     "anchor": "edit",
+     "detail": ""
+    },
+    {
+     "id": "h12",
+     "label": "You: big, centre",
+     "start": 68.713,
+     "end": 72.527,
+     "anchor": "edit",
+     "detail": ""
+    },
+    {
+     "id": "h13",
+     "label": "You: small, right",
+     "start": 72.527,
+     "end": 76.747,
+     "anchor": "edit",
+     "detail": ""
+    },
+    {
+     "id": "h14",
+     "label": "You: small, left",
+     "start": 76.747,
+     "end": 78.873,
+     "anchor": "edit",
+     "detail": ""
+    },
+    {
+     "id": "h15",
+     "label": "You: small, right",
+     "start": 78.873,
+     "end": 83.54,
+     "anchor": "edit",
+     "detail": ""
+    },
+    {
+     "id": "h16",
+     "label": "You: small, left",
+     "start": 83.54,
+     "end": 89.167,
+     "anchor": "edit",
+     "detail": ""
+    },
+    {
+     "id": "h17",
+     "label": "You: big, centre",
+     "start": 89.167,
+     "end": 94.12,
+     "anchor": "edit",
+     "detail": ""
+    },
+    {
+     "id": "h18",
+     "label": "You: small, right",
+     "start": 94.12,
+     "end": 95.967,
+     "anchor": "edit",
+     "detail": ""
+    },
+    {
+     "id": "h19",
+     "label": "You: small, right",
+     "start": 95.967,
+     "end": 98.934,
+     "anchor": "edit",
+     "detail": ""
+    },
+    {
+     "id": "h20",
+     "label": "You: big, centre",
+     "start": 98.934,
+     "end": 102.334,
+     "anchor": "edit",
+     "detail": ""
+    }
+   ]
+  },
+  {
+   "id": "sfx",
+   "label": "Sound effects",
+   "items": [
+    {
+     "id": "s000",
+     "label": "swoosh 1",
+     "start": 27.25,
+     "end": 27.55,
+     "anchor": "edit",
+     "detail": "-2 dB"
+    },
+    {
+     "id": "s001",
+     "label": "paper",
+     "start": 27.657,
+     "end": 27.957,
+     "anchor": "edit",
+     "detail": "-4 dB"
+    },
+    {
+     "id": "s002",
+     "label": "paper",
+     "start": 27.807,
+     "end": 28.107,
+     "anchor": "edit",
+     "detail": "+0 dB"
+    },
+    {
+     "id": "s003",
+     "label": "paper",
+     "start": 28.417,
+     "end": 28.717,
+     "anchor": "edit",
+     "detail": "+0 dB"
+    },
+    {
+     "id": "s004",
+     "label": "marker 1",
+     "start": 28.997,
+     "end": 29.297,
+     "anchor": "edit",
+     "detail": "-4 dB"
+    },
+    {
+     "id": "s005",
+     "label": "paper 2",
+     "start": 30.047,
+     "end": 30.347,
+     "anchor": "edit",
+     "detail": "-8 dB"
+    },
+    {
+     "id": "s006",
+     "label": "paper",
+     "start": 30.817,
+     "end": 31.117,
+     "anchor": "edit",
+     "detail": "+0 dB"
+    },
+    {
+     "id": "s007",
+     "label": "marker 1",
+     "start": 31.267,
+     "end": 31.567,
+     "anchor": "edit",
+     "detail": "+0 dB"
+    },
+    {
+     "id": "s008",
+     "label": "paper",
+     "start": 32.117,
+     "end": 32.417,
+     "anchor": "edit",
+     "detail": "+0 dB"
+    },
+    {
+     "id": "s009",
+     "label": "thud",
+     "start": 32.417,
+     "end": 32.717,
+     "anchor": "edit",
+     "detail": "+0 dB"
+    },
+    {
+     "id": "s010",
+     "label": "paper 2",
+     "start": 33.607,
+     "end": 33.907,
+     "anchor": "edit",
+     "detail": "-8 dB"
+    },
+    {
+     "id": "s011",
+     "label": "paper",
+     "start": 33.737,
+     "end": 34.037,
+     "anchor": "edit",
+     "detail": "+0 dB"
+    },
+    {
+     "id": "s012",
+     "label": "paper 3",
+     "start": 33.857,
+     "end": 34.157,
+     "anchor": "edit",
+     "detail": "-6 dB"
+    },
+    {
+     "id": "s013",
+     "label": "paper 3",
+     "start": 35.437,
+     "end": 35.737,
+     "anchor": "edit",
+     "detail": "-6 dB"
+    },
+    {
+     "id": "s014",
+     "label": "paper 3",
+     "start": 36.297,
+     "end": 36.597,
+     "anchor": "edit",
+     "detail": "-6 dB"
+    },
+    {
+     "id": "s015",
+     "label": "paper 2",
+     "start": 36.887,
+     "end": 37.187,
+     "anchor": "edit",
+     "detail": "-8 dB"
+    },
+    {
+     "id": "s016",
+     "label": "paper",
+     "start": 37.217,
+     "end": 37.517,
+     "anchor": "edit",
+     "detail": "+0 dB"
+    },
+    {
+     "id": "s017",
+     "label": "paper",
+     "start": 38.197,
+     "end": 38.497,
+     "anchor": "edit",
+     "detail": "-6 dB"
+    },
+    {
+     "id": "s018",
+     "label": "paper 2",
+     "start": 38.94,
+     "end": 39.24,
+     "anchor": "edit",
+     "detail": "-8 dB"
+    },
+    {
+     "id": "s019",
+     "label": "marker 1",
+     "start": 39.71,
+     "end": 40.01,
+     "anchor": "edit",
+     "detail": "+0 dB"
+    },
+    {
+     "id": "s020",
+     "label": "swoosh 2",
+     "start": 40.203,
+     "end": 40.503,
+     "anchor": "edit",
+     "detail": "+0 dB"
+    },
+    {
+     "id": "s021",
+     "label": "marker 1",
+     "start": 40.603,
+     "end": 40.903,
+     "anchor": "edit",
+     "detail": "-6 dB"
+    },
+    {
+     "id": "s022",
+     "label": "paper",
+     "start": 40.903,
+     "end": 41.203,
+     "anchor": "edit",
+     "detail": "-4 dB"
+    },
+    {
+     "id": "s023",
+     "label": "thud",
+     "start": 40.983,
+     "end": 41.283,
+     "anchor": "edit",
+     "detail": "-4 dB"
+    },
+    {
+     "id": "s024",
+     "label": "paper 2",
+     "start": 42.6,
+     "end": 42.9,
+     "anchor": "edit",
+     "detail": "-8 dB"
+    },
+    {
+     "id": "s025",
+     "label": "paper",
+     "start": 42.67,
+     "end": 42.97,
+     "anchor": "edit",
+     "detail": "+0 dB"
+    },
+    {
+     "id": "s026",
+     "label": "marker 1",
+     "start": 43.49,
+     "end": 43.79,
+     "anchor": "edit",
+     "detail": "-4 dB"
+    },
+    {
+     "id": "s027",
+     "label": "paper",
+     "start": 43.93,
+     "end": 44.23,
+     "anchor": "edit",
+     "detail": "+0 dB"
+    },
+    {
+     "id": "s028",
+     "label": "marker 1",
+     "start": 44.743,
+     "end": 45.043,
+     "anchor": "edit",
+     "detail": "-6 dB"
+    },
+    {
+     "id": "s029",
+     "label": "paper 2",
+     "start": 44.873,
+     "end": 45.173,
+     "anchor": "edit",
+     "detail": "-8 dB"
+    },
+    {
+     "id": "s030",
+     "label": "paper",
+     "start": 45.983,
+     "end": 46.283,
+     "anchor": "edit",
+     "detail": "+0 dB"
+    },
+    {
+     "id": "s031",
+     "label": "paper",
+     "start": 46.233,
+     "end": 46.533,
+     "anchor": "edit",
+     "detail": "+0 dB"
+    },
+    {
+     "id": "s032",
+     "label": "thud",
+     "start": 46.433,
+     "end": 46.733,
+     "anchor": "edit",
+     "detail": "-3 dB"
+    },
+    {
+     "id": "s033",
+     "label": "paper 2",
+     "start": 48.927,
+     "end": 49.227,
+     "anchor": "edit",
+     "detail": "-8 dB"
+    },
+    {
+     "id": "s034",
+     "label": "paper",
+     "start": 49.147,
+     "end": 49.447,
+     "anchor": "edit",
+     "detail": "+0 dB"
+    },
+    {
+     "id": "s035",
+     "label": "paper 3",
+     "start": 49.963,
+     "end": 50.263,
+     "anchor": "edit",
+     "detail": "-6 dB"
+    },
+    {
+     "id": "s036",
+     "label": "paper 3",
+     "start": 50.583,
+     "end": 50.883,
+     "anchor": "edit",
+     "detail": "-6 dB"
+    },
+    {
+     "id": "s037",
+     "label": "paper 3",
+     "start": 51.063,
+     "end": 51.363,
+     "anchor": "edit",
+     "detail": "-6 dB"
+    },
+    {
+     "id": "s038",
+     "label": "thud",
+     "start": 51.803,
+     "end": 52.103,
+     "anchor": "edit",
+     "detail": "-4 dB"
+    },
+    {
+     "id": "s039",
+     "label": "paper",
+     "start": 52.72,
+     "end": 53.02,
+     "anchor": "edit",
+     "detail": "+0 dB"
+    },
+    {
+     "id": "s040",
+     "label": "paper",
+     "start": 54.02,
+     "end": 54.32,
+     "anchor": "edit",
+     "detail": "+0 dB"
+    },
+    {
+     "id": "s041",
+     "label": "paper 2",
+     "start": 54.253,
+     "end": 54.553,
+     "anchor": "edit",
+     "detail": "-8 dB"
+    },
+    {
+     "id": "s042",
+     "label": "paper",
+     "start": 55.75,
+     "end": 56.05,
+     "anchor": "edit",
+     "detail": "-4 dB"
+    },
+    {
+     "id": "s043",
+     "label": "thud",
+     "start": 56.103,
+     "end": 56.403,
+     "anchor": "edit",
+     "detail": "-6 dB"
+    },
+    {
+     "id": "s044",
+     "label": "swoosh 2",
+     "start": 56.77,
+     "end": 57.07,
+     "anchor": "edit",
+     "detail": "+0 dB"
+    },
+    {
+     "id": "s045",
+     "label": "paper 2",
+     "start": 56.8,
+     "end": 57.1,
+     "anchor": "edit",
+     "detail": "-8 dB"
+    },
+    {
+     "id": "s046",
+     "label": "paper",
+     "start": 57.27,
+     "end": 57.57,
+     "anchor": "edit",
+     "detail": "+0 dB"
+    },
+    {
+     "id": "s047",
+     "label": "swoosh 1",
+     "start": 60.22,
+     "end": 60.52,
+     "anchor": "edit",
+     "detail": "-4 dB"
+    },
+    {
+     "id": "s048",
+     "label": "paper 2",
+     "start": 60.3,
+     "end": 60.6,
+     "anchor": "edit",
+     "detail": "-8 dB"
+    },
+    {
+     "id": "s049",
+     "label": "paper",
+     "start": 61.31,
+     "end": 61.61,
+     "anchor": "edit",
+     "detail": "+0 dB"
+    },
+    {
+     "id": "s050",
+     "label": "thud",
+     "start": 64.28,
+     "end": 64.58,
+     "anchor": "edit",
+     "detail": "+0 dB"
+    },
+    {
+     "id": "s051",
+     "label": "paper 2",
+     "start": 65.234,
+     "end": 65.534,
+     "anchor": "edit",
+     "detail": "-8 dB"
+    },
+    {
+     "id": "s052",
+     "label": "paper",
+     "start": 65.663,
+     "end": 65.963,
+     "anchor": "edit",
+     "detail": "+0 dB"
+    },
+    {
+     "id": "s053",
+     "label": "paper",
+     "start": 66.444,
+     "end": 66.744,
+     "anchor": "edit",
+     "detail": "+0 dB"
+    },
+    {
+     "id": "s054",
+     "label": "paper",
+     "start": 67.283,
+     "end": 67.583,
+     "anchor": "edit",
+     "detail": "+0 dB"
+    },
+    {
+     "id": "s055",
+     "label": "marker 1",
+     "start": 68.49,
+     "end": 68.79,
+     "anchor": "edit",
+     "detail": "+0 dB"
+    },
+    {
+     "id": "s056",
+     "label": "paper 2",
+     "start": 68.813,
+     "end": 69.113,
+     "anchor": "edit",
+     "detail": "-8 dB"
+    },
+    {
+     "id": "s057",
+     "label": "swoosh 2",
+     "start": 69.153,
+     "end": 69.453,
+     "anchor": "edit",
+     "detail": "+2 dB"
+    },
+    {
+     "id": "s058",
+     "label": "boom",
+     "start": 69.203,
+     "end": 69.503,
+     "anchor": "edit",
+     "detail": "-2 dB"
+    },
+    {
+     "id": "s059",
+     "label": "thud",
+     "start": 69.922,
+     "end": 70.222,
+     "anchor": "edit",
+     "detail": "-6 dB"
+    },
+    {
+     "id": "s060",
+     "label": "swoosh 1",
+     "start": 71.837,
+     "end": 72.137,
+     "anchor": "edit",
+     "detail": "-4 dB"
+    },
+    {
+     "id": "s061",
+     "label": "swoosh 2",
+     "start": 71.837,
+     "end": 72.137,
+     "anchor": "edit",
+     "detail": "+0 dB"
+    },
+    {
+     "id": "s062",
+     "label": "paper 2",
+     "start": 72.627,
+     "end": 72.927,
+     "anchor": "edit",
+     "detail": "-8 dB"
+    },
+    {
+     "id": "s063",
+     "label": "paper",
+     "start": 73.25,
+     "end": 73.55,
+     "anchor": "edit",
+     "detail": "+0 dB"
+    },
+    {
+     "id": "s064",
+     "label": "paper",
+     "start": 74.52,
+     "end": 74.82,
+     "anchor": "edit",
+     "detail": "+0 dB"
+    },
+    {
+     "id": "s065",
+     "label": "paper",
+     "start": 76.137,
+     "end": 76.437,
+     "anchor": "edit",
+     "detail": "-4 dB"
+    },
+    {
+     "id": "s066",
+     "label": "paper 2",
+     "start": 76.847,
+     "end": 77.147,
+     "anchor": "edit",
+     "detail": "-8 dB"
+    },
+    {
+     "id": "s067",
+     "label": "paper",
+     "start": 76.917,
+     "end": 77.217,
+     "anchor": "edit",
+     "detail": "+0 dB"
+    },
+    {
+     "id": "s068",
+     "label": "paper",
+     "start": 77.57,
+     "end": 77.87,
+     "anchor": "edit",
+     "detail": "+0 dB"
+    },
+    {
+     "id": "s069",
+     "label": "paper 2",
+     "start": 78.973,
+     "end": 79.273,
+     "anchor": "edit",
+     "detail": "-8 dB"
+    },
+    {
+     "id": "s070",
+     "label": "paper",
+     "start": 79.7,
+     "end": 80.0,
+     "anchor": "edit",
+     "detail": "+0 dB"
+    },
+    {
+     "id": "s071",
+     "label": "paper",
+     "start": 81.92,
+     "end": 82.22,
+     "anchor": "edit",
+     "detail": "+0 dB"
+    },
+    {
+     "id": "s072",
+     "label": "paper 2",
+     "start": 83.64,
+     "end": 83.94,
+     "anchor": "edit",
+     "detail": "-8 dB"
+    },
+    {
+     "id": "s073",
+     "label": "paper",
+     "start": 85.03,
+     "end": 85.33,
+     "anchor": "edit",
+     "detail": "+0 dB"
+    },
+    {
+     "id": "s074",
+     "label": "paper",
+     "start": 85.23,
+     "end": 85.53,
+     "anchor": "edit",
+     "detail": "-4 dB"
+    },
+    {
+     "id": "s075",
+     "label": "paper",
+     "start": 87.82,
+     "end": 88.12,
+     "anchor": "edit",
+     "detail": "+0 dB"
+    },
+    {
+     "id": "s076",
+     "label": "paper 2",
+     "start": 89.267,
+     "end": 89.567,
+     "anchor": "edit",
+     "detail": "-8 dB"
+    },
+    {
+     "id": "s077",
+     "label": "paper 3",
+     "start": 90.05,
+     "end": 90.35,
+     "anchor": "edit",
+     "detail": "-7 dB"
+    },
+    {
+     "id": "s078",
+     "label": "paper 3",
+     "start": 90.2,
+     "end": 90.5,
+     "anchor": "edit",
+     "detail": "-7 dB"
+    },
+    {
+     "id": "s079",
+     "label": "paper 3",
+     "start": 90.35,
+     "end": 90.65,
+     "anchor": "edit",
+     "detail": "-7 dB"
+    },
+    {
+     "id": "s080",
+     "label": "paper 3",
+     "start": 90.5,
+     "end": 90.8,
+     "anchor": "edit",
+     "detail": "-7 dB"
+    },
+    {
+     "id": "s081",
+     "label": "paper 3",
+     "start": 90.65,
+     "end": 90.95,
+     "anchor": "edit",
+     "detail": "-7 dB"
+    },
+    {
+     "id": "s082",
+     "label": "thud",
+     "start": 90.7,
+     "end": 91.0,
+     "anchor": "edit",
+     "detail": "-4 dB"
+    },
+    {
+     "id": "s083",
+     "label": "paper",
+     "start": 91.677,
+     "end": 91.977,
+     "anchor": "edit",
+     "detail": "+0 dB"
+    },
+    {
+     "id": "s084",
+     "label": "marker 1",
+     "start": 92.407,
+     "end": 92.707,
+     "anchor": "edit",
+     "detail": "+0 dB"
+    },
+    {
+     "id": "s085",
+     "label": "swoosh 2",
+     "start": 93.457,
+     "end": 93.757,
+     "anchor": "edit",
+     "detail": "-6 dB"
+    },
+    {
+     "id": "s086",
+     "label": "paper",
+     "start": 94.19,
+     "end": 94.49,
+     "anchor": "edit",
+     "detail": "+0 dB"
+    },
+    {
+     "id": "s087",
+     "label": "paper 2",
+     "start": 94.22,
+     "end": 94.52,
+     "anchor": "edit",
+     "detail": "-8 dB"
+    },
+    {
+     "id": "s088",
+     "label": "thud",
+     "start": 94.39,
+     "end": 94.69,
+     "anchor": "edit",
+     "detail": "-8 dB"
+    },
+    {
+     "id": "s089",
+     "label": "paper",
+     "start": 94.97,
+     "end": 95.27,
+     "anchor": "edit",
+     "detail": "+0 dB"
+    },
+    {
+     "id": "s090",
+     "label": "thud",
+     "start": 95.17,
+     "end": 95.47,
+     "anchor": "edit",
+     "detail": "-8 dB"
+    },
+    {
+     "id": "s091",
+     "label": "paper",
+     "start": 95.45,
+     "end": 95.75,
+     "anchor": "edit",
+     "detail": "+0 dB"
+    },
+    {
+     "id": "s092",
+     "label": "thud",
+     "start": 95.65,
+     "end": 95.95,
+     "anchor": "edit",
+     "detail": "-8 dB"
+    },
+    {
+     "id": "s093",
+     "label": "paper 2",
+     "start": 96.067,
+     "end": 96.367,
+     "anchor": "edit",
+     "detail": "-8 dB"
+    },
+    {
+     "id": "s094",
+     "label": "paper",
+     "start": 96.137,
+     "end": 96.437,
+     "anchor": "edit",
+     "detail": "+0 dB"
+    },
+    {
+     "id": "s095",
+     "label": "marker 1",
+     "start": 98.557,
+     "end": 98.857,
+     "anchor": "edit",
+     "detail": "-4 dB"
+    },
+    {
+     "id": "s096",
+     "label": "swoosh 2",
+     "start": 99.004,
+     "end": 99.304,
+     "anchor": "edit",
+     "detail": "+0 dB"
+    },
+    {
+     "id": "s097",
+     "label": "paper 2",
+     "start": 99.034,
+     "end": 99.334,
+     "anchor": "edit",
+     "detail": "-8 dB"
+    },
+    {
+     "id": "s098",
+     "label": "paper",
+     "start": 99.174,
+     "end": 99.474,
+     "anchor": "edit",
+     "detail": "+0 dB"
+    },
+    {
+     "id": "s099",
+     "label": "boom",
+     "start": 100.964,
+     "end": 101.264,
+     "anchor": "edit",
+     "detail": "+0 dB"
+    }
+   ]
+  },
+  {
+   "id": "captions",
+   "label": "Captions",
+   "items": [
+    {
+     "id": "t000",
+     "label": "Normal people can't build a physique like this.",
+     "start": 27.407,
+     "end": 29.867,
+     "anchor": "edit",
+     "detail": ""
+    },
+    {
+     "id": "t001",
+     "label": "You skip the drinks,",
+     "start": 30.067,
+     "end": 30.967,
+     "anchor": "edit",
+     "detail": ""
+    },
+    {
+     "id": "t002",
+     "label": "you say no to the pizza your friends are",
+     "start": 31.187,
+     "end": 33.107,
+     "anchor": "edit",
+     "detail": ""
+    },
+    {
+     "id": "t003",
+     "label": "eating, and tonight everyone's calling you obsessed and abnormal.",
+     "start": 33.147,
+     "end": 36.747,
+     "anchor": "edit",
+     "detail": ""
+    },
+    {
+     "id": "t004",
+     "label": "So is something actually wrong with you?",
+     "start": 36.907,
+     "end": 38.767,
+     "anchor": "edit",
+     "detail": ""
+    },
+    {
+     "id": "t005",
+     "label": "Actually, yes.",
+     "start": 38.96,
+     "end": 39.96,
+     "anchor": "edit",
+     "detail": ""
+    },
+    {
+     "id": "t006",
+     "label": "You are not normal,",
+     "start": 40.253,
+     "end": 41.033,
+     "anchor": "edit",
+     "detail": ""
+    },
+    {
+     "id": "t007",
+     "label": "and that's the point.",
+     "start": 41.633,
+     "end": 42.473,
+     "anchor": "edit",
+     "detail": ""
+    },
+    {
+     "id": "t008",
+     "label": "Success is abnormal by definition.",
+     "start": 42.62,
+     "end": 44.78,
+     "anchor": "edit",
+     "detail": ""
+    },
+    {
+     "id": "t009",
+     "label": "Successful people are outliers.",
+     "start": 44.893,
+     "end": 46.693,
+     "anchor": "edit",
+     "detail": ""
+    },
+    {
+     "id": "t010",
+     "label": "They do not belong to the average.",
+     "start": 47.093,
+     "end": 48.773,
+     "anchor": "edit",
+     "detail": ""
+    },
+    {
+     "id": "t011",
+     "label": "Which sounds great, except it comes with a price",
+     "start": 48.947,
+     "end": 51.473,
+     "anchor": "edit",
+     "detail": ""
+    },
+    {
+     "id": "t012",
+     "label": "most people won't pay.",
+     "start": 51.613,
+     "end": 52.633,
+     "anchor": "edit",
+     "detail": ""
+    },
+    {
+     "id": "t013",
+     "label": "Pain, discomfort, going further than most people could ever",
+     "start": 52.76,
+     "end": 56.093,
+     "anchor": "edit",
+     "detail": ""
+    },
+    {
+     "id": "t014",
+     "label": "tolerate.",
+     "start": 56.153,
+     "end": 56.693,
+     "anchor": "edit",
+     "detail": ""
+    },
+    {
+     "id": "t015",
+     "label": "That's why balance does not hold up while you",
+     "start": 56.82,
+     "end": 59.04,
+     "anchor": "edit",
+     "detail": ""
+    },
+    {
+     "id": "t016",
+     "label": "are chasing a big goal.",
+     "start": 59.08,
+     "end": 60.14,
+     "anchor": "edit",
+     "detail": ""
+    },
+    {
+     "id": "t017",
+     "label": "Balance is something everybody can do,",
+     "start": 60.32,
+     "end": 62.1,
+     "anchor": "edit",
+     "detail": ""
+    },
+    {
+     "id": "t018",
+     "label": "and if everybody can do it,",
+     "start": 62.46,
+     "end": 63.66,
+     "anchor": "edit",
+     "detail": ""
+    },
+    {
+     "id": "t019",
+     "label": "there's no value in it.",
+     "start": 64.04,
+     "end": 65.14,
+     "anchor": "edit",
+     "detail": ""
+    },
+    {
+     "id": "t020",
+     "label": "It's like a class where everybody gets an A.",
+     "start": 65.254,
+     "end": 67.434,
+     "anchor": "edit",
+     "detail": ""
+    },
+    {
+     "id": "t021",
+     "label": "The A means nothing.",
+     "start": 67.64,
+     "end": 68.66,
+     "anchor": "edit",
+     "detail": ""
+    },
+    {
+     "id": "t022",
+     "label": "Screw balance.",
+     "start": 68.833,
+     "end": 69.594,
+     "anchor": "edit",
+     "detail": ""
+    },
+    {
+     "id": "t023",
+     "label": "You need to go all out.",
+     "start": 69.793,
+     "end": 70.874,
+     "anchor": "edit",
+     "detail": ""
+    },
+    {
+     "id": "t024",
+     "label": "But here's the problem.",
+     "start": 71.007,
+     "end": 72.347,
+     "anchor": "edit",
+     "detail": ""
+    },
+    {
+     "id": "t025",
+     "label": "The moment it gets uncomfortable is the exact moment",
+     "start": 72.647,
+     "end": 75.667,
+     "anchor": "edit",
+     "detail": ""
+    },
+    {
+     "id": "t026",
+     "label": "you have to keep going.",
+     "start": 75.727,
+     "end": 76.707,
+     "anchor": "edit",
+     "detail": ""
+    },
+    {
+     "id": "t027",
+     "label": "That discomfort is what makes you grow It tells",
+     "start": 76.867,
+     "end": 79.353,
+     "anchor": "edit",
+     "detail": ""
+    },
+    {
+     "id": "t028",
+     "label": "your body and mind there's no option but to",
+     "start": 79.393,
+     "end": 82.133,
+     "anchor": "edit",
+     "detail": ""
+    },
+    {
+     "id": "t029",
+     "label": "adapt and become stronger.",
+     "start": 82.214,
+     "end": 83.513,
+     "anchor": "edit",
+     "detail": ""
+    },
+    {
+     "id": "t030",
+     "label": "And it's exactly where most people chicken out and",
+     "start": 83.66,
+     "end": 86.22,
+     "anchor": "edit",
+     "detail": ""
+    },
+    {
+     "id": "t031",
+     "label": "crawl back into comfort.",
+     "start": 86.4,
+     "end": 87.74,
+     "anchor": "edit",
+     "detail": ""
+    },
+    {
+     "id": "t032",
+     "label": "Outliers keep going, and that is when the judging",
+     "start": 87.887,
+     "end": 90.707,
+     "anchor": "edit",
+     "detail": ""
+    },
+    {
+     "id": "t033",
+     "label": "starts.",
+     "start": 90.807,
+     "end": 91.187,
+     "anchor": "edit",
+     "detail": ""
+    },
+    {
+     "id": "t034",
+     "label": "Normal people don't look at themselves.",
+     "start": 91.367,
+     "end": 93.207,
+     "anchor": "edit",
+     "detail": ""
+    },
+    {
+     "id": "t035",
+     "label": "They look at you.",
+     "start": 93.407,
+     "end": 94.147,
+     "anchor": "edit",
+     "detail": ""
+    },
+    {
+     "id": "t036",
+     "label": "Crazy, boring, obsessed, whatever helps them feel better about",
+     "start": 94.24,
+     "end": 97.947,
+     "anchor": "edit",
+     "detail": ""
+    },
+    {
+     "id": "t037",
+     "label": "their own mediocrity You,",
+     "start": 97.987,
+     "end": 99.133,
+     "anchor": "edit",
+     "detail": ""
+    },
+    {
+     "id": "t038",
+     "label": "my friend, were never supposed to be normal",
+     "start": 99.234,
+     "end": 101.334,
+     "anchor": "edit",
+     "detail": ""
+    }
+   ]
+  },
+  {
+   "id": "music",
+   "label": "Music",
+   "items": [
+    {
+     "id": "m1",
+     "label": "Jake Chudnow, Turquoise",
+     "start": 0,
+     "end": 102.334,
+     "anchor": "edit",
+     "detail": "about 10 dB under the voice, fades on the last 'normal'"
+    }
+   ]
+  }
+ ]
+}
