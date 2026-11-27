@@ -1,0 +1,152 @@
+{
+  "metal_hit": {
+    "openverse_id": "fbd67b3a-787a-4a1b-912c-d8dddbe67dd4",
+    "title": "Metal hit with metal bar resonance",
+    "creator": "jorickhoofd",
+    "license": "by",
+    "license_version": "4.0",
+    "license_url": "https://creativecommons.org/licenses/by/4.0/",
+    "source": "freesound",
+    "page": "https://freesound.org/people/jorickhoofd/sounds/160045",
+    "attribution": "\"Metal hit with metal bar resonance\" by jorickhoofd is licensed under CC BY 4.0. To view a copy of this license, visit https://creativecommons.org/licenses/by/4.0/.",
+    "needs_credit": true,
+    "files": {
+      "original": "assets/sfx/openverse/orig/metal_hit.mp3",
+      "wav": "assets/sfx/openverse/metal_hit.wav"
+    },
+    "measure": {
+      "length_s": 0.838,
+      "sound_s": 0.36,
+      "peak_dbfs": -0.5,
+      "loudness_db": -18.3,
+      "attack_ms": 10,
+      "peak_at_s": 0.01,
+      "tail_ms": 340,
+      "brightness_hz": 2565,
+      "tone": "mid",
+      "low_end": 0.02,
+      "hits": 0,
+      "shape": "hit"
+    }
+  },
+  "boom": {
+    "openverse_id": "4c99d7d3-4987-46f3-9637-bfd9b4cc66b9",
+    "title": "BOOM IMPACT 2",
+    "creator": "XHALE303",
+    "license": "cc0",
+    "license_version": "1.0",
+    "license_url": "https://creativecommons.org/publicdomain/zero/1.0/",
+    "source": "freesound",
+    "page": "https://freesound.org/people/XHALE303/sounds/535592",
+    "attribution": "\"BOOM IMPACT 2\" by XHALE303 is marked with CC0 1.0. To view the terms, visit https://creativecommons.org/publicdomain/zero/1.0/.",
+    "needs_credit": false,
+    "files": {
+      "original": "assets/sfx/openverse/orig/boom.mp3",
+      "wav": "assets/sfx/openverse/boom.wav"
+    },
+    "measure": {
+      "length_s": 1.997,
+      "sound_s": 1.78,
+      "peak_dbfs": -1.0,
+      "loudness_db": -16.7,
+      "attack_ms": 290,
+      "peak_at_s": 0.29,
+      "tail_ms": 1480,
+      "brightness_hz": 616,
+      "tone": "dark",
+      "low_end": 0.41,
+      "hits": 2,
+      "shape": "swoosh"
+    }
+  },
+  "shield_bash": {
+    "openverse_id": "f29163f7-cbc2-45e2-a266-ede2fd6f4ad0",
+    "title": "Shield Bash Impact",
+    "creator": "Hybrid_V",
+    "license": "by",
+    "license_version": "4.0",
+    "license_url": "https://creativecommons.org/licenses/by/4.0/",
+    "source": "freesound",
+    "page": "https://freesound.org/people/Hybrid_V/sounds/319590",
+    "attribution": "\"Shield Bash Impact\" by Hybrid_V is licensed under CC BY 4.0. To view a copy of this license, visit https://creativecommons.org/licenses/by/4.0/.",
+    "needs_credit": true,
+    "files": {
+      "original": "assets/sfx/openverse/orig/shield_bash.mp3",
+      "wav": "assets/sfx/openverse/shield_bash.wav"
+    },
+    "measure": {
+      "length_s": 0.899,
+      "sound_s": 0.62,
+      "peak_dbfs": 0.8,
+      "loudness_db": -10.9,
+      "attack_ms": 150,
+      "peak_at_s": 0.16,
+      "tail_ms": 460,
+      "brightness_hz": 3883,
+      "tone": "mid",
+      "low_end": 0.22,
+      "hits": 1,
+      "shape": "swoosh"
+    }
+  },
+  "shutter": {
+    "openverse_id": "3290f0e3-a217-48c9-bafb-06401b961c21",
+    "title": "Camera Shutter",
+    "creator": "roachpowder",
+    "license": "cc0",
+    "license_version": "1.0",
+    "license_url": "https://creativecommons.org/publicdomain/zero/1.0/",
+    "source": "freesound",
+    "page": "https://freesound.org/people/roachpowder/sounds/170229",
+    "attribution": "\"Camera Shutter\" by roachpowder is marked with CC0 1.0. To view the terms, visit https://creativecommons.org/publicdomain/zero/1.0/.",
+    "needs_credit": false,
+    "files": {
+      "original": "assets/sfx/openverse/orig/shutter.mp3",
+      "wav": "assets/sfx/openverse/shutter.wav"
+    },
+    "measure": {
+      "length_s": 0.295,
+      "sound_s": 0.29,
+      "peak_dbfs": -2.2,
+      "loudness_db": -26.2,
+      "attack_ms": 100,
+      "peak_at_s": 0.1,
+      "tail_ms": 180,
+      "brightness_hz": 7955,
+      "tone": "bright",
+      "low_end": 0.01,
+      "hits": 1,
+      "shape": "swoosh"
+    }
+  },
+  "riser": {
+    "openverse_id": "96a9062b-be8d-42ae-aacc-f64d3a34294a",
+    "title": "Riser",
+    "creator": "Rizzard",
+    "license": "cc0",
+    "license_version": "1.0",
+    "license_url": "https://creativecommons.org/publicdomain/zero/1.0/",
+    "source": "freesound",
+    "page": "https://freesound.org/people/Rizzard/sounds/561207",
+    "attribution": "\"Riser\" by Rizzard is marked with CC0 1.0. To view the terms, visit https://creativecommons.org/publicdomain/zero/1.0/.",
+    "needs_credit": false,
+    "files": {
+      "original": "assets/sfx/openverse/orig/riser.mp3",
+      "wav": "assets/sfx/openverse/riser.wav"
+    },
+    "measure": {
+      "length_s": 1.886,
+      "sound_s": 1.75,
+      "peak_dbfs": -0.3,
+      "loudness_db": -22.9,
+      "attack_ms": 1730,
+      "peak_at_s": 1.86,
+      "tail_ms": 10,
+      "brightness_hz": 844,
+      "tone": "dark",
+      "low_end": 0.16,
+      "hits": 0,
+      "shape": "swell"
+    }
+  }
+}

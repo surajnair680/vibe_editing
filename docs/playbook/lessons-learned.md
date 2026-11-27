@@ -23,6 +23,49 @@ Other docs and when to read them: `docs/README.md`.
   vertical cut on the deadlift outline. Check every cut-out at full size, especially head, hands and edges. [r03]
 - Long static holds bore him: a 4 s hold of one shot "becomes monotonous". Something must happen in its second half
   (in reel-03: a rim light builds, then the body fills with glowing grain on the key word). [r03]
+- **HDR on his training clips when he asks (reel-14).** "Add HDR so my muscles look sharper" overrides the
+  no-filter default for his training clips (not his photos unless asked). A plain CLAHE + sharpen boosted the phone's
+  noise into gritty skin; the version that worked boosts a denoised layer: bilateral on lightness, CLAHE 2.0 (8x8),
+  clarity 0.40 at sigma 18, detail 0.35 at sigma 2, add back half the noise, saturation x1.12. About 90 ms a frame.
+  `hdr()` in `projects/reel-14/work/build3/scene3.py`. Always check a full-size crop of skin before sending. [r14]
+  On reel-17 (dim gym light, pull-ups from behind) he approved a stronger variant instead: L + 0.9 (L - blur 25)
+  + 0.7 (L - blur 6) + 0.35 (L - blur 1.2), saturation x1.08, on his body only via the matte. Next to reel-14's
+  recipe it gives deeper lat and spine separation; reel-14's is brighter and flatter. Offer both on a skin crop.
+  `hdr()` in `projects/reel-17/work/render.py`. [r17]
+- **Grainy Vox reels are huge at real quality (reel-14).** 1:42 at 1080x1920 with heavy grain: master crf 14 = 1.2 GB,
+  crf 22 = about 8 MB a second (about 600 MB, 21 parts), 8 Mbps = about 120 MB (5 parts), 2-pass 2150k = 28 MB in one
+  file (grain softened, face fine). Audio-only revisions remux the last review video with the new mix in a minute. [r14]
+- **Music level for phone speakers (reel-14).** With his own track (Jake Chudnow "Turquoise") ducked 18 dB under the
+  voice he "cannot hear it without earphones". About 10 dB under the voice while he talks (+4 dB in pauses) works for
+  phone speakers. The reel-12 "18 dB under" figure was for a busy track; check on a phone-speaker basis. [r14]
+- **Draft before every full render, without being asked (reel-14).** He asked "why not show me the preview first, to
+  save time?" A half-size 15 fps draft of the changed range takes about 3 minutes against 20 for the full render
+  (`scene3.py draft a b out.mp4`, 4 ranges in parallel, voice mix muxed from the same start). Send it first, render
+  full quality only after he approves the motion. [r14]
+- **Physique shots need time: at least about 2 s each (reel-14).** At 0.7 to 1.4 s his photos and training clips
+  "just look like glimpses". Give every physique photo or clip 2 s or more (the ending 3 s), taking the time from the
+  graphics around it, and keep graphics windows from running under a full-screen print. [r14]
+- **Never caption an emotional image (reel-14).** Labels DISCOMFORT, GROW and NO OPTION on the statue photos were
+  "fucking lame". Labels help abstract symbols (a scale = BALANCE); a strong image plus his voice needs nothing on it. [r14]
+- **Emotion beats diagrams (reel-14).** He called the brain and bicep drawings "so boring" and sent two dark B&W
+  statue photos instead: Sisyphus pushing the boulder (discomfort you push through) and the self-made man carving
+  himself (building yourself). For feeling lines (struggle, growth, becoming stronger) use dramatic, symbolic real
+  images like these as torn prints; keep diagrams for facts. Assets: `projects/reel-14/assets/photos/statue_*.jpg`. [r14]
+- **Charts carry meaning by position (reel-14).** He caught Elon Musk placed on the LEFT end of the bell curve, which
+  reads as below average. Outliers and "you" always sit on the right (high) end; check where each element sits on a
+  chart, not just that it is visible. Also keep recognisable people big (Jobs about 520 px, not 300). [r14]
+- **The child test (reel-14, 2026-11-24).** He asked: would a child understand every frame? Fixes that made abstract
+  visuals readable: a word label on every symbol (NORMAL PEOPLE, BALANCE, MIND / BODY, COMFORT, JUDGING), name strips
+  under celebrity photos, people instead of charts (a crowd labelled MOST PEOPLE inside a bell curve with you as a lone
+  red YOU dot; grey figures stopping at a MOST PEOPLE STOP HERE line while one red figure carries on), a drawn arm that
+  cracks then grows instead of abstract muscle fibres, and no text under about 40 px. Check this before sending stills. [r14]
+- **Text is not a visual (reel-14, 2026-11-24).** He called the v2 look "awful... just a bunch of text, no visual
+  element at all. For pizza you just wrote it on the screen". Every spoken line needs something to look at that shows
+  it (a pizza for pizza), made in code or with Codex image generation; titles only support it. He wants Vox style
+  (torn paper collage) for this kind of eye-opening talk reel. Plan the visual per line in the beat sheet. [r14]
+- **His look: darker and grainier = "important" (brand intake, 2026-11-24).** He couldn't answer brand questions in
+  the abstract; fill them from what you know and ask him to correct. Master look in `docs/playbook/brand/MOTION.md`:
+  black and deep red (#4A0005 to #1C0202), heavy grain (about 2x the house default), bone titles, ash captions. [brand]
 - He wants his face visible and recognisable. Pixelating half the face (reference style) works against him; the
   version he chose: start pixelated, resolve to the clear face. [r03]
 - He likes to understand why an effect exists ("what is the point of pixelating half the face?"). Explain meaning
@@ -336,6 +379,16 @@ Other docs and when to read them: `docs/README.md`.
   start_time, padded to its picture length): `projects/reel-12/work/join.py`. Meme inserts can be odd sizes
   (1080x1316): framed full width on black, never stretched. [r12]
 
+- **Client promos use the client's brand, not his (reel-15, ZAZI).** He said "take care of the vibe of the brand":
+  pull the client site's own fonts (computed styles with Playwright: ZAZI = Tenor Sans uppercase 2px tracking +
+  Outfit 300), colours and lines, keep product photos ungraded, no prices, slow dissolves. His dark grainy look
+  (`docs/playbook/brand/`) is only for his own reels. [r15]
+- **Tall photos in a 16:9 edit: Codex outpaint, then paste the original back (reel-15).** Pad the photo to 3:2 with
+  grey bars, ask Codex to extend only the bars, then `projects/reel-15/work/make_wide.py`: ECC-align the original,
+  blur Codex's sides to the original's softness, carry the low-frequency tone difference across the seam, feather
+  110 px. People and products stay the real pixels. Trim the original's 4 px border first: Codex copies a thin white
+  border line into its output as a visible stripe. Shopify sites block `/products.json` (403); scrape the home page. [r15]
+
 ## 4. Cut-outs (mattes)
 - **No single model does it all.** Compare on the actual image before committing: [r03]
   - MediaPipe selfie_multiclass: good person region, rough edges, lumpy heads. Class 1 = hair (useful), 0 = background.
@@ -366,6 +419,19 @@ Other docs and when to read them: `docs/README.md`.
   whole head it ate his ears and cheeks. Scaling him to 0.82 (bottom anchored) leaves room for titles above his head
   but cuts the shoulders in a hard vertical line at the old frame edge: fade the matte over the outer 170 px.
   `edge_fix()` and `his_layer()` in `projects/reel-14/work/build2/scene2.py`; mattes `work/matte_frames.py`. [r14]
+
+- **rembg subject cut-outs fail on patterned clothes and backgrounds (reel-15).** A hanging embroidered coat came out
+  with holes and a halo; an artisan on a patterned carpet and a woman with a boy left fringes. Only the hero (dark coat
+  on a plain street) was clean. Check every parallax subject at full size; fall back to a slow push on the whole photo
+  (`render_flat` in `projects/reel-15/scene.py`) when the edge isn't perfect. [r15]
+
+- **Gym footage (pull-ups from behind, rings and straps on the rack behind him), reel-17:** rembg `u2net_human_seg`
+  alone grabs the gymnastic rings and bar pieces near his hands and head. MediaPipe multiclass class 5 ("others")
+  is what catches the rings, so build the person mask from classes 1-4 only (hair, body skin, face skin, clothes),
+  threshold 0.5, dilate 9 px, then multiply with rembg. Fill holes inside the body (the neck gap at the top of a rep)
+  by flooding the background from the frame border, erode 1 px, and push body colour into the 8 px edge band so the
+  blurred hair loses its wall-coloured fringe. The bar knob inside his fist stays in the matte (a fist around nothing
+  looks wrong). About 0.7 s a frame at 1080x1920. `matte()` and `decontam()` in `projects/reel-17/work/render.py`. [r17]
 
 ## 5. Effects that worked (copy the code from the project, never import across projects)
 All in `projects/reel-03/work/build/fx.py` (helpers) and `edit.py` (beats). Deterministic (seeded) so re-renders match.
@@ -529,6 +595,11 @@ All in `projects/reel-03/work/build/fx.py` (helpers) and `edit.py` (beats). Dete
   movements. `projects/reel-02/work/plan_cut.py`. [r02]
 - Music: find tempo, grid phase and phrase length before looping; repeat whole phrases; check where the generated track
   really ends. `projects/reel-02/work/mix.py`. [r02]
+- **Soundtrack for a finished edit that wasn't cut to music (reel-16, ZAZI editorial).** The cuts sit on no grid, so
+  anchor the music on the one moment that matters (the cut to the end logo): a 30 s ElevenLabs request gave only 8 bars
+  (18.4 s) of groove, so it was rebuilt as bars 2-3 + bars 0-3 + bars 4-7 + ending (splices 12 ms before downbeats,
+  10 ms crossfade) and sped up 2.4 % with atempo so the ending chord hits the logo cut exactly. Subtle CC0 paper flips
+  on the type cards, cloth on coat shots, soft chime on the logo; -14 LUFS. `projects/reel-16/work/mix.py`. [r16]
 - "Voice louder, music the same": key ducking from the voice before the boost, fix master gain to the approved preview. [r02]
 - SFX: place each so its peak lands on its frame (`work/sfx_cues.json`). Music ducked about 10.5 dB under voice;
   final about -14 LUFS, peak about -1.4 dB. [r01]

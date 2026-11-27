@@ -1,0 +1,17 @@
+{
+ "parts": [
+  "raw/part1.mp4",
+  "raw/part2.mp4",
+  "raw/part3.mp4",
+  "raw/part4.mp4",
+  "raw/part5.mp4"
+ ],
+ "offsets": [
+  0.0,
+  42.0,
+  71.0,
+  99.0,
+  127.0
+ ],
+ "length": 132.2833
+}

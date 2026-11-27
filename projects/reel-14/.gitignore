@@ -1,0 +1,25 @@
+# keep heavy media out of git, keep scripts and paid audio
+raw/
+out/
+work/**/*.mp4
+work/**/*.wav
+work/**/*.png
+work/**/*.jpg
+work/frames/
+*.mp4
+*.mov
+*.wav
+*.npy
+*.npz
+*.onnx
+__pycache__/
+.DS_Store
+!out/stills/*.png
+*.aac
+work/*.log
+*.mbtree
+*.log.mbtree
+reanimate/caption/
+reanimate/title/
+!assets/sfx/openverse/*.wav
+work/render/*.log

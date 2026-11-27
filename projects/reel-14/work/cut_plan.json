@@ -1,0 +1,230 @@
+{
+ "fps": 30,
+ "length": 101.4335,
+ "segments": [
+  {
+   "src_in": 0.0,
+   "src_out": 27.3,
+   "text": "[her clip + reaction, original audio]",
+   "audio": "orig",
+   "edit_in": 0.0
+  },
+  {
+   "src_in": 28.0333,
+   "src_out": 30.7,
+   "text": "Normal people can't build a physique like this.",
+   "audio": "iso",
+   "edit_in": 27.3
+  },
+  {
+   "src_in": 32.4,
+   "src_out": 35.9667,
+   "text": "You skip the drinks, you say no to the pizza your friends are eating,",
+   "audio": "iso",
+   "edit_in": 29.9667
+  },
+  {
+   "src_in": 36.2667,
+   "src_out": 39.5333,
+   "text": "and tonight everyone's calling you obsessed and abnormal.",
+   "audio": "iso",
+   "edit_in": 33.5334
+  },
+  {
+   "src_in": 41.5333,
+   "src_out": 41.9,
+   "text": "So",
+   "audio": "iso",
+   "edit_in": 36.8
+  },
+  {
+   "src_in": 42.1,
+   "src_out": 43.8,
+   "text": "Is something actually wrong with you?",
+   "audio": "iso",
+   "edit_in": 37.1667
+  },
+  {
+   "src_in": 44.6667,
+   "src_out": 45.9667,
+   "text": "Actually, yes.",
+   "audio": "iso",
+   "edit_in": 38.8667
+  },
+  {
+   "src_in": 46.3333,
+   "src_out": 48.7,
+   "text": "You are not normal, / and that's the point.",
+   "audio": "iso",
+   "edit_in": 40.1667
+  },
+  {
+   "src_in": 49.3333,
+   "src_out": 50.6667,
+   "text": "Success is abnormal",
+   "audio": "iso",
+   "edit_in": 42.5334
+  },
+  {
+   "src_in": 51.0667,
+   "src_out": 52.0,
+   "text": "by definition.",
+   "audio": "iso",
+   "edit_in": 43.8668
+  },
+  {
+   "src_in": 53.6667,
+   "src_out": 57.7,
+   "text": "Successful people are outliers. / They do not belong to the average.",
+   "audio": "iso",
+   "edit_in": 44.8001
+  },
+  {
+   "src_in": 59.1667,
+   "src_out": 60.2333,
+   "text": "Which sounds great,",
+   "audio": "iso",
+   "edit_in": 48.8334
+  },
+  {
+   "src_in": 60.4667,
+   "src_out": 63.2667,
+   "text": "except it comes with a price most people won't pay.",
+   "audio": "iso",
+   "edit_in": 49.9
+  },
+  {
+   "src_in": 63.9,
+   "src_out": 65.3667,
+   "text": "Pain, / discomfort,",
+   "audio": "iso",
+   "edit_in": 52.7
+  },
+  {
+   "src_in": 65.6333,
+   "src_out": 68.2,
+   "text": "going further than most people could ever tolerate.",
+   "audio": "iso",
+   "edit_in": 54.1667
+  },
+  {
+   "src_in": 69.8333,
+   "src_out": 73.3333,
+   "text": "That's why balance does not hold up while you are chasing a big goal.",
+   "audio": "iso",
+   "edit_in": 56.7334
+  },
+  {
+   "src_in": 75.0333,
+   "src_out": 79.9667,
+   "text": "Balance is something everybody can do, and if everybody can do it, / there's no value in it.",
+   "audio": "iso",
+   "edit_in": 60.2334
+  },
+  {
+   "src_in": 81.4333,
+   "src_out": 83.8,
+   "text": "It's like a class where everybody gets an A.",
+   "audio": "iso",
+   "edit_in": 65.1668
+  },
+  {
+   "src_in": 84.1333,
+   "src_out": 85.3333,
+   "text": "The A means nothing.",
+   "audio": "iso",
+   "edit_in": 67.5335
+  },
+  {
+   "src_in": 85.9,
+   "src_out": 88.0667,
+   "text": "Screw balance. You need to go all out.",
+   "audio": "iso",
+   "edit_in": 68.7335
+  },
+  {
+   "src_in": 89.4333,
+   "src_out": 91.1,
+   "text": "But here's the problem.",
+   "audio": "iso",
+   "edit_in": 70.9002
+  },
+  {
+   "src_in": 91.4,
+   "src_out": 95.6,
+   "text": "The moment it gets uncomfortable is the exact moment you have to keep going.",
+   "audio": "iso",
+   "edit_in": 72.5669
+  },
+  {
+   "src_in": 96.2,
+   "src_out": 98.3333,
+   "text": "That discomfort is what makes you grow",
+   "audio": "iso",
+   "edit_in": 76.7669
+  },
+  {
+   "src_in": 99.9667,
+   "src_out": 104.6333,
+   "text": "It tells your body and mind there's no option but to adapt and become stronger.",
+   "audio": "iso",
+   "edit_in": 78.9002
+  },
+  {
+   "src_in": 106.4667,
+   "src_out": 110.7,
+   "text": "And it's exactly where most people chicken out and crawl back into comfort.",
+   "audio": "iso",
+   "edit_in": 83.5668
+  },
+  {
+   "src_in": 111.2333,
+   "src_out": 112.6333,
+   "text": "Outliers keep going,",
+   "audio": "iso",
+   "edit_in": 87.8001
+  },
+  {
+   "src_in": 114.2333,
+   "src_out": 116.3,
+   "text": "and that is when the judging starts.",
+   "audio": "iso",
+   "edit_in": 89.2001
+  },
+  {
+   "src_in": 116.9,
+   "src_out": 118.9333,
+   "text": "Normal people don't look at themselves.",
+   "audio": "iso",
+   "edit_in": 91.2668
+  },
+  {
+   "src_in": 119.2333,
+   "src_out": 120.1,
+   "text": "They look at you.",
+   "audio": "iso",
+   "edit_in": 93.3001
+  },
+  {
+   "src_in": 121.5667,
+   "src_out": 123.4,
+   "text": "Crazy, boring, obsessed,",
+   "audio": "iso",
+   "edit_in": 94.1668
+  },
+  {
+   "src_in": 123.9333,
+   "src_out": 126.9,
+   "text": "whatever helps them feel better about their own mediocrity",
+   "audio": "iso",
+   "edit_in": 96.0001
+  },
+  {
+   "src_in": 128.5333,
+   "src_out": 131.0,
+   "text": "You, my friend, were never supposed to be normal",
+   "audio": "iso",
+   "edit_in": 98.9668
+  }
+ ]
+}
