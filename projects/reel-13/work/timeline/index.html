@@ -138,6 +138,7 @@ canvas.wave { position: absolute; top: 0; left: 0; pointer-events: none; }
   <button id="zout" aria-label="Zoom out">-</button>
   <button id="zin" aria-label="Zoom in">+</button>
   <button id="addnote">Add note here</button>
+  <button class="primary" id="sendbar">Send to Claude</button>
 </div>
 
 <section class="tl" aria-label="Timeline">
@@ -439,7 +440,7 @@ function renderSide() {
   // changes
   const C = $("changes"), ids = Object.keys(S.edits.cuts), open = S.notes.filter((x) => !x.done);
   let h = "<h2>Your changes</h2>";
-  if (!ids.length && !open.length) h += '<p class="hint">No changes or notes yet.</p>';
+  if (!ids.length && !open.length) h += '<p class="hint">No changes or notes yet. Trim a cut in Live cut or tap Add note here, then Send to Claude lights up.</p>';
   else {
     h += '<ul class="chlist">' + ids.map((id) => { const i = segIndex[id], g = baseSegs[i], o = S.edits.cuts[id];
       let d = o.deleted ? "deleted" : [o.src_in != null ? "start " + fmtD(o.src_in - g.src_in) : "", o.src_out != null ? "end " + fmtD(o.src_out - g.src_out) : ""].filter(Boolean).join(", ");
@@ -450,6 +451,10 @@ function renderSide() {
   }
   h += '<p class="status' + (S.saveMsg === "Saved" ? " ok" : "") + '" id="savemsg">' + esc(S.status === "ready" ? "Sent. Now say done in the chat and Claude will apply it." : S.saveMsg) + "</p>";
   C.innerHTML = h;
+  const sb = $("sendbar"), cnt = ids.length + open.length;
+  sb.disabled = !cnt || S.status === "ready";
+  sb.textContent = S.status === "ready" && cnt ? "Sent to Claude" : cnt ? "Send to Claude (" + cnt + ")" : "Send to Claude";
+  sb.title = cnt ? "" : "Make a trim or add a note first";
   C.querySelectorAll("[data-undo]").forEach((bt) => bt.onclick = () => { delete S.edits.cuts[bt.dataset.undo]; changed(); });
   const se = $("send"); if (se) se.onclick = () => { S.status = "ready"; renderSide(); queueSave(true); };
   const ra = $("resetall"); if (ra) ra.onclick = () => { S.confirmReset = true; renderSide(); };
@@ -477,6 +482,8 @@ function saveNote() {
 }
 function delNote(id) { S.sel = null; if (!S.db || id.startsWith("local")) { S.notes = S.notes.filter((n) => n.id !== id); render(); return; }
   S.db.doc("notes/" + id).delete().catch(() => {}); }
+$("sendbar").onclick = () => { S.status = "ready"; renderSide(); queueSave(true);
+  $("changes").scrollIntoView({ block: "nearest", behavior: "smooth" }); };
 $("addnote").onclick = () => { if (S.playing) pause(); S.sel = null; S.draftNote = { t: S.t }; renderSide(); $("inspector").scrollIntoView({ block: "nearest", behavior: "smooth" }); };
 
 async function connect() {
