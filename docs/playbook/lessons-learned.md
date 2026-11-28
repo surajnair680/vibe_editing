@@ -322,6 +322,11 @@ Other docs and when to read them: `docs/README.md`.
   Tested numbers: page 56 KB, proxy of 85 s of raw = 3.8 MiB (crf 30, keyframe every 0.5 s), live playback swaps
   between two video elements at each out-point; a timecode with frames after the dot ("0:53.17") reads as seconds,
   so the page shows hundredths. [r13]
+- **"Why can't I see the elements in the live cut?" (reel-17).** Live cut plays the raw proxy, so graphics and
+  effects are missing and he expects to see them. When the effects are rendered over the whole source 1:1 (no cuts
+  yet, as in reel-17's panel-behind-body + HDR), build the proxy from the render instead:
+  `make_proxy.py projects/<name> --src out/<name>-v1.mp4 --voice work/audio/full.wav`. Trims then play with the
+  effects. Once the edit has real cuts the render no longer maps to source time, so say plainly which it is. [r17]
 
 ## 2. Remaking a reference edit shot for shot [r03]
 - **Measure the reference frame by frame.** `select='gt(scene,0.12)'` gives a first cut list; busy parts need sheets of

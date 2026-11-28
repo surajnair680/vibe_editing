@@ -34,3 +34,7 @@ Lines cross the p1/p2 and p2/p3 seams; audio start_times are 0 to 13 ms (no hidd
 14. Sound: `python3 work/build3/mix3.py` -> work/audio/mix_v3.wav (voice + soft low-passed paper sounds, no music).
 15. Master: concat the 4 parts (`-f concat -c:v copy`) + mix_v3.wav (aac 256k, `-t` LEN) -> out/reel-14-v3-master.mp4
     (about 1.26 GB at crf 14 because of the grain). Review copy under 30 MiB: 2-pass x264 at 2150k + aac 160k.
+
+## Timeline editor page
+https://claude.ai/artifact/CyphKAUjA3xdGepq8yg4bM (private). Rebuild: `python3 work/build3/timeline_extra.py`, then
+`tools/timeline/export_timeline.py projects/reel-14 --version <v>`, `make_proxy.py`, `build_page.py` (media in work/timeline/media.json).
