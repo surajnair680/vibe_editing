@@ -30,10 +30,10 @@ Times are rough cut v2 edit times. SPLIT = graphic on top, him in the strip. FUL
 | 12 | 36.20-38.50 | "If I can build this body, so can you." | FULL | 21 | Caption "so can you." in serif. |
 | 13a | 38.50-40.77 | "I'm already two months into this bulk," | SPLIT | 16 line path + thumbnails | Title "The *bulk* so far". Line draws from Day 1; small video cards of his last two months (training, eating) pop onto it while the camera slides to the red dot "Day 60, today" (user, 2026-11-28). |
 | 13b | 40.77-41.87 | "but from today," | FULL | 21 | Turn beat (keeps every graphics run under about 10 s, skill rhythm rule). |
-| 13c | 41.87-43.27 | "I'm filming all of it." | SPLIT | 16 line path | Back on the timeline; a red REC badge blinks on the Day 60 dot. |
-| 14 | 43.27-45.53 | "Training, food, supplements" | SPLIT | 18 carousel | One card per word: training, food, supplements. Real photos. |
+| 13c | 41.87-43.27 | "I'm filming all of it." | SPLIT | 16 line path | Same timeline where 13a stopped. Old clips dim; at the red dot a new empty card with a blinking REC badge; the line draws on past today as a dashed line (approved 2026-11-28). |
+| 14 | 43.27-45.53 | "Training, food, supplements" | SPLIT | 18 carousel | The REC card grows to fill the middle and becomes the carousel, one card per word. Real photos. |
 | 15 | 45.53-47.80 | "The wins and the days it goes wrong." | SPLIT | 9 before / after | Two cards: "*Wins*" (green) and "*Bad days*" (red). |
-| 16 | 47.80-50.60 | "How long will it take? Six months? A year?" | SPLIT | 16 line path | Back to the timeline. The line runs on past today: "6 months?" then "1 year?" tags pop. |
+| 16 | 47.80-50.60 | "How long will it take? Six months? A year?" | SPLIT | 16 line path | Same dashed line further past today; "6 months?" then "1 year?" tags pop. |
 | 17 | 50.60-51.30 | "I don't know," | FULL | 21 | Shrug beat. |
 | 18 | 51.30-53.67 | "but I'm not stopping until I look like him" | SPLIT | 9 side by side | Title "Until I look like *him*". Him now on the left, Toji on the right. Ends here. |
 
