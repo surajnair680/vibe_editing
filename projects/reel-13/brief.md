@@ -19,7 +19,7 @@ Times are rough cut v2 edit times. SPLIT = graphic on top, him in the strip. FUL
 | 3 | 4.70-9.57 | "Wide back, arms like carved stone, and a V-taper so sharp it looks fake." | SPLIT | 8 annotated example | Same card. Red arrows and labels pop on each phrase: "Wide back", "Arms like stone", "V-taper". "Looks fake" in a red box. |
 | 4 | 9.57-13.00 | "But whenever I tell people they can build a body like this," | FULL | 21 | Snap back. One-word captions. |
 | 5 | 13.00-19.80 | "I hear the same three excuses. I don't have the genetics. I don't have the time. It's not possible naturally." | SPLIT | 5a tracker + visuals | Title "The *3 Excuses*", pills in a compact row under it (red tab on the current one). One big visual per excuse, hard cut on its line (user asked for visuals, 2026-11-28): glowing DNA strand that turns red and cracks, clock with spinning hands, syringe with a question mark. Glossy 3D on black with red light (Codex). |
-| 6 | 19.80-20.80 | "So I am going to show you" | SPLIT | 5a | The three visuals shrink into a row; a red line strikes through each one. |
+| 6 | 19.80-20.80 | "So I am going to show you" | SPLIT | 5a | The three visuals shrink into a row (0.2 s), then a red slash hits each about 0.25 s apart on "going", "show", "you", marker sound each. Syringe + glossy 3D approved 2026-11-28. |
 | 7 | 20.80-22.43 | "what is possible" | FULL | 21 | Caption "possible" in serif. |
 | 8 | 22.43-24.97 | "This is me after seven years of training." | SPLIT | 8 annotated example | Title "*7 years* of training". His physique photo (face showing) with a slow parallax push. |
 | 9 | 24.97-27.67 | "Decent, but I'm not a genetic freak." | FULL | 21 | Honest beat, his face. |
