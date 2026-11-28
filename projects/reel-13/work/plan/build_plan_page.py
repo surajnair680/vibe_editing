@@ -9,8 +9,8 @@ CUT = ROOT / "out/reel-13-rough-v2.mp4"
 
 ROWS = [
  (0.00, 2.90, "I am going to bulk until I look like an anime villain.", "SPLIT", "2 Word-by-word hook",
-  "Title builds per word: <b>Bulking until I look like</b> / an <i>anime villain</i>. The card swaps on each word: loaded barbell, full plate, mirror, then Toji with a red glow on \"villain\".",
-  "02-word-by-word-hook/09_s003_000.63.jpg", "Toji image, barbell / plate / mirror cards"),
+  "Two pictures only. The title builds one word at a time: <b>Bulking until I look like</b> / an <i>anime villain</i>. Under it, you (photo or clip) from \"I am going to bulk\" to \"look like\", then a hard cut to Toji on \"anime villain\", with a red glow on \"villain\".",
+  "02-word-by-word-hook/09_s003_000.63.jpg", "A photo or clip of you, a Toji photo or clip"),
  (2.90, 4.70, "This is Toji Fushiguro.", "SPLIT", "8 Annotated example",
   "Title <b>This is</b> <i>Toji Fushiguro</i>. Toji card in the centre, slow push in.",
   "08-annotated-example/15_s025_041.88.jpg", "Toji image"),

@@ -14,7 +14,7 @@ Times are rough cut v2 edit times. SPLIT = graphic on top, him in the strip. FUL
 
 | # | time | spoken | layout | type | on screen |
 |---|---|---|---|---|---|
-| 1 | 0.00-2.90 | "I am going to bulk until I look like an anime villain." | SPLIT | 2 word-by-word hook | Title builds per word: "Bulking until I look like / an *anime villain*". Card swaps per word: loaded barbell, full plate, mirror, then Toji with a red glow on "villain". |
+| 1 | 0.00-2.90 | "I am going to bulk until I look like an anime villain." | SPLIT | 2 word-by-word hook | Two assets only (user, 2026-11-28). Title builds per word: "Bulking until I look like / an *anime villain*". Under it: his photo or clip until "look like", hard cut to Toji on "anime villain", red glow on "villain". |
 | 2 | 2.90-4.70 | "This is Toji Fushiguro." | SPLIT | 8 annotated example | Title "This is *Toji Fushiguro*". Toji image card in the centre, slow push in. |
 | 3 | 4.70-9.57 | "Wide back, arms like carved stone, and a V-taper so sharp it looks fake." | SPLIT | 8 annotated example | Same card. Red arrows and labels pop on each phrase: "Wide back", "Arms like stone", "V-taper". "Looks fake" in a red box. |
 | 4 | 9.57-13.00 | "But whenever I tell people they can build a body like this," | FULL | 21 | Snap back. One-word captions. |
@@ -45,12 +45,12 @@ Screen time: SPLIT 78 %, FULL 22 %. Longest graphics run 9.6 s. Visual planning 
 ## Assets needed
 | row | asset | source |
 |---|---|---|
-| 1, 2, 3, 18 | 2 or 3 Toji images (full body or back, clear muscles) | user (real anime frames; Codex can't draw him reliably) |
+| 1, 2, 3, 18 | 2 or 3 Toji images (one for the hook, can be a clip) (full body or back, clear muscles) | user (real anime frames; Codex can't draw him reliably) |
+| 1 | a photo or clip of him for the hook | user |
 | 8, 18 | his physique photo with his face | user |
 | 14 | a training clip or photo | user (else Codex) |
 | 14 | a meal photo | user (else Codex) |
 | 14 | his supplements | user (else Codex) |
-| 1 | barbell, plate, mirror cards | Codex |
 
 ## Cue sheet (draft)
 | time | event | sound | level |
