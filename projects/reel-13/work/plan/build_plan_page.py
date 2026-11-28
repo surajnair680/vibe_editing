@@ -31,9 +31,15 @@ ROWS = [
   "08-annotated-example/02_s030_038.04.jpg", "Your physique photo with your face"),
  (24.97, 27.67, "Decent, but I'm not a genetic freak.", "FULL", "21 Full A-roll beat",
   "Honest beat on your face.", "21-full-aroll/03_s013_047.38.jpg", ""),
- (27.67, 32.50, "I am twenty-seven. I work full time in tech, and I'm also a fitness coach.", "SPLIT", "5a / 18 Stacked pills",
-  "Title <b>Just a</b> <i>normal</i> <b>guy</b>. Pills drop in on the words: 27 years old, Full-time tech job, Fitness coach.",
-  "05a-tracker-pills/10_s021_037.33.jpg", ""),
+ (27.67, 28.90, "I am twenty-seven.", "SPLIT", "10 Big number",
+  "Title <b>Just a</b> <i>normal</i> <b>guy</b>. A big glossy red 3D <b>27</b> (Codex).",
+  "10-graph-gauge/16_s017_016.27.jpg", "27 render (Codex)"),
+ (28.90, 30.70, "I work full time in tech,", "BROLL", "20 Full-screen B-roll",
+  "Your real footage full screen: you at your laptop or desk, typing, on a work call or in the office. One-word captions keep running.",
+  "21-full-aroll/01_s008_012.56.jpg", "B-roll: you at work (vertical, 5 to 10 s)"),
+ (30.70, 32.50, "and I'm also a fitness coach.", "BROLL", "20 Full-screen B-roll",
+  "Your real footage full screen: checking a client's form, writing a plan, replying to check-ins or on a coaching call. Client names and faces hidden.",
+  "21-full-aroll/03_s013_047.38.jpg", "B-roll: you coaching (vertical, 5 to 10 s)"),
  (32.50, 36.20, "And I have been a type one diabetic since I was twelve.", "SPLIT", "10 Big number",
   "Pills grey out. A big red card: <b>Type 1 diabetic</b>, since age <i>12</i>, with a simple glucose meter drawing.",
   "10-graph-gauge/16_s017_016.27.jpg", ""),
@@ -85,7 +91,7 @@ for i, (a, b, spoken, lay, typ, screen, ref, asset) in enumerate(ROWS, 1):
   <figure><img src="{frame_at((a + b) / 2)}" alt="Your cut at {ts((a + b) / 2)}"><figcaption>Your cut now</figcaption></figure>
 </article>""")
 
-split = sum(b - a for a, b, _, l, *_ in ROWS if l == "SPLIT"); full = sum(b - a for a, b, _, l, *_ in ROWS if l == "FULL")
+split = sum(b - a for a, b, _, l, *_ in ROWS if l == "SPLIT"); full = sum(b - a for a, b, _, l, *_ in ROWS if l != "SPLIT")
 tot = split + full
 bar = "".join(f'<span class="seg {r[3].lower()}" style="flex:{r[1] - r[0]:.2f}" title="{i}"></span>' for i, r in enumerate(ROWS, 1))
 
@@ -108,17 +114,17 @@ h1 i {{ font-family:var(--serif); font-weight:400; }}
 .stats {{ display:flex; flex-wrap:wrap; gap:8px 18px; color:var(--dim); font-size:13px; font-variant-numeric:tabular-nums; }}
 .stats b {{ color:var(--fg); }}
 .bar {{ display:flex; height:14px; border-radius:7px; overflow:hidden; gap:2px; }}
-.seg.split {{ background:#3a3a3a; }} .seg.full {{ background:var(--red); }}
-.key {{ display:flex; gap:16px; font-size:12px; color:var(--dim); }}
+.seg.split {{ background:#3a3a3a; }} .seg.full {{ background:var(--red); }} .seg.broll {{ background:var(--green); }}
+.key {{ display:flex; flex-wrap:wrap; gap:8px 16px; font-size:12px; color:var(--dim); }}
 .key span::before {{ content:""; display:inline-block; width:10px; height:10px; border-radius:3px; margin-right:6px; vertical-align:-1px; }}
-.key .k1::before {{ background:#3a3a3a; }} .key .k2::before {{ background:var(--red); }}
+.key .k1::before {{ background:#3a3a3a; }} .key .k2::before {{ background:var(--red); }} .key .k3::before {{ background:var(--green); }}
 .row {{ display:grid; grid-template-columns:150px minmax(0,1fr) 120px 120px; gap:16px; align-items:start;
   background:var(--card); border:1px solid var(--line); border-radius:16px; padding:14px; }}
-.row.full {{ border-left:3px solid var(--red); }}
+.row.full {{ border-left:3px solid var(--red); }} .row.broll {{ border-left:3px solid var(--green); }}
 .meta {{ display:grid; gap:4px; font-variant-numeric:tabular-nums; font-size:13px; color:var(--dim); }}
 .num {{ font-size:22px; font-weight:800; color:var(--fg); }}
 .lay {{ justify-self:start; font-size:11px; font-weight:600; letter-spacing:.08em; padding:3px 8px; border-radius:999px; border:1px solid var(--line); color:var(--fg); }}
-.full .lay {{ background:var(--red); border-color:var(--red); }}
+.full .lay {{ background:var(--red); border-color:var(--red); }} .broll .lay {{ background:var(--green); border-color:var(--green); color:#04140a; }}
 .words p {{ margin:0 0 8px; line-height:1.45; }}
 .spoken {{ font-family:var(--serif); font-style:italic; font-size:20px; line-height:1.3 !important; }}
 .type {{ font-size:11px; font-weight:600; letter-spacing:.08em; text-transform:uppercase; color:var(--red); }}
@@ -139,10 +145,10 @@ figcaption {{ font-size:11px; color:var(--dim); margin-top:5px; text-align:cente
   <h1>Reel-13 <i>planning table</i></h1>
   <p class="lede">Bulking series, episode 0, cut in the Kallaway look. One row per line of the approved rough cut (v2). Each row has the scene type from the skill, a frame from a real Kallaway reel showing that type, and your cut as it looks now at that moment.</p>
   <div class="stats"><span><b>{tot:.1f} s</b> long</span><span><b>{len(ROWS)}</b> scenes</span>
-    <span>Graphics (SPLIT) <b>{split / tot:.0%}</b></span><span>You full screen (FULL) <b>{full / tot:.0%}</b></span>
+    <span>Graphics (SPLIT) <b>{split / tot:.0%}</b></span><span>Full screen, you or B-roll <b>{full / tot:.0%}</b></span>
     <span>Longest graphic run <b>9.6 s</b></span></div>
   <div class="bar">{bar}</div>
-  <div class="key"><span class="k1">SPLIT: graphic on top, you in the strip</span><span class="k2">FULL: you full screen</span></div>
+  <div class="key"><span class="k1">SPLIT: graphic on top, you in the strip</span><span class="k2">FULL: you full screen</span><span class="k3">B-ROLL: your footage full screen</span></div>
   {''.join(rows_html)}
   <section class="notes"><h2>Open questions</h2><ul>
     <li>No call to action in the script. Default: end on row 20. Option: a 1.5 s silent card, Follow for <i>episode 1</i>.</li>

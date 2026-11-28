@@ -23,7 +23,9 @@ Times are rough cut v2 edit times. SPLIT = graphic on top, him in the strip. FUL
 | 7 | 20.80-22.43 | "what is possible" | FULL | 21 | Caption "possible" in serif. |
 | 8 | 22.43-24.97 | "This is me after seven years of training." | SPLIT | 8 annotated example | Title "*7 years* of training". His physique photo (face showing) with a slow parallax push. |
 | 9 | 24.97-27.67 | "Decent, but I'm not a genetic freak." | FULL | 21 | Honest beat, his face. |
-| 10 | 27.67-32.50 | "I am twenty-seven. I work full time in tech, and I'm also a fitness coach." | SPLIT | 18 stacked pills | Title "Just a *normal* guy". Pills drop in on the words: "27 years old", "Full-time tech job", "Fitness coach". |
+| 10a | 27.67-28.90 | "I am twenty-seven." | SPLIT | 10 big number | Title "Just a *normal* guy", big glossy red 3D "27" (Codex). |
+| 10b | 28.90-30.70 | "I work full time in tech," | B-ROLL | 20 B-roll | His real footage full screen: at his laptop / desk / work call / office (user asked for B-roll, 2026-11-28: "more connection than just motion graphics"). |
+| 10c | 30.70-32.50 | "and I'm also a fitness coach." | B-ROLL | 20 B-roll | His real footage full screen: coaching (form check, plan, check-ins, call). Client names and faces hidden. |
 | 11 | 32.50-36.20 | "And I have been a type one diabetic since I was twelve." | SPLIT | 10 big number | Pills grey out. Big red card: "Type 1 diabetic" with "since age *12*", a simple glucose meter drawing. |
 | 12 | 36.20-38.50 | "If I can build this body, so can you." | FULL | 21 | Caption "so can you." in serif. |
 | 13a | 38.50-40.77 | "I'm already two months into this bulk," | SPLIT | 16 line path | Title "The *bulk* so far". A timeline line: Day 1 to a red dot at "Day 60, today". |
@@ -47,6 +49,9 @@ Screen time: SPLIT 78 %, FULL 22 %. Longest graphics run 9.6 s. Visual planning 
 |---|---|---|
 | 1, 2, 3, 18 | 2 or 3 Toji images (one for the hook, can be a clip) (full body or back, clear muscles) | user (real anime frames; Codex can't draw him reliably) |
 | 1 | a photo or clip of him for the hook | user |
+| 10b | B-roll at work, vertical, 5-10 s, screens clean | user |
+| 10c | B-roll coaching, vertical, 5-10 s, clients hidden | user |
+| 10a | glossy red 3D "27" | Codex |
 | 5, 6 | DNA strand, clock, syringe (glossy 3D, red light, black) | Codex |
 | 8, 18 | his physique photo with his face | user |
 | 14 | a training clip or photo | user (else Codex) |
