@@ -343,6 +343,16 @@ Other docs and when to read them: `docs/README.md`.
   file). Check the strip top edge at full size on several stills before sending. Placeholders: dashed grey cards
   labelled with the asset (`.ph` in `projects/reel-13/mg/panel/index.html`) let him approve layout and timing
   before he sends any footage; he asked for this ("use a placeholder frame"). [r13]
+- **"Movement looks like typical AI" = overshoot pops and hard swaps; he wants fluid motion and time to look (reel-13).**
+  What fixed it: no easeOutBack pops; entrances fade, rise 26 px and unblur with easeOutQuint over 0.5 to 0.6 s;
+  camera and state changes on smootherstep; elements glide to new positions instead of cutting (Toji slides in beside
+  him, one canvas the camera glides along for a list, cards slide apart for a comparison). Every visual stays at least
+  about 1 s after it lands: start a visual on the first word of its line, show all list cards at once and light each in
+  turn, drop sub-second FULL beats, never let a scene end before its last element is readable (check with a script:
+  `data-in` vs scene end). Captions as 2 to 3 word phrases split evenly per sentence, not single words.
+  Kit changes: `projects/reel-13/mg/panel/kallaway.js` (`soft`, `data-keys`, `data-pulse`), phrase captions in
+  `projects/reel-13/work/kal/compose.py`. Codex renders on black: convert to real alpha (brightness -> alpha,
+  un-premultiply) instead of `mix-blend-mode: screen`, which shows black boxes inside a moving or filtered parent. [r13]
 
 ## 2. Remaking a reference edit shot for shot [r03]
 - **Measure the reference frame by frame.** `select='gt(scene,0.12)'` gives a first cut list; busy parts need sheets of
