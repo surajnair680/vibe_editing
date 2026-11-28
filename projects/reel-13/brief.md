@@ -26,7 +26,7 @@ Times are rough cut v2 edit times. SPLIT = graphic on top, him in the strip. FUL
 | 10a | 27.67-28.90 | "I am twenty-seven." | SPLIT | 10 big number | Title "Just a *normal* guy", big glossy red 3D "27" (Codex). |
 | 10b | 28.90-30.70 | "I work full time in tech," | B-ROLL | 20 B-roll | His real footage full screen: at his laptop / desk / work call / office (user asked for B-roll, 2026-11-28: "more connection than just motion graphics"). |
 | 10c | 30.70-32.50 | "and I'm also a fitness coach." | B-ROLL | 20 B-roll | His real footage full screen: coaching (form check, plan, check-ins, call). Client names and faces hidden. |
-| 11 | 32.50-36.20 | "And I have been a type one diabetic since I was twelve." | SPLIT | 10 big number | Pills grey out. Big red card: "Type 1 diabetic" with "since age *12*", a simple glucose meter drawing. |
+| 11 | 32.50-36.20 | "And I have been a type one diabetic since I was twelve." | B-ROLL | 20 B-roll | His B-roll taking insulin (user, 2026-11-28). Red tag "Type 1 diabetic since age *12*" the whole time so it is not read as steroids after the crossed-out syringe in scene 5. |
 | 12 | 36.20-38.50 | "If I can build this body, so can you." | FULL | 21 | Caption "so can you." in serif. |
 | 13a | 38.50-40.77 | "I'm already two months into this bulk," | SPLIT | 16 line path | Title "The *bulk* so far". A timeline line: Day 1 to a red dot at "Day 60, today". |
 | 13b | 40.77-41.87 | "but from today," | FULL | 21 | Turn beat (keeps every graphics run under about 10 s, skill rhythm rule). |
@@ -52,6 +52,7 @@ Screen time: SPLIT 78 %, FULL 22 %. Longest graphics run 9.6 s. Visual planning 
 | 10b | B-roll at work, vertical, 5-10 s, screens clean | user |
 | 10c | B-roll coaching, vertical, 5-10 s, clients hidden | user |
 | 10a | glossy red 3D "27" | Codex |
+| 11 | B-roll taking insulin, vertical, 5-10 s (pen if he uses one) | user |
 | 5, 6 | DNA strand, clock, syringe (glossy 3D, red light, black) | Codex |
 | 8, 18 | his physique photo with his face | user |
 | 14 | a training clip or photo | user (else Codex) |
