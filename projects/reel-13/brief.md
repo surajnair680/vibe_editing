@@ -28,7 +28,7 @@ Times are rough cut v2 edit times. SPLIT = graphic on top, him in the strip. FUL
 | 10c | 30.70-32.50 | "and I'm also a fitness coach." | B-ROLL | 20 B-roll | His real footage full screen: coaching (form check, plan, check-ins, call). Client names and faces hidden. |
 | 11 | 32.50-36.20 | "And I have been a type one diabetic since I was twelve." | B-ROLL | 20 B-roll | His B-roll taking insulin (user, 2026-11-28). Red tag "Type 1 diabetic since age *12*" the whole time so it is not read as steroids after the crossed-out syringe in scene 5. |
 | 12 | 36.20-38.50 | "If I can build this body, so can you." | FULL | 21 | Caption "so can you." in serif. |
-| 13a | 38.50-40.77 | "I'm already two months into this bulk," | SPLIT | 16 line path | Title "The *bulk* so far". A timeline line: Day 1 to a red dot at "Day 60, today". |
+| 13a | 38.50-40.77 | "I'm already two months into this bulk," | SPLIT | 16 line path + thumbnails | Title "The *bulk* so far". Line draws from Day 1; small video cards of his last two months (training, eating) pop onto it while the camera slides to the red dot "Day 60, today" (user, 2026-11-28). |
 | 13b | 40.77-41.87 | "but from today," | FULL | 21 | Turn beat (keeps every graphics run under about 10 s, skill rhythm rule). |
 | 13c | 41.87-43.27 | "I'm filming all of it." | SPLIT | 16 line path | Back on the timeline; a red REC badge blinks on the Day 60 dot. |
 | 14 | 43.27-45.53 | "Training, food, supplements" | SPLIT | 18 carousel | One card per word: training, food, supplements. Real photos. |
@@ -52,6 +52,7 @@ Screen time: SPLIT 78 %, FULL 22 %. Longest graphics run 9.6 s. Visual planning 
 | 10b | B-roll at work, vertical, 5-10 s, screens clean | user |
 | 10c | B-roll coaching, vertical, 5-10 s, clients hidden | user |
 | 10a | glossy red 3D "27" | Codex |
+| 13a | 4-6 clips from the last 2 months, training + eating, 2 s+ each | user |
 | 11 | B-roll taking insulin, vertical, 5-10 s (pen if he uses one) | user |
 | 5, 6 | DNA strand, clock, syringe (glossy 3D, red light, black) | Codex |
 | 8, 18 | his physique photo with his face | user |
