@@ -1,0 +1,223 @@
+<!doctype html>
+<html><head><meta charset="utf-8"><meta name="viewport" content="width=1080">
+<title>reel-13 panel (Kallaway style)</title>
+<link rel="stylesheet" href="kallaway.css">
+<style>
+  /* placeholder frames: where his own photos and clips go (swap the .ph for an <img>/<video> later) */
+  .ph { position: absolute; border-radius: 22px; background: #131313; border: 3px dashed #4a4a4a; overflow: hidden;
+    display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 14px; text-align: center; padding: 30px; }
+  .ph .tag { font: 600 22px "Inter"; letter-spacing: .18em; color: #7a7a7a; }
+  .ph .lab { font: 800 46px/1.0 "Inter"; letter-spacing: -0.03em; color: #e8e8e8; }
+  .ph .sub { font: 500 24px/1.25 "Inter"; color: #8a8a8a; max-width: 90%; }
+  .ph.sm .lab { font-size: 30px; } .ph.sm .tag { font-size: 16px; } .ph.sm .sub { font-size: 18px; }
+  .ph.full { left: 0; top: 0; width: 1080px; height: 1920px; border-radius: 0; border-width: 6px; }
+  .ph.full .lab { font-size: 72px; } .ph.full .tag { font-size: 30px; } .ph.full .sub { font-size: 32px; }
+  .glow { position: absolute; border-radius: 26px; box-shadow: 0 0 60px 18px rgba(224,16,42,.55), inset 0 0 0 3px #E0102A; }
+  .r3d { position: absolute; mix-blend-mode: screen; }
+  .ktag { position: absolute; padding: 6px 20px 9px; border-radius: 8px; background: var(--red-box); color: #fff;
+    font: italic 400 46px "ISerif"; white-space: nowrap; }
+  .pillrow .k-pill { font-size: 30px; }
+  .pillrow .k-pill.is-on { border-color: #E0102A; box-shadow: inset 6px 0 0 #E0102A; }
+  .tl-line { position: absolute; height: 4px; background: #e9e9e9; border-radius: 2px; transform-origin: left; }
+  .tl-dash { position: absolute; height: 0; border-top: 4px dashed #bdbdbd; transform-origin: left; }
+  .tl-day { position: absolute; font: 700 30px "Inter"; color: #cfcfcf; white-space: nowrap; }
+  .dot { position: absolute; width: 34px; height: 34px; border-radius: 50%; background: #E0102A; box-shadow: 0 0 30px 8px rgba(224,16,42,.5); }
+  .rec { position: absolute; padding: 6px 16px; border-radius: 8px; background: #E0102A; font: 800 26px "Inter"; letter-spacing: .08em; color: #fff; }
+  .qtag { position: absolute; padding: 8px 22px 10px; border-radius: 99px; border: 2px solid #fff; font: italic 400 48px "ISerif"; white-space: nowrap; }
+  .stem { position: absolute; width: 2px; background: #6a6a6a; }
+  .fade-r { position: absolute; top: 0; bottom: 0; width: 420px; background: linear-gradient(90deg, rgba(7,7,7,0), #070707 75%); }
+  .gcard svg text { font-family: "Inter"; }
+</style>
+</head>
+<body>
+<div class="k-strip-guide"></div>
+
+<!-- 1. Hook 0 to 2.9: him, then Toji (two assets only) -->
+<section class="k-scene dark" data-start="0" data-end="2.9">
+  <h1 class="k-title">
+    <span class="line"><span class="w" data-in="0" data-anim="rise">Bulking</span> <span class="w" data-in="1.21" data-anim="rise">until</span>
+      <span class="w" data-in="1.49" data-anim="rise">I</span> <span class="w" data-in="1.61" data-anim="rise">look</span> <span class="w" data-in="1.87" data-anim="rise">like</span></span>
+    <span class="line"><span class="w" data-in="2.05" data-anim="rise">an</span> <em class="w" data-in="2.15" data-anim="blur">anime villain</em></span>
+  </h1>
+  <section class="k-scene" data-start="0" data-end="2.15" style="background:none">
+    <div class="ph" style="left:300px; top:470px; width:480px; height:700px" data-in="0" data-anim="pop">
+      <div class="tag">PLACEHOLDER</div><div class="lab">YOU</div><div class="sub">photo or clip, body showing</div></div>
+  </section>
+  <section class="k-scene" data-start="2.15" data-end="2.9" style="background:none">
+    <div class="glow" style="left:296px; top:466px; width:488px; height:708px" data-in="2.51" data-anim="fade" data-dur="0.2"></div>
+    <div class="ph" style="left:300px; top:470px; width:480px; height:700px">
+      <div class="tag">PLACEHOLDER</div><div class="lab">TOJI</div><div class="sub">photo or clip</div></div>
+  </section>
+</section>
+
+<!-- 2+3. Toji 2.9 to 9.57: card, then red tags on each phrase -->
+<section class="k-scene dark" data-start="2.9" data-end="9.57">
+  <div class="k-canvas" data-cam='[[2.9,1,0,0],[9.57,1.06,0,10]]'>
+    <h1 class="k-title"><span class="line"><span class="w" data-in="2.9" data-anim="rise">This is</span></span>
+      <span class="line"><em class="w" data-in="3.61" data-anim="blur">Toji Fushiguro</em></span></h1>
+    <div class="ph" style="left:310px; top:470px; width:460px; height:700px" data-in="2.9" data-anim="pop">
+      <div class="tag">PLACEHOLDER</div><div class="lab">TOJI</div><div class="sub">back or full body, muscles clear</div></div>
+    <svg class="k-svg" style="left:0; top:0" width="1080" height="1300" viewBox="0 0 1080 1300">
+      <path d="M250 610 C 300 615, 360 640, 420 680" fill="none" stroke="#E0102A" stroke-width="5" stroke-linecap="round" data-in="4.84" data-anim="draw" data-dur="0.3"/>
+      <path d="M830 760 C 780 770, 720 790, 670 820" fill="none" stroke="#E0102A" stroke-width="5" stroke-linecap="round" data-in="5.59" data-anim="draw" data-dur="0.3"/>
+      <path d="M250 960 C 310 960, 380 950, 450 930" fill="none" stroke="#E0102A" stroke-width="5" stroke-linecap="round" data-in="7.33" data-anim="draw" data-dur="0.3"/>
+    </svg>
+    <div class="ktag" style="left:40px; top:560px" data-in="4.84" data-anim="pop">Wide back</div>
+    <div class="ktag" style="left:720px; top:690px" data-in="5.59" data-anim="pop">Arms like stone</div>
+    <div class="ktag" style="left:60px; top:910px" data-in="7.33" data-anim="pop">V-taper</div>
+    <div class="k-redbox" style="position:absolute; left:380px; top:1080px; font:800 44px Inter; letter-spacing:-0.03em; transform:rotate(-3deg)" data-base="rotate(-3deg)" data-in="8.85" data-anim="pop">Looks fake</div>
+  </div>
+</section>
+
+<!-- 5+6. Three excuses 13.0 to 20.8 -->
+<section class="k-scene dark" data-start="13.0" data-end="20.8">
+  <h1 class="k-title"><span class="line">The</span><span class="line"><em>3 Excuses</em></span></h1>
+  <div class="pillrow">
+    <div class="k-pill" style="left:70px; top:430px" data-states='[[0,"blur"],[15.57,"on"],[17.25,"done"],[19.8,"plain"]]'>1 Bad genetics</div>
+    <div class="k-pill" style="left:420px; top:430px" data-states='[[0,"blur"],[17.25,"on"],[18.23,"done"],[19.8,"plain"]]'>2 No time</div>
+    <div class="k-pill" style="left:690px; top:430px" data-states='[[0,"blur"],[18.23,"on"],[19.8,"plain"]]'>3 Not natural</div>
+  </div>
+  <!-- teaser row on "three excuses", then the big one per line, then the row again for the strike-throughs -->
+  <section class="k-scene" data-start="13.0" data-end="15.57" style="background:none">
+    <img class="r3d" src="img/excuse_genetics.png" style="left:30px; top:600px; width:340px" data-in="14.07" data-anim="pop">
+    <img class="r3d" src="img/excuse_time.png" style="left:370px; top:600px; width:340px" data-in="14.15" data-anim="pop">
+    <img class="r3d" src="img/excuse_natural.png" style="left:710px; top:600px; width:340px" data-in="14.23" data-anim="pop">
+  </section>
+  <section class="k-scene" data-start="15.57" data-end="17.25" style="background:none">
+    <img class="r3d" src="img/excuse_genetics.png" style="left:220px; top:530px; width:640px" data-in="15.57" data-anim="pop"></section>
+  <section class="k-scene" data-start="17.25" data-end="18.23" style="background:none">
+    <img class="r3d" src="img/excuse_time.png" style="left:220px; top:530px; width:640px" data-in="17.25" data-anim="pop"></section>
+  <section class="k-scene" data-start="18.23" data-end="19.8" style="background:none">
+    <img class="r3d" src="img/excuse_natural.png" style="left:220px; top:530px; width:640px" data-in="18.23" data-anim="pop"></section>
+  <section class="k-scene" data-start="19.8" data-end="20.8" style="background:none">
+    <img class="r3d" src="img/excuse_genetics.png" style="left:30px; top:600px; width:340px">
+    <img class="r3d" src="img/excuse_time.png" style="left:370px; top:600px; width:340px">
+    <img class="r3d" src="img/excuse_natural.png" style="left:710px; top:600px; width:340px">
+    <svg class="k-svg k-glow-red" style="left:0; top:0" width="1080" height="1300" viewBox="0 0 1080 1300">
+      <path d="M70 900 L 330 650" fill="none" stroke="#E0102A" stroke-width="16" stroke-linecap="round" data-in="20.32" data-anim="draw" data-dur="0.15"/>
+      <path d="M410 900 L 670 650" fill="none" stroke="#E0102A" stroke-width="16" stroke-linecap="round" data-in="20.68" data-anim="draw" data-dur="0.15"/>
+      <path d="M750 900 L 1010 650" fill="none" stroke="#E0102A" stroke-width="16" stroke-linecap="round" data-in="20.90" data-anim="draw" data-dur="0.15"/>
+    </svg>
+  </section>
+</section>
+
+<!-- 8. Seven years 22.43 to 24.97 -->
+<section class="k-scene dark" data-start="22.43" data-end="24.97">
+  <div class="k-canvas" data-cam='[[22.43,1,0,0],[24.97,1.07,0,0]]'>
+    <h1 class="k-title"><span class="line"><span class="w" data-in="22.43" data-anim="rise">Me after</span></span>
+      <span class="line"><em class="w" data-in="23.81" data-anim="blur">7 years</em></span></h1>
+    <div class="ph" style="left:310px; top:470px; width:460px; height:700px" data-in="22.43" data-anim="pop">
+      <div class="tag">PLACEHOLDER</div><div class="lab">YOUR PHYSIQUE</div><div class="sub">photo, face showing (parallax push)</div></div>
+  </div>
+</section>
+
+<!-- 10a. 27 (27.67 to 28.9) -->
+<section class="k-scene dark" data-start="27.67" data-end="28.9">
+  <h1 class="k-title"><span class="line">Just a</span><span class="line"><em>normal</em> guy</span></h1>
+  <img class="r3d" src="img/age_27.png" style="left:200px; top:470px; width:680px" data-in="28.11" data-anim="pop">
+</section>
+
+<!-- 10b, 10c, 11. B-roll placeholders, full frame (28.9 to 36.2) -->
+<section class="k-scene dark" data-start="28.9" data-end="30.7">
+  <div class="ph full"><div class="tag">PLACEHOLDER B-ROLL</div><div class="lab">YOU AT WORK</div><div class="sub">laptop, desk, work call or office</div></div></section>
+<section class="k-scene dark" data-start="30.7" data-end="32.5">
+  <div class="ph full"><div class="tag">PLACEHOLDER B-ROLL</div><div class="lab">YOU COACHING</div><div class="sub">form check, plan, check-ins or a call</div></div></section>
+<section class="k-scene dark" data-start="32.5" data-end="36.2">
+  <div class="ph full"><div class="tag">PLACEHOLDER B-ROLL</div><div class="lab">YOU TAKING INSULIN</div><div class="sub">insulin pen if you use one</div></div>
+  <div class="k-redbox" style="position:absolute; left:50%; top:330px; transform:translateX(-50%); font:700 46px Inter; letter-spacing:-0.03em; white-space:nowrap"
+    data-base="translateX(-50%)" data-in="32.6" data-anim="pop">Type 1 diabetic since age <span class="k-serif">12</span></div>
+</section>
+
+<!-- 13a, 13c. Timeline 38.5 to 43.27 (the FULL beat 40.77 to 41.87 is cut over it by compose) -->
+<section class="k-scene dark" data-start="38.5" data-end="43.27">
+  <h1 class="k-title"><span class="line">The <em>bulk</em></span><span class="line">so far</span></h1>
+  <div class="k-canvas" data-cam='[[38.5,1,0,0],[38.9,1,0,0],[40.6,1,-760,0]]'>
+    <div class="tl-line" style="left:90px; top:840px; width:1440px" data-in="38.5" data-anim="wipe" data-dur="2.0"></div>
+    <div class="tl-day" style="left:60px; top:880px" data-in="38.5" data-anim="rise">Day 1</div>
+    <div class="stem" style="left:270px; top:760px; height:80px" data-in="38.61" data-anim="fade"></div>
+    <div data-states='[[38.5,"plain"],[41.87,"done"]]'><div class="ph sm" style="left:180px; top:520px; width:180px; height:250px" data-in="38.61" data-anim="pop"><div class="tag">CLIP</div><div class="lab">TRAINING</div></div></div>
+    <div class="stem" style="left:500px; top:840px; height:80px" data-in="38.89" data-anim="fade"></div>
+    <div data-states='[[38.5,"plain"],[41.87,"done"]]'><div class="ph sm" style="left:410px; top:910px; width:180px; height:250px" data-in="38.89" data-anim="pop"><div class="tag">CLIP</div><div class="lab">EATING</div></div></div>
+    <div class="stem" style="left:740px; top:760px; height:80px" data-in="39.37" data-anim="fade"></div>
+    <div data-states='[[38.5,"plain"],[41.87,"done"]]'><div class="ph sm" style="left:650px; top:520px; width:180px; height:250px" data-in="39.37" data-anim="pop"><div class="tag">CLIP</div><div class="lab">TRAINING</div></div></div>
+    <div class="stem" style="left:980px; top:840px; height:80px" data-in="39.59" data-anim="fade"></div>
+    <div data-states='[[38.5,"plain"],[41.87,"done"]]'><div class="ph sm" style="left:890px; top:910px; width:180px; height:250px" data-in="39.59" data-anim="pop"><div class="tag">CLIP</div><div class="lab">EATING</div></div></div>
+    <div class="stem" style="left:1220px; top:760px; height:80px" data-in="39.97" data-anim="fade"></div>
+    <div data-states='[[38.5,"plain"],[41.87,"done"]]'><div class="ph sm" style="left:1130px; top:520px; width:180px; height:250px" data-in="39.97" data-anim="pop"><div class="tag">CLIP</div><div class="lab">TRAINING</div></div></div>
+    <div class="dot" style="left:1513px; top:825px" data-in="40.41" data-anim="pop"></div>
+    <div class="tl-day" style="left:1400px; top:880px; color:#fff" data-in="40.41" data-anim="rise">Day 60, <span class="k-serif" style="font-size:40px">today</span></div>
+    <!-- 13c: REC card at the dot, dashed line on past today -->
+    <div class="ph sm" style="left:1440px; top:520px; width:180px; height:250px; border-color:#E0102A" data-in="42.0" data-anim="pop"><div class="tag" style="color:#E0102A">NEXT</div><div class="lab">FROM TODAY</div></div>
+    <div class="rec" style="left:1478px; top:470px" data-states='[[0,"hidden"],[42.18,"plain"],[42.55,"hidden"],[42.72,"plain"],[43.05,"hidden"],[43.15,"plain"]]'>● REC</div>
+    <div class="tl-dash" style="left:1550px; top:840px; width:520px" data-in="42.72" data-anim="wipe" data-dur="0.5"></div>
+  </div>
+</section>
+
+<!-- 14. Carousel 43.27 to 45.53: the card grows, then one card per word -->
+<section class="k-scene dark" data-start="43.27" data-end="45.53">
+  <h1 class="k-title"><span class="line"><span class="w" data-in="43.49" data-anim="rise">Training.</span> <span class="w" data-in="44.27" data-anim="rise">Food.</span></span>
+    <span class="line"><em class="w" data-in="44.81" data-anim="blur">Supplements.</em></span></h1>
+  <div class="k-canvas" data-cam='[[43.27,0.55,0,-60],[43.45,1,0,0],[44.17,1,0,0],[44.37,1,-470,0],[44.71,1,-470,0],[44.91,1,-940,0]]' data-camblur="1">
+    <div class="ph" style="left:330px; top:520px; width:420px; height:620px; border-color:#E0102A" data-states='[[43.27,"plain"],[44.27,"blur"]]'><div class="tag">PLACEHOLDER</div><div class="lab">TRAINING</div><div class="sub">photo or clip</div></div>
+    <div class="ph" style="left:800px; top:520px; width:420px; height:620px" data-states='[[43.27,"blur"],[44.27,"plain"],[44.81,"blur"]]'><div class="tag">PLACEHOLDER</div><div class="lab">FOOD</div><div class="sub">meal photo or clip</div></div>
+    <div class="ph" style="left:1270px; top:520px; width:420px; height:620px" data-states='[[43.27,"blur"],[44.81,"plain"]]'><div class="tag">PLACEHOLDER</div><div class="lab">SUPPLEMENTS</div><div class="sub">your supplements</div></div>
+  </div>
+</section>
+
+<!-- 15. Up and down graphs 45.53 to 47.8 -->
+<section class="k-scene dark" data-start="45.53" data-end="47.8">
+  <h1 class="k-title"><span class="line">The <em>good</em> days</span><span class="line">and the bad</span></h1>
+  <div class="k-card gcard" style="left:70px; top:520px; width:455px; height:560px" data-in="45.6" data-anim="pop">
+    <svg width="455" height="560" viewBox="0 0 455 560">
+      <line x1="50" y1="60" x2="50" y2="490" stroke="#3a3a3a" stroke-width="2"/><line x1="50" y1="490" x2="420" y2="490" stroke="#3a3a3a" stroke-width="2"/>
+      <path d="M60 450 C 150 430, 200 380, 260 300 S 360 130, 410 90" fill="none" stroke="#22C55E" stroke-width="9" stroke-linecap="round"
+        style="filter:drop-shadow(0 0 14px rgba(34,197,94,.55))" data-in="45.86" data-anim="draw" data-dur="0.5"/>
+    </svg></div>
+  <div class="k-card gcard" style="left:555px; top:520px; width:455px; height:560px" data-in="46.62" data-anim="pop">
+    <svg width="455" height="560" viewBox="0 0 455 560">
+      <line x1="50" y1="60" x2="50" y2="490" stroke="#3a3a3a" stroke-width="2"/><line x1="50" y1="490" x2="420" y2="490" stroke="#3a3a3a" stroke-width="2"/>
+      <path d="M60 110 C 150 120, 200 170, 250 270 S 350 440, 410 460" fill="none" stroke="#E0102A" stroke-width="9" stroke-linecap="round"
+        style="filter:drop-shadow(0 0 14px rgba(224,16,42,.6))" data-in="46.78" data-anim="draw" data-dur="0.5"/>
+    </svg></div>
+</section>
+
+<!-- 16. How long 47.8 to 50.6: back on the timeline, past today -->
+<section class="k-scene dark" data-start="47.8" data-end="50.6">
+  <h1 class="k-title"><span class="line"><span class="w" data-in="47.8" data-anim="rise">How</span> <span class="w" data-in="48.14" data-anim="rise">long</span> <span class="w" data-in="48.34" data-anim="rise">will</span></span>
+    <span class="line"><span class="w" data-in="48.48" data-anim="rise">it</span> <em class="w" data-in="48.64" data-anim="blur">take?</em></span></h1>
+  <div class="k-canvas" data-cam='[[47.8,1,-760,0],[49.05,1,-760,0],[49.4,1,-1200,0],[49.95,1,-1200,0],[50.3,1,-1640,0]]'>
+    <div class="tl-line" style="left:90px; top:840px; width:1440px"></div>
+    <div class="ph sm" style="left:1130px; top:520px; width:180px; height:250px; opacity:.55"><div class="tag">CLIP</div><div class="lab">TRAINING</div></div>
+    <div class="stem" style="left:1220px; top:760px; height:80px"></div>
+    <div class="dot" style="left:1513px; top:825px"></div>
+    <div class="tl-day" style="left:1400px; top:880px; color:#fff">Day 60, <span class="k-serif" style="font-size:40px">today</span></div>
+    <div class="ph sm" style="left:1440px; top:520px; width:180px; height:250px; border-color:#E0102A"><div class="tag" style="color:#E0102A">NEXT</div><div class="lab">FROM TODAY</div></div>
+    <div class="rec" style="left:1478px; top:470px">● REC</div>
+    <div class="tl-dash" style="left:1550px; top:840px; width:1900px"></div>
+    <div class="stem" style="left:2030px; top:760px; height:80px" data-in="49.25" data-anim="fade"></div>
+    <div class="qtag" style="left:1920px; top:680px" data-in="49.25" data-anim="pop">6 months?</div>
+    <div class="stem" style="left:2460px; top:840px; height:80px" data-in="50.11" data-anim="fade"></div>
+    <div class="qtag" style="left:2370px; top:930px" data-in="50.11" data-anim="pop">1 year?</div>
+    <div class="fade-r" style="left:2800px"></div>
+  </div>
+</section>
+
+<!-- 18. Side by side 51.3 to 53.67 -->
+<section class="k-scene dark" data-start="51.3" data-end="53.67">
+  <h1 class="k-title"><span class="line"><span class="w" data-in="51.3" data-anim="rise">Until</span> <span class="w" data-in="52.64" data-anim="rise">I</span> <span class="w" data-in="52.8" data-anim="rise">look</span></span>
+    <span class="line"><span class="w" data-in="53.1" data-anim="rise">like</span> <em class="w" data-in="53.36" data-anim="blur">him</em></span></h1>
+  <div class="ph" style="left:90px; top:500px; width:430px; height:660px" data-in="51.38" data-anim="pop">
+    <div class="tag">PLACEHOLDER</div><div class="lab">YOU</div><div class="sub">physique photo, face showing</div></div>
+  <div class="glow" style="left:556px; top:496px; width:438px; height:668px" data-in="53.36" data-anim="fade" data-dur="0.25"></div>
+  <div class="ph" style="left:560px; top:500px; width:430px; height:660px" data-in="53.36" data-anim="pop">
+    <div class="tag">PLACEHOLDER</div><div class="lab">TOJI</div><div class="sub">photo or clip</div></div>
+</section>
+
+<!-- 19. Silent end card 53.67 to 55.67 -->
+<section class="k-scene dark" data-start="53.67" data-end="55.67">
+  <h1 class="k-title" style="top:760px; font-size:104px"><span class="line w" data-in="53.67" data-anim="rise">Follow me on</span>
+    <span class="line" style="margin-top:22px"><span class="k-redbox w" data-in="53.9" data-anim="pop">this <em>journey</em></span></span></h1>
+</section>
+
+<script src="kallaway.js"></script>
+</body></html>

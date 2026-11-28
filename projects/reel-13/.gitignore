@@ -19,3 +19,4 @@ __pycache__/
 work/*.log
 *.mbtree
 *.log.mbtree
+work/**/*.log
