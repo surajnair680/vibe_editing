@@ -327,6 +327,14 @@ Other docs and when to read them: `docs/README.md`.
   yet, as in reel-17's panel-behind-body + HDR), build the proxy from the render instead:
   `make_proxy.py projects/<name> --src out/<name>-v1.mp4 --voice work/audio/full.wav`. Trims then play with the
   effects. Once the edit has real cuts the render no longer maps to source time, so say plainly which it is. [r17]
+- **Kallaway planning: real B-roll beats motion graphics for "who I am" lines; every list item gets a visual.**
+  On reel-13's Kallaway plan he asked for pictures, not text-only pills, on both lists: the three excuses got one
+  glossy 3D Codex render each (DNA cracking red, spinning clock, syringe + question mark; prompt and style line in
+  `projects/reel-13/work/plan/codex_excuses.sh`), and for "I work full time in tech, and I'm also a fitness coach"
+  he wanted his own B-roll full screen ("gives more connection than just motion graphics"). Plan personal facts as
+  type-20 B-roll from the start and ask for the clips with the plan. Hook: he wanted only two assets (him, then
+  Toji), not a card per word. The planning table as a page with a Kallaway reference frame and a frame of his cut
+  per row worked well for review: `projects/reel-13/work/plan/build_plan_page.py`. [r13]
 
 ## 2. Remaking a reference edit shot for shot [r03]
 - **Measure the reference frame by frame.** `select='gt(scene,0.12)'` gives a first cut list; busy parts need sheets of
