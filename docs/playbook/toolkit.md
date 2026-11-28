@@ -12,6 +12,7 @@ When a new skill, tool, kit or proven recipe is added to the repo, add a line he
 | Footage / ask | Skill |
 |---|---|
 | Him talking to camera, reply or reaction reels, podcasts, tutorials | `vibe-talking-head` (cuts, captions, punch-ins, B-roll) |
+| Education reel in the Kallaway look: top title, one graphic per line, him in a bottom strip with his head popping out, full-screen beats between | `edit-like-kallawaymarketing` (22 scene types, panel kit + `kit/compose.py`; cut with `vibe-talking-head` first) |
 | Vlog, day in my life, travel, camcorder REC look | `vibe-mini-vlog` (overlay pack, vertical) |
 | AI clips (Veo, Sora, Kling, Flow) or a faceless video | `vibe-ai-footage` |
 | Promo, launch, course, ad with variants | `vibe-launch-ads`, `launch-video` |

@@ -1,0 +1,71 @@
+/* Kallaway-style panel kit. 1080x1920. Fonts are local (copy assets/fonts next to the page as fonts/). */
+@font-face { font-family: "Inter"; src: url("fonts/Inter-Variable.ttf") format("truetype"); font-weight: 100 900; }
+@font-face { font-family: "ISerif"; src: url("fonts/InstrumentSerif-Italic.ttf") format("truetype"); font-style: italic; }
+
+:root {
+  --red-box: #8D0003; --red: #A5000A; --red-glow: rgba(224, 16, 42, .4);
+  --green: #22C55E; --yellow: #F5C518; --magenta: #D946EF;
+  --ink: #111; --card-dark: #121212; --line-dark: #2A2A2A;
+}
+* { box-sizing: border-box; margin: 0; padding: 0; }
+html, body { width: 1080px; height: 1920px; overflow: hidden; background: #050505; }
+body { font-family: "Inter", sans-serif; color: #fff; -webkit-font-smoothing: antialiased; }
+
+/* a scene fills the frame; only the active one is visible (kallaway.js) */
+.k-scene { position: absolute; inset: 0; overflow: hidden; display: none; }
+.k-scene.dark  { background: #070707 url("bg/bg-dark.png") center/cover; color: #fff; }
+.k-scene.light { background: #E2E2E1 url("bg/bg-light.png") center/cover; color: var(--ink); }
+
+/* the camera: everything inside moves together (data-cam keyframes) */
+.k-canvas { position: absolute; inset: 0; transform-origin: 540px 800px; }
+
+/* the speaker strip area is left empty: compose.py pastes the strip + pop-out there (y 1403 down) */
+.k-strip-guide { position: absolute; left: 68px; top: 1403px; width: 944px; height: 600px; border-radius: 50px;
+  outline: 2px dashed rgba(255, 0, 0, .5); display: none; }
+body.guides .k-strip-guide { display: block; }
+
+/* title: top third, 2 lines, centred */
+.k-title { position: absolute; left: 60px; right: 60px; top: 170px; text-align: center; font-weight: 800;
+  font-size: 92px; line-height: .95; letter-spacing: -0.045em; }
+.k-title .line { display: block; }
+.k-title em, .k-serif { font-family: "ISerif", serif; font-style: italic; font-weight: 400; letter-spacing: -0.01em;
+  font-size: 1.1em; }
+.k-title .small { font-size: .62em; }
+.k-title .huge { font-size: 1.45em; font-weight: 900; text-transform: uppercase; }
+.k-title .w { display: inline-block; }
+.k-redbox { display: inline-block; background: var(--red-box); color: #fff; padding: 2px 22px 8px; border-radius: 8px; }
+.k-underline { position: relative; display: inline-block; }
+.k-underline::after { content: ""; position: absolute; left: 12%; right: 12%; bottom: -12px; height: 5px; background: var(--red);
+  transform-origin: left; transform: scaleX(var(--u, 1)); }
+
+/* cards */
+.k-card { position: absolute; border-radius: 22px; overflow: hidden; }
+.dark .k-card { background: var(--card-dark); border: 1px solid var(--line-dark); box-shadow: 0 0 40px rgba(255,255,255,.06); }
+.light .k-card { background: #fff; box-shadow: 0 12px 40px rgba(0,0,0,.12); }
+.k-thumb { position: absolute; border-radius: 14px; border: 2px solid rgba(255,255,255,.9); overflow: visible; background-size: cover; background-position: center; }
+.light .k-thumb { border-color: #fff; box-shadow: 0 8px 24px rgba(0,0,0,.15); }
+.k-views { position: absolute; left: 50%; transform: translateX(-50%); bottom: -44px; padding: 4px 14px; border-radius: 99px;
+  font: 700 22px "Inter"; background: #16a34a; color: #fff; white-space: nowrap; }
+
+/* chapter tracker rows */
+.k-row { position: absolute; left: 170px; width: 740px; height: 130px; border-radius: 10px; background: linear-gradient(180deg,#1a1a1a,#0d0d0d);
+  border: 1px solid #2a2a2a; display: flex; align-items: center; gap: 44px; padding-left: 34px; font: 700 50px "Inter";
+  letter-spacing: -0.03em; color: #fff; }
+.k-row::before { content: ""; position: absolute; left: 0; top: 0; bottom: 0; width: 6px; border-radius: 10px 0 0 10px; background: var(--red); }
+.k-row .num { color: #ddd; }
+
+/* pills */
+.k-pill { position: absolute; padding: 10px 26px; border-radius: 99px; font: 600 30px "Inter"; white-space: nowrap; }
+.dark .k-pill { background: #161616; border: 1px solid #333; color: #fff; }
+.light .k-pill { background: #111; color: #fff; }
+.k-pill.outline { background: transparent; border: 2px solid currentColor; }
+
+/* script doc lines */
+.k-doc { padding: 54px 46px; }
+.k-doc .hd { font: italic 400 44px "ISerif"; text-align: center; margin-bottom: 26px; color: #ddd; }
+.k-doc .ln { height: 14px; border-radius: 7px; background: #555; margin: 0 0 20px 34px; transform-origin: left; position: relative; }
+.k-doc .ln i { position: absolute; left: -34px; top: -2px; width: 18px; height: 18px; border-radius: 3px; background: currentColor; }
+.k-doc .lab { font: 700 22px "Inter"; color: #fff; margin: 6px 0 12px; }
+
+svg.k-svg { position: absolute; overflow: visible; }
+.k-glow-red { filter: drop-shadow(0 0 24px var(--red-glow)); }

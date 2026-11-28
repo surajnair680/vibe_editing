@@ -1,0 +1,94 @@
+<!doctype html>
+<html><head><meta charset="utf-8"><meta name="viewport" content="width=1080">
+<title>Kallaway-style kit demo (15 s)</title>
+<link rel="stylesheet" href="kallaway.css">
+<style>
+  .thumbA { background: linear-gradient(160deg,#3b4a5a,#0e1620); } .thumbB { background: linear-gradient(160deg,#6b3b2a,#1d0e08); }
+  .thumbC { background: linear-gradient(160deg,#2f5d46,#0a1a12); } .thumbD { background: linear-gradient(160deg,#4b3b6b,#120a20); }
+  .thumbE { background: linear-gradient(160deg,#7a6a3a,#201a08); } .thumbF { background: linear-gradient(160deg,#355a7a,#08121e); }
+  .k-thumb::after { content: ""; position: absolute; left: 30%; top: 22%; width: 40%; height: 40%; border-radius: 50%;
+    background: rgba(255,255,255,.18); }
+</style>
+</head>
+<body>
+<div class="k-strip-guide"></div>
+
+<!-- A. Word-by-word hook + script doc (0 to 3.0 s) -->
+<section class="k-scene dark" data-start="0" data-end="3.0">
+  <div class="k-canvas" data-cam='[[0,1,0,0],[2.2,1,0,0],[2.9,1.12,0,40]]'>
+    <h1 class="k-title">
+      <span class="line"><span class="w" data-in="0" data-anim="rise">How</span> <span class="w" data-in="0.25" data-anim="rise">To</span>
+        <span class="w" data-in="0.45" data-anim="rise">Write</span> <span class="w" data-in="0.6" data-anim="rise">A</span></span>
+      <span class="line"><em class="w" data-in="0.8" data-anim="blur">Viral</em> <span class="w" data-in="1.05" data-anim="rise">Hook</span></span>
+    </h1>
+    <div class="k-card k-doc" style="left:250px; top:500px; width:580px; height:700px; color:var(--red)" data-in="0.2" data-anim="pop">
+      <div class="hd">Script</div>
+      <div class="lab">Hook</div>
+      <div class="ln" style="width:92%; background:var(--red)" data-in="1.2" data-anim="wipe"><i></i></div>
+      <div class="ln" style="width:80%; background:var(--red)" data-in="1.3" data-anim="wipe"><i></i></div>
+      <div class="lab" style="margin-top:26px">Body</div>
+      <div class="ln" style="width:88%" data-in="1.5" data-anim="wipe"></div>
+      <div class="ln" style="width:70%" data-in="1.55" data-anim="wipe"></div>
+      <div class="ln" style="width:84%" data-in="1.6" data-anim="wipe"></div>
+      <div class="ln" style="width:76%" data-in="1.65" data-anim="wipe"></div>
+      <div class="ln" style="width:90%" data-in="1.7" data-anim="wipe"></div>
+      <div class="lab" style="margin-top:26px">CTA</div>
+      <div class="ln" style="width:60%; background:var(--green); color:var(--green)" data-in="1.9" data-anim="wipe"><i></i></div>
+    </div>
+  </div>
+</section>
+
+<!-- B. Chapter tracker, pill list (3.0 to 7.0 s) -->
+<section class="k-scene dark" data-start="3.0" data-end="7.0">
+  <h1 class="k-title" style="top:280px"><span class="line">The Triple Hook</span><span class="line"><em>Method</em></span></h1>
+  <div class="k-row" style="top:560px"  data-states='[[0,"blur"],[3.5,"on"],[5.2,"done"]]'><span class="num">01</span>The Context</div>
+  <div class="k-row" style="top:730px"  data-states='[[0,"blur"],[5.2,"on"]]'><span class="num">02</span>The Lean</div>
+  <div class="k-row" style="top:900px"  data-states='[[0,"blur"]]'><span class="num">03</span>The Snapback</div>
+</section>
+
+<!-- C. Light proof grid with a camera push and a red hand-drawn circle (7.0 to 10.0 s) -->
+<section class="k-scene light" data-start="7.0" data-end="10.0">
+  <div class="k-canvas" data-cam='[[7.0,1,0,0],[8.9,1,0,0],[9.4,1.55,-250,-180]]' data-camblur="1">
+    <h1 class="k-title" style="top:150px"><span class="line small">This New Type Of Content</span>
+      <span class="line"><span class="k-redbox">Is Going <em>Viral</em></span></span></h1>
+    <div class="k-thumb thumbA" style="left:150px; top:470px; width:230px; height:330px" data-in="7.1" data-anim="pop"><div class="k-views">4.1M</div></div>
+    <div class="k-thumb thumbB" style="left:425px; top:470px; width:230px; height:330px" data-in="7.16" data-anim="pop"><div class="k-views">3.3M</div></div>
+    <div class="k-thumb thumbC" style="left:700px; top:470px; width:230px; height:330px" data-in="7.22" data-anim="pop"><div class="k-views">1.6M</div></div>
+    <div class="k-thumb thumbD" style="left:150px; top:860px; width:230px; height:330px" data-in="7.28" data-anim="pop"><div class="k-views">3.4M</div></div>
+    <div class="k-thumb thumbE" style="left:425px; top:860px; width:230px; height:330px" data-in="7.34" data-anim="pop"><div class="k-views">1.1M</div></div>
+    <div class="k-thumb thumbF" style="left:700px; top:860px; width:230px; height:330px" data-in="7.40" data-anim="pop"><div class="k-views">2.4M</div></div>
+    <svg class="k-svg" style="left:660px; top:430px" width="320" height="420" viewBox="0 0 320 420">
+      <path d="M160 18 C 290 14, 312 140, 300 250 C 290 360, 220 404, 150 400 C 60 396, 14 320, 16 210 C 18 90, 70 30, 175 26"
+        fill="none" stroke="#A5000A" stroke-width="7" stroke-linecap="round" data-in="9.45" data-anim="draw"/>
+    </svg>
+  </div>
+</section>
+
+<!-- D. Graph card: red drop vs green (10.0 to 12.5 s) -->
+<section class="k-scene dark" data-start="10.0" data-end="12.5">
+  <h1 class="k-title" style="top:280px; font-size:64px"><span class="line">Delaying Context =</span><span class="line"><span class="k-underline" data-in="10.3" data-anim="underline">Higher Skip Rates</span></span></h1>
+  <div class="k-card" style="left:140px; top:520px; width:800px; height:600px" data-in="10.05" data-anim="pop">
+    <svg width="800" height="600" viewBox="0 0 800 600">
+      <line x1="80" y1="60" x2="80" y2="520" stroke="#444" stroke-width="2"/><line x1="80" y1="520" x2="740" y2="520" stroke="#444" stroke-width="2"/>
+      <line x1="80" y1="190" x2="740" y2="190" stroke="#2a2a2a" stroke-width="1"/><line x1="80" y1="355" x2="740" y2="355" stroke="#2a2a2a" stroke-width="1"/>
+      <path d="M90 90 C 200 110, 380 200, 720 230" fill="none" stroke="#22C55E" stroke-width="6" stroke-linecap="round" data-in="10.5" data-anim="draw"/>
+      <path class="k-glow-red" d="M90 90 C 130 330, 220 470, 720 500" fill="none" stroke="#E0102A" stroke-width="6" stroke-linecap="round" data-in="11.1" data-anim="draw"/>
+      <text x="410" y="570" fill="#bbb" font-family="Inter" font-weight="600" font-size="26" text-anchor="middle">Skip rate</text>
+    </svg>
+  </div>
+</section>
+
+<!-- E. CTA lead magnet (12.5 to 15.0 s) -->
+<section class="k-scene light" data-start="12.5" data-end="15.0">
+  <h1 class="k-title" style="top:170px"><span class="line"><span class="w" data-in="12.5" data-anim="rise">Comment</span> <em class="w" data-in="12.75" data-anim="blur">"Hooks"</em></span>
+    <span class="line"><span class="k-redbox w" data-in="13.0" data-anim="pop">To Get The Doc</span></span></h1>
+  <div class="k-card" style="left:170px; top:520px; width:220px; height:290px" data-in="13.2" data-anim="pop"></div>
+  <div class="k-card" style="left:430px; top:520px; width:220px; height:290px" data-in="13.27" data-anim="pop"></div>
+  <div class="k-card" style="left:690px; top:520px; width:220px; height:290px" data-in="13.34" data-anim="pop"></div>
+  <div class="k-card" style="left:170px; top:850px; width:220px; height:290px" data-in="13.41" data-anim="pop"></div>
+  <div class="k-card" style="left:430px; top:850px; width:220px; height:290px" data-in="13.48" data-anim="pop"></div>
+  <div class="k-card" style="left:690px; top:850px; width:220px; height:290px" data-in="13.55" data-anim="pop"></div>
+</section>
+
+<script src="kallaway.js"></script>
+</body></html>
