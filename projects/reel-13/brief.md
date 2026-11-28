@@ -32,7 +32,7 @@ Times are rough cut v2 edit times. SPLIT = graphic on top, him in the strip. FUL
 | 13b | 40.77-41.87 | "but from today," | FULL | 21 | Turn beat (keeps every graphics run under about 10 s, skill rhythm rule). |
 | 13c | 41.87-43.27 | "I'm filming all of it." | SPLIT | 16 line path | Same timeline where 13a stopped. Old clips dim; at the red dot a new empty card with a blinking REC badge; the line draws on past today as a dashed line (approved 2026-11-28). |
 | 14 | 43.27-45.53 | "Training, food, supplements" | SPLIT | 18 carousel | The REC card grows to fill the middle and becomes the carousel, one card per word. Real photos. |
-| 15 | 45.53-47.80 | "The wins and the days it goes wrong." | SPLIT | 9 before / after | Two cards: "*Wins*" (green) and "*Bad days*" (red). |
+| 15 | 45.53-47.80 | "The wins and the days it goes wrong." | SPLIT | 10 graph | No words (user, 2026-11-28): two graph cards side by side, green line climbs on "the wins", red line drops on "the days it goes wrong". Code-drawn, no axis numbers. Alt offered: one line that climbs green then dips red. |
 | 16 | 47.80-50.60 | "How long will it take? Six months? A year?" | SPLIT | 16 line path | Same dashed line further past today; "6 months?" then "1 year?" tags pop. |
 | 17 | 50.60-51.30 | "I don't know," | FULL | 21 | Shrug beat. |
 | 18 | 51.30-53.67 | "but I'm not stopping until I look like him" | SPLIT | 9 side by side | Title "Until I look like *him*". Him now on the left, Toji on the right. Ends here. |
