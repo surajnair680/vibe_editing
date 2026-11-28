@@ -335,6 +335,14 @@ Other docs and when to read them: `docs/README.md`.
   type-20 B-roll from the start and ask for the clips with the plan. Hook: he wanted only two assets (him, then
   Toji), not a card per word. The planning table as a page with a Kallaway reference frame and a frame of his cut
   per row worked well for review: `projects/reel-13/work/plan/build_plan_page.py`. [r13]
+- **Kallaway look on his vertical room footage: two compositing fixes (reel-13).** (1) The kit's FULL caption
+  height (y 1165) lands on his nose: his face and beard fill the middle and the handheld mic sits on the chest, so
+  FULL captions go on the wall above his head (`full.caption_y` 400 in `projects/reel-13/work/kal/compose.py`).
+  (2) u2net also mattes the wall photo frame and lamp behind him, which pop out above the strip as a square. Limit
+  the pop-out to 66 px above the strip and to dark (hair) pixels only (`popout_limit`, `popout_dark` in the same
+  file). Check the strip top edge at full size on several stills before sending. Placeholders: dashed grey cards
+  labelled with the asset (`.ph` in `projects/reel-13/mg/panel/index.html`) let him approve layout and timing
+  before he sends any footage; he asked for this ("use a placeholder frame"). [r13]
 
 ## 2. Remaking a reference edit shot for shot [r03]
 - **Measure the reference frame by frame.** `select='gt(scene,0.12)'` gives a first cut list; busy parts need sheets of
