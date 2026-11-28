@@ -65,6 +65,9 @@ ROWS = [
  (51.30, 53.67, "but I'm not stopping until I look like him", "SPLIT", "9 Side by side",
   "Title <b>Until I look like</b> <i>him</i>. You on the left, Toji on the right. The reel ends here.",
   "09-before-after/09_s008_012.30.jpg", "Your physique photo, Toji image"),
+ (53.67, 55.67, "(silent)", "CARD", "22 CTA card",
+  "Silent end card, no strip: title <b>Follow me on this</b> / <i>journey</i>, with the key line in the red box. Music carries on under it and lands a soft hit as it appears.",
+  "22-cta/01_s044_124.52.jpg", ""),
 ]
 
 def thumb(img, w=216):
@@ -75,6 +78,10 @@ def thumb(img, w=216):
 def frame_at(t):
     raw = subprocess.run(["ffmpeg", "-v", "error", "-ss", f"{t:.2f}", "-i", str(CUT), "-frames:v", "1",
                           "-vf", "scale=216:-2", "-f", "image2pipe", "-vcodec", "png", "-"], capture_output=True).stdout
+    if not raw:  # past the end of the cut (the new end card)
+        from PIL import ImageDraw
+        im = Image.new("RGB", (216, 384), (8, 8, 8)); ImageDraw.Draw(im).text((62, 185), "not in the cut yet", fill=(150, 150, 150))
+        return thumb(im)
     return thumb(Image.open(io.BytesIO(raw)))
 
 def ts(t):
@@ -116,7 +123,7 @@ h1 i {{ font-family:var(--serif); font-weight:400; }}
 .stats {{ display:flex; flex-wrap:wrap; gap:8px 18px; color:var(--dim); font-size:13px; font-variant-numeric:tabular-nums; }}
 .stats b {{ color:var(--fg); }}
 .bar {{ display:flex; height:14px; border-radius:7px; overflow:hidden; gap:2px; }}
-.seg.split {{ background:#3a3a3a; }} .seg.full {{ background:var(--red); }} .seg.broll {{ background:var(--green); }}
+.seg.split {{ background:#3a3a3a; }} .seg.full {{ background:var(--red); }} .seg.broll {{ background:var(--green); }} .seg.card {{ background:#f2f2f2; }}
 .key {{ display:flex; flex-wrap:wrap; gap:8px 16px; font-size:12px; color:var(--dim); }}
 .key span::before {{ content:""; display:inline-block; width:10px; height:10px; border-radius:3px; margin-right:6px; vertical-align:-1px; }}
 .key .k1::before {{ background:#3a3a3a; }} .key .k2::before {{ background:var(--red); }} .key .k3::before {{ background:var(--green); }}
@@ -145,6 +152,7 @@ figcaption {{ font-size:11px; color:var(--dim); margin-top:5px; text-align:cente
 </style>
 <div class="wrap">
   <h1>Reel-13 <i>planning table</i></h1>
+  <p class="lede"><b style="color:var(--green)">Approved 28 Nov 2026.</b> Waiting for footage.</p>
   <p class="lede">Bulking series, episode 0, cut in the Kallaway look. One row per line of the approved rough cut (v2). Each row has the scene type from the skill, a frame from a real Kallaway reel showing that type, and your cut as it looks now at that moment.</p>
   <div class="stats"><span><b>{tot:.1f} s</b> long</span><span><b>{len(ROWS)}</b> scenes</span>
     <span>Graphics (SPLIT) <b>{split / tot:.0%}</b></span><span>Full screen, you or B-roll <b>{full / tot:.0%}</b></span>
@@ -153,7 +161,7 @@ figcaption {{ font-size:11px; color:var(--dim); margin-top:5px; text-align:cente
   <div class="key"><span class="k1">SPLIT: graphic on top, you in the strip</span><span class="k2">FULL: you full screen</span><span class="k3">B-ROLL: your footage full screen</span></div>
   {''.join(rows_html)}
   <section class="notes"><h2>Open questions</h2><ul>
-    <li>No call to action in the script. Default: end on row 20. Option: a 1.5 s silent card, Follow for <i>episode 1</i>.</li>
+    <li>End: a 2 s silent card, Follow me on this <i>journey</i> (decided).</li>
     <li>In FULL beats the caption sits at chest height, near your mic. I'll check it on the stills.</li>
     <li>Sound: a real recorded sound on every pop, pill and slide, plus a low dark music bed from 0:00 kept well under your voice.</li>
   </ul></section>

@@ -9,7 +9,7 @@
 - Voice: his own (ElevenLabs isolated, `assets/el/voice_isolated.mp3`). Captions: one word, Inter Bold.
 - Music: low dark bed from 0:00, ducked about 18 dB under the voice. Openverse SFX per the cue sheet.
 
-## Planning doc (draft v1, waiting for approval)
+## Planning doc (approved 2026-11-28)
 Times are rough cut v2 edit times. SPLIT = graphic on top, him in the strip. FULL = him full screen.
 
 | # | time | spoken | layout | type | on screen |
@@ -35,12 +35,14 @@ Times are rough cut v2 edit times. SPLIT = graphic on top, him in the strip. FUL
 | 15 | 45.53-47.80 | "The wins and the days it goes wrong." | SPLIT | 10 graph | No words (user, 2026-11-28): two graph cards side by side, green line climbs on "the wins", red line drops on "the days it goes wrong". Code-drawn, no axis numbers. Alt offered: one line that climbs green then dips red. |
 | 16 | 47.80-50.60 | "How long will it take? Six months? A year?" | SPLIT | 16 line path | Same dashed line further past today; "6 months?" then "1 year?" tags pop. |
 | 17 | 50.60-51.30 | "I don't know," | FULL | 21 | Shrug beat. |
-| 18 | 51.30-53.67 | "but I'm not stopping until I look like him" | SPLIT | 9 side by side | Title "Until I look like *him*". Him now on the left, Toji on the right. Ends here. |
+| 18 | 51.30-53.67 | "but I'm not stopping until I look like him" | SPLIT | 9 side by side | Title "Until I look like *him*". Him now on the left, Toji on the right. Then the end card. |
+| 19 | 53.67-55.67 | (silent) | CARD | 22 CTA card | "Follow me on this *journey*", key line in the red box, music under it, soft hit. |
 
 Screen time: SPLIT 78 %, FULL 22 %. Longest graphics run 9.6 s. Visual planning table with a Kallaway reference frame per row: https://claude.ai/artifact/PoALZah5AsG68BxrEo3stx (`work/plan/build_plan_page.py`).
 
-## Open questions
-- Ending: the script has no call to action. Default: end on row 18. Option: a 1.5 s silent card "Follow for *episode 1*".
+## Decisions
+- Ending (user, 2026-11-28): a 2 s silent card "Follow me on this *journey*" after row 18 (CTA card style, music under it, soft hit). Reel length about 55.7 s.
+- Planning doc approved 2026-11-28 ("Everything else is fine as discussed").
 - Caption height: he holds the mic at chest height; in SPLIT the caption sits above the strip so it is clear,
   in FULL it sits around y 1165, which may hit the mic. Check at the stills step.
 
@@ -77,6 +79,6 @@ Screen time: SPLIT 78 %, FULL 22 %. Longest graphics run 9.6 s. Visual planning 
 | 0.0-53.7 | music | low dark bed, ducked 18 dB under voice | |
 
 ## Sign-off checklist
-- [ ] planning doc approved
+- [x] planning doc approved (2026-11-28)
 - [ ] assets in
 - [ ] stills approved (contact sheet)
