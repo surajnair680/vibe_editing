@@ -18,8 +18,8 @@ Times are rough cut v2 edit times. SPLIT = graphic on top, him in the strip. FUL
 | 2 | 2.90-4.70 | "This is Toji Fushiguro." | SPLIT | 8 annotated example | Title "This is *Toji Fushiguro*". Toji image card in the centre, slow push in. |
 | 3 | 4.70-9.57 | "Wide back, arms like carved stone, and a V-taper so sharp it looks fake." | SPLIT | 8 annotated example | Same card. Red arrows and labels pop on each phrase: "Wide back", "Arms like stone", "V-taper". "Looks fake" in a red box. |
 | 4 | 9.57-13.00 | "But whenever I tell people they can build a body like this," | FULL | 21 | Snap back. One-word captions. |
-| 5 | 13.00-19.80 | "I hear the same three excuses. I don't have the genetics. I don't have the time. It's not possible naturally." | SPLIT | 5a tracker pills | Title "The *3 Excuses*". Three pills, blurred until spoken: 1 "Bad genetics", 2 "No time", 3 "Not natural". Each lights with the red tab on its line. |
-| 6 | 19.80-20.80 | "So I am going to show you" | SPLIT | 5a | All three pills get a red line through them, one after another. |
+| 5 | 13.00-19.80 | "I hear the same three excuses. I don't have the genetics. I don't have the time. It's not possible naturally." | SPLIT | 5a tracker + visuals | Title "The *3 Excuses*", pills in a compact row under it (red tab on the current one). One big visual per excuse, hard cut on its line (user asked for visuals, 2026-11-28): glowing DNA strand that turns red and cracks, clock with spinning hands, syringe with a question mark. Glossy 3D on black with red light (Codex). |
+| 6 | 19.80-20.80 | "So I am going to show you" | SPLIT | 5a | The three visuals shrink into a row; a red line strikes through each one. |
 | 7 | 20.80-22.43 | "what is possible" | FULL | 21 | Caption "possible" in serif. |
 | 8 | 22.43-24.97 | "This is me after seven years of training." | SPLIT | 8 annotated example | Title "*7 years* of training". His physique photo (face showing) with a slow parallax push. |
 | 9 | 24.97-27.67 | "Decent, but I'm not a genetic freak." | FULL | 21 | Honest beat, his face. |
@@ -47,6 +47,7 @@ Screen time: SPLIT 78 %, FULL 22 %. Longest graphics run 9.6 s. Visual planning 
 |---|---|---|
 | 1, 2, 3, 18 | 2 or 3 Toji images (one for the hook, can be a clip) (full body or back, clear muscles) | user (real anime frames; Codex can't draw him reliably) |
 | 1 | a photo or clip of him for the hook | user |
+| 5, 6 | DNA strand, clock, syringe (glossy 3D, red light, black) | Codex |
 | 8, 18 | his physique photo with his face | user |
 | 14 | a training clip or photo | user (else Codex) |
 | 14 | a meal photo | user (else Codex) |
