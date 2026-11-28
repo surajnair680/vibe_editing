@@ -11,7 +11,7 @@ folder and add one line to `docs/README.md`. The two guides are the source of tr
   to name shots in footage requests, plan a gym shoot, tag the user's gym clips and order gym B-roll.
 
 The skills in `.claude/skills/` are the playbooks per video type (`vibe-editing-system` picks the type; `vibe-talking-head`
-for talking-head footage; `vibe-mini-vlog` for mini vlogs / day in my life with the camcorder overlay pack, vertical by
+for talking-head footage; `edit-like-kallawaymarketing` for education reels in the kallawaymarketing look (top title, one graphic per line, him in a rounded bottom strip with his head popping out); `vibe-mini-vlog` for mini vlogs / day in my life with the camcorder overlay pack, vertical by
 default; `lemo-opuscar` for animated explainers and short films in one of 99 code-made film styles or the user's own;
 `voxel-reels` for blocky 3D cartoon dialogue reels, him as a voxel character plus a sidekick; `reanimate` to copy an animation from a reference reel, clip or site and measure the copy against it; `session-handoff` to write a full handoff of the chat into the repo so a new session continues with nothing lost; `photo-parallax` for Vox-style 2.5D camera moves that make a still photo feel like video; `timeline-editor` for the web timeline of every video, where he sees every track, trims cuts himself and pins notes; the 15-skill motion graphics pack, led by `vox-explainer` for Vox-style torn-paper explainers and `motion-effects` for premium UI, data and type effects). Follow the workflow below for the order of work, and the matching skill for the techniques.
 
