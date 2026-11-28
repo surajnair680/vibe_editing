@@ -26,14 +26,16 @@ Times are rough cut v2 edit times. SPLIT = graphic on top, him in the strip. FUL
 | 10 | 27.67-32.50 | "I am twenty-seven. I work full time in tech, and I'm also a fitness coach." | SPLIT | 18 stacked pills | Title "Just a *normal* guy". Pills drop in on the words: "27 years old", "Full-time tech job", "Fitness coach". |
 | 11 | 32.50-36.20 | "And I have been a type one diabetic since I was twelve." | SPLIT | 10 big number | Pills grey out. Big red card: "Type 1 diabetic" with "since age *12*", a simple glucose meter drawing. |
 | 12 | 36.20-38.50 | "If I can build this body, so can you." | FULL | 21 | Caption "so can you." in serif. |
-| 13 | 38.50-43.27 | "I'm already two months into this bulk, but from today, I'm filming all of it." | SPLIT | 16 line path | Title "The *bulk* so far". A timeline line: Day 1 to a red dot at "Day 60, today". On "filming" a red REC badge blinks on the dot. |
+| 13a | 38.50-40.77 | "I'm already two months into this bulk," | SPLIT | 16 line path | Title "The *bulk* so far". A timeline line: Day 1 to a red dot at "Day 60, today". |
+| 13b | 40.77-41.87 | "but from today," | FULL | 21 | Turn beat (keeps every graphics run under about 10 s, skill rhythm rule). |
+| 13c | 41.87-43.27 | "I'm filming all of it." | SPLIT | 16 line path | Back on the timeline; a red REC badge blinks on the Day 60 dot. |
 | 14 | 43.27-45.53 | "Training, food, supplements" | SPLIT | 18 carousel | One card per word: training, food, supplements. Real photos. |
 | 15 | 45.53-47.80 | "The wins and the days it goes wrong." | SPLIT | 9 before / after | Two cards: "*Wins*" (green) and "*Bad days*" (red). |
 | 16 | 47.80-50.60 | "How long will it take? Six months? A year?" | SPLIT | 16 line path | Back to the timeline. The line runs on past today: "6 months?" then "1 year?" tags pop. |
 | 17 | 50.60-51.30 | "I don't know," | FULL | 21 | Shrug beat. |
 | 18 | 51.30-53.67 | "but I'm not stopping until I look like him" | SPLIT | 9 side by side | Title "Until I look like *him*". Him now on the left, Toji on the right. Ends here. |
 
-Screen time: SPLIT about 80 %, FULL about 20 %. Never more than 9 s of SPLIT in a row.
+Screen time: SPLIT 78 %, FULL 22 %. Longest graphics run 9.6 s. Visual planning table with a Kallaway reference frame per row: https://claude.ai/artifact/PoALZah5AsG68BxrEo3stx (`work/plan/build_plan_page.py`).
 
 ## Open questions
 - Ending: the script has no call to action. Default: end on row 18. Option: a 1.5 s silent card "Follow for *episode 1*".
