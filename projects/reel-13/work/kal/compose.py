@@ -92,6 +92,29 @@ class Captions:
         except Exception: pass
         self.ser = ImageFont.truetype(str(FONT_DIR / "InstrumentSerif-Italic.ttf"), 66)
 
+    def chunk(self, max_words=3, max_chars=18, gap=0.25, cuts=()):
+        """reel-13: short phrases instead of one word at a time, so each caption stays up long enough to read.
+        Words are first split into runs at punctuation, pauses and cut points, then each run is divided into
+        even phrases of up to max_words ("This is" / "Toji Fushiguro."). A phrase appears on its first word."""
+        runs, cur = [], []
+        for w in self.words:
+            if cur and (cur[-1]["w"][-1:] in ".,?!" or w["s"] - cur[-1]["e"] > gap
+                        or any(cur[-1]["s"] < c <= w["s"] + 0.02 for c in cuts)):
+                runs.append(cur); cur = []
+            cur.append(w)
+        if cur: runs.append(cur)
+        out = []
+        for r in runs:
+            k = -(-len(r) // max_words)
+            while True:   # even split into k phrases (7 words -> 3 + 2 + 2), more phrases if one is too long
+                q, rem = divmod(len(r), k); sizes = [q + (i < rem) for i in range(k)]
+                parts, i0 = [], 0
+                for n in sizes: parts.append(r[i0:i0 + n]); i0 += n
+                if all(len(" ".join(x["w"] for x in p_)) <= max_chars for p_ in parts) or k >= len(r): break
+                k += 1
+            out += parts
+        self.words = [{"w": " ".join(x["w"] for x in c), "s": c[0]["s"], "e": c[-1]["e"]} for c in out]
+
     def word_at(self, t):
         for i, w in enumerate(self.words):
             nxt = self.words[i + 1]["s"] if i + 1 < len(self.words) else 1e9
@@ -154,6 +177,7 @@ def main():
     words = json.loads(Path(rp("words")).read_text()) if P.get("words") else []
     words = [{"w": w.get("w", w.get("word", "")), "s": float(w.get("s", w.get("start", 0))), "e": float(w.get("e", w.get("end", 0)))} for w in words]
     caps = Captions(words, P.get("serif", []), P.get("caption_hold", 0.6))
+    if P.get("caption_phrases"): caps.chunk(cuts=[g["start"] for g in P["segments"]] + P.get("cuts", []), **P["caption_phrases"])
     segs = P["segments"]; brolls = {}
 
     # strip geometry. The speaker frame is scaled by strip.scale x (strip width / frame width): 1.0 for wide

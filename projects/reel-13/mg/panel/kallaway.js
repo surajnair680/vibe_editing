@@ -14,15 +14,17 @@
     inOutCubic: x => x < .5 ? 4 * x * x * x : 1 - Math.pow(-2 * x + 2, 3) / 2,
     outBack: x => { const c1 = 1.2, c3 = c1 + 1; return 1 + c3 * Math.pow(x - 1, 3) + c1 * Math.pow(x - 1, 2); },
     outExpo: x => x === 1 ? 1 : 1 - Math.pow(2, -10 * x),
+    outQuint: x => 1 - Math.pow(1 - x, 5),
+    smooth: x => x * x * x * (x * (6 * x - 15) + 10),   // smootherstep: no snap at either end
   };
-  const DUR = { rise: .25, pop: .3, blur: .3, fade: .25, draw: .45, wipe: .3, type: 0, underline: .35 };
+  const DUR = { rise: .45, pop: .3, blur: .5, fade: .4, draw: .55, wipe: .6, type: 0, underline: .45, soft: .6 };
   const STATE = {
     hidden: { o: 0, b: 0, s: 1 }, blur: { o: .4, b: 8, s: 1 }, on: { o: 1, b: 0, s: 1.04 },
-    done: { o: .55, b: 0, s: 1 }, plain: { o: 1, b: 0, s: 1 },
+    done: { o: .55, b: 0, s: 1 }, plain: { o: 1, b: 0, s: 1 }, dim: { o: .3, b: 2, s: 1 },
   };
   const num = (el, k, d) => el.dataset[k] !== undefined ? parseFloat(el.dataset[k]) : d;
 
-  let scenes = [], animEls = [], stateEls = [], cams = [], counts = [];
+  let scenes = [], animEls = [], stateEls = [], cams = [], counts = [], keyEls = [], pulses = [];
 
   function init() {
     scenes = [...document.querySelectorAll('.k-scene')];
@@ -36,6 +38,8 @@
       if (el.dataset.anim === 'type') { el.dataset.full = el.textContent; }
       if (el.dataset.anim === 'draw' && el.getTotalLength) { const L = el.getTotalLength(); el.style.strokeDasharray = L; el.dataset.len = L; }
     });
+    keyEls = [...document.querySelectorAll('[data-keys]')].map(el => ({ el, keys: JSON.parse(el.dataset.keys) }));
+    pulses = [...document.querySelectorAll('[data-pulse]')].map(el => { const [a, b] = el.dataset.pulse.split(',').map(Number); return { el, t0: a, per: b }; });
     window.KDUR = Math.max(0, ...scenes.map(s => num(s, 'end', 0)));
   }
 
@@ -43,7 +47,7 @@
     if (t <= keys[0][0]) return keys[0].slice(1);
     for (let i = 0; i < keys.length - 1; i++) {
       const [t0, ...a] = keys[i], [t1, ...b] = keys[i + 1];
-      if (t < t1) { const u = E.inOutCubic(clamp((t - t0) / (t1 - t0))); return a.map((v, j) => v + (b[j] - v) * u); }
+      if (t < t1) { const u = E.smooth(clamp((t - t0) / (t1 - t0))); return a.map((v, j) => v + (b[j] - v) * u); }
     }
     return keys[keys.length - 1].slice(1);
   }
@@ -55,13 +59,14 @@
       const t0 = num(el, 'in', 0), kind = el.dataset.anim || 'rise', d = num(el, 'dur', DUR[kind] ?? .3);
       const u = clamp((t - t0) / Math.max(d, 1e-3));
       let o = 1, tr = '', f = '';
-      if (kind === 'rise') { const e = E.outCubic(u); o = e; tr = `translateY(${(1 - e) * 14}px)`; }
+      if (kind === 'rise') { const e = E.outQuint(u); o = clamp(u * 1.6); tr = `translateY(${(1 - e) * 18}px)`; f = `blur(${(1 - e) * 6}px)`; }
+      else if (kind === 'soft') { const e = E.outQuint(u); o = clamp(u * 1.4); tr = `translateY(${(1 - e) * 26}px) scale(${.97 + .03 * e})`; f = `blur(${(1 - e) * 8}px)`; }
       else if (kind === 'pop') { o = clamp(u * 2.5); tr = `scale(${.9 + .1 * E.outBack(u)})`; }
-      else if (kind === 'blur') { const e = E.outCubic(u); o = e; f = `blur(${(1 - e) * 10}px)`; }
+      else if (kind === 'blur') { const e = E.outQuint(u); o = e; f = `blur(${(1 - e) * 10}px)`; }
       else if (kind === 'fade') { o = E.outCubic(u); }
-      else if (kind === 'wipe') { o = u > 0 ? 1 : 0; tr = `scaleX(${E.outCubic(u)})`; }
+      else if (kind === 'wipe') { o = u > 0 ? 1 : 0; tr = `scaleX(${E.smooth(u)})`; }
       else if (kind === 'underline') { el.style.setProperty('--u', E.outCubic(u)); }
-      else if (kind === 'draw') { el.style.strokeDashoffset = (1 - E.inOutCubic(u)) * num(el, 'len', 0); }
+      else if (kind === 'draw') { el.style.strokeDashoffset = (1 - E.smooth(u)) * num(el, 'len', 0); }
       else if (kind === 'type') { const full = el.dataset.full || ''; const n = t < t0 ? 0 : Math.floor((t - t0) / .03) + 1; el.textContent = full.slice(0, n); }
       if (!['underline', 'draw', 'type'].includes(kind)) { el.style.opacity = o; el.style.transform = (el.dataset.base || '') + ' ' + tr; el.style.filter = f; }
     });
@@ -69,7 +74,7 @@
     stateEls.forEach(({ el, st }) => {
       let cur = st[0][1], prev = st[0][1], since = -1e9;
       for (const [ts, name] of st) if (t >= ts) { prev = cur; cur = name; since = ts; }
-      const u = E.outCubic(clamp((t - since) / .3)), A = STATE[prev] || STATE.plain, B = STATE[cur] || STATE.plain;
+      const u = E.smooth(clamp((t - since) / .45)), A = STATE[prev] || STATE.plain, B = STATE[cur] || STATE.plain;
       const mix = k => A[k] + (B[k] - A[k]) * u;
       el.style.opacity = mix('o'); el.style.filter = `blur(${mix('b')}px)`;
       el.style.transform = (el.dataset.base || '') + ` scale(${mix('s')})`;
@@ -81,6 +86,12 @@
       el.style.transform = `translate(${x}px, ${y}px) scale(${s})`;
       if (blur) { const v = Math.hypot(x2 - x, y2 - y) + Math.abs(s2 - s) * 600; el.style.filter = v > 6 ? `blur(${Math.min(24, v / 4)}px)` : ''; }
     });
+
+    keyEls.forEach(({ el, keys }) => {
+      const [x, y, sc, o] = camAt(keys, t);
+      el.style.transform = (el.dataset.base || '') + ` translate(${x}px, ${y}px) scale(${sc})`; el.style.opacity = o;
+    });
+    pulses.forEach(({ el, t0, per }) => { el.style.opacity = t < t0 ? 0 : .45 + .55 * (.5 + .5 * Math.cos(2 * Math.PI * (t - t0) / per)); });
 
     counts.forEach(({ el, a, b, t: t0, d, fmt }) => {
       const v = a + (b - a) * E.outExpo(clamp((t - t0) / d));
