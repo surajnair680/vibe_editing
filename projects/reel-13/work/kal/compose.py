@@ -230,7 +230,9 @@ def main():
             if cap: paste(out, caps.image(cap, False), W / 2, CAP_Y_FULL)
         else:
             out = cover(spk.at(t), g.get("zoom", full_cfg.get("zoom", 1.1)), g.get("anchor", full_cfg.get("anchor", [.5, .33])))
-            if cap: paste(out, caps.image(cap, False), W / 2, CAP_Y_FULL)
+            # reel-13: his face and beard fill the middle and the mic sits on the chest, so the FULL caption
+            # goes in the clear wall above his head (full.caption_y)
+            if cap: paste(out, caps.image(cap, False), W / 2, full_cfg.get("caption_y", CAP_Y_FULL))
         return np.clip(out, 0, 255).astype(np.uint8)
 
     if a.stills or a.every:

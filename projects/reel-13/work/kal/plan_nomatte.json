@@ -1,0 +1,101 @@
+{
+ "fps": 30,
+ "duration": 55.67,
+ "speaker": "../../out/reel-13-rough-v2.mp4",
+ "panel": "../../out/panel.mp4",
+ "words": "words_cut.json",
+ "strip": {
+  "scale": 0.7,
+  "band_top": "auto",
+  "popout": 60
+ },
+ "full": {
+  "zoom": 1.1,
+  "anchor": [
+   0.5,
+   0.33
+  ],
+  "caption_y": 400
+ },
+ "serif": [
+  "possible"
+ ],
+ "caption_hold": 0.6,
+ "segments": [
+  {
+   "start": 0,
+   "end": 9.57,
+   "layout": "split"
+  },
+  {
+   "start": 9.57,
+   "end": 13.0,
+   "layout": "full"
+  },
+  {
+   "start": 13.0,
+   "end": 20.8,
+   "layout": "split"
+  },
+  {
+   "start": 20.8,
+   "end": 22.43,
+   "layout": "full"
+  },
+  {
+   "start": 22.43,
+   "end": 24.97,
+   "layout": "split"
+  },
+  {
+   "start": 24.97,
+   "end": 27.67,
+   "layout": "full"
+  },
+  {
+   "start": 27.67,
+   "end": 28.9,
+   "layout": "split"
+  },
+  {
+   "start": 28.9,
+   "end": 36.2,
+   "layout": "panel"
+  },
+  {
+   "start": 36.2,
+   "end": 38.5,
+   "layout": "full"
+  },
+  {
+   "start": 38.5,
+   "end": 40.77,
+   "layout": "split"
+  },
+  {
+   "start": 40.77,
+   "end": 41.87,
+   "layout": "full"
+  },
+  {
+   "start": 41.87,
+   "end": 50.6,
+   "layout": "split"
+  },
+  {
+   "start": 50.6,
+   "end": 51.3,
+   "layout": "full"
+  },
+  {
+   "start": 51.3,
+   "end": 53.67,
+   "layout": "split"
+  },
+  {
+   "start": 53.67,
+   "end": 55.67,
+   "layout": "panel"
+  }
+ ]
+}
