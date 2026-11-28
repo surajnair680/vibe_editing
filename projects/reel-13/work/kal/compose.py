@@ -215,6 +215,14 @@ def main():
                 al = cv2.resize(mat.at(t), (fw, sh), interpolation=cv2.INTER_LINEAR).astype(np.float32)[:, :, None] / 255
                 top = max(0, oy); src0 = top - oy
                 al_up, sp_up = al[src0:STRIP_TOP - oy], sp[src0:STRIP_TOP - oy]
+                # reel-13: the matte also picks up the wall photo frame and lamp behind him; only the head and hair
+                # may pop out, so drop everything more than popout_limit px above the window, with a soft edge
+                lim = scfg.get("popout_limit", 110)
+                ys = np.arange(top, STRIP_TOP)[:, None, None]
+                al_up = al_up * np.clip((ys - (STRIP_TOP - lim)) / 20.0, 0, 1)
+                # and only dark pixels (his hair) pop out: the brown frame edge right behind his hair is lighter
+                lum = sp_up.mean(2, keepdims=True)
+                al_up = al_up * np.clip((scfg.get("popout_dark", 105) - lum) / 35.0, 0, 1)
                 reg = out[top:STRIP_TOP, STRIP_X0 + fx:STRIP_X0 + fx + fw]
                 reg[:] = reg * (1 - al_up) + sp_up * al_up
             if cap:

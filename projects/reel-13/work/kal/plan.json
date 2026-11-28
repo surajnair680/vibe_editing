@@ -8,7 +8,8 @@
  "strip": {
   "scale": 0.7,
   "band_top": "auto",
-  "popout": 60
+  "popout": 60,
+  "popout_limit": 66
  },
  "full": {
   "zoom": 1.1,
